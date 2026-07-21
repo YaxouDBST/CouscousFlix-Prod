@@ -441,13 +441,6 @@ voirdramaRouter.configure({
   shouldUpdateCache24h,
 });
 
-// --- Configure francetv ---
-const francetvRouter = require("./routes/francetv");
-francetvRouter.configure({
-  getFromCacheWithExpiration,
-  saveToCache,
-});
-
 const {
   router: vipDonationsRouter,
   ensureVipDonationsTables
@@ -482,13 +475,13 @@ app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/oauth', oauthRouter);
 app.use('/api/admin/oauth-apps', require('./routes/adminOauthApps'));
 app.use('/api/sessions', require('./routes/sessions'));
-app.use('/api', require('./routes/debrid'));
+
 app.use('/api', require('./routes/admin'));
 app.use('/api', vipDonationsRouter);
 app.use('/api', vipPayblisRouter);
 app.use('/api/darkiworld', darkiworldRouter);
 app.use('/api/drama', voirdramaRouter);
-app.use('/api/ftv', francetvRouter);
+
 const purstreamRouter = require('./routes/purstream');
 purstreamRouter.configure({
   TMDB_API_KEY,
@@ -533,6 +526,7 @@ const appReady = (async () => {
         id VARCHAR(255) PRIMARY KEY,
         user_id VARCHAR(255) NOT NULL,
         user_type ENUM('oauth', 'bip39') NOT NULL,
+        device TEXT,
         user_agent TEXT,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         accessed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,

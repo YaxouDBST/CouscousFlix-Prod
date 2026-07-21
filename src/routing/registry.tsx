@@ -24,7 +24,6 @@ export const ROUTES: RouteEntry[] = [
   { path: '/watchparty/list',         loader: lz(() => import('../pages/WatchPartyList')),          fallback: <GridSkeleton /> },
   { path: '/wishboard',               loader: lz(() => import('../pages/Greenlight/WishboardPage')), fallback: <GridSkeleton /> },
   { path: '/vip/invoices',            loader: lz(() => import('../pages/VipInvoicesPage')),         fallback: <GridSkeleton /> },
-  { path: '/ftv',                     loader: lz(() => import('../pages/FranceTV/FranceTVBrowse')), fallback: <GridSkeleton /> },
   { path: '/top10',                   loader: lz(() => import('../pages/Top10Page')),               fallback: <GridSkeleton /> },
 
   // Provider catalogs
@@ -50,8 +49,6 @@ export const ROUTES: RouteEntry[] = [
   { path: '/watch/tv/:tmdbid/s/:season/e/:episode',       loader: lz(() => import('../pages/Watch/WatchTv')) },
   { path: '/watch/anime/:id/season/:season/episode/:episode', loader: lz(() => import('../pages/Watch/WatchAnime')) },
   { path: '/live-tv',                 loader: lz(() => import('../pages/LiveTV')) },
-  { path: '/ftv/info/:encoded',       loader: lz(() => import('../pages/FranceTV/FranceTVInfo')) },
-  { path: '/ftv/watch/:encoded',      loader: lz(() => import('../pages/FranceTV/FranceTVPlayer')) },
 
   // Watch party
   { path: '/watchparty/create',       loader: lz(() => import('../pages/WatchPartyCreate')) },
@@ -76,7 +73,6 @@ export const ROUTES: RouteEntry[] = [
 
   // Other
   { path: '/about',                   loader: lz(() => import('../pages/WhatIsCouscousFlixPage')) },
-  { path: '/help/*',                  loader: lz(() => import('../pages/help/HelpRouter')) },
   { path: '/privacy',                 loader: lz(() => import('../pages/Privacy')) },
   { path: '/terms-of-service',        loader: lz(() => import('../pages/TermsOfService')) },
   { path: '/cinegraph',               loader: lz(() => import('../pages/CineGraph')) },
@@ -86,7 +82,6 @@ export const ROUTES: RouteEntry[] = [
   { path: '/dmca',                    loader: lz(() => import('../pages/DMCA')) },
   { path: '/admin',                   loader: lz(() => import('../pages/AdminPage')) },
   { path: '/download/:type/:id',      loader: lz(() => import('../pages/DownloadPage')) },
-  { path: '/debrid',                  loader: lz(() => import('../pages/DebridPage')) },
   { path: '/roulette',                loader: lz(() => import('../pages/RoulettePage')) },
   { path: '/suggestion',              loader: lz(() => import('../pages/SuggestionPage')) },
   { path: '/extension',               loader: lz(() => import('../pages/ExtensionPage')) },

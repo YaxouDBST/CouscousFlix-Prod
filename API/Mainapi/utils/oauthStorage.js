@@ -186,7 +186,7 @@ async function ensureOAuthStorage(pool = getPool()) {
       redirect_uri TEXT NOT NULL,
       response_type VARCHAR(20) NOT NULL DEFAULT 'code',
       scopes TEXT NOT NULL,
-      state TEXT DEFAULT '',
+      state VARCHAR(512) DEFAULT '',
       code_challenge VARCHAR(255) DEFAULT NULL,
       code_challenge_method VARCHAR(20) DEFAULT NULL,
       expires_at DATETIME NOT NULL,

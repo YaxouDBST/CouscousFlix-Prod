@@ -349,8 +349,8 @@ const CommentItem = React.memo<CommentItemProps>((props) => {
               </span>
             )}
             {comment.is_vip === 1 && (
-              <span className="px-1.5 sm:px-2 py-0.5 bg-yellow-600 text-white text-[10px] sm:text-xs rounded-full whitespace-nowrap">
-                VIP
+              <span className="ml-2 px-1.5 py-0.5 bg-yellow-500 text-black text-[10px] font-bold rounded-full">
+                LE SANG
               </span>
             )}
             <span className="text-[10px] sm:text-xs text-gray-400 whitespace-nowrap">{formatDate(comment.created_at)}</span>
@@ -668,8 +668,8 @@ const CommentItem = React.memo<CommentItemProps>((props) => {
                               </span>
                             )}
                             {reply.is_vip === 1 && (
-                              <span className="px-1.5 sm:px-2 py-0.5 bg-yellow-600 text-white text-[10px] sm:text-xs rounded-full whitespace-nowrap">
-                                VIP
+                              <span className="ml-2 px-1.5 py-0.5 bg-yellow-500 text-black text-[9px] font-bold rounded-full">
+                                LE SANG
                               </span>
                             )}
                             <span className="text-[10px] sm:text-xs text-gray-400 whitespace-nowrap">{formatDate(reply.created_at)}</span>

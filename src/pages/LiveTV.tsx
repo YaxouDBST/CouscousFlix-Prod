@@ -194,15 +194,10 @@ const livetvStatusOptions = [
   { key: 'all', labelKey: 'common.all' },
 ] as const;
 
-// Source display names for dropdown
 const sourceDisplayNames: { [key: string]: string } = {
   'linkzy': 'liveTV.freeSource',
   'fctv': 'FCTV33',
   'wiflix': 'Landscape',
-  'sosplay': 'Bolaloca',
-  'livetv': 'LiveTV',
-  'daddylive': 'Daddylive',
-  'iptv': 'liveTV.iptvWebSource',
 };
 
 // Get source key from catalog ID
@@ -210,9 +205,6 @@ const getSourceKey = (catalogId: string): string => {
   if (catalogId.startsWith('linkzy_')) return 'linkzy';
   if (catalogId.startsWith('matches_')) return 'fctv';
   if (catalogId.startsWith('wiflix_')) return 'wiflix';
-  if (catalogId.startsWith('sosplay_')) return 'sosplay';
-  if (catalogId.startsWith('livetv_')) return 'livetv';
-  if (catalogId.startsWith('daddylive_')) return 'daddylive';
   return 'other';
 };
 
@@ -805,7 +797,7 @@ const LiveTV: React.FC = () => {
         localCatalogs.forEach(c => catalogsMap.set(c.id, c));
         extensionCatalogs.forEach(c => catalogsMap.set(c.id, c));
         
-        const filteredCatalogs = Array.from(catalogsMap.values());
+        const filteredCatalogs = Array.from(catalogsMap.values()).filter(c => getSourceKey(c.id) !== 'other');
 
         if (filteredCatalogs.length === 0) {
            throw new Error(t('liveTV.loadCategoriesError'));
@@ -815,22 +807,9 @@ const LiveTV: React.FC = () => {
 
         // Auto-select source and catalog
         if (filteredCatalogs.length > 0) {
-          if (isExtensionAvailable()) {
-            // Avec extension, auto-sélectionner sosplay
-            const sosplayCatalog = filteredCatalogs.find(c => getSourceKey(c.id) === 'sosplay');
-            if (sosplayCatalog) {
-              setSelectedCatalog(sosplayCatalog.id);
-              setSelectedSource('sosplay');
-            } else {
-              const first = filteredCatalogs[0];
-              setSelectedCatalog(first.id);
-              setSelectedSource(getSourceKey(first.id));
-            }
-          } else {
-            const first = filteredCatalogs[0];
-            setSelectedCatalog(first.id);
-            setSelectedSource(getSourceKey(first.id));
-          }
+          const first = filteredCatalogs[0];
+          setSelectedCatalog(first.id);
+          setSelectedSource(getSourceKey(first.id));
         }
       } catch (err) {
         console.error('Error fetching manifest:', err);

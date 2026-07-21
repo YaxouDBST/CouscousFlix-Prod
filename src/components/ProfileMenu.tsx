@@ -222,7 +222,7 @@ const ProfileMenu: React.FC = () => {
                           {username}
                           {isVip && (
                             <span className="ml-2 px-1.5 py-0.5 bg-yellow-500 text-black text-xs font-bold rounded-full">
-                              VIP
+                              LE SANG
                             </span>
                           )}
                         </div>
