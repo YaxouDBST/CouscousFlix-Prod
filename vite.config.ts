@@ -9,18 +9,18 @@ process.env.VITE_APP_BUILD_ID = buildId
 
 function injectSwConfig(): Plugin {
   const replacePlaceholders = (source: string): string => {
-    const mirrors = (process.env.VITE_DEFAULT_MIRRORS || 'movix.health')
+    const mirrors = (process.env.VITE_DEFAULT_MIRRORS || 'yaxoudbst.health')
       .split(',')
       .map((s) => s.trim())
       .filter(Boolean)
     const configUrl =
-      process.env.VITE_MIRRORS_CONFIG_URL || 'https://rentry.co/movix'
+      process.env.VITE_MIRRORS_CONFIG_URL || 'https://rentry.co/yaxoudbst'
     return source
-      .replace(/__MOVIX_DEFAULT_MIRRORS__/g, JSON.stringify(mirrors))
-      .replace(/__MOVIX_CONFIG_URL__/g, JSON.stringify(configUrl))
+      .replace(/__YAXOUDBST_DEFAULT_MIRRORS__/g, JSON.stringify(mirrors))
+      .replace(/__YAXOUDBST_CONFIG_URL__/g, JSON.stringify(configUrl))
   }
   return {
-    name: 'movix-sw-inject',
+    name: 'yaxoudbst-sw-inject',
     // Mode build : transforme dist/sw.js après que Vite ait copié public/sw.js
     closeBundle() {
       const swPath = resolve(__dirname, 'dist/sw.js')

@@ -31,7 +31,7 @@ export const BG_STORAGE_KEYS = {
 // `storage` event ne fire que cross-tab. On ajoute un event custom pour
 // notifier les composants montés dans la même page (SquareBackground sur
 // chaque route) quand l'utilisateur change un réglage.
-export const BG_PREFS_EVENT = 'movix:bg-prefs-changed';
+export const BG_PREFS_EVENT = 'yaxoudbst:bg-prefs-changed';
 
 export function notifyBgPrefsChanged() {
   window.dispatchEvent(new Event(BG_PREFS_EVENT));

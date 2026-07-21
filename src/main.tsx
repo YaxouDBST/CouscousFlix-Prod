@@ -10,17 +10,17 @@ import { registerBlockDetection } from './services/blockDetection'
 import './index.css'
 import './styles/light-mode.css'
 
-type MovixConsoleWarningWindow = Window & {
-  __movixConsoleSafetyWarningStarted?: boolean;
-  __movixConsoleSafetyWarningTimerId?: number;
+type YaxouDBSTConsoleWarningWindow = Window & {
+  __yaxoudbstConsoleSafetyWarningStarted?: boolean;
+  __yaxoudbstConsoleSafetyWarningTimerId?: number;
 };
 
-type MovixConsoleWarningLine = {
+type YaxouDBSTConsoleWarningLine = {
   text: string;
   style: string;
 };
 
-const MOVIX_CONSOLE_SAFETY_WARNING_LINES: MovixConsoleWarningLine[] = [
+const YAXOUDBST_CONSOLE_SAFETY_WARNING_LINES: YaxouDBSTConsoleWarningLine[] = [
   {
     text: 'ATTENDS !',
     style: [
@@ -51,7 +51,7 @@ const MOVIX_CONSOLE_SAFETY_WARNING_LINES: MovixConsoleWarningLine[] = [
     ].join('; '),
   },
   {
-    text: 'Coller quelque chose ici peut donner à un attaquant accès à ton compte Movix.',
+    text: 'Coller quelque chose ici peut donner à un attaquant accès à ton compte YaxouDBST.',
     style: [
       'font-size: 22px',
       'font-weight: 900',
@@ -92,9 +92,9 @@ const MOVIX_CONSOLE_SAFETY_WARNING_LINES: MovixConsoleWarningLine[] = [
   },
 ];
 
-const emitMovixConsoleSafetyWarning = () => {
+const emitYaxouDBSTConsoleSafetyWarning = () => {
   console.log(
-    '%c MOVIX SECURITY WARNING ',
+    '%c YAXOUDBST SECURITY WARNING ',
     [
       'font-size: 16px',
       'font-weight: 900',
@@ -108,29 +108,29 @@ const emitMovixConsoleSafetyWarning = () => {
     ].join('; ')
   );
 
-  MOVIX_CONSOLE_SAFETY_WARNING_LINES.forEach((line) => {
+  YAXOUDBST_CONSOLE_SAFETY_WARNING_LINES.forEach((line) => {
     console.log(`%c${line.text}`, line.style);
   });
 };
 
-const startMovixConsoleSafetyWarning = () => {
+const startYaxouDBSTConsoleSafetyWarning = () => {
   if (typeof window === 'undefined') return;
 
-  const globalWindow = window as MovixConsoleWarningWindow;
-  if (globalWindow.__movixConsoleSafetyWarningStarted) return;
+  const globalWindow = window as YaxouDBSTConsoleWarningWindow;
+  if (globalWindow.__yaxoudbstConsoleSafetyWarningStarted) return;
 
-  globalWindow.__movixConsoleSafetyWarningStarted = true;
+  globalWindow.__yaxoudbstConsoleSafetyWarningStarted = true;
 
-  emitMovixConsoleSafetyWarning();
-  window.setTimeout(emitMovixConsoleSafetyWarning, 700);
-  window.setTimeout(emitMovixConsoleSafetyWarning, 1400);
+  emitYaxouDBSTConsoleSafetyWarning();
+  window.setTimeout(emitYaxouDBSTConsoleSafetyWarning, 700);
+  window.setTimeout(emitYaxouDBSTConsoleSafetyWarning, 1400);
   // The previous 30s setInterval kept printing forever, blocking idle and
   // flooding the DevTools console for power users. The three staggered
   // emissions above cover the case where devtools opens slightly after page
   // load; that's enough deterrent without permanent main-thread work. — perf
 };
 
-startMovixConsoleSafetyWarning();
+startYaxouDBSTConsoleSafetyWarning();
 
 // Register block detection on both the default axios (used by most services)
 // and the api instance (used by contentAPI). Both need their own interceptors

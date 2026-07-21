@@ -33,7 +33,7 @@ interface UseWrappedTrackerOptions {
 }
 
 /**
- * Hook to track viewing time and page visits for Movix Wrapped 2026.
+ * Hook to track viewing time and page visits for YaxouDBST Wrapped 2026.
  * Respects privacy_data_collection setting in localStorage.
  * Sends data every 30 seconds to minimize request spam.
  */

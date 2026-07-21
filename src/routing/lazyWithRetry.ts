@@ -33,7 +33,7 @@
  *   loader: () => lazyWithRetry(() => import('../pages/MyPage'))
  */
 
-const RELOAD_KEY = '__movix_chunk_reload';
+const RELOAD_KEY = '__yaxoudbst_chunk_reload';
 const RELOAD_WINDOW_MS = 120_000; // counter resets after 2 min of no failures
 const MAX_RELOADS = 3; // hard cap within the window — loop guard
 const MIN_RELOAD_SPACING_MS = 3_000; // never reload twice in quick succession

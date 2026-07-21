@@ -7,15 +7,15 @@ const cors = require("cors");
 const { getOAuthAllowedCorsOrigins } = require('../utils/oauthClients');
 
 const STATIC_ALLOWED_DOMAINS = [
-  'movix.date',
-  'movix.chat',
-  'movix.cloud',
-  'movix.cash',
-  'movix.blog',
-  'movix.rodeo',
-  'movix.club',
-  'movix.site',
-  'movix11.pages.dev',
+  'yaxoudbst.date',
+  'yaxoudbst.chat',
+  'yaxoudbst.cloud',
+  'yaxoudbst.cash',
+  'yaxoudbst.blog',
+  'yaxoudbst.rodeo',
+  'yaxoudbst.club',
+  'yaxoudbst.site',
+  'yaxoudbst11.pages.dev',
   'nakios.site',
   'cinezo.site',
   'filmib.cc'

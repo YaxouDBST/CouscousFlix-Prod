@@ -1,8 +1,8 @@
 // ============================================================================
 // Fallback domain — constantes injectées au build par vite.config.ts
 // ============================================================================
-const DEFAULT_MIRRORS = __MOVIX_DEFAULT_MIRRORS__;
-const CONFIG_URL = __MOVIX_CONFIG_URL__;
+const DEFAULT_MIRRORS = __YAXOUDBST_DEFAULT_MIRRORS__;
+const CONFIG_URL = __YAXOUDBST_CONFIG_URL__;
 const NAV_TIMEOUT_MS = 3000;
 const CONFIG_TIMEOUT_MS = 3000;
 // Ping de confirmation sur un asset statique de l'origine. Volontairement
@@ -10,7 +10,7 @@ const CONFIG_TIMEOUT_MS = 3000;
 // radio cellulaire qui se réveille). Si même ce ping fail, l'origine est
 // vraiment injoignable.
 const REACHABILITY_TIMEOUT_MS = 4000;
-const REACHABILITY_PROBE_PATH = '/movix.png';
+const REACHABILITY_PROBE_PATH = '/yaxoudbst.png';
 const HOSTNAME_RE = /^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$/i;
 
 // ============================================================================
@@ -27,7 +27,7 @@ const HOSTNAME_RE = /^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9
 // (ex. quand on change la taille standard w500→w342 — sinon on continue à
 // servir les vieilles URLs pendant des semaines). v2 = passage à w342 posters
 // + w300 logos.
-const IMAGE_CACHE_NAME = 'movix-tmdb-images-v2';
+const IMAGE_CACHE_NAME = 'yaxoudbst-tmdb-images-v2';
 const TMDB_IMAGE_HOST = 'image.tmdb.org';
 const MAX_CONCURRENT_IMAGE_FETCHES = 6;
 let activeImageFetches = 0;
@@ -91,7 +91,7 @@ function isLocalHost(hostname) {
 
 function parseConfig(text) {
   // Deux formats supportés :
-  // - JSON : {"mirrors":["movix.health",...]}  (dpaste.org, gist raw, etc.)
+  // - JSON : {"mirrors":["yaxoudbst.health",...]}  (dpaste.org, gist raw, etc.)
   // - HTML : page rendue rentry.co/<slug> — on extrait les hostnames des <a href>
   //   à l'intérieur du <article>. Rentry.co exige un access code pour /raw
   //   depuis un durcissement anti-abuse ; on parse le HTML rendu à la place.
@@ -174,7 +174,7 @@ function renderRedirectPage(url) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="refresh" content="0; url=${safe}">
-  <title>Movix — Redirection</title>
+  <title>YaxouDBST — Redirection</title>
   <link rel="canonical" href="${safe}">
   <style>
     html, body { margin: 0; padding: 0; height: 100%; background: #000; color: #fff;
@@ -193,7 +193,7 @@ function renderRedirectPage(url) {
 </head>
 <body>
   <div class="wrap">
-    <div class="logo">MOVIX</div>
+    <div class="logo">YAXOUDBST</div>
     <div class="spinner"></div>
     <p>Redirection vers notre nouveau domaine…</p>
     <p><a href="${safe}">Cliquer ici si rien ne se passe</a></p>
@@ -218,7 +218,7 @@ function render503Page() {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Movix — Indisponible</title>
+  <title>YaxouDBST — Indisponible</title>
   <style>
     html, body { margin: 0; padding: 0; height: 100%; background: #000; color: #fff;
       font-family: system-ui, -apple-system, sans-serif; display: grid; place-items: center; }
@@ -232,11 +232,11 @@ function render503Page() {
 </head>
 <body>
   <div class="wrap">
-    <div class="logo">MOVIX</div>
+    <div class="logo">YAXOUDBST</div>
     <h1>Site temporairement indisponible</h1>
     <p>Tous nos domaines connus sont inaccessibles depuis votre connexion.</p>
     <p>Rejoins notre canal Telegram pour recevoir l'adresse du nouveau domaine.</p>
-    <a href="https://t.me/movix_site">Ouvrir Telegram</a>
+    <a href="https://t.me/yaxoudbst_site">Ouvrir Telegram</a>
   </div>
 </body>
 </html>`;
@@ -284,10 +284,10 @@ self.addEventListener('push', (event) => {
   const data = event.data.json();
   const baseUrl = self.location.origin;
   event.waitUntil(
-    self.registration.showNotification(data.title || 'Movix', {
+    self.registration.showNotification(data.title || 'YaxouDBST', {
       body: data.body || '',
-      icon: data.icon ? new URL(data.icon, baseUrl).href : `${baseUrl}/movix.png`,
-      badge: `${baseUrl}/movix.png`,
+      icon: data.icon ? new URL(data.icon, baseUrl).href : `${baseUrl}/yaxoudbst.png`,
+      badge: `${baseUrl}/yaxoudbst.png`,
       image: data.image || undefined,
       data: data.data || {},
     })
@@ -429,7 +429,7 @@ self.addEventListener('fetch', (event) => {
 
 self.addEventListener('message', async (event) => {
   const data = event.data;
-  if (!data || data.type !== 'MOVIX_FORCE_REDIRECT') return;
+  if (!data || data.type !== 'YAXOUDBST_FORCE_REDIRECT') return;
   if (isLocalHost(self.location.hostname)) return;
   try {
     // Garde-fou : la page peut compter ses erreurs de manière trop
@@ -447,6 +447,6 @@ self.addEventListener('message', async (event) => {
       error: data.error || 'API error threshold reached',
       via: 'sw-message',
     });
-    event.source?.postMessage({ type: 'MOVIX_REDIRECT_TO', url });
+    event.source?.postMessage({ type: 'YAXOUDBST_REDIRECT_TO', url });
   } catch {}
 });

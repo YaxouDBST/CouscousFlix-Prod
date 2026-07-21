@@ -1,11 +1,11 @@
 {
   "manifest_version": 3,
-  "name": "Movix Proxy Extension",
+  "name": "YaxouDBST Proxy Extension",
   "version": "1.5.6",
-  "description": "Extension proxy pour Live TV Movix - Contourne CORS, injecte les headers et extrait les sources Nexus",
+  "description": "Extension proxy pour Live TV YaxouDBST - Contourne CORS, injecte les headers et extrait les sources Nexus",
   "browser_specific_settings": {
     "gecko": {
-      "id": "movix-extension@movix.cash",
+      "id": "yaxoudbst-extension@yaxoudbst.cash",
       "strict_min_version": "109.0",
       "data_collection_permissions": {
         "required": ["none"]
@@ -13,18 +13,18 @@
     }
   },
   "icons": {
-    "16": "movix.png",
-    "48": "movix.png",
-    "128": "movix.png"
+    "16": "yaxoudbst.png",
+    "48": "yaxoudbst.png",
+    "128": "yaxoudbst.png"
   },
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "movix.png",
-      "48": "movix.png",
-      "128": "movix.png"
+      "16": "yaxoudbst.png",
+      "48": "yaxoudbst.png",
+      "128": "yaxoudbst.png"
     },
-    "default_title": "Movix Extension"
+    "default_title": "YaxouDBST Extension"
   },
   "permissions": [
     "declarativeNetRequest",

@@ -27,7 +27,7 @@ export async function buildRoutePresence(
   return finalizeRoutePresence(
     context,
     createPagePresence(
-      'Explore Movix sans carte ni boussole',
+      'Explore YaxouDBST sans carte ni boussole',
       context.pageTitle || 'Exploration en cours',
       context.pageImage,
     ),

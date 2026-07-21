@@ -1,6 +1,6 @@
 const ALPHABET =
   "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const SITE_NAME = "Movix";
+const SITE_NAME = "YaxouDBST";
 const TMDB_API_BASE = "https://api.themoviedb.org/3";
 const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p";
 
@@ -81,9 +81,9 @@ const COPY = {
     tmdbLanguage: "fr-FR",
     ogLocale: "fr_FR",
     alternateOgLocale: "en_US",
-    defaultTitle: "Movix - Films et séries en streaming",
+    defaultTitle: "YaxouDBST - Films et séries en streaming",
     defaultDescription:
-      "Regardez des films, séries, collections et pages communautaires sur Movix.",
+      "Regardez des films, séries, collections et pages communautaires sur YaxouDBST.",
     movieWord: "films",
     tvWord: "séries",
     providerFallback: "Plateforme",
@@ -98,13 +98,13 @@ const COPY = {
     knownForLabel: "Connu pour",
     bornLabel: "Naissance",
     movieFallback:
-      "Découvrez {{title}} sur Movix, avec synopsis, note et lecture en ligne.",
+      "Découvrez {{title}} sur YaxouDBST, avec synopsis, note et lecture en ligne.",
     tvFallback:
-      "Découvrez {{title}} sur Movix, avec synopsis, note, saisons et lecture en ligne.",
+      "Découvrez {{title}} sur YaxouDBST, avec synopsis, note, saisons et lecture en ligne.",
     collectionFallback:
-      "Retrouvez tous les films de la collection {{title}} sur Movix.",
+      "Retrouvez tous les films de la collection {{title}} sur YaxouDBST.",
     personFallback:
-      "Consultez la biographie et la filmographie de {{title}} sur Movix.",
+      "Consultez la biographie et la filmographie de {{title}} sur YaxouDBST.",
     watchMovieLabel: "Regarder le film",
     watchSeriesLabel: "Regarder la série",
     watchAnimeLabel: "Regarder l’anime",
@@ -123,81 +123,81 @@ const COPY = {
     syncProLabel: "Sync Pro",
     movieLabel: "Film",
     tvLabel: "Serie",
-    sharedListTitle: "Liste partagée - Movix",
+    sharedListTitle: "Liste partagée - YaxouDBST",
     sharedListDescription:
-      "Consultez une liste partagée par la communauté Movix.",
-    watchPartyTitle: "Watch Party - Movix",
+      "Consultez une liste partagée par la communauté YaxouDBST.",
+    watchPartyTitle: "Watch Party - YaxouDBST",
     watchPartyDescription:
-      "Créez, rejoignez et partagez une watch party synchronisée sur Movix.",
-    homeTitle: "Movix - Streaming films et séries gratuit",
+      "Créez, rejoignez et partagez une watch party synchronisée sur YaxouDBST.",
+    homeTitle: "YaxouDBST - Streaming films et séries gratuit",
     homeDescription:
-      "Explorez les films, séries, collections, alertes et recommandations Movix.",
-    searchTitle: "Recherche - Movix",
+      "Explorez les films, séries, collections, alertes et recommandations YaxouDBST.",
+    searchTitle: "Recherche - YaxouDBST",
     searchDescription:
-      "Cherchez un film, une série, une collection ou une personne sur Movix.",
-    moviesTitle: "Films - Movix",
+      "Cherchez un film, une série, une collection ou une personne sur YaxouDBST.",
+    moviesTitle: "Films - YaxouDBST",
     moviesDescription:
-      "Parcourez les films populaires, récents et recommandés sur Movix.",
-    tvTitle: "Séries TV - Movix",
+      "Parcourez les films populaires, récents et recommandés sur YaxouDBST.",
+    tvTitle: "Séries TV - YaxouDBST",
     tvDescription:
-      "Parcourez les séries TV populaires, récentes et recommandées sur Movix.",
-    collectionsTitle: "Collections - Movix",
+      "Parcourez les séries TV populaires, récentes et recommandées sur YaxouDBST.",
+    collectionsTitle: "Collections - YaxouDBST",
     collectionsDescription:
-      "Retrouvez les sagas et franchises de films disponibles sur Movix.",
-    alertsTitle: "Mes alertes - Movix",
+      "Retrouvez les sagas et franchises de films disponibles sur YaxouDBST.",
+    alertsTitle: "Mes alertes - YaxouDBST",
     alertsDescription: "Gérez vos alertes de sorties et de nouveaux épisodes.",
-    rouletteTitle: "Roulette - Movix",
+    rouletteTitle: "Roulette - YaxouDBST",
     rouletteDescription:
-      "Laissez Movix choisir un film ou une série pour votre prochaine session.",
-    suggestionTitle: "Suggestion - Movix",
+      "Laissez YaxouDBST choisir un film ou une série pour votre prochaine session.",
+    suggestionTitle: "Suggestion - YaxouDBST",
     suggestionDescription:
       "Lancez une recommandation surprise selon vos critères.",
-    providerBrowseTitle: "Où regarder - Movix",
+    providerBrowseTitle: "Où regarder - YaxouDBST",
     providerBrowseDescription:
-      "Explorez les catalogues par plateforme de streaming sur Movix.",
-    liveTvTitle: "Live TV - Movix",
+      "Explorez les catalogues par plateforme de streaming sur YaxouDBST.",
+    liveTvTitle: "Live TV - YaxouDBST",
     liveTvDescription:
-      "Accédez aux chaînes en direct et au direct TV sur Movix.",
-    extensionTitle: "Extension - Movix",
+      "Accédez aux chaînes en direct et au direct TV sur YaxouDBST.",
+    extensionTitle: "Extension - YaxouDBST",
     extensionDescription:
-      "Installez l’extension navigateur Movix et ses intégrations.",
-    top10Title: "Top 10 - Movix",
+      "Installez l’extension navigateur YaxouDBST et ses intégrations.",
+    top10Title: "Top 10 - YaxouDBST",
     top10Description:
-      "Consultez le Top 10 films et séries de la communauté Movix.",
-    settingsTitle: "Paramètres - Movix",
+      "Consultez le Top 10 films et séries de la communauté YaxouDBST.",
+    settingsTitle: "Paramètres - YaxouDBST",
     settingsDescription:
-      "Réglez la langue, les préférences et les options de votre expérience Movix.",
-    aboutTitle: "À propos de Movix",
+      "Réglez la langue, les préférences et les options de votre expérience YaxouDBST.",
+    aboutTitle: "À propos de YaxouDBST",
     aboutDescription:
-      "Découvrez ce qu’est Movix et les fonctionnalités de la plateforme.",
-    privacyTitle: "Confidentialité - Movix",
+      "Découvrez ce qu’est YaxouDBST et les fonctionnalités de la plateforme.",
+    privacyTitle: "Confidentialité - YaxouDBST",
     privacyDescription:
-      "Consultez la politique de confidentialité et les pratiques de Movix.",
-    cinegraphTitle: "CineGraph - Movix",
+      "Consultez la politique de confidentialité et les pratiques de YaxouDBST.",
+    cinegraphTitle: "CineGraph - YaxouDBST",
     cinegraphDescription:
       "Explorez les liens entre films, séries, genres et talents avec CineGraph.",
-    wishboardTitle: "Wishboard - Movix",
+    wishboardTitle: "Wishboard - YaxouDBST",
     wishboardDescription:
       "Demandez un ajout de contenu et suivez les requêtes communautaires.",
-    wrappedTitle: "Wrapped - Movix",
-    wrappedDescription: "Retrouvez vos statistiques et votre récap Movix.",
-    profileTitle: "Profil - Movix",
+    wrappedTitle: "Wrapped - YaxouDBST",
+    wrappedDescription: "Retrouvez vos statistiques et votre récap YaxouDBST.",
+    profileTitle: "Profil - YaxouDBST",
     profileDescription:
-      "Retrouvez vos listes, favoris, alertes et historique sur Movix.",
-    authTitle: "Connexion - Movix",
-    authDescription: "Connectez-vous à votre compte Movix.",
-    vipTitle: "VIP - Movix",
-    vipDescription: "Découvrez les avantages VIP et les options premium Movix.",
-    genericPageTitle: "Page Movix",
-    genericPageDescription: "Découvrez cette page sur Movix.",
+      "Retrouvez vos listes, favoris, alertes et historique sur YaxouDBST.",
+    authTitle: "Connexion - YaxouDBST",
+    authDescription: "Connectez-vous à votre compte YaxouDBST.",
+    vipTitle: "VIP - YaxouDBST",
+    vipDescription: "Découvrez les avantages VIP et les options premium YaxouDBST.",
+    genericPageTitle: "Page YaxouDBST",
+    genericPageDescription: "Découvrez cette page sur YaxouDBST.",
   },
   en: {
     tmdbLanguage: "en-US",
     ogLocale: "en_US",
     alternateOgLocale: "fr_FR",
-    defaultTitle: "Movix - Movies and TV streaming",
+    defaultTitle: "YaxouDBST - Movies and TV streaming",
     defaultDescription:
-      "Watch movies, TV shows, collections and community pages on Movix.",
+      "Watch movies, TV shows, collections and community pages on YaxouDBST.",
     movieWord: "movies",
     tvWord: "TV shows",
     providerFallback: "Platform",
@@ -212,12 +212,12 @@ const COPY = {
     knownForLabel: "Known for",
     bornLabel: "Born",
     movieFallback:
-      "Discover {{title}} on Movix with synopsis, rating and online playback.",
+      "Discover {{title}} on YaxouDBST with synopsis, rating and online playback.",
     tvFallback:
-      "Discover {{title}} on Movix with synopsis, rating, seasons and online playback.",
+      "Discover {{title}} on YaxouDBST with synopsis, rating, seasons and online playback.",
     collectionFallback:
-      "Browse every movie in the {{title}} collection on Movix.",
-    personFallback: "See the biography and filmography of {{title}} on Movix.",
+      "Browse every movie in the {{title}} collection on YaxouDBST.",
+    personFallback: "See the biography and filmography of {{title}} on YaxouDBST.",
     watchMovieLabel: "Watch movie",
     watchSeriesLabel: "Watch series",
     watchAnimeLabel: "Watch anime",
@@ -236,67 +236,67 @@ const COPY = {
     syncProLabel: "Sync Pro",
     movieLabel: "Movie",
     tvLabel: "TV Show",
-    sharedListTitle: "Shared List - Movix",
-    sharedListDescription: "Browse a list shared by the Movix community.",
-    watchPartyTitle: "Watch Party - Movix",
+    sharedListTitle: "Shared List - YaxouDBST",
+    sharedListDescription: "Browse a list shared by the YaxouDBST community.",
+    watchPartyTitle: "Watch Party - YaxouDBST",
     watchPartyDescription:
-      "Create, join and share synchronized watch parties on Movix.",
-    homeTitle: "Movix - Free movie and TV streaming",
+      "Create, join and share synchronized watch parties on YaxouDBST.",
+    homeTitle: "YaxouDBST - Free movie and TV streaming",
     homeDescription:
-      "Explore movies, TV shows, collections, alerts and recommendations on Movix.",
-    searchTitle: "Search - Movix",
+      "Explore movies, TV shows, collections, alerts and recommendations on YaxouDBST.",
+    searchTitle: "Search - YaxouDBST",
     searchDescription:
-      "Search for a movie, TV show, collection or person on Movix.",
-    moviesTitle: "Movies - Movix",
+      "Search for a movie, TV show, collection or person on YaxouDBST.",
+    moviesTitle: "Movies - YaxouDBST",
     moviesDescription:
-      "Browse popular, recent and recommended movies on Movix.",
-    tvTitle: "TV Shows - Movix",
-    tvDescription: "Browse popular, recent and recommended TV shows on Movix.",
-    collectionsTitle: "Collections - Movix",
+      "Browse popular, recent and recommended movies on YaxouDBST.",
+    tvTitle: "TV Shows - YaxouDBST",
+    tvDescription: "Browse popular, recent and recommended TV shows on YaxouDBST.",
+    collectionsTitle: "Collections - YaxouDBST",
     collectionsDescription:
-      "Browse movie sagas and franchises available on Movix.",
-    alertsTitle: "My Alerts - Movix",
+      "Browse movie sagas and franchises available on YaxouDBST.",
+    alertsTitle: "My Alerts - YaxouDBST",
     alertsDescription: "Manage your release and new episode alerts.",
-    rouletteTitle: "Roulette - Movix",
+    rouletteTitle: "Roulette - YaxouDBST",
     rouletteDescription:
-      "Let Movix pick a movie or TV show for your next session.",
-    suggestionTitle: "Suggestion - Movix",
+      "Let YaxouDBST pick a movie or TV show for your next session.",
+    suggestionTitle: "Suggestion - YaxouDBST",
     suggestionDescription:
       "Get a surprise recommendation based on your filters.",
-    providerBrowseTitle: "Where to Watch - Movix",
+    providerBrowseTitle: "Where to Watch - YaxouDBST",
     providerBrowseDescription:
-      "Explore streaming catalogs by platform on Movix.",
-    liveTvTitle: "Live TV - Movix",
-    liveTvDescription: "Access live channels and TV streams on Movix.",
-    extensionTitle: "Extension - Movix",
+      "Explore streaming catalogs by platform on YaxouDBST.",
+    liveTvTitle: "Live TV - YaxouDBST",
+    liveTvDescription: "Access live channels and TV streams on YaxouDBST.",
+    extensionTitle: "Extension - YaxouDBST",
     extensionDescription:
-      "Install the Movix browser extension and integrations.",
-    top10Title: "Top 10 - Movix",
-    top10Description: "See the Movix community Top 10 movies and TV shows.",
-    settingsTitle: "Settings - Movix",
+      "Install the YaxouDBST browser extension and integrations.",
+    top10Title: "Top 10 - YaxouDBST",
+    top10Description: "See the YaxouDBST community Top 10 movies and TV shows.",
+    settingsTitle: "Settings - YaxouDBST",
     settingsDescription:
-      "Adjust language, preferences and experience options on Movix.",
-    aboutTitle: "About Movix",
-    aboutDescription: "Learn what Movix is and what the platform offers.",
-    privacyTitle: "Privacy - Movix",
-    privacyDescription: "Read the Movix privacy policy and data practices.",
-    cinegraphTitle: "CineGraph - Movix",
+      "Adjust language, preferences and experience options on YaxouDBST.",
+    aboutTitle: "About YaxouDBST",
+    aboutDescription: "Learn what YaxouDBST is and what the platform offers.",
+    privacyTitle: "Privacy - YaxouDBST",
+    privacyDescription: "Read the YaxouDBST privacy policy and data practices.",
+    cinegraphTitle: "CineGraph - YaxouDBST",
     cinegraphDescription:
       "Explore links between movies, shows, genres and talent with CineGraph.",
-    wishboardTitle: "Wishboard - Movix",
+    wishboardTitle: "Wishboard - YaxouDBST",
     wishboardDescription:
       "Request content additions and track community requests.",
-    wrappedTitle: "Wrapped - Movix",
-    wrappedDescription: "See your Movix stats and recap.",
-    profileTitle: "Profile - Movix",
+    wrappedTitle: "Wrapped - YaxouDBST",
+    wrappedDescription: "See your YaxouDBST stats and recap.",
+    profileTitle: "Profile - YaxouDBST",
     profileDescription:
-      "Find your lists, favorites, alerts and history on Movix.",
-    authTitle: "Login - Movix",
-    authDescription: "Sign in to your Movix account.",
-    vipTitle: "VIP - Movix",
-    vipDescription: "Discover Movix VIP benefits and premium options.",
-    genericPageTitle: "Movix Page",
-    genericPageDescription: "Discover this page on Movix.",
+      "Find your lists, favorites, alerts and history on YaxouDBST.",
+    authTitle: "Login - YaxouDBST",
+    authDescription: "Sign in to your YaxouDBST account.",
+    vipTitle: "VIP - YaxouDBST",
+    vipDescription: "Discover YaxouDBST VIP benefits and premium options.",
+    genericPageTitle: "YaxouDBST Page",
+    genericPageDescription: "Discover this page on YaxouDBST.",
   },
 };
 
@@ -422,7 +422,7 @@ function formatRating(value) {
     : numberValue.toFixed(1);
 }
 
-function buildImageUrl(origin, payload, fallbackPath = "/movix.png") {
+function buildImageUrl(origin, payload, fallbackPath = "/yaxoudbst.png") {
   const imagePath =
     payload.backdrop_path || payload.poster_path || payload.profile_path;
   if (!imagePath) return new URL(fallbackPath, origin).toString();
@@ -430,7 +430,7 @@ function buildImageUrl(origin, payload, fallbackPath = "/movix.png") {
   return `${TMDB_IMAGE_BASE}/${size}${imagePath}`;
 }
 
-function resolveExternalImageUrl(origin, value, fallbackPath = "/movix.png") {
+function resolveExternalImageUrl(origin, value, fallbackPath = "/yaxoudbst.png") {
   const normalized = String(value || "").trim();
 
   if (!normalized) {
@@ -537,7 +537,7 @@ function buildBaseMetadata(requestUrl, previewLanguage, payload) {
     ),
     canonicalUrl: requestUrl.toString(),
     imageUrl:
-      payload.imageUrl || new URL("/movix.png", requestUrl.origin).toString(),
+      payload.imageUrl || new URL("/yaxoudbst.png", requestUrl.origin).toString(),
     imageAlt: payload.imageAlt || SITE_NAME,
     ogType: payload.ogType || "website",
     ogLocale: copy.ogLocale,
@@ -840,8 +840,8 @@ function buildWatchPartyMetadata(requestUrl, roomData, previewLanguage, mode) {
   ];
   const descriptionBody = titleText
     ? previewLanguage === "fr"
-      ? `Rejoignez cette Watch Party Movix pour regarder ${titleText}${episodePart} en synchronisation.`
-      : `Join this Movix Watch Party to watch ${titleText}${episodePart} in sync.`
+      ? `Rejoignez cette Watch Party YaxouDBST pour regarder ${titleText}${episodePart} en synchronisation.`
+      : `Join this YaxouDBST Watch Party to watch ${titleText}${episodePart} in sync.`
     : copy.watchPartyDescription;
 
   return buildBaseMetadata(requestUrl, previewLanguage, {
@@ -851,7 +851,7 @@ function buildWatchPartyMetadata(requestUrl, roomData, previewLanguage, mode) {
       requestUrl.origin,
       media.poster || roomData.poster,
     ),
-    imageAlt: titleText ? `${titleText} - Watch Party` : "Watch Party - Movix",
+    imageAlt: titleText ? `${titleText} - Watch Party` : "Watch Party - YaxouDBST",
     ogType: "website",
   });
 }
@@ -864,8 +864,8 @@ function buildGenreMetadata(requestUrl, mediaType, genreId, previewLanguage) {
   const contentType = mediaType === "movie" ? copy.movieWord : copy.tvWord;
   const description =
     previewLanguage === "fr"
-      ? `Retrouvez les ${contentType} du genre ${genreName} sur Movix.`
-      : `Browse ${contentType} in the ${genreName} genre on Movix.`;
+      ? `Retrouvez les ${contentType} du genre ${genreName} sur YaxouDBST.`
+      : `Browse ${contentType} in the ${genreName} genre on YaxouDBST.`;
   const title =
     previewLanguage === "fr"
       ? `${genreName} - ${contentType} - ${SITE_NAME}`
@@ -902,11 +902,11 @@ function buildProviderMetadata(
           : "movies and TV shows";
   const description = type
     ? previewLanguage === "fr"
-      ? `Retrouvez les ${contentType} de ${providerName}${genreName ? ` dans ${genreName}` : ""} sur Movix.`
-      : `Browse ${contentType} on ${providerName}${genreName ? ` in ${genreName}` : ""} on Movix.`
+      ? `Retrouvez les ${contentType} de ${providerName}${genreName ? ` dans ${genreName}` : ""} sur YaxouDBST.`
+      : `Browse ${contentType} on ${providerName}${genreName ? ` in ${genreName}` : ""} on YaxouDBST.`
     : previewLanguage === "fr"
-      ? `Explorez le catalogue ${providerName} sur Movix.`
-      : `Explore the ${providerName} catalog on Movix.`;
+      ? `Explorez le catalogue ${providerName} sur YaxouDBST.`
+      : `Explore the ${providerName} catalog on YaxouDBST.`;
 
   return buildBaseMetadata(requestUrl, previewLanguage, {
     title: type
@@ -920,12 +920,12 @@ function buildWrappedMetadata(requestUrl, year, previewLanguage) {
   const copy = COPY[previewLanguage];
   const description = year
     ? previewLanguage === "fr"
-      ? `Retrouvez votre récap Movix ${year} et partagez vos stats.`
-      : `See your Movix ${year} recap and share your stats.`
+      ? `Retrouvez votre récap YaxouDBST ${year} et partagez vos stats.`
+      : `See your YaxouDBST ${year} recap and share your stats.`
     : copy.wrappedDescription;
 
   return buildBaseMetadata(requestUrl, previewLanguage, {
-    title: year ? `Movix Wrapped ${year}` : copy.wrappedTitle,
+    title: year ? `YaxouDBST Wrapped ${year}` : copy.wrappedTitle,
     description,
   });
 }
@@ -1059,32 +1059,32 @@ function buildStaticMetadata(requestUrl, previewLanguage) {
       });
     case "/debrid":
       return buildBaseMetadata(requestUrl, previewLanguage, {
-        title: "Debrid - Movix",
+        title: "Debrid - YaxouDBST",
         description:
           previewLanguage === "fr"
-            ? "Débridez et gérez vos liens premium sur Movix."
-            : "Debrid and manage your premium links on Movix.",
+            ? "Débridez et gérez vos liens premium sur YaxouDBST."
+            : "Debrid and manage your premium links on YaxouDBST.",
       });
     case "/dmca":
       return buildBaseMetadata(requestUrl, previewLanguage, {
-        title: "DMCA - Movix",
+        title: "DMCA - YaxouDBST",
         description:
           previewLanguage === "fr"
-            ? "Informations DMCA et demandes legales pour Movix."
-            : "DMCA information and legal requests for Movix.",
+            ? "Informations DMCA et demandes legales pour YaxouDBST."
+            : "DMCA information and legal requests for YaxouDBST.",
       });
     case "/admin":
       return buildBaseMetadata(requestUrl, previewLanguage, {
-        title: "Admin - Movix",
-        description: "Movix administration.",
+        title: "Admin - YaxouDBST",
+        description: "YaxouDBST administration.",
       });
     case "/ftv":
       return buildBaseMetadata(requestUrl, previewLanguage, {
-        title: "France TV - Movix",
+        title: "France TV - YaxouDBST",
         description:
           previewLanguage === "fr"
-            ? "Accédez au catalogue et au live France TV via Movix."
-            : "Access the France TV catalog and live streams via Movix.",
+            ? "Accédez au catalogue et au live France TV via YaxouDBST."
+            : "Access the France TV catalog and live streams via YaxouDBST.",
       });
     default:
       if (/^\/watchparty\/(?:join|room)\//.test(pathname)) {
@@ -1111,11 +1111,11 @@ function buildStaticMetadata(requestUrl, previewLanguage) {
 
       if (/^\/ftv\/(?:info|watch)\//.test(pathname)) {
         return buildBaseMetadata(requestUrl, previewLanguage, {
-          title: "France TV - Movix",
+          title: "France TV - YaxouDBST",
           description:
             previewLanguage === "fr"
-              ? "Accédez au catalogue et au live France TV via Movix."
-              : "Access the France TV catalog and live streams via Movix.",
+              ? "Accédez au catalogue et au live France TV via YaxouDBST."
+              : "Access the France TV catalog and live streams via YaxouDBST.",
         });
       }
 

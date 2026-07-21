@@ -9,15 +9,15 @@ interface ExtensionResponse<T = unknown> {
 
 export const isExtensionAvailable = (): boolean => {
     const w = window as Window & {
-        hasMovixExtension?: boolean;
-        __MOVIX_EXTENSION_INSTALLED?: boolean;
-        hasMovixUserscript?: boolean;
+        hasYaxouDBSTExtension?: boolean;
+        __YAXOUDBST_EXTENSION_INSTALLED?: boolean;
+        hasYaxouDBSTUserscript?: boolean;
     };
     return (
-        w.hasMovixExtension === true ||
-        w.__MOVIX_EXTENSION_INSTALLED === true ||
-        w.hasMovixUserscript === true ||
-        document.documentElement?.dataset.movixExtension === 'true'
+        w.hasYaxouDBSTExtension === true ||
+        w.__YAXOUDBST_EXTENSION_INSTALLED === true ||
+        w.hasYaxouDBSTUserscript === true ||
+        document.documentElement?.dataset.yaxoudbstExtension === 'true'
     );
 };
 
@@ -41,7 +41,7 @@ export const fetchFromExtension = <T = unknown>(
             const response = event.data;
 
             // We accept messages from window, must be from extension content script
-            if (event.source !== window || !response || response.source !== "MOVIX_EXTENSION") return;
+            if (event.source !== window || !response || response.source !== "YAXOUDBST_EXTENSION") return;
 
             if (response.messageId === messageId) {
                 window.removeEventListener("message", handler);
@@ -55,7 +55,7 @@ export const fetchFromExtension = <T = unknown>(
 
         window.addEventListener("message", handler);
         window.postMessage({
-            source: "MOVIX_WEB",
+            source: "YAXOUDBST_WEB",
             type: "EXTENSION_REQUEST",
             action,
             payload: enrichedPayload,

@@ -12,7 +12,7 @@ let dnsPopupDismissed = false;
 
 const DOWNLOAD_URL = 'https://one.one.one.one/';
 const HELP_PATH = '/help/dns';
-const TOAST_ID = 'movix-dns-block';
+const TOAST_ID = 'yaxoudbst-dns-block';
 
 const DnsBlockBanner: React.FC = () => {
   const { t } = useTranslation();
@@ -116,9 +116,9 @@ const DnsBlockBanner: React.FC = () => {
       );
     };
 
-    window.addEventListener('movix:dns-blocked', onBlocked);
+    window.addEventListener('yaxoudbst:dns-blocked', onBlocked);
     return () => {
-      window.removeEventListener('movix:dns-blocked', onBlocked);
+      window.removeEventListener('yaxoudbst:dns-blocked', onBlocked);
     };
   }, [t, navigate]);
 

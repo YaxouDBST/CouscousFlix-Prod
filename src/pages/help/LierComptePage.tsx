@@ -7,7 +7,7 @@ const LierComptePage: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = `${t('help.lierCompte.title')} — Movix`;
+    document.title = `${t('help.lierCompte.title')} — YaxouDBST`;
   }, [t]);
 
   const sections: TutoSection[] = [

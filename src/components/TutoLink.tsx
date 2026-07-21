@@ -9,7 +9,7 @@ interface TutoLinkProps {
 
 /**
  * Inline styled Link used inside tuto body paragraphs to point at another
- * Movix route. Rendered through i18next <Trans> numeric placeholders:
+ * YaxouDBST route. Rendered through i18next <Trans> numeric placeholders:
  *
  *   "bodyText": "Download on the <1>/app</1> page."
  *

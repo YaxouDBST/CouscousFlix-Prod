@@ -31,7 +31,7 @@ export async function handleCatalogRoutes(
       context,
       createPagePresence(
         'Farfouille l\'accueil comme un critique sous caféine',
-        'Accueil Movix',
+        'Accueil YaxouDBST',
         pageImage,
       ),
     )
@@ -77,7 +77,7 @@ export async function handleCatalogRoutes(
       context,
       createPagePresence(
         'Fouille les collections comme un conservateur insomniaque',
-        pageTitle || 'Collections Movix',
+        pageTitle || 'Collections YaxouDBST',
         pageImage,
       ),
     )
@@ -114,7 +114,7 @@ export async function handleCatalogRoutes(
         [
           'Fiche film sous la loupe 🎬',
           'Film inspecté comme un dossier brûlant 🍿',
-          'Autopsie ciné en cours sur Movix 🎞️',
+          'Autopsie ciné en cours sur YaxouDBST 🎞️',
         ],
         contentImage,
       ),
@@ -206,7 +206,7 @@ export async function handleCatalogRoutes(
       context,
       createPagePresence(
         'Laisse le destin choisir quelle idée brillante',
-        pageTitle || 'Roulette Movix',
+        pageTitle || 'Roulette YaxouDBST',
         pageImage,
       ),
     )

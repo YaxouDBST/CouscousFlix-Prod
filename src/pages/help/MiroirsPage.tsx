@@ -8,11 +8,11 @@ const MiroirsPage: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = `${t('help.miroirs.title')} — Movix`;
+    document.title = `${t('help.miroirs.title')} — YaxouDBST`;
   }, [t]);
 
   const telegramUrl =
-    import.meta.env.VITE_SUPPORT_TELEGRAM_URL || 'https://t.me/movix_site';
+    import.meta.env.VITE_SUPPORT_TELEGRAM_URL || 'https://t.me/yaxoudbst_site';
 
   const sections: TutoSection[] = [
     {
@@ -34,7 +34,7 @@ const MiroirsPage: React.FC = () => {
       components: {
         1: (
           <a
-            href="https://movix.online"
+            href="https://yaxoudbst.online"
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium text-indigo-400 hover:text-indigo-300 underline underline-offset-2 decoration-indigo-500/40 hover:decoration-indigo-400"
@@ -42,7 +42,7 @@ const MiroirsPage: React.FC = () => {
         ),
         2: (
           <a
-            href="https://rentry.co/movix"
+            href="https://rentry.co/yaxoudbst"
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium text-indigo-400 hover:text-indigo-300 underline underline-offset-2 decoration-indigo-500/40 hover:decoration-indigo-400"

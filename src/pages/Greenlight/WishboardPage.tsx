@@ -89,7 +89,7 @@ const WishboardPage: React.FC = () => {
 
     const API_URL = import.meta.env.VITE_MAIN_API || '';
 
-    // Movix Wrapped 2026 - Track wishboard page visit time
+    // YaxouDBST Wrapped 2026 - Track wishboard page visit time
     useWrappedTracker({
         mode: 'page',
         pageData: { pageName: 'wishboard' },

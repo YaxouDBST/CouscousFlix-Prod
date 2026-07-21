@@ -1,8 +1,8 @@
-# Services backend Movix
+# Services backend YaxouDBST
 
 Le dossier `API/` regroupe les services serveurs du projet. Le point clé à retenir : le backend applicatif actif est `API/Mainapi/`. Le vieux backend directement posé sous `API/` n'est plus la référence.
 
-Movix ne tourne pas sur un seul serveur monolithique. Selon la feature, le frontend peut parler au backend principal, à la WatchParty, à un proxy Python, à un worker Cloudflare ou à un outil navigateur.
+YaxouDBST ne tourne pas sur un seul serveur monolithique. Selon la feature, le frontend peut parler au backend principal, à la WatchParty, à un proxy Python, à un worker Cloudflare ou à un outil navigateur.
 
 ## Carte rapide
 
@@ -57,7 +57,7 @@ Note utile :
 
 ## Stockage et dépendances
 
-Selon les services, le backend Movix s'appuie sur :
+Selon les services, le backend YaxouDBST s'appuie sur :
 
 - MySQL
 - Redis

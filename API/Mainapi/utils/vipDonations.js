@@ -27,7 +27,7 @@ const VIP_PAYMENT_METHODS = Object.freeze({
 });
 const VIP_PAYMENT_METHOD_ENUM_SQL = "ENUM('btc', 'ltc', 'paygate_hosted', 'autobuy', 'payblis')";
 
-const DEFAULT_SUPPORT_TELEGRAM_URL = 'https://t.me/movix_site';
+const DEFAULT_SUPPORT_TELEGRAM_URL = 'https://t.me/yaxoudbst_site';
 const FINAL_STATUSES = new Set(['delivered', 'cancelled']);
 const DEFAULT_EXPIRATION_MINUTES = 210;
 const PAYGATE_DEFAULT_DOMAIN = 'checkout.paygate.to';
@@ -131,7 +131,7 @@ function getGiftPath(giftToken) {
 
 function hashIp(ipAddress) {
   if (!ipAddress) return null;
-  const secret = process.env.JWT_SECRET || 'movix-vip-ip';
+  const secret = process.env.JWT_SECRET || 'yaxoudbst-vip-ip';
   return crypto.createHmac('sha256', secret).update(ipAddress).digest('hex');
 }
 
@@ -1083,7 +1083,7 @@ async function refreshInvoiceStatus(pool, invoiceInput, options = {}) {
   if (isPaygatePaymentMethod(paymentMethod)) {
     // Fallback officiel PayGate: si le callback n'est jamais arrivé, on
     // interroge payment-status.php avec l'ipn_token stocké à la création.
-    // Couvre aussi les invoices expirées côté Movix mais payées côté PayGate.
+    // Couvre aussi les invoices expirées côté YaxouDBST mais payées côté PayGate.
     if (invoice.status !== 'paid' && invoice.paygate_ipn_token) {
       try {
         const statusPayload = await fetchPaygatePaymentStatus(invoice.paygate_ipn_token);
@@ -1554,7 +1554,7 @@ async function createPayblisVipInvoice(pool, { pack, recipientMode, payerEmail, 
     secretKey,
     sandbox: payblisMod.isPayblisSandbox(),
     amountEur: pack.amountEur,
-    productName: `Movix VIP ${buildDurationLabel(pack.vipYears)}`,
+    productName: `YaxouDBST VIP ${buildDurationLabel(pack.vipYears)}`,
     refOrder,
     payerEmail: normalizedEmail,
     customerName,

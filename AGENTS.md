@@ -1,8 +1,8 @@
-# AGENTS.md - Movix
+# AGENTS.md - YaxouDBST
 
 ## Overview
 
-Movix is a French streaming platform monorepo: React 18 + TypeScript frontend (Vite), Node.js/Express + Python backends, browser extensions, Rust WASM sync engine, and Cloudflare Workers.
+YaxouDBST is a French streaming platform monorepo: React 18 + TypeScript frontend (Vite), Node.js/Express + Python backends, browser extensions, Rust WASM sync engine, and Cloudflare Workers.
 
 ## Setup
 

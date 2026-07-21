@@ -1,21 +1,21 @@
 {
   "manifest_version": 3,
-  "name": "Movix Proxy Extension",
+  "name": "YaxouDBST Proxy Extension",
   "version": "1.3.9",
-  "description": "Extension proxy pour Live TV Movix - Contourne CORS, injecte les headers et extrait les sources Nexus",
+  "description": "Extension proxy pour Live TV YaxouDBST - Contourne CORS, injecte les headers et extrait les sources Nexus",
   "icons": {
-    "16": "movix.png",
-    "48": "movix.png",
-    "128": "movix.png"
+    "16": "yaxoudbst.png",
+    "48": "yaxoudbst.png",
+    "128": "yaxoudbst.png"
   },
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "movix.png",
-      "48": "movix.png",
-      "128": "movix.png"
+      "16": "yaxoudbst.png",
+      "48": "yaxoudbst.png",
+      "128": "yaxoudbst.png"
     },
-    "default_title": "Movix Extension"
+    "default_title": "YaxouDBST Extension"
   },
   "permissions": [
     "declarativeNetRequest",
@@ -36,22 +36,22 @@
   "externally_connectable": {
     "matches": [
       "*://localhost/*",
-      "*://movix.cash/*",
-      "*://*.movix.cash/*",
-      "*://movix.cloud/*",
-      "*://*.movix.cloud/*",
-      "*://movix.tax/*",
-      "*://*.movix.tax/*",
-      "*://movix.club/*",
-      "*://*.movix.club/*",
-      "*://movix.golf/*",
-      "*://*.movix.golf/*",
-      "*://movix.chat/*",
-      "*://*.movix.chat/*",
-      "*://movix.date/*",
-      "*://*.movix.date/*",
-      "*://movix.show/*",
-      "*://*.movix.show/*"
+      "*://yaxoudbst.cash/*",
+      "*://*.yaxoudbst.cash/*",
+      "*://yaxoudbst.cloud/*",
+      "*://*.yaxoudbst.cloud/*",
+      "*://yaxoudbst.tax/*",
+      "*://*.yaxoudbst.tax/*",
+      "*://yaxoudbst.club/*",
+      "*://*.yaxoudbst.club/*",
+      "*://yaxoudbst.golf/*",
+      "*://*.yaxoudbst.golf/*",
+      "*://yaxoudbst.chat/*",
+      "*://*.yaxoudbst.chat/*",
+      "*://yaxoudbst.date/*",
+      "*://*.yaxoudbst.date/*",
+      "*://yaxoudbst.show/*",
+      "*://*.yaxoudbst.show/*"
     ]
   },
   "web_accessible_resources": [

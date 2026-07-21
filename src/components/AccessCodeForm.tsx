@@ -73,7 +73,7 @@ const AccessCodeForm: React.FC<AccessCodeFormProps> = ({ isModal = false, hideNo
     return (
       <div className="w-full">
         <h2 className="text-2xl font-bold text-white mb-6 text-center bg-gradient-to-r from-red-500 to-purple-500 bg-clip-text text-transparent">
-          {t('vip.accessMovixVip')}
+          {t('vip.accessYaxouDBSTVip')}
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -105,7 +105,7 @@ const AccessCodeForm: React.FC<AccessCodeFormProps> = ({ isModal = false, hideNo
             type="submit"
             className="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-3 px-4 rounded-xl font-medium hover:from-blue-600 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-blue-500/25"
           >
-            {t('vip.accessMovixVip')}
+            {t('vip.accessYaxouDBSTVip')}
           </motion.button>
           
           {!hideNoKeyButton && (
@@ -163,7 +163,7 @@ const AccessCodeForm: React.FC<AccessCodeFormProps> = ({ isModal = false, hideNo
                     {t('vip.donate')}
                   </Link>
                   <a
-                    href="https://t.me/movix_site"
+                    href="https://t.me/yaxoudbst_site"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block text-center bg-[#0088cc] text-white py-3 px-4 rounded-xl font-medium hover:bg-[#006699] transition-colors duration-200"
@@ -188,7 +188,7 @@ const AccessCodeForm: React.FC<AccessCodeFormProps> = ({ isModal = false, hideNo
           className="bg-gray-800/50 backdrop-blur-lg p-8 rounded-2xl shadow-2xl border border-gray-700"
         >
           <h2 className="text-3xl font-bold text-white mb-8 text-center bg-gradient-to-r from-red-500 to-purple-500 bg-clip-text text-transparent">
-            {t('vip.accessMovixVip')}
+            {t('vip.accessYaxouDBSTVip')}
           </h2>
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
@@ -220,7 +220,7 @@ const AccessCodeForm: React.FC<AccessCodeFormProps> = ({ isModal = false, hideNo
               type="submit"
               className="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white py-3 px-4 rounded-xl font-medium hover:from-blue-600 hover:to-blue-800 transition-all duration-200 shadow-lg hover:shadow-blue-500/25"
             >
-              {t('vip.accessMovixVip')}
+              {t('vip.accessYaxouDBSTVip')}
             </motion.button>
           </form>
 
@@ -279,7 +279,7 @@ const AccessCodeForm: React.FC<AccessCodeFormProps> = ({ isModal = false, hideNo
                     {t('vip.donate')}
                   </Link>
                   <a
-                    href="https://t.me/movix_site"
+                    href="https://t.me/yaxoudbst_site"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block text-center bg-[#0088cc] text-white py-3 px-4 rounded-xl font-medium hover:bg-[#006699] transition-colors duration-200"

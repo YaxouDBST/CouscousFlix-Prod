@@ -1,11 +1,11 @@
 /**
- * Movix Extension - Direct M3U8 Extractors
+ * YaxouDBST Extension - Direct M3U8 Extractors
  * Replaces server.py extraction logic - runs entirely in the extension service worker.
  * No VIP check needed since it runs locally.
  */
 
 // ===== Configuration =====
-const PROXY_BASE = 'https://proxiesembed.movix.show';
+const PROXY_BASE = 'https://proxiesembed.yaxoudbst.show';
 
 // AES constants for SeekStreaming (embed4me)
 const SEEKSTREAMING_AES_KEY_HEX = '6b69656d7469656e6d7561393131636131323334353637383930';
@@ -1134,7 +1134,7 @@ function clearCaches(type) {
 // Export everything for use in background.js
 // (In service worker, we'll import via importScripts or just include in order)
 if (typeof globalThis !== 'undefined') {
-    globalThis.MovixExtractors = {
+    globalThis.YaxouDBSTExtractors = {
         extractVoe,
         extractFsvid,
         extractVidzy,

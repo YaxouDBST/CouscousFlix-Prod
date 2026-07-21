@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Lit le userscript depuis ../userscript/movix.user.js,
+ * Lit le userscript depuis ../userscript/yaxoudbst.user.js,
  * supprime le header ==UserScript==,
  * et génère src/injection/userscript-source.ts avec le contenu en string.
  */
@@ -12,7 +12,7 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const userscriptPath = resolve(__dirname, '../../userscript/movix.user.js');
+const userscriptPath = resolve(__dirname, '../../userscript/yaxoudbst.user.js');
 const outputPath = resolve(__dirname, '../src/injection/userscript-source.ts');
 
 let source = readFileSync(userscriptPath, 'utf-8');
@@ -27,7 +27,7 @@ const escaped = source
   .replace(/\$\{/g, '\\${');
 
 const output = `/**
- * Source du userscript Movix.
+ * Source du userscript YaxouDBST.
  *
  * AUTO-GÉNÉRÉ par scripts/build-userscript.js
  * Ne pas modifier manuellement.

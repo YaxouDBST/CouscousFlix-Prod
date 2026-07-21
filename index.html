@@ -6,11 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="robots" content="index, follow, noarchive, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta name="google" content="notranslate">
-    <meta name="apple-mobile-web-app-title" content="Movix" />
-    <meta name="application-name" content="Movix" />
+    <meta name="apple-mobile-web-app-title" content="YaxouDBST" />
+    <meta name="application-name" content="YaxouDBST" />
     <meta name="msapplication-TileColor" content="#000000" />
     <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Regardez des milliers de films et séries en streaming HD sur Movix. Catalogue complet en VF et VOSTFR, live TV, collections et watch parties synchronisées entre amis." />
+    <meta name="description" content="Regardez des milliers de films et séries en streaming HD . Catalogue complet en VF et VOSTFR, live TV, collections et watch parties synchronisées entre amis(en dev)." />
 
     <!-- Prefetch -->
     <link rel="dns-prefetch" href="//image.tmdb.org">
@@ -27,14 +27,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- Icons -->
-    <link rel="icon" href="/movix.png" />
-    <link rel="icon" type="image/png" href="/movix.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="/movix.png" />
-    <link rel="shortcut icon" href="/movix.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/movix.png" />
+    <link rel="icon" href="/cat.png" />
+    <link rel="icon" type="image/png" href="/cat.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/cat.svg" />
+    <link rel="shortcut icon" href="/cat.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/cat.png" />
     <link rel="manifest" href="/manifest.json" />
 
-    <title data-rh="true">Movix — Films et séries en streaming gratuit | VF, VOSTFR, HD</title>
+    <title data-rh="true">jsp lv je me faisais chier </title>
 
     <!-- JSON-LD -->
     <script type="application/ld+json" data-rh="true">
@@ -42,37 +42,37 @@
       {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "name": "Movix",
-        "alternateName": "Movix Streaming",
-        "url": "https://movix.cash",
-        "description": "Movix est une plateforme française open-source (CC BY-NC 4.0) de streaming multimédia : films, séries, anime, TV en direct et Watch Parties synchronisées.",
+        "name": "YaxouDBST",
+        "alternateName": "YaxouDBST Streaming",
+        "url": "",
+        "description": "YaxouDBST est une plateforme française open-source (CC BY-NC 4.0) de streaming multimédia : films, séries, anime, TV en direct et Watch Parties synchronisées.",
         "logo": {
           "@type": "ImageObject",
-          "url": "https://movix.cash/movix.png",
+          "url": "/cat.png",
           "width": 512,
           "height": 512
         },
         "sameAs": [
-          "https://t.me/movix_site"
+          ""
         ],
         "contactPoint": {
           "@type": "ContactPoint",
           "contactType": "customer support",
-          "email": "movixstreaming@gmail.com",
+          "email": "",
           "availableLanguage": ["French", "English"]
         }
       },
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "Movix",
-        "url": "https://movix.cash",
+        "name": "YaxouDBST",
+        "url": "https://YaxouDBST.cash",
         "inLanguage": "fr",
         "potentialAction": {
           "@type": "SearchAction",
           "target": {
             "@type": "EntryPoint",
-            "urlTemplate": "https://movix.cash/search?q={search_term_string}"
+            "urlTemplate": ""
           },
           "query-input": "required name=search_term_string"
         }
@@ -98,9 +98,9 @@
   <script>
     (() => {
       const buildId = '%VITE_APP_BUILD_ID%';
-      const buildStorageKey = 'movix_build_id';
-      const recoveryStorageKey = `movix_build_recovery_${buildId}`;
-      const refreshSearchParam = 'movix_build_refresh';
+      const buildStorageKey = 'yaxoudbst_build_id';
+      const recoveryStorageKey = `yaxoudbst_build_recovery_${buildId}`;
+      const refreshSearchParam = 'yaxoudbst_build_refresh';
 
       const buildRecoveryUrl = () => {
         const url = new URL(window.location.href);
@@ -139,7 +139,7 @@
         const alreadyRecovered = sessionStorage.getItem(recoveryStorageKey) === 'done';
 
         if (previousBuildId && previousBuildId !== buildId && !alreadyRecovered) {
-          window.__MOVIX_CACHE_RECOVERY__ = recoverClientCache();
+          window.__YAXOUDBST_CACHE_RECOVERY__ = recoverClientCache();
           return;
         }
 
@@ -167,7 +167,7 @@
           // Ignore storage errors.
         }
 
-        window.__MOVIX_CACHE_RECOVERY__ = recoverClientCache();
+        window.__YAXOUDBST_CACHE_RECOVERY__ = recoverClientCache();
       }, true);
     })();
   </script>

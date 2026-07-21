@@ -1137,7 +1137,7 @@ body {
   height: 100%;
 }
 
-/* Animations pour l'intro Movix */
+/* Animations pour l'intro YaxouDBST */
 @keyframes fadeout {
   from {
     opacity: 1;
@@ -1148,7 +1148,7 @@ body {
   }
 }
 
-@keyframes movixPulse {
+@keyframes yaxoudbstPulse {
   0% {
     transform: scale(1);
   }
@@ -1162,7 +1162,7 @@ body {
   }
 }
 
-@keyframes movixPulseMed {
+@keyframes yaxoudbstPulseMed {
   0% {
     transform: scale(1);
   }
@@ -1176,7 +1176,7 @@ body {
   }
 }
 
-@keyframes movixReveal {
+@keyframes yaxoudbstReveal {
   0% {
     transform: translateY(10px);
     opacity: 0;
@@ -1188,7 +1188,7 @@ body {
   }
 }
 
-@keyframes movixShine {
+@keyframes yaxoudbstShine {
   0% {
     background-position: -200% 0;
   }
@@ -1198,7 +1198,7 @@ body {
   }
 }
 
-@keyframes movixShineFast {
+@keyframes yaxoudbstShineFast {
   0% {
     background-position: -200% 0;
   }
@@ -1284,7 +1284,7 @@ body {
   }
 }
 
-@keyframes movixFlare {
+@keyframes yaxoudbstFlare {
   0% {
     opacity: 0.4;
     transform: translate(0, 0) scale(0.8);
@@ -1301,7 +1301,7 @@ body {
   }
 }
 
-@keyframes movixFlareAlt {
+@keyframes yaxoudbstFlareAlt {
   0% {
     opacity: 0.4;
     transform: translate(0, 0) scale(0.8);
@@ -1318,7 +1318,7 @@ body {
   }
 }
 
-@keyframes movixFlash {
+@keyframes yaxoudbstFlash {
   0% {
     opacity: 0.3;
     transform: scaleX(0.8);
@@ -1335,7 +1335,7 @@ body {
   }
 }
 
-@keyframes movixFlashAlt {
+@keyframes yaxoudbstFlashAlt {
 
   0%,
   100% {
@@ -1490,35 +1490,35 @@ body {
 }
 
 /* Animation des particules */
-.animate-movix-particles div:nth-child(1) {
+.animate-yaxoudbst-particles div:nth-child(1) {
   animation: particleDrift1 7s ease-in-out infinite;
 }
 
-.animate-movix-particles div:nth-child(2) {
+.animate-yaxoudbst-particles div:nth-child(2) {
   animation: particleDrift2 8s ease-in-out infinite;
 }
 
-.animate-movix-particles div:nth-child(3) {
+.animate-yaxoudbst-particles div:nth-child(3) {
   animation: particleDrift3 6s ease-in-out infinite;
 }
 
-.animate-movix-particles div:nth-child(4) {
+.animate-yaxoudbst-particles div:nth-child(4) {
   animation: particleDrift4 9s ease-in-out infinite;
 }
 
-.animate-movix-particles div:nth-child(5) {
+.animate-yaxoudbst-particles div:nth-child(5) {
   animation: particleDrift2 7.5s ease-in-out infinite 1s;
 }
 
-.animate-movix-particles div:nth-child(6) {
+.animate-yaxoudbst-particles div:nth-child(6) {
   animation: particleDrift4 6.5s ease-in-out infinite 0.5s;
 }
 
-.animate-movix-particles div:nth-child(7) {
+.animate-yaxoudbst-particles div:nth-child(7) {
   animation: particleDrift1 8.5s ease-in-out infinite 1.5s;
 }
 
-.animate-movix-particles div:nth-child(8) {
+.animate-yaxoudbst-particles div:nth-child(8) {
   animation: particleDrift3 7s ease-in-out infinite 2s;
 }
 
@@ -1528,27 +1528,27 @@ body {
 }
 
 .animate-pulse {
-  animation: movixPulse 1.5s ease-in-out;
+  animation: yaxoudbstPulse 1.5s ease-in-out;
 }
 
 .animate-pulse-med {
-  animation: movixPulseMed 2s ease-in-out infinite;
+  animation: yaxoudbstPulseMed 2s ease-in-out infinite;
 }
 
 .animate-pulse-slow {
-  animation: movixPulse 2.5s ease-in-out infinite;
+  animation: yaxoudbstPulse 2.5s ease-in-out infinite;
 }
 
-.animate-movix-reveal {
-  animation: movixReveal 0.8s ease-out;
+.animate-yaxoudbst-reveal {
+  animation: yaxoudbstReveal 0.8s ease-out;
 }
 
-.animate-movix-shine {
-  animation: movixShine 2s linear infinite;
+.animate-yaxoudbst-shine {
+  animation: yaxoudbstShine 2s linear infinite;
 }
 
-.animate-movix-shine-fast {
-  animation: movixShineFast 1.5s linear infinite;
+.animate-yaxoudbst-shine-fast {
+  animation: yaxoudbstShineFast 1.5s linear infinite;
 }
 
 .animate-gentle-drift {
@@ -1567,20 +1567,20 @@ body {
   animation: lineDriftDown 8s ease-in-out infinite;
 }
 
-.animate-movix-flare {
-  animation: movixFlare 3s ease-in-out infinite;
+.animate-yaxoudbst-flare {
+  animation: yaxoudbstFlare 3s ease-in-out infinite;
 }
 
-.animate-movix-flare-alt {
-  animation: movixFlareAlt 4s ease-in-out infinite;
+.animate-yaxoudbst-flare-alt {
+  animation: yaxoudbstFlareAlt 4s ease-in-out infinite;
 }
 
-.animate-movix-flash {
-  animation: movixFlash 2s ease-in-out infinite;
+.animate-yaxoudbst-flash {
+  animation: yaxoudbstFlash 2s ease-in-out infinite;
 }
 
-.animate-movix-flash-alt {
-  animation: movixFlashAlt 3s ease-in-out infinite;
+.animate-yaxoudbst-flash-alt {
+  animation: yaxoudbstFlashAlt 3s ease-in-out infinite;
 }
 
 /* Animations rayons lumineux */
@@ -1857,7 +1857,7 @@ body,
   flex-shrink: 0;
 }
 
-/* Animation pour le logo MOVIX */
+/* Animation pour le logo YAXOUDBST */
 @keyframes shine-slow {
   0% {
     background-position: -200% 0;

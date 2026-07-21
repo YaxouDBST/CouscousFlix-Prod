@@ -119,8 +119,8 @@ def proxy(target):
 
     # Domain specific headers
     if "coflix" in domain_lower:
-        req_headers["Origin"] = "https://movix.embedseek.com"
-        req_headers["Referer"] = "https://movix.embedseek.com/"
+        req_headers["Origin"] = "https://yaxoudbst.embedseek.com"
+        req_headers["Referer"] = "https://yaxoudbst.embedseek.com/"
     elif "cinetacos" in domain_lower:
         req_headers["Origin"] = "https://cinepulse.to"
         req_headers["Referer"] = "https://cinepulse.to/"

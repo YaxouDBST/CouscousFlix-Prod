@@ -14,8 +14,8 @@ const SYNCABLE_EXACT_KEYS = new Set([
   'live_tv_favorite_iptv_categories',
   'miniPlayerPosition',
   'miniPlayerVolume',
-  'movix_intro_enabled',
-  'movix_intro_seen',
+  'yaxoudbst_intro_enabled',
+  'yaxoudbst_intro_seen',
   'privacy_data_collection',
   'recentEmojis',
   'screensaver_enabled',
@@ -36,7 +36,7 @@ const SYNCABLE_PREFIXES = [
   'favorite_',
   'favorites_',
   'miniPlayer',
-  'movix_intro_',
+  'yaxoudbst_intro_',
   'player',
   'progress_',
   'screensaver_',
@@ -49,7 +49,7 @@ const SYNCABLE_PREFIXES = [
 // didn't reach the server before unload (Firefox keepalive flake, network
 // hiccup, browser crash) is replayed on next boot before loadProfileData wipes
 // localStorage. See ProfileContext.replayOutboxIfAny.
-export const SYNC_OUTBOX_STORAGE_KEY = '__movix_sync_outbox';
+export const SYNC_OUTBOX_STORAGE_KEY = '__yaxoudbst_sync_outbox';
 
 const BLOCKED_SYNC_KEYS = new Set([
   SYNC_OUTBOX_STORAGE_KEY,
@@ -73,7 +73,7 @@ const BLOCKED_SYNC_KEYS = new Set([
   'is_admin',
   'lastCommentTime',
   'lastReplyTime',
-  'movix_pending_auth_action',
+  'yaxoudbst_pending_auth_action',
   'removeItem',
   'resolved_user_id',
   'resolved_user_type',
@@ -115,7 +115,7 @@ const PROFILE_LOAD_PRESERVED_KEYS = new Set([
   'guest_uuid',
   'is_admin',
   'is_vip',
-  'movix_pending_auth_action',
+  'yaxoudbst_pending_auth_action',
   'resolved_user_id',
   'resolved_user_type',
   'selectedProfile',

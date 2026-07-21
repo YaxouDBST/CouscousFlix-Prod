@@ -79,7 +79,7 @@ export async function generatePosterShareImage(data: WrappedShareCardData): Prom
     ctx.font = `800 26px ${FONT_STACK}`;
     center(`🏆  SÉLECTION OFFICIELLE ${data.year}  🏆`, 138);
 
-    // MOVIX PRÉSENTE
+    // YAXOUDBST PRÉSENTE
     ctx.fillStyle = 'rgba(255,255,255,0.6)';
     ctx.font = `800 30px ${FONT_STACK}`;
     center('M O V I X   P R É S E N T E', 252);
@@ -160,7 +160,7 @@ export async function generatePosterShareImage(data: WrappedShareCardData): Prom
     center(`${data.uniqueTitles} TITRES  ·  ${data.totalSessions} SESSIONS  ·  ${data.watchTimeLabel}`, 1492);
     ctx.fillStyle = 'rgba(255,255,255,0.38)';
     ctx.font = `600 24px ${FONT_STACK}`;
-    center('movix.date', 1556);
+    center('yaxoudbst.date', 1556);
 
     return toBlob(canvas);
 }
@@ -216,7 +216,7 @@ export async function generateTicketShareImage(data: WrappedShareCardData): Prom
     // En-tête ticket
     ctx.fillStyle = ink;
     ctx.font = `400 58px ${DISPLAY_FONT}`;
-    centerInTicket(`MOVIX WRAPPED`, ty + 116);
+    centerInTicket(`YAXOUDBST WRAPPED`, ty + 116);
     ctx.font = `400 100px ${DISPLAY_FONT}`;
     centerInTicket(String(data.year), ty + 226);
     ctx.fillStyle = inkSoft;
@@ -305,7 +305,7 @@ export async function generateTicketShareImage(data: WrappedShareCardData): Prom
     }
     ctx.fillStyle = inkSoft;
     ctx.font = `700 24px ${FONT_STACK}`;
-    centerInTicket('movix.date', ty + th - 66);
+    centerInTicket('yaxoudbst.date', ty + th - 66);
 
     return toBlob(canvas);
 }

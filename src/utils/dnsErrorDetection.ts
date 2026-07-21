@@ -73,7 +73,7 @@ export function isDnsLikeError(
 // Reachability probe — gate de confirmation pour la popup
 // ============================================================================
 
-const ORIGIN_PROBE_PATH = '/movix.png';
+const ORIGIN_PROBE_PATH = '/yaxoudbst.png';
 const ORIGIN_PROBE_TIMEOUT_MS = 4000;
 // Cache du résultat : pendant un burst d'erreurs vidéo, on ne refait pas un
 // probe pour chaque erreur. 30s = window assez longue pour absorber une
@@ -132,9 +132,9 @@ async function checkOriginReachable(): Promise<boolean> {
 // — le banner s'en sert pour afficher le message "on a changé de lecteur
 // pour toi automatiquement" uniquement quand c'est vrai.
 //
-// Gate : on ne dispatch QUE si l'origine Movix est elle-même injoignable. Si
-// on arrive à charger /movix.png, l'erreur vidéo vient du host vidéo tiers
-// (source morte, CORS, proxy down…) et pas d'un blocage FAI sur Movix —
+// Gate : on ne dispatch QUE si l'origine YaxouDBST est elle-même injoignable. Si
+// on arrive à charger /yaxoudbst.png, l'erreur vidéo vient du host vidéo tiers
+// (source morte, CORS, proxy down…) et pas d'un blocage FAI sur YaxouDBST —
 // montrer "ton FAI bloque ce lecteur" serait un faux positif.
 export function notifyDnsBlocked(
   detail: { host?: string; details?: string; switched?: boolean }
@@ -143,6 +143,6 @@ export function notifyDnsBlocked(
   void (async () => {
     const reachable = await checkOriginReachable();
     if (reachable) return;
-    window.dispatchEvent(new CustomEvent('movix:dns-blocked', { detail }));
+    window.dispatchEvent(new CustomEvent('yaxoudbst:dns-blocked', { detail }));
   })();
 }

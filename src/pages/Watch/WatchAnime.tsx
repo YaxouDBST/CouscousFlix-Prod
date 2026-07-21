@@ -278,7 +278,7 @@ const WatchAnime: React.FC = () => {
     localStorage.setItem('continueWatching', JSON.stringify(continueWatching));
   }, [id, season, episode]);
 
-  // Movix Wrapped 2026 - Track anime viewing time
+  // YaxouDBST Wrapped 2026 - Track anime viewing time
   useWrappedTracker({
     mode: 'viewing',
     viewingData: id ? {

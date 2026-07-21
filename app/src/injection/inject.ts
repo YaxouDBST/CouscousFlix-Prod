@@ -12,7 +12,7 @@ ${castShim}
 
 ${bridge}
 
-// --- Userscript Movix ---
+// --- Userscript YaxouDBST ---
 ${USERSCRIPT_SOURCE}
 
 true;

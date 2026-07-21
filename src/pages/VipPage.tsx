@@ -87,7 +87,7 @@ const VipPage: React.FC = () => {
               <Crown className="w-8 h-8 text-yellow-500" />
             </div>
             <BlurText
-              text={t("vip.becomeVip") + " Movix"}
+              text={t("vip.becomeVip") + " YaxouDBST"}
               delay={300}
               animateBy="words"
               direction="top"
@@ -197,7 +197,7 @@ const VipPage: React.FC = () => {
                   {t("vipDonations.page.myInvoicesButton")}
                 </Link>
                 <a
-                  href="https://t.me/movix_site"
+                  href="https://t.me/yaxoudbst_site"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

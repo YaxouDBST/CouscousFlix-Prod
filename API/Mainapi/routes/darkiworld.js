@@ -20,7 +20,7 @@ const path = require('path');
 const fsp = require('fs').promises;
 const { generateCacheKey } = require('../utils/cacheManager');
 const { getAuthIfValid } = require('../middleware/auth');
-const { getPool: getMovixPool } = require('../mysqlPool');
+const { getPool: getYaxouDBSTPool } = require('../mysqlPool');
 const darkiworldSqlite = require('../utils/darkiworldSqlite');
 const hydrackerLiveModule = require('../utils/hydrackerLive');
 const { redis: redisClient } = require('../config/redis');
@@ -53,7 +53,7 @@ function poisonDecodeResponse(id) {
     id: String(id),
     provider: 'direct',
     embed_url: {
-      lien: 'https://t.me/movix_site',
+      lien: 'https://t.me/yaxoudbst_site',
       taille: null,
       created_at: null,
     },
@@ -155,7 +155,7 @@ function getHydrackerLive() {
   return _hydrackerLive;
 }
 
-async function resolveMovixUsername(userId, authType) {
+async function resolveYaxouDBSTUsername(userId, authType) {
   try {
     const safeUserId = String(userId).replace(/[^a-zA-Z0-9_\-]/g, '');
     const safeUserType = authType === 'bip-39' ? 'bip39' : 'oauth';
@@ -168,8 +168,8 @@ async function resolveMovixUsername(userId, authType) {
   return { username: 'Admin', avatar: null };
 }
 
-async function fetchMovixDownloadLinks(type, id, season, episode) {
-  const pool = getMovixPool();
+async function fetchYaxouDBSTDownloadLinks(type, id, season, episode) {
+  const pool = getYaxouDBSTPool();
   let raw = [];
   if (type === 'movie') {
     const [rows] = await pool.execute('SELECT download_links FROM films WHERE id = ?', [id]);
@@ -196,17 +196,17 @@ async function fetchMovixDownloadLinks(type, id, season, episode) {
   const normalized = await Promise.all(raw.map(async (l) => {
     const addedBy = l.added_by || {};
     const userInfo = addedBy.id
-      ? await resolveMovixUsername(addedBy.id, addedBy.auth_type)
+      ? await resolveYaxouDBSTUsername(addedBy.id, addedBy.auth_type)
       : { username: 'Admin', avatar: null };
     const isFullSeason = Boolean(l.full_saison);
     return {
-      source: 'movix',
-      id: `movix:${l.url}`,
+      source: 'yaxoudbst',
+      id: `yaxoudbst:${l.url}`,
       url: l.url,
       host_id: -1,
-      host_name: l.host || 'Movix',
+      host_name: l.host || 'YaxouDBST',
       host_icon: HOST_ICON_MAP[l.host] || null,
-      provider: 'movix',
+      provider: 'yaxoudbst',
       language: l.language,
       quality: l.quality,
       sub: Boolean(l.sub),
@@ -390,8 +390,8 @@ router.get('/download/:type/:id', async (req, res) => {
       `darkiworld_download_v2_${type}_${id}${type === 'tv' ? `_${season}_${episode}` : ''}`
     );
 
-    const movixLookupId = tmdbId ? String(tmdbId) : id;
-    const movixLinks = await fetchMovixDownloadLinks(type, movixLookupId, season, episode);
+    const yaxoudbstLookupId = tmdbId ? String(tmdbId) : id;
+    const yaxoudbstLinks = await fetchYaxouDBSTDownloadLinks(type, yaxoudbstLookupId, season, episode);
 
     // Disk cache holds the sqlite-derived rows only (sqlite is static so
     // caching forever is safe). Live rows come from a separate Redis-cached
@@ -451,8 +451,8 @@ router.get('/download/:type/:id', async (req, res) => {
 
     return res.status(200).json({
       success: true,
-      all: [...movixLinks, ...darkiList, ...liveLinks],
-      movixCount: movixLinks.length,
+      all: [...yaxoudbstLinks, ...darkiList, ...liveLinks],
+      yaxoudbstCount: yaxoudbstLinks.length,
     });
 
   } catch (error) {

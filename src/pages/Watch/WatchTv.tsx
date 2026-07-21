@@ -352,7 +352,7 @@ const checkDarkinoAvailability = async (
   _updateRetryMessage?: (message: string) => void,
   _retryCount = 0
 ): Promise<false | { available: boolean; sources: any[]; darkinoId: string | null }> => {
-  // Source Darkino/Nightflix retirée : endpoints api.movix.chat/api/search + /api/series/download désactivés.
+  // Source Darkino/Nightflix retirée : endpoints api.yaxoudbst.chat/api/search + /api/series/download désactivés.
   return false;
 };
 
@@ -361,7 +361,7 @@ const checkSibnetAvailability = async (videoId: string): Promise<string | null> 
   if (!videoId) return null;
 
   try {
-    const response = await axios.get(`https://colossal-latrina-movixfrembedapi-acb05587.koyeb.app/api/extract-sibnet?url=https:%2F%2Fvideo.sibnet.ru%2Fshell.php%3Fvideoid%3D${videoId}`);
+    const response = await axios.get(`https://colossal-latrina-yaxoudbstfrembedapi-acb05587.koyeb.app/api/extract-sibnet?url=https:%2F%2Fvideo.sibnet.ru%2Fshell.php%3Fvideoid%3D${videoId}`);
 
     if (response.data && response.data.url) {
       // Replace dv98 with cvs123-1 as requested
@@ -733,7 +733,7 @@ const WatchTv: React.FC = () => {
   // Ajout de l'état pour savoir si l'utilisateur a cliqué sur la pub
   const [hasClickedAd, setHasClickedAd] = useState(false);
 
-  // Movix Wrapped 2026 - Track TV viewing time
+  // YaxouDBST Wrapped 2026 - Track TV viewing time
   useWrappedTracker({
     mode: 'viewing',
     viewingData: id ? {

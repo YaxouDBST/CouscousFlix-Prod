@@ -1263,15 +1263,15 @@ const VideoPlayer = forwardRef<VideoPlayerRefHandle, VideoPlayerProps>(({ showId
   // State for the next episode (if applicable)
   // const [_nextEpisode, _setNextEpisode] = useState<any>(null);
 
-  // Helper function to transform coflix.upn display name to movix
+  // Helper function to transform coflix.upn display name to yaxoudbst
   const getDisplayName = (quality: string) => {
     if (!quality) return '';
 
     let displayName = quality;
 
-    // Replace coflix.upn with movix
+    // Replace coflix.upn with yaxoudbst
     if (displayName.includes('coflix.upn')) {
-      displayName = displayName.replace('coflix.upn', 'movix');
+      displayName = displayName.replace('coflix.upn', 'yaxoudbst');
     }
 
     // Format "PAS DE PUBLICITE" to title case
@@ -2238,7 +2238,7 @@ const VideoPlayer = forwardRef<VideoPlayerRefHandle, VideoPlayerProps>(({ showId
               onEnded={() => {
                 // On ne tente plus la source suivante automatiquement, on passe juste à l'épisode suivant si besoin
                 const nextEpisodeNum = episodeNumber + 1;
-                const event = new CustomEvent('movix:playNextEpisode', {
+                const event = new CustomEvent('yaxoudbst:playNextEpisode', {
                   detail: {
                     currentSeason: seasonNumber,
                     currentEpisode: episodeNumber,
@@ -2290,7 +2290,7 @@ const VideoPlayer = forwardRef<VideoPlayerRefHandle, VideoPlayerProps>(({ showId
               })()}
               onNextEpisode={(season, episode) => {
                 // Trigger next episode via custom event which will be handled by the parent component
-                const event = new CustomEvent('movix:playNextEpisode', {
+                const event = new CustomEvent('yaxoudbst:playNextEpisode', {
                   detail: {
                     currentSeason: seasonNumber,
                     currentEpisode: episodeNumber,
@@ -2317,7 +2317,7 @@ const VideoPlayer = forwardRef<VideoPlayerRefHandle, VideoPlayerProps>(({ showId
               autoPlay={true}
               onEnded={() => {
                 const nextEpisodeNum = episodeNumber + 1;
-                const event = new CustomEvent('movix:playNextEpisode', {
+                const event = new CustomEvent('yaxoudbst:playNextEpisode', {
                   detail: {
                     currentSeason: seasonNumber,
                     currentEpisode: episodeNumber,
@@ -2369,7 +2369,7 @@ const VideoPlayer = forwardRef<VideoPlayerRefHandle, VideoPlayerProps>(({ showId
               })()}
               onNextEpisode={(season, episode) => {
                 // Trigger next episode via custom event which will be handled by the parent component
-                const event = new CustomEvent('movix:playNextEpisode', {
+                const event = new CustomEvent('yaxoudbst:playNextEpisode', {
                   detail: {
                     currentSeason: seasonNumber,
                     currentEpisode: episodeNumber,
@@ -2435,7 +2435,7 @@ const TVDetails: React.FC = () => {
   const navigate = useNavigate();
   const { currentProfile } = useProfile();
 
-  // Track page visit for Movix Wrapped
+  // Track page visit for YaxouDBST Wrapped
   useWrappedTracker({
     mode: 'page',
     pageData: id ? { pageName: 'tv-details', contentId: id } : undefined,
@@ -3692,7 +3692,7 @@ const TVDetails: React.FC = () => {
   useEffect(() => {
     if (tvShow) {
       // Simple TV show title
-      document.title = `${tvShow.name} - Movix`;
+      document.title = `${tvShow.name} - YaxouDBST`;
     } else {
       document.title = t('details.tvShowDefaultTitle');
     }
@@ -4037,11 +4037,11 @@ const TVDetails: React.FC = () => {
     };
 
     // Add event listener
-    document.addEventListener('movix:playNextEpisode', handleNextEpisode as EventListener);
+    document.addEventListener('yaxoudbst:playNextEpisode', handleNextEpisode as EventListener);
 
     // Cleanup
     return () => {
-      document.removeEventListener('movix:playNextEpisode', handleNextEpisode as EventListener);
+      document.removeEventListener('yaxoudbst:playNextEpisode', handleNextEpisode as EventListener);
     };
   }, [show, handleEpisodeSelect, id]);
 
@@ -4538,12 +4538,12 @@ const TVDetails: React.FC = () => {
   const tvYear = tvShow.first_air_date && !isNaN(new Date(tvShow.first_air_date).getTime())
     ? new Date(tvShow.first_air_date).getFullYear()
     : null;
-  const tvTitle = tvYear ? `${tvShow.name} (${tvYear}) - Movix` : `${tvShow.name} - Movix`;
+  const tvTitle = tvYear ? `${tvShow.name} (${tvYear}) - YaxouDBST` : `${tvShow.name} - YaxouDBST`;
   const tvCanonicalUrl = buildSiteUrl(`/tv/${encodedId || id}`);
   const tvSocialImage = tvShow.backdrop_path || tvShow.poster_path
     ? `https://image.tmdb.org/t/p/original${tvShow.backdrop_path || tvShow.poster_path}`
     : undefined;
-  const tvDescription = tvShow.overview?.trim() || `Découvrez ${tvShow.name} sur Movix.`;
+  const tvDescription = tvShow.overview?.trim() || `Découvrez ${tvShow.name} sur YaxouDBST.`;
 
   return (
     <MotionConfig reducedMotion="user">

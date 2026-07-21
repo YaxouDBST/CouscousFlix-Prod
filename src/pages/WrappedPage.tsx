@@ -364,7 +364,7 @@ const SlideIntro: React.FC<{ slide: WrappedSlide; stats: WrappedData['stats'] }>
                 className="p-4 sm:p-6 md:p-8 backdrop-blur-md"
             >
                 <p className="mb-5 text-sm leading-relaxed text-white/90 sm:text-base md:text-lg">
-                    {i18n.t('wrapped.spentOnMovix')}
+                    {i18n.t('wrapped.spentOnYaxouDBST')}
                 </p>
                 
                 {/* Cascading Time Counter */}
@@ -1174,8 +1174,8 @@ const CreditsRoll: React.FC<{ topContent: WrappedData['topContent']; topGenres?:
         ...(topContent.length ? [{ label: t('wrapped.creditsStarring'), value: topContent.slice(0, 5).map(c => c.title).join(' · ') }] : []),
         ...(topGenres?.length ? [{ label: t('wrapped.creditsGenre'), value: topGenres[0].name }] : []),
         { label: t('wrapped.creditsRuntime'), value: formatCompactDuration(stats.totalMinutes, t) },
-        { label: t('wrapped.creditsProducedBy'), value: 'MOVIX' },
-        { label: '©', value: 'movix.date' },
+        { label: t('wrapped.creditsProducedBy'), value: 'YAXOUDBST' },
+        { label: '©', value: 'yaxoudbst.date' },
     ];
 
     return (
@@ -2939,7 +2939,7 @@ const WrappedPage: React.FC = () => {
 
         ctx.fillStyle = '#ffffff';
         ctx.font = '900 54px Inter, system-ui, sans-serif';
-        ctx.fillText('MOVIX', 356, 262);
+        ctx.fillText('YAXOUDBST', 356, 262);
         ctx.fillStyle = accentGradient;
         ctx.fillText('Wrapped', 557, 262);
 
@@ -2952,7 +2952,7 @@ const WrappedPage: React.FC = () => {
 
         ctx.fillStyle = 'rgba(255,255,255,0.52)';
         ctx.font = '800 22px Inter, system-ui, sans-serif';
-        fillCenteredText(`MOVIX WRAPPED ${year}`, 330);
+        fillCenteredText(`YAXOUDBST WRAPPED ${year}`, 330);
 
         ctx.fillStyle = '#ffffff';
         ctx.font = '900 68px Inter, system-ui, sans-serif';
@@ -3080,7 +3080,7 @@ const WrappedPage: React.FC = () => {
 
         ctx.fillStyle = 'rgba(255,255,255,0.36)';
         ctx.font = '600 26px Inter, system-ui, sans-serif';
-        const domainLabel = 'movix.date';
+        const domainLabel = 'yaxoudbst.date';
         ctx.fillText(domainLabel, width - 78 - ctx.measureText(domainLabel).width, footerTextY);
 
         return new Promise((resolve) => {
@@ -3172,7 +3172,7 @@ const WrappedPage: React.FC = () => {
                 return;
             }
 
-            downloadBlob(blob, `movix-wrapped-${year}-${shareFormat}.png`);
+            downloadBlob(blob, `yaxoudbst-wrapped-${year}-${shareFormat}.png`);
             toast.success(t('wrapped.imageDownloaded'));
         } catch (error) {
             console.error('[Wrapped] Unable to download share image:', error);
@@ -3193,7 +3193,7 @@ const WrappedPage: React.FC = () => {
                 return;
             }
 
-            const file = new File([blob], `movix-wrapped-${year}-${shareFormat}.png`, { type: 'image/png' });
+            const file = new File([blob], `yaxoudbst-wrapped-${year}-${shareFormat}.png`, { type: 'image/png' });
             if (navigator.share && typeof navigator.canShare === 'function' && navigator.canShare({ files: [file] })) {
                 await navigator.share({
                     title: t('wrapped.shareTitle', { year }),
@@ -3203,7 +3203,7 @@ const WrappedPage: React.FC = () => {
                 return;
             }
 
-            downloadBlob(blob, `movix-wrapped-${year}-${shareFormat}.png`);
+            downloadBlob(blob, `yaxoudbst-wrapped-${year}-${shareFormat}.png`);
             toast.success(t('wrapped.imageShareFallback'));
         } catch (error) {
             if (!isShareAbortError(error)) {

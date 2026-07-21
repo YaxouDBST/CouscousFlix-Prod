@@ -1,31 +1,31 @@
 // ==UserScript==
-// @name         Movix Proxy Extension (Tampermonkey)
-// @namespace    https://movix.cash
+// @name         YaxouDBST Proxy Extension (Tampermonkey)
+// @namespace    https://yaxoudbst.cash
 // @version      1.4.8
-// @description  Extension proxy pour Live TV Movix - Contourne CORS, injecte les headers et extrait les sources Nexus - version userscript Tampermonkey
-// @author       Movix
-// @updateURL    https://github.com/movixcorp/MovixOpenSource/raw/refs/heads/main/userscript/movix.user.js
-// @downloadURL  https://github.com/movixcorp/MovixOpenSource/raw/refs/heads/main/userscript/movix.user.js
+// @description  Extension proxy pour Live TV YaxouDBST - Contourne CORS, injecte les headers et extrait les sources Nexus - version userscript Tampermonkey
+// @author       YaxouDBST
+// @updateURL    https://github.com/yaxoudbstcorp/YaxouDBSTOpenSource/raw/refs/heads/main/userscript/yaxoudbst.user.js
+// @downloadURL  https://github.com/yaxoudbstcorp/YaxouDBSTOpenSource/raw/refs/heads/main/userscript/yaxoudbst.user.js
 // @match        http://localhost/*
 // @match        http://127.0.0.1/*
 // @match        https://localhost/*
 // @match        https://127.0.0.1/*
-// @match        https://movix.cash/*
-// @match        https://*.movix.cash/*
-// @match        https://movix.club/*
-// @match        https://*.movix.club/*
-// @match        https://movix.cloud/*
-// @match        https://*.movix.cloud/*
-// @match        https://movix.tax/*
-// @match        https://*.movix.tax/*
-// @match        https://movix.golf/*
-// @match        https://movix.chat/*
-// @match        https://*.movix.chat/*
-// @match        https://*.movix.golf/*
-// @match        https://movix.date/*
-// @match        https://*.movix.date/*
-// @match        https://movix.show/*
-// @match        https://*.movix.show/*
+// @match        https://yaxoudbst.cash/*
+// @match        https://*.yaxoudbst.cash/*
+// @match        https://yaxoudbst.club/*
+// @match        https://*.yaxoudbst.club/*
+// @match        https://yaxoudbst.cloud/*
+// @match        https://*.yaxoudbst.cloud/*
+// @match        https://yaxoudbst.tax/*
+// @match        https://*.yaxoudbst.tax/*
+// @match        https://yaxoudbst.golf/*
+// @match        https://yaxoudbst.chat/*
+// @match        https://*.yaxoudbst.chat/*
+// @match        https://*.yaxoudbst.golf/*
+// @match        https://yaxoudbst.date/*
+// @match        https://*.yaxoudbst.date/*
+// @match        https://yaxoudbst.show/*
+// @match        https://*.yaxoudbst.show/*
 // @grant        GM_xmlhttpRequest
 // @grant        GM_getValue
 // @grant        GM_setValue
@@ -42,15 +42,15 @@
   "use strict";
 
   const USERSCRIPT_MANIFEST = {
-    name: "Movix Proxy Extension",
+    name: "YaxouDBST Proxy Extension",
     version: "1.4.8",
     description:
-      "Extension proxy pour Live TV Movix - Contourne CORS, injecte les headers et extrait les sources Nexus",
+      "Extension proxy pour Live TV YaxouDBST - Contourne CORS, injecte les headers et extrait les sources Nexus",
   };
 
   const pageWindow =
     typeof unsafeWindow !== "undefined" ? unsafeWindow : window;
-  const storagePrefix = "movix_userscript:";
+  const storagePrefix = "yaxoudbst_userscript:";
   const runtimeListeners = {
     onInstalled: [],
     onStartup: [],
@@ -411,7 +411,7 @@
     };
   }
 
-  class MovixXMLHttpRequest {
+  class YaxouDBSTXMLHttpRequest {
     constructor() {
       this._native = NativeXMLHttpRequest ? new NativeXMLHttpRequest() : null;
       this._useNative = Boolean(this._native);
@@ -527,7 +527,7 @@
         return;
       }
 
-      this.readyState = MovixXMLHttpRequest.OPENED;
+      this.readyState = YaxouDBSTXMLHttpRequest.OPENED;
       this._dispatch("readystatechange");
     }
 
@@ -575,7 +575,7 @@
       const request = getGMRequest();
       const payload = serializeBody(body);
 
-      this.readyState = MovixXMLHttpRequest.OPENED;
+      this.readyState = YaxouDBSTXMLHttpRequest.OPENED;
       this._dispatch("readystatechange");
 
       this._requestHandle = request({
@@ -590,7 +590,7 @@
         timeout: this._timeout || 30000,
         responseType: "arraybuffer",
         onprogress: (event) => {
-          this.readyState = MovixXMLHttpRequest.LOADING;
+          this.readyState = YaxouDBSTXMLHttpRequest.LOADING;
           this._dispatch("readystatechange");
           this._dispatch(
             "progress",
@@ -612,14 +612,14 @@
           this.responseURL = response.finalUrl || this._url;
           this._responseHeadersRaw = response.responseHeaders || "";
 
-          this.readyState = MovixXMLHttpRequest.HEADERS_RECEIVED;
+          this.readyState = YaxouDBSTXMLHttpRequest.HEADERS_RECEIVED;
           this._dispatch("readystatechange");
 
-          this.readyState = MovixXMLHttpRequest.LOADING;
+          this.readyState = YaxouDBSTXMLHttpRequest.LOADING;
           this._applyProxyResponse(buffer);
           this._dispatch("readystatechange");
 
-          this.readyState = MovixXMLHttpRequest.DONE;
+          this.readyState = YaxouDBSTXMLHttpRequest.DONE;
           this._dispatch("readystatechange");
           this._dispatch(
             "load",
@@ -637,19 +637,19 @@
           this.status = response?.status || 0;
           this.statusText =
             response?.statusText || response?.error || "Erreur réseau";
-          this.readyState = MovixXMLHttpRequest.DONE;
+          this.readyState = YaxouDBSTXMLHttpRequest.DONE;
           this._dispatch("readystatechange");
           this._dispatch("error");
           this._dispatch("loadend");
         },
         ontimeout: () => {
-          this.readyState = MovixXMLHttpRequest.DONE;
+          this.readyState = YaxouDBSTXMLHttpRequest.DONE;
           this._dispatch("readystatechange");
           this._dispatch("timeout");
           this._dispatch("loadend");
         },
         onabort: () => {
-          this.readyState = MovixXMLHttpRequest.DONE;
+          this.readyState = YaxouDBSTXMLHttpRequest.DONE;
           this._dispatch("readystatechange");
           this._dispatch("abort");
           this._dispatch("loadend");
@@ -667,7 +667,7 @@
         this._requestHandle?.abort?.();
       } catch {}
 
-      this.readyState = MovixXMLHttpRequest.DONE;
+      this.readyState = YaxouDBSTXMLHttpRequest.DONE;
       this._dispatch("readystatechange");
       this._dispatch("abort");
       this._dispatch("loadend");
@@ -757,7 +757,7 @@
         try {
           handler.call(this, event);
         } catch (error) {
-          console.error("[Movix Userscript] XHR handler error:", error);
+          console.error("[YaxouDBST Userscript] XHR handler error:", error);
         }
       }
 
@@ -767,18 +767,18 @@
           try {
             listener.call(this, event);
           } catch (error) {
-            console.error("[Movix Userscript] XHR listener error:", error);
+            console.error("[YaxouDBST Userscript] XHR listener error:", error);
           }
         }
       }
     }
   }
 
-  MovixXMLHttpRequest.UNSENT = 0;
-  MovixXMLHttpRequest.OPENED = 1;
-  MovixXMLHttpRequest.HEADERS_RECEIVED = 2;
-  MovixXMLHttpRequest.LOADING = 3;
-  MovixXMLHttpRequest.DONE = 4;
+  YaxouDBSTXMLHttpRequest.UNSENT = 0;
+  YaxouDBSTXMLHttpRequest.OPENED = 1;
+  YaxouDBSTXMLHttpRequest.HEADERS_RECEIVED = 2;
+  YaxouDBSTXMLHttpRequest.LOADING = 3;
+  YaxouDBSTXMLHttpRequest.DONE = 4;
 
   function patchPageFetch() {
     const patchedFetch = function (input, init) {
@@ -811,7 +811,7 @@
       return;
     }
 
-    pageWindow.XMLHttpRequest = MovixXMLHttpRequest;
+    pageWindow.XMLHttpRequest = YaxouDBSTXMLHttpRequest;
   }
 
   function isDirectMediaUrl(url) {
@@ -877,7 +877,7 @@
             }
           })
           .catch((error) => {
-            console.error("[Movix Userscript] Media proxy failed:", error);
+            console.error("[YaxouDBST Userscript] Media proxy failed:", error);
             srcDescriptor.set.call(mediaElement, nextUrl);
           });
       },
@@ -1035,13 +1035,13 @@
 
   // --- BEGIN extension/Chrome/extractors.js ---
   /**
-   * Movix Extension - Direct M3U8 Extractors
+   * YaxouDBST Extension - Direct M3U8 Extractors
    * Replaces server.py extraction logic - runs entirely in the extension service worker.
    * No VIP check needed since it runs locally.
    */
 
   // ===== Configuration =====
-  const PROXY_BASE = "https://proxiesembed.movix.show";
+  const PROXY_BASE = "https://proxiesembed.yaxoudbst.show";
 
   // AES constants for SeekStreaming (embed4me)
   const SEEKSTREAMING_AES_KEY_HEX =
@@ -2376,7 +2376,7 @@
   // Export everything for use in background.js
   // (In service worker, we'll import via importScripts or just include in order)
   if (typeof globalThis !== "undefined") {
-    globalThis.MovixExtractors = {
+    globalThis.YaxouDBSTExtractors = {
       extractVoe,
       extractFsvid,
       extractVidzy,
@@ -2410,13 +2410,13 @@
     typeof location !== "undefined" &&
     (location.hostname === "localhost" || location.hostname === "127.0.0.1")
       ? "http://localhost:25565"
-      : "https://api.movix.show";
+      : "https://api.yaxoudbst.show";
   const STREAM_PROXY_USER_AGENT =
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
 
   // Import extractors module
 
-  const Extractors = globalThis.MovixExtractors;
+  const Extractors = globalThis.YaxouDBSTExtractors;
 
   // Cache for Wiflix channels with their page slugs
   let wiflixChannelCache = {};
@@ -2466,11 +2466,11 @@
   // Load initial state
   (async () => {
     const storedEnabled = await gmGetValueCompat(
-      "movix_extensionEnabled",
+      "yaxoudbst_extensionEnabled",
       null,
     );
     if (storedEnabled !== null) extensionEnabled = storedEnabled !== false;
-    const storedStats = await gmGetValueCompat("movix_stats", null);
+    const storedStats = await gmGetValueCompat("yaxoudbst_stats", null);
     if (storedStats) {
       sessionStats = { ...sessionStats, ...storedStats };
       if (!sessionStats.byType) {
@@ -2486,7 +2486,7 @@
         };
       }
     }
-    const storedPrefs = await gmGetValueCompat("movix_extraction_prefs", null);
+    const storedPrefs = await gmGetValueCompat("yaxoudbst_extraction_prefs", null);
     if (storedPrefs) extractionPrefs = storedPrefs;
   })();
 
@@ -2513,7 +2513,7 @@
         seekstreaming: 0,
       },
     };
-    gmSetValueCompat("movix_stats", sessionStats);
+    gmSetValueCompat("yaxoudbst_stats", sessionStats);
   });
 
   // Configure DNR rules for CORS and Headers
@@ -2558,14 +2558,14 @@
           initiatorDomains: [
             "localhost",
             "127.0.0.1",
-            "movix.cash",
-            "movix.club",
-            "movix.cloud",
-            "movix.tax",
-            "movix.golf",
-            "movix.chat",
-            "movix.date",
-            "movix.show",
+            "yaxoudbst.cash",
+            "yaxoudbst.club",
+            "yaxoudbst.cloud",
+            "yaxoudbst.tax",
+            "yaxoudbst.golf",
+            "yaxoudbst.chat",
+            "yaxoudbst.date",
+            "yaxoudbst.show",
           ],
           resourceTypes: [
             "xmlhttprequest",
@@ -2698,7 +2698,7 @@
           sessionStats.byType[detectedType] =
             (sessionStats.byType[detectedType] || 0) + 1;
         }
-        await gmSetValueCompat("movix_stats", sessionStats);
+        await gmSetValueCompat("yaxoudbst_stats", sessionStats);
         return await handleExtractM3u8(payload);
       }
       case "EXTRACT_ALL_M3U8": {
@@ -2713,7 +2713,7 @@
           return !srcType || isEmbedAllowed(srcType);
         });
         sessionStats.extractions++;
-        await gmSetValueCompat("movix_stats", sessionStats);
+        await gmSetValueCompat("yaxoudbst_stats", sessionStats);
         return await handleExtractAllM3u8({
           ...payload,
           sources: filteredSources,
@@ -2763,7 +2763,7 @@
             m3u8: { ...DEFAULT_EXTRACTION_PREFS.m3u8, ...incoming.m3u8 },
             livetv: { ...DEFAULT_EXTRACTION_PREFS.livetv, ...incoming.livetv },
           };
-          await gmSetValueCompat("movix_extraction_prefs", extractionPrefs);
+          await gmSetValueCompat("yaxoudbst_extraction_prefs", extractionPrefs);
           return { success: true };
         }
         return { success: false, error: "Invalid prefs shape" };
@@ -2959,38 +2959,38 @@
 
   // === API LOGIC ===
 
-  function getMovixFrontendOrigin() {
+  function getYaxouDBSTFrontendOrigin() {
     try {
       const currentOrigin = pageWindow.location?.origin;
       const currentHostname = pageWindow.location?.hostname ?? "";
 
       if (
-        currentHostname === "movix.cash" ||
-        currentHostname.endsWith(".movix.cash") ||
-        currentHostname === "movix.club" ||
-        currentHostname.endsWith(".movix.club") ||
-        currentHostname === "movix.cloud" ||
-        currentHostname.endsWith(".movix.cloud") ||
-        currentHostname === "movix.tax" ||
-        currentHostname.endsWith(".movix.tax") ||
-        currentHostname === "movix.golf" ||
-        currentHostname === "movix.chat" ||
-        currentHostname.endsWith(".movix.chat") ||
-        currentHostname === "movix.date" ||
-        currentHostname.endsWith(".movix.date") ||
-        currentHostname === "movix.show" ||
-        currentHostname.endsWith(".movix.show") ||
-        currentHostname.endsWith(".movix.golf")
+        currentHostname === "yaxoudbst.cash" ||
+        currentHostname.endsWith(".yaxoudbst.cash") ||
+        currentHostname === "yaxoudbst.club" ||
+        currentHostname.endsWith(".yaxoudbst.club") ||
+        currentHostname === "yaxoudbst.cloud" ||
+        currentHostname.endsWith(".yaxoudbst.cloud") ||
+        currentHostname === "yaxoudbst.tax" ||
+        currentHostname.endsWith(".yaxoudbst.tax") ||
+        currentHostname === "yaxoudbst.golf" ||
+        currentHostname === "yaxoudbst.chat" ||
+        currentHostname.endsWith(".yaxoudbst.chat") ||
+        currentHostname === "yaxoudbst.date" ||
+        currentHostname.endsWith(".yaxoudbst.date") ||
+        currentHostname === "yaxoudbst.show" ||
+        currentHostname.endsWith(".yaxoudbst.show") ||
+        currentHostname.endsWith(".yaxoudbst.golf")
       ) {
-        return (currentOrigin || "https://movix.show").replace(/\/$/, "");
+        return (currentOrigin || "https://yaxoudbst.show").replace(/\/$/, "");
       }
     } catch {}
 
-    return "https://movix.show";
+    return "https://yaxoudbst.show";
   }
 
   function buildBackendApiHeaders(accessKey, extraHeaders = {}) {
-    const frontendOrigin = getMovixFrontendOrigin();
+    const frontendOrigin = getYaxouDBSTFrontendOrigin();
     const headers = {
       Accept: "application/json",
       Origin: frontendOrigin,
@@ -5159,13 +5159,13 @@
     pageWindow.postMessage(
       success
         ? {
-            source: "MOVIX_EXTENSION",
+            source: "YAXOUDBST_EXTENSION",
             messageId,
             success: true,
             data: payload,
           }
         : {
-            source: "MOVIX_EXTENSION",
+            source: "YAXOUDBST_EXTENSION",
             messageId,
             success: false,
             error:
@@ -5193,22 +5193,22 @@
   }
 
   function exposePageApi() {
-    pageWindow.__MOVIX_EXTENSION_INSTALLED = true;
-    pageWindow.hasMovixUserscript = true;
-    pageWindow.hasMovixNexusExtractor = true;
+    pageWindow.__YAXOUDBST_EXTENSION_INSTALLED = true;
+    pageWindow.hasYaxouDBSTUserscript = true;
+    pageWindow.hasYaxouDBSTNexusExtractor = true;
 
     if (document.documentElement) {
-      document.documentElement.dataset.movixExtension = "true";
+      document.documentElement.dataset.yaxoudbstExtension = "true";
     }
 
-    pageWindow.movixExtractM3u8 = async function movixExtractM3u8(type, url) {
+    pageWindow.yaxoudbstExtractM3u8 = async function yaxoudbstExtractM3u8(type, url) {
       const result = await requestAction("EXTRACT_M3U8", { type, url });
       return result.success
         ? result.data
         : { success: false, error: result.error || "Extraction impossible" };
     };
 
-    pageWindow.movixExtractAllM3u8 = async function movixExtractAllM3u8(
+    pageWindow.yaxoudbstExtractAllM3u8 = async function yaxoudbstExtractAllM3u8(
       sources,
     ) {
       const result = await requestAction("EXTRACT_ALL_M3U8", { sources });
@@ -5221,26 +5221,26 @@
           };
     };
 
-    pageWindow.movixDetectEmbeds = async function movixDetectEmbeds(sources) {
+    pageWindow.yaxoudbstDetectEmbeds = async function yaxoudbstDetectEmbeds(sources) {
       const result = await requestAction("DETECT_EMBEDS", { sources });
       return result.success ? result.data : { embeds: [] };
     };
 
-    pageWindow.movixSetupHeaders = async function movixSetupHeaders(type, url) {
+    pageWindow.yaxoudbstSetupHeaders = async function yaxoudbstSetupHeaders(type, url) {
       const result = await requestAction("SETUP_HEADERS", { type, url });
       return result.success
         ? result.data
         : { success: false, error: result.error || "Configuration impossible" };
     };
 
-    pageWindow.dispatchEvent(new CustomEvent("movix-extension-loaded"));
+    pageWindow.dispatchEvent(new CustomEvent("yaxoudbst-extension-loaded"));
   }
 
   pageWindow.addEventListener("message", async (event) => {
     if (
       event.source !== pageWindow ||
       !event.data ||
-      event.data.source !== "MOVIX_WEB" ||
+      event.data.source !== "YAXOUDBST_WEB" ||
       event.data.type !== "EXTENSION_REQUEST"
     ) {
       return;
@@ -5265,6 +5265,6 @@
   Promise.resolve()
     .then(() => (typeof setupRules === "function" ? setupRules() : undefined))
     .catch((error) => {
-      console.error("[Movix Userscript] setupRules error:", error);
+      console.error("[YaxouDBST Userscript] setupRules error:", error);
     });
 })();

@@ -190,7 +190,7 @@ export default function BrowserScreen() {
           style={[StyleSheet.absoluteFillObject, styles.splash, { opacity: splashFade }]}
           pointerEvents="none">
           <Image
-            source={require('../../assets/movix512.png')}
+            source={require('../../assets/yaxoudbst512.png')}
             style={styles.splashLogo}
             resizeMode="contain"
           />

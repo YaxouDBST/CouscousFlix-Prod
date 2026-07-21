@@ -40,15 +40,15 @@ function domainRestriction(req, res, next) {
 
   const allowedDomains = [
     'localhost:3000',
-    'movix.date',
-    'movix.chat',
-    'movix.cloud',
-    'movix.cash',
-    'movix.blog',
-    'movix.rodeo',
-    'movix.club',
-    'movix.site',
-    'movix11.pages.dev',
+    'yaxoudbst.date',
+    'yaxoudbst.chat',
+    'yaxoudbst.cloud',
+    'yaxoudbst.cash',
+    'yaxoudbst.blog',
+    'yaxoudbst.rodeo',
+    'yaxoudbst.club',
+    'yaxoudbst.site',
+    'yaxoudbst11.pages.dev',
     'nakios.site',
     'cinezo.site',
     'filmib.cc'
@@ -90,21 +90,21 @@ function domainRestriction(req, res, next) {
   // Route spécifique accessible mais avec fausse réponse
   if (req.path.startsWith('/api/imdb/movie')) {
     return res.json({
-      "iframe_src": "https://movixfakesite.vercel.app/",
+      "iframe_src": "https://yaxoudbstfakesite.vercel.app/",
       "player_links": [
         {
           "player": "supervideo",
-          "link": "https://movixfakesite.vercel.app/",
+          "link": "https://yaxoudbstfakesite.vercel.app/",
           "is_hd": false
         },
         {
           "player": "dropload",
-          "link": "https://movixfakesite.vercel.app/",
+          "link": "https://yaxoudbstfakesite.vercel.app/",
           "is_hd": false
         },
         {
           "player": "mixdrop",
-          "link": "https://movixfakesite.vercel.app/",
+          "link": "https://yaxoudbstfakesite.vercel.app/",
           "is_hd": false
         }
       ]
@@ -142,7 +142,7 @@ function domainRestriction(req, res, next) {
                       "players": [
                         {
                           "name": "Supervideo",
-                          "link": "https://movixfakesite.vercel.app/"
+                          "link": "https://yaxoudbstfakesite.vercel.app/"
                         }
                       ]
                     }

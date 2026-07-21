@@ -1082,7 +1082,7 @@ const PersistenceManager = () => {
     let channel: BroadcastChannel | null = null;
     if (supportsBroadcastChannel && isLocalStorageAvailable) {
       try {
-        channel = new BroadcastChannel('movix-storage-sync');
+        channel = new BroadcastChannel('yaxoudbst-storage-sync');
         channel.onmessage = (e: MessageEvent) => {
           const data = e.data ?? {};
           const key = data.key;
@@ -1880,7 +1880,7 @@ const EmbedBlockPage = () => (
         {i18n.t('embed.message')}
       </p>
       <a
-        href="https://movix.date"
+        href="https://yaxoudbst.date"
         target="_blank"
         rel="noopener noreferrer"
         className="mt-2 inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition sm:py-3 sm:px-6 lg:py-4 lg:px-8"

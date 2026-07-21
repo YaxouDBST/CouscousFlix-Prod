@@ -207,7 +207,7 @@ const Home: React.FC = () => {
   const sliderIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const cancelTokenSourceRef = useRef<CancelTokenSource | null>(null);
 
-  // Track page visit for Movix Wrapped
+  // Track page visit for YaxouDBST Wrapped
   useWrappedTracker({
     mode: 'page',
     pageData: { pageName: 'home' },
@@ -257,8 +257,8 @@ const Home: React.FC = () => {
       setLoading(true);
 
       // Check for cached data first
-      const cachedData = sessionStorage.getItem('movix_home_data');
-      const cacheTimestamp = sessionStorage.getItem('movix_home_data_timestamp');
+      const cachedData = sessionStorage.getItem('yaxoudbst_home_data');
+      const cacheTimestamp = sessionStorage.getItem('yaxoudbst_home_data_timestamp');
 
       // Use cache if it exists and is less than 15 minutes old
       if (cachedData && cacheTimestamp) {
@@ -446,8 +446,8 @@ const Home: React.FC = () => {
         allItems: filteredItems
       };
 
-      sessionStorage.setItem('movix_home_data', JSON.stringify(cacheData));
-      sessionStorage.setItem('movix_home_data_timestamp', Date.now().toString());
+      sessionStorage.setItem('yaxoudbst_home_data', JSON.stringify(cacheData));
+      sessionStorage.setItem('yaxoudbst_home_data_timestamp', Date.now().toString());
 
       // Organize content into categories
       organizeContentByCategories(filteredItems);
@@ -468,8 +468,8 @@ const Home: React.FC = () => {
   // Fetch curated TMDB collections for the "Les sagas incontournables" section
   const fetchSagaCollections = async () => {
     try {
-      const cacheKey = 'movix_sagas_data';
-      const cacheTsKey = 'movix_sagas_data_ts';
+      const cacheKey = 'yaxoudbst_sagas_data';
+      const cacheTsKey = 'yaxoudbst_sagas_data_ts';
       const cached = sessionStorage.getItem(cacheKey);
       const cachedTs = sessionStorage.getItem(cacheTsKey);
       const oneDayMs = 24 * 60 * 60 * 1000;
@@ -834,20 +834,20 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     // Simple title for homepage
-    document.title = `${t('nav.home')} - Movix`;
+    document.title = `${t('nav.home')} - YaxouDBST`;
 
     // Add or update structured data for a WebSite
     const structuredData = {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "Movix",
+      "name": "YaxouDBST",
       "url": SITE_URL,
       "potentialAction": {
         "@type": "SearchAction",
         "target": `${SITE_URL}/search?q={search_term_string}`,
         "query-input": "required name=search_term_string"
       },
-      "description": "Movix - Plateforme de streaming gratuite proposant des films et séries en français. Regardez en ligne sans inscription."
+      "description": "YaxouDBST - Plateforme de streaming gratuite proposant des films et séries en français. Regardez en ligne sans inscription."
     };
 
     // Add structured data to head

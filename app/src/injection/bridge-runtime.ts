@@ -12,8 +12,8 @@ export function buildBridgeRuntime(): string {
   'use strict';
 
   // Empêche la double-injection
-  if (window.__MOVIX_BRIDGE_READY) return;
-  window.__MOVIX_BRIDGE_READY = true;
+  if (window.__YAXOUDBST_BRIDGE_READY) return;
+  window.__YAXOUDBST_BRIDGE_READY = true;
 
   // --- Pending requests ---
   var _pendingRequests = {};
@@ -30,7 +30,7 @@ export function buildBridgeRuntime(): string {
   }
 
   // Réception des réponses du bridge React Native
-  window.addEventListener('__MOVIX_BRIDGE_RESPONSE', function(event) {
+  window.addEventListener('__YAXOUDBST_BRIDGE_RESPONSE', function(event) {
     var response = event.detail;
     if (!response || !response.id) return;
     var handler = _pendingRequests[response.id];
@@ -145,7 +145,7 @@ export function buildBridgeRuntime(): string {
     }
     // Fallback sur localStorage
     try {
-      var stored = localStorage.getItem('movix_userscript:' + key);
+      var stored = localStorage.getItem('yaxoudbst_userscript:' + key);
       if (stored !== null) {
         return JSON.parse(stored);
       }
@@ -156,7 +156,7 @@ export function buildBridgeRuntime(): string {
   function GM_setValue(key, value) {
     _storageCache[key] = value;
     try {
-      localStorage.setItem('movix_userscript:' + key, JSON.stringify(value));
+      localStorage.setItem('yaxoudbst_userscript:' + key, JSON.stringify(value));
     } catch(e) {}
     // Sync vers natif en arrière-plan
     sendToNative({ type: 'GM_SET_VALUE', id: generateId(), key: key, value: value });
@@ -165,7 +165,7 @@ export function buildBridgeRuntime(): string {
   function GM_deleteValue(key) {
     delete _storageCache[key];
     try {
-      localStorage.removeItem('movix_userscript:' + key);
+      localStorage.removeItem('yaxoudbst_userscript:' + key);
     } catch(e) {}
     sendToNative({ type: 'GM_DELETE_VALUE', id: generateId(), key: key });
   }
@@ -195,7 +195,7 @@ export function buildBridgeRuntime(): string {
   // unsafeWindow = window (pas de sandboxing dans le WebView)
   window.unsafeWindow = window;
 
-  console.log('[Movix App] Bridge runtime initialisé');
+  console.log('[YaxouDBST App] Bridge runtime initialisé');
 })();
 true;
 `;

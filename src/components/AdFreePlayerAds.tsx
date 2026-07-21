@@ -192,33 +192,14 @@ const AdFreePlayerAds: React.FC<AdFreePlayerAdsProps> = ({
       ? t("adBlocker.viewAdSpace")
       : t("adBlocker.viewAd");
 
+  // Ad popup fully disabled — never render anything (no overlay, no dialog).
   if (!shouldShow) return null;
 
   // Auto mode: useEffect above fires the ad + accept; render nothing.
   if (popupMode === 'auto') return null;
 
-  // Click-anywhere mode: invisible full-screen catcher, first click opens ad + accepts.
-  if (popupMode === 'click-anywhere' && !hasClicked) {
-    return (
-      <div
-        role="button"
-        tabIndex={0}
-        aria-label={t('adBlocker.clickAnywhereLabel')}
-        className="fixed inset-0 z-[100000] cursor-pointer bg-transparent"
-        onClick={() => {
-          handleLinkClick();
-          finalOnAccept();
-        }}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            handleLinkClick();
-            finalOnAccept();
-          }
-        }}
-      />
-    );
-  }
+  // Click-anywhere mode disabled: skip the invisible full-screen overlay entirely.
+  if (popupMode === 'click-anywhere') return null;
 
   return (
     <DialogPrimitive.Root

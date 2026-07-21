@@ -21,11 +21,11 @@ const EXTERNAL_RESOURCES: Array<{
     href: 'https://developers.cloudflare.com/1.1.1.1/setup/',
   },
   { labelKey: 'helpDns.otherChangeTonDns', href: 'https://changetondns.fr/' },
-  { labelKey: 'helpDns.otherMirrorsMovixHealth', href: 'https://movix.online' },
-  { labelKey: 'helpDns.otherMirrors', href: 'https://rentry.co/movix' },
+  { labelKey: 'helpDns.otherMirrorsYaxouDBSTHealth', href: 'https://yaxoudbst.online' },
+  { labelKey: 'helpDns.otherMirrors', href: 'https://rentry.co/yaxoudbst' },
   {
     labelKey: 'helpDns.otherTelegram',
-    href: import.meta.env.VITE_SUPPORT_TELEGRAM_URL || 'https://t.me/movix_site',
+    href: import.meta.env.VITE_SUPPORT_TELEGRAM_URL || 'https://t.me/yaxoudbst_site',
   },
 ];
 
@@ -70,7 +70,7 @@ const DnsPage: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = `${t('helpDns.title')} — Movix`;
+    document.title = `${t('helpDns.title')} — YaxouDBST`;
   }, [t]);
 
   const renderInstallGrid = () => (

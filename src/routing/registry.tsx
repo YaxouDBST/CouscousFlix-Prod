@@ -79,7 +79,7 @@ export const ROUTES: RouteEntry[] = [
   { path: '/vip/cadeau/:giftToken',   loader: lz(() => import('../pages/VipGiftPage')) },
 
   // Other
-  { path: '/about',                   loader: lz(() => import('../pages/WhatIsMovixPage')) },
+  { path: '/about',                   loader: lz(() => import('../pages/WhatIsCouscousFlixPage')) },
   { path: '/help/*',                  loader: lz(() => import('../pages/help/HelpRouter')) },
   { path: '/privacy',                 loader: lz(() => import('../pages/Privacy')) },
   { path: '/terms-of-service',        loader: lz(() => import('../pages/TermsOfService')) },

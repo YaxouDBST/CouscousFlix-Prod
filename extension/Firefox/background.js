@@ -1,4 +1,4 @@
-// Firefox-compatible background script for Movix Extension
+// Firefox-compatible background script for YaxouDBST Extension
 // In Firefox MV3, background scripts run in an event page context.
 // extractors.js is loaded before this file via manifest "background.scripts".
 
@@ -13,7 +13,7 @@ const LIVETV_EMBED_REFERER = LIVETV_BASE_URL;
 // Dev override: when the requesting page is localhost (Vite dev on :3000),
 // talk to the local backend (:25565) instead of prod. Set per-message from
 // the sender origin (see maybeUseLocalApi in the onMessage listener below).
-const PROD_API_BASE_URL = "https://api.movix.show";
+const PROD_API_BASE_URL = "https://api.yaxoudbst.show";
 const LOCAL_API_BASE_URL = "http://localhost:25565";
 let API_BASE_URL = PROD_API_BASE_URL;
 
@@ -33,7 +33,7 @@ const STREAM_PROXY_USER_AGENT =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
 
 // Access extractors loaded via manifest background.scripts
-const Extractors = globalThis.MovixExtractors;
+const Extractors = globalThis.YaxouDBSTExtractors;
 
 // Cache for Wiflix channels with their page slugs
 let wiflixChannelCache = {};
@@ -135,14 +135,14 @@ async function setupRules() {
         initiatorDomains: [
           "localhost",
           "127.0.0.1",
-          "movix.cash",
-          "movix.cloud",
-          "movix.tax",
-          "movix.club",
-          "movix.chat",
-          "movix.golf",
-          "movix.date",
-          "movix.show",
+          "yaxoudbst.cash",
+          "yaxoudbst.cloud",
+          "yaxoudbst.tax",
+          "yaxoudbst.club",
+          "yaxoudbst.chat",
+          "yaxoudbst.golf",
+          "yaxoudbst.date",
+          "yaxoudbst.show",
         ],
         resourceTypes: [
           "xmlhttprequest",
@@ -502,8 +502,8 @@ function handleDetectEmbeds(payload) {
 function buildBackendApiHeaders(accessKey, extraHeaders = {}) {
   const headers = {
     Accept: "application/json",
-    Origin: "https://movix.show",
-    Referer: "https://movix.show/",
+    Origin: "https://yaxoudbst.show",
+    Referer: "https://yaxoudbst.show/",
     ...extraHeaders,
   };
 

@@ -97,7 +97,7 @@ function getCinegraphVariants(type: string): readonly string[] {
   return [
     'Cartographie ciné en cours dans CinéGraph 🧠',
     'Connexions ciné passées au scanner 🕸️',
-    'Univers Movix disséqué comme un dossier top secret 🧪',
+    'Univers YaxouDBST disséqué comme un dossier top secret 🧪',
   ]
 }
 

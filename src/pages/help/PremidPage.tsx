@@ -4,7 +4,7 @@ import { Gamepad2, AlertTriangle } from 'lucide-react';
 import TutoLayout, { TutoSection } from '../../components/TutoLayout';
 
 const PREMID_HOME = 'https://premid.app/fr';
-const PREMID_MOVIX_LIBRARY = 'https://premid.app/fr/library/movix';
+const PREMID_YAXOUDBST_LIBRARY = 'https://premid.app/fr/library/yaxoudbst';
 const PREMID_CHROME = 'https://chromewebstore.google.com/detail/premid/agnpmnnelkhngjfiibjjljipjmlhbecf';
 const PREMID_FIREFOX = 'https://addons.mozilla.org/fr/firefox/addon/premid/';
 
@@ -21,7 +21,7 @@ const PremidPage: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = `${t('help.premid.title')} — Movix`;
+    document.title = `${t('help.premid.title')} — YaxouDBST`;
   }, [t]);
 
   const sections: TutoSection[] = [
@@ -53,10 +53,10 @@ const PremidPage: React.FC = () => {
     },
     {
       kind: 'text',
-      titleKey: 'help.premid.movixPresenceTitle',
-      bodyKey: 'help.premid.movixPresenceBody',
+      titleKey: 'help.premid.yaxoudbstPresenceTitle',
+      bodyKey: 'help.premid.yaxoudbstPresenceBody',
       components: {
-        1: externalLink(PREMID_MOVIX_LIBRARY),
+        1: externalLink(PREMID_YAXOUDBST_LIBRARY),
       },
     },
     {

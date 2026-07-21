@@ -20,7 +20,7 @@ interface SearchResult {
     overview?: string;
 }
 
-const POSTER_FALLBACK = `data:image/svg+xml,${encodeURIComponent('<svg width="500" height="750" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="#111"/><text x="50%" y="50%" fill="#444" font-size="36" font-family="sans-serif" text-anchor="middle" dy=".3em">MOVIX</text></svg>')}`;
+const POSTER_FALLBACK = `data:image/svg+xml,${encodeURIComponent('<svg width="500" height="750" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="#111"/><text x="50%" y="50%" fill="#444" font-size="36" font-family="sans-serif" text-anchor="middle" dy=".3em">YAXOUDBST</text></svg>')}`;
 
 // Module-level watchlist id cache, keyed by media_type. Previously each
 // SearchGridCard / SearchListCard ran `JSON.parse(localStorage[...])` inside
@@ -52,11 +52,11 @@ const invalidateWatchlistCache = (mediaType: 'movie' | 'tv') => {
 };
 
 // Listen for cross-tab storage updates so the cache doesn't go stale.
-type GlobalWithFlag = Window & { __movixWatchlistCacheRegistered?: boolean };
+type GlobalWithFlag = Window & { __yaxoudbstWatchlistCacheRegistered?: boolean };
 if (typeof window !== 'undefined') {
     const w = window as GlobalWithFlag;
-    if (!w.__movixWatchlistCacheRegistered) {
-        w.__movixWatchlistCacheRegistered = true;
+    if (!w.__yaxoudbstWatchlistCacheRegistered) {
+        w.__yaxoudbstWatchlistCacheRegistered = true;
         window.addEventListener('storage', (e) => {
             if (e.key === 'watchlist_movie') invalidateWatchlistCache('movie');
             else if (e.key === 'watchlist_tv') invalidateWatchlistCache('tv');

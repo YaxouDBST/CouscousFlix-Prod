@@ -1,8 +1,8 @@
-# Userscript Movix
+# Userscript YaxouDBST
 
-Le userscript Movix est la variante Tampermonkey de l'outillage navigateur. Il reprend la logique utile pour les navigateurs Chromium quand l'installation d'une extension locale n'est pas l'option la plus pratique.
+Le userscript YaxouDBST est la variante Tampermonkey de l'outillage navigateur. Il reprend la logique utile pour les navigateurs Chromium quand l'installation d'une extension locale n'est pas l'option la plus pratique.
 
-Le fichier installé est `userscript/movix.user.js`.
+Le fichier installé est `userscript/yaxoudbst.user.js`.
 
 ## Quand choisir le userscript
 
@@ -15,9 +15,9 @@ Sur Firefox, l'extension native reste généralement le choix le plus propre.
 ## Installation
 
 1. Installe [Tampermonkey](https://www.tampermonkey.net/).
-2. Ouvre [`movix.user.js`](./movix.user.js).
+2. Ouvre [`yaxoudbst.user.js`](./yaxoudbst.user.js).
 3. Utilise le bouton `Raw` ou l'équivalent de ta forge pour lancer l'installation.
-4. Recharge Movix.
+4. Recharge YaxouDBST.
 
 ## Ce que le script fait
 
@@ -30,8 +30,8 @@ Sur Firefox, l'extension native reste généralement le choix le plus propre.
 
 | Fichier | Rôle |
 | --- | --- |
-| `movix.user.js` | Script installable dans Tampermonkey |
-| `../public/userscript/movix.user.js` | Variante servie par le frontend quand nécessaire |
+| `yaxoudbst.user.js` | Script installable dans Tampermonkey |
+| `../public/userscript/yaxoudbst.user.js` | Variante servie par le frontend quand nécessaire |
 
 ## Notes de contribution
 

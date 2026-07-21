@@ -69,8 +69,8 @@ const HeroSliderInner: React.FC<HeroSliderProps> = ({ items }) => {
   // Fetch logo URLs for all items with sessionStorage caching
   useEffect(() => {
     const fetchLogos = async () => {
-      const storedCache = sessionStorage.getItem('movix_hero_logos');
-      const storedTimestamp = sessionStorage.getItem('movix_hero_logos_timestamp');
+      const storedCache = sessionStorage.getItem('yaxoudbst_hero_logos');
+      const storedTimestamp = sessionStorage.getItem('yaxoudbst_hero_logos_timestamp');
       const oneDayMs = 24 * 60 * 60 * 1000;
 
       let sessionCache: { [key: number]: string | null } = {};
@@ -121,8 +121,8 @@ const HeroSliderInner: React.FC<HeroSliderProps> = ({ items }) => {
       });
 
       setLogoUrls(urls);
-      sessionStorage.setItem('movix_hero_logos', JSON.stringify(logoCache.current));
-      sessionStorage.setItem('movix_hero_logos_timestamp', Date.now().toString());
+      sessionStorage.setItem('yaxoudbst_hero_logos', JSON.stringify(logoCache.current));
+      sessionStorage.setItem('yaxoudbst_hero_logos_timestamp', Date.now().toString());
     };
 
     fetchLogos();

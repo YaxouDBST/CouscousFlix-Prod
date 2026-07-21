@@ -62,69 +62,12 @@ export const AdFreePopupProvider: React.FC<{ children: React.ReactNode }> = ({ c
     return subscribeToAdPopupModeChanges(sync);
   }, []);
 
-  const showPopupForPlayer = useCallback((playerType: string, additionalInfo?: any) => {
-    // First check VIP status via server-verified utility
-    const isVipUser = isUserVip() || is_vip;
-
-    if (isVipUser) {
-      setIsVip(true); // Ensure state is in sync with localStorage
-      setShouldLoadIframe(true);
-      return;
-    }
-    const adTypeRandom = Math.random() < 0.3 ? 'ad1' : 'ad2';
-    setAdType(adTypeRandom);
-
-    // Check if this is a VO/VOSTFR only player
-    const isVoVostfrOnlyPlayer = additionalInfo?.isVoVostfrOnly || false;
-    setIsVoVostfrOnly(isVoVostfrOnlyPlayer);
-
-    // ALWAYS show popup for ALL player types (unless user is VIP)
-    // This ensures the popup appears for every player source
-    const isSpecial = true; // Consider all players as "special" to ensure popup shows
-
-    // Log specific player types for debugging
-    if (playerType === 'darkino') {
-      console.log(`[AdFreePopupContext] Darkino player detected`);
-    } else if (playerType === 'adfree') {
-      console.log(`[AdFreePopupContext] AdFree player detected`);
-    } else if (playerType === 'mp4') {
-      console.log(`[AdFreePopupContext] MP4 player detected`);
-    } else if (playerType === 'multi') {
-      console.log(`[AdFreePopupContext] Multi/Coflix player detected`);
-    } else if (playerType === 'omega') {
-      console.log(`[AdFreePopupContext] Omega player detected`);
-    } else if (playerType === 'vidmoly') {
-      console.log(`[AdFreePopupContext] Vidmoly player detected`);
-    } else if (playerType === 'dropload') {
-      console.log(`[AdFreePopupContext] Dropload player detected`);
-    } else if (playerType === 'fstream') {
-      console.log(`[AdFreePopupContext] FStream player detected`);
-    } else if (playerType === 'wiflix') {
-      console.log(`[AdFreePopupContext] Wiflix/Lynx player detected`);
-    } else if (playerType === 'j1f') {
-      console.log(`[AdFreePopupContext] 1jour1film player detected`);
-    } else if (playerType === 'frembed') {
-      console.log(`[AdFreePopupContext] Frembed player detected`);
-    } else if (playerType === 'coflix') {
-      console.log(`[AdFreePopupContext] Coflix player detected`);
-    } else if (playerType === 'nexus_hls' || playerType === 'nexus_file') {
-      console.log(`[AdFreePopupContext] Nexus player detected`);
-    } else {
-      console.log(`[AdFreePopupContext] Generic player detected: ${playerType}`);
-    }
-
-    setIsSpecialPlayer(isSpecial);
-
-    // Always show popup for any player type
-    setPlayerToShow(playerType);
-    setShowAdFreePopup(true);
-    // Click-anywhere preloads the player (iframe/HLS) behind the transparent
-    // catcher so the user sees the video instead of a black screen. The catcher
-    // (z-100000) intercepts the first click to open the ad, then unmounts. Other
-    // modes keep the player gated until the user accepts via the popup.
-    setShouldLoadIframe(getAdPopupMode() === 'click-anywhere');
-    console.log(`[AdFreePopupContext] Popup shown for ${playerType}`);
+  const showPopupForPlayer = useCallback((_playerType: string, _additionalInfo?: any) => {
+    // Ad popup disabled — always load the player directly without any interstitial
+    setIsVip(true);
+    setShouldLoadIframe(true);
   }, [is_vip]);
+
 
   const handlePopupClose = useCallback(() => {
     setShowAdFreePopup(false);
