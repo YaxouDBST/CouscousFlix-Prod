@@ -549,7 +549,7 @@ const Search: React.FC = () => {
 
     // Set simple title
     React.useEffect(() => {
-        document.title = `${t('search.title')} - YaxouDBST`;
+        document.title = `${t('search.title')} - CouscousFlix`;
     }, []);
 
     const filtersActive = showFilters || selectedGenres.length > 0 || director || actor || year || selectedKeywords.length > 0 || selectedLanguage || selectedCountry || selectedProviders.length > 0;

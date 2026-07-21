@@ -12,7 +12,7 @@ let dnsPopupDismissed = false;
 
 const DOWNLOAD_URL = 'https://one.one.one.one/';
 const HELP_PATH = '/help/dns';
-const TOAST_ID = 'yaxoudbst-dns-block';
+const TOAST_ID = 'couscousflix-dns-block';
 
 const DnsBlockBanner: React.FC = () => {
   const { t } = useTranslation();
@@ -116,9 +116,9 @@ const DnsBlockBanner: React.FC = () => {
       );
     };
 
-    window.addEventListener('yaxoudbst:dns-blocked', onBlocked);
+    window.addEventListener('couscousflix:dns-blocked', onBlocked);
     return () => {
-      window.removeEventListener('yaxoudbst:dns-blocked', onBlocked);
+      window.removeEventListener('couscousflix:dns-blocked', onBlocked);
     };
   }, [t, navigate]);
 

@@ -9,7 +9,7 @@ const ChangerLecteurPage: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = `${t('help.changerLecteur.title')} — YaxouDBST`;
+    document.title = `${t('help.changerLecteur.title')} — CouscousFlix`;
   }, [t]);
 
   const sections: TutoSection[] = [

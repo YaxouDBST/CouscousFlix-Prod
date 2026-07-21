@@ -12,7 +12,7 @@ import { useProfile } from '../context/ProfileContext';
 
 const API_URL = import.meta.env.VITE_MAIN_API;
 const DEFAULT_AVATAR = 'https://as2.ftcdn.net/v2/jpg/05/89/93/27/1000_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp';
-const YAXOUDBST_LOGO_SRC = '/yaxoudbst.png';
+const COUSCOUSFLIX_LOGO_SRC = '/couscousflix.png';
 
 interface OAuthPreviewResponse {
   success: boolean;
@@ -62,7 +62,7 @@ function getStoredIdentity(): StoredIdentity | null {
       const userProfile = parsed?.userProfile;
       if (userProfile && typeof userProfile === 'object') {
         return {
-          username: String(userProfile.username || userProfile.name || 'YaxouDBST'),
+          username: String(userProfile.username || userProfile.name || 'CouscousFlix'),
           avatar: String(userProfile.avatar || DEFAULT_AVATAR),
         };
       }
@@ -76,7 +76,7 @@ function getStoredIdentity(): StoredIdentity | null {
     try {
       const parsed = JSON.parse(googleRaw);
       return {
-        username: String(parsed?.name || 'YaxouDBST'),
+        username: String(parsed?.name || 'CouscousFlix'),
         avatar: String(parsed?.picture || DEFAULT_AVATAR),
       };
     } catch {
@@ -89,7 +89,7 @@ function getStoredIdentity(): StoredIdentity | null {
     try {
       const parsed = JSON.parse(discordRaw);
       return {
-        username: String(parsed?.username || 'YaxouDBST'),
+        username: String(parsed?.username || 'CouscousFlix'),
         avatar: String(parsed?.avatar || DEFAULT_AVATAR),
       };
     } catch {
@@ -214,7 +214,7 @@ const FakePermissionsTeasingCard: React.FC = () => {
   return (
     <div>
       <p className="text-[0.6rem] font-semibold uppercase tracking-[0.3em] text-gray-400">
-        🚫 {t('oauthAuthorize.fakeNotRequestedTitle', 'Ce que YaxouDBST ne demande pas')}
+        🚫 {t('oauthAuthorize.fakeNotRequestedTitle', 'Ce que CouscousFlix ne demande pas')}
       </p>
       <div className="mt-2 flex items-start gap-2.5">
         <span className="mt-0.5 shrink-0 text-red-400/70 leading-none">✗</span>
@@ -311,7 +311,7 @@ const OAuthAuthorizePage: React.FC = () => {
   const authToken = localStorage.getItem('auth_token');
   const accountIdentity = useMemo(() => getStoredIdentity(), []);
   const { currentProfile } = useProfile();
-  const displayName = currentProfile?.name || accountIdentity?.username || 'YaxouDBST';
+  const displayName = currentProfile?.name || accountIdentity?.username || 'CouscousFlix';
   const displayAvatar = currentProfile?.avatar || accountIdentity?.avatar || DEFAULT_AVATAR;
   const returnTo = `${location.pathname}${location.search}`;
   const isAlreadyConnected = Boolean(authToken);
@@ -513,8 +513,8 @@ const OAuthAuthorizePage: React.FC = () => {
           <section className="min-w-0 rounded-3xl border border-white/10 bg-white/[0.04] p-5 shadow-xl backdrop-blur sm:p-7">
             <div className="flex items-start justify-between gap-3">
               <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5">
-                <img src={YAXOUDBST_LOGO_SRC} alt="YaxouDBST" className="h-4 w-4 object-contain" />
-                <span className="text-xs font-medium text-white">YaxouDBST OAuth</span>
+                <img src={COUSCOUSFLIX_LOGO_SRC} alt="CouscousFlix" className="h-4 w-4 object-contain" />
+                <span className="text-xs font-medium text-white">CouscousFlix OAuth</span>
               </div>
               <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-2 text-red-200">
                 <ShieldCheck className="h-5 w-5" />
@@ -675,7 +675,7 @@ const OAuthAuthorizePage: React.FC = () => {
 
           <aside className="min-w-0 rounded-3xl border border-white/10 bg-white/[0.02] p-5 shadow-xl backdrop-blur sm:p-6">
             <p className="text-[0.6rem] font-semibold uppercase tracking-[0.3em] text-gray-400">
-              {isAlreadyConnected ? t('oauthAuthorize.connectedAccount') : t('oauthAuthorize.connectYaxouDBST')}
+              {isAlreadyConnected ? t('oauthAuthorize.connectedAccount') : t('oauthAuthorize.connectCouscousFlix')}
             </p>
             {isAlreadyConnected ? (
               <>
@@ -718,13 +718,7 @@ const OAuthAuthorizePage: React.FC = () => {
                 </p>
 
                 <div className="mt-5 space-y-2.5">
-                  <Button
-                    onClick={() => handleProviderLogin('discord')}
-                    disabled={!preview}
-                    className="w-full justify-center bg-[#5865F2] py-2.5 hover:bg-[#4752C4]"
-                  >
-                    {t('auth.loginWithDiscord')}
-                  </Button>
+
                   <Button
                     onClick={() => handleProviderLogin('google')}
                     disabled={!preview}
@@ -732,21 +726,14 @@ const OAuthAuthorizePage: React.FC = () => {
                   >
                     {t('auth.loginWithGoogle')}
                   </Button>
-                  <Button
-                    onClick={() => handleBip39Route('/login-bip39')}
-                    disabled={!preview}
-                    variant="secondary"
-                    className="w-full justify-center py-2.5"
-                  >
-                    {t('oauthAuthorize.loginWithBip39')}
-                  </Button>
+
                   <Button
                     onClick={() => handleBip39Route('/create-account')}
                     disabled={!preview}
                     variant="outline"
                     className="w-full justify-center border-white/15 bg-transparent py-2.5"
                   >
-                    {t('oauthAuthorize.createYaxouDBSTAccount')}
+                    {t('oauthAuthorize.createCouscousFlixAccount')}
                   </Button>
                 </div>
               </>

@@ -720,7 +720,7 @@ export const loadMediaOnCast = async (
 export const getHLSContentTypes = (_url: string): string[] => [
   'application/vnd.apple.mpegurl', // RFC 8216, broadest receiver support
   'application/x-mpegurl',         // older Apple variant, lowercase
-  'application/x-mpegURL',         // mixed-case, what YaxouDBST used historically
+  'application/x-mpegURL',         // mixed-case, what CouscousFlix used historically
 ];
 
 /**

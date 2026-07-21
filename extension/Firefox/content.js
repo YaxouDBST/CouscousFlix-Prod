@@ -1,4 +1,4 @@
-// Firefox-compatible content script for YaxouDBST Extension
+// Firefox-compatible content script for CouscousFlix Extension
 const browserAPI = typeof browser !== 'undefined' ? browser : chrome;
 
 // Inject a flag so the page knows the extension is active
@@ -12,7 +12,7 @@ script.onload = function () {
 // Listen for messages from the web page
 window.addEventListener("message", async (event) => {
     // We only accept messages from ourselves
-    if (event.source !== window || !event.data || event.data.source !== "YAXOUDBST_WEB") {
+    if (event.source !== window || !event.data || event.data.source !== "COUSCOUSFLIX_WEB") {
         return;
     }
 
@@ -25,14 +25,14 @@ window.addEventListener("message", async (event) => {
 
             if (response && response.error) {
                 window.postMessage({
-                    source: "YAXOUDBST_EXTENSION",
+                    source: "COUSCOUSFLIX_EXTENSION",
                     messageId,
                     success: false,
                     error: response.error
                 }, "*");
             } else {
                 window.postMessage({
-                    source: "YAXOUDBST_EXTENSION",
+                    source: "COUSCOUSFLIX_EXTENSION",
                     messageId,
                     success: true,
                     data: response
@@ -40,7 +40,7 @@ window.addEventListener("message", async (event) => {
             }
         } catch (error) {
             window.postMessage({
-                source: "YAXOUDBST_EXTENSION",
+                source: "COUSCOUSFLIX_EXTENSION",
                 messageId,
                 success: false,
                 error: error.message
@@ -54,7 +54,7 @@ browserAPI.runtime.onMessage.addListener((message, sender, sendResponse) => {
     // Forward extraction results back to the page if needed
     if (message.type === 'EXTRACTION_RESULT') {
         window.postMessage({
-            source: 'YAXOUDBST_EXTENSION',
+            source: 'COUSCOUSFLIX_EXTENSION',
             type: 'EXTRACTION_RESULT',
             data: message.data
         }, '*');

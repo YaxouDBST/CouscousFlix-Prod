@@ -8,7 +8,7 @@ const DebridHelpPage: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = `${t('help.debrid.title')} — YaxouDBST`;
+    document.title = `${t('help.debrid.title')} — CouscousFlix`;
   }, [t]);
 
   const sections: TutoSection[] = [

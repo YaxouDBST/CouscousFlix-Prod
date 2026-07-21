@@ -72,7 +72,7 @@ Réponds UNIQUEMENT avec ce format JSON (sans markdown, sans backticks):
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${OPENROUTER_API_KEY}`,
           'HTTP-Referer': FRONTEND_BASE_URL,
-          'X-Title': 'YaxouDBST Shared List Moderation'
+          'X-Title': 'CouscousFlix Shared List Moderation'
         },
         timeout: 15000
       }

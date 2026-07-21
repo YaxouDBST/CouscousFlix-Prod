@@ -10,7 +10,7 @@ import { useTmdbImages, prefetchTmdbImages } from '../hooks/useTmdbImages';
 import { useEmblaScrollSuppress } from '../hooks/useEmblaScrollSuppress';
 import './EmblaCarousel.css';
 
-const POSTER_FALLBACK = `data:image/svg+xml,${encodeURIComponent('<svg width="500" height="750" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="#111"/><text x="50%" y="50%" fill="#444" font-size="36" font-family="sans-serif" text-anchor="middle" dy=".3em">YAXOUDBST</text></svg>')}`;
+const POSTER_FALLBACK = `data:image/svg+xml,${encodeURIComponent('<svg width="500" height="750" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="#111"/><text x="50%" y="50%" fill="#444" font-size="36" font-family="sans-serif" text-anchor="middle" dy=".3em">COUSCOUSFLIX</text></svg>')}`;
 
 // Stable frozen constant for non-history carousel items — prevents fresh object
 // identity inside limitedItems.map() from defeating CarouselCard memo. — perf
@@ -82,7 +82,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
   className = '',
   style,
   onError,
-  placeholder = 'data:image/svg+xml;utf8,<svg width="342" height="513" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 342 513" preserveAspectRatio="xMidYMid meet"><rect width="100%" height="100%" fill="%23333"/><text x="50%" y="50%" fill="%23ccc" font-size="38" font-family="Arial, sans-serif" text-anchor="middle" dy=".3em">YAXOUDBST</text></svg>',
+  placeholder = 'data:image/svg+xml;utf8,<svg width="342" height="513" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 342 513" preserveAspectRatio="xMidYMid meet"><rect width="100%" height="100%" fill="%23333"/><text x="50%" y="50%" fill="%23ccc" font-size="38" font-family="Arial, sans-serif" text-anchor="middle" dy=".3em">COUSCOUSFLIX</text></svg>',
   draggable = false,
   priority = false
 }) => {

@@ -1,6 +1,6 @@
 const ALPHABET =
   "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const SITE_NAME = "YaxouDBST";
+const SITE_NAME = "CouscousFlix";
 const TMDB_API_BASE = "https://api.themoviedb.org/3";
 const TMDB_IMAGE_BASE = "https://image.tmdb.org/t/p";
 
@@ -81,9 +81,9 @@ const COPY = {
     tmdbLanguage: "fr-FR",
     ogLocale: "fr_FR",
     alternateOgLocale: "en_US",
-    defaultTitle: "YaxouDBST - Films et séries en streaming",
+    defaultTitle: "CouscousFlix - Films et séries en streaming",
     defaultDescription:
-      "Regardez des films, séries, collections et pages communautaires sur YaxouDBST.",
+      "Regardez des films, séries, collections et pages communautaires sur CouscousFlix.",
     movieWord: "films",
     tvWord: "séries",
     providerFallback: "Plateforme",
@@ -98,13 +98,13 @@ const COPY = {
     knownForLabel: "Connu pour",
     bornLabel: "Naissance",
     movieFallback:
-      "Découvrez {{title}} sur YaxouDBST, avec synopsis, note et lecture en ligne.",
+      "Découvrez {{title}} sur CouscousFlix, avec synopsis, note et lecture en ligne.",
     tvFallback:
-      "Découvrez {{title}} sur YaxouDBST, avec synopsis, note, saisons et lecture en ligne.",
+      "Découvrez {{title}} sur CouscousFlix, avec synopsis, note, saisons et lecture en ligne.",
     collectionFallback:
-      "Retrouvez tous les films de la collection {{title}} sur YaxouDBST.",
+      "Retrouvez tous les films de la collection {{title}} sur CouscousFlix.",
     personFallback:
-      "Consultez la biographie et la filmographie de {{title}} sur YaxouDBST.",
+      "Consultez la biographie et la filmographie de {{title}} sur CouscousFlix.",
     watchMovieLabel: "Regarder le film",
     watchSeriesLabel: "Regarder la série",
     watchAnimeLabel: "Regarder l’anime",
@@ -123,81 +123,81 @@ const COPY = {
     syncProLabel: "Sync Pro",
     movieLabel: "Film",
     tvLabel: "Serie",
-    sharedListTitle: "Liste partagée - YaxouDBST",
+    sharedListTitle: "Liste partagée - CouscousFlix",
     sharedListDescription:
-      "Consultez une liste partagée par la communauté YaxouDBST.",
-    watchPartyTitle: "Watch Party - YaxouDBST",
+      "Consultez une liste partagée par la communauté CouscousFlix.",
+    watchPartyTitle: "Watch Party - CouscousFlix",
     watchPartyDescription:
-      "Créez, rejoignez et partagez une watch party synchronisée sur YaxouDBST.",
-    homeTitle: "YaxouDBST - Streaming films et séries gratuit",
+      "Créez, rejoignez et partagez une watch party synchronisée sur CouscousFlix.",
+    homeTitle: "CouscousFlix - Streaming films et séries gratuit",
     homeDescription:
-      "Explorez les films, séries, collections, alertes et recommandations YaxouDBST.",
-    searchTitle: "Recherche - YaxouDBST",
+      "Explorez les films, séries, collections, alertes et recommandations CouscousFlix.",
+    searchTitle: "Recherche - CouscousFlix",
     searchDescription:
-      "Cherchez un film, une série, une collection ou une personne sur YaxouDBST.",
-    moviesTitle: "Films - YaxouDBST",
+      "Cherchez un film, une série, une collection ou une personne sur CouscousFlix.",
+    moviesTitle: "Films - CouscousFlix",
     moviesDescription:
-      "Parcourez les films populaires, récents et recommandés sur YaxouDBST.",
-    tvTitle: "Séries TV - YaxouDBST",
+      "Parcourez les films populaires, récents et recommandés sur CouscousFlix.",
+    tvTitle: "Séries TV - CouscousFlix",
     tvDescription:
-      "Parcourez les séries TV populaires, récentes et recommandées sur YaxouDBST.",
-    collectionsTitle: "Collections - YaxouDBST",
+      "Parcourez les séries TV populaires, récentes et recommandées sur CouscousFlix.",
+    collectionsTitle: "Collections - CouscousFlix",
     collectionsDescription:
-      "Retrouvez les sagas et franchises de films disponibles sur YaxouDBST.",
-    alertsTitle: "Mes alertes - YaxouDBST",
+      "Retrouvez les sagas et franchises de films disponibles sur CouscousFlix.",
+    alertsTitle: "Mes alertes - CouscousFlix",
     alertsDescription: "Gérez vos alertes de sorties et de nouveaux épisodes.",
-    rouletteTitle: "Roulette - YaxouDBST",
+    rouletteTitle: "Roulette - CouscousFlix",
     rouletteDescription:
-      "Laissez YaxouDBST choisir un film ou une série pour votre prochaine session.",
-    suggestionTitle: "Suggestion - YaxouDBST",
+      "Laissez CouscousFlix choisir un film ou une série pour votre prochaine session.",
+    suggestionTitle: "Suggestion - CouscousFlix",
     suggestionDescription:
       "Lancez une recommandation surprise selon vos critères.",
-    providerBrowseTitle: "Où regarder - YaxouDBST",
+    providerBrowseTitle: "Où regarder - CouscousFlix",
     providerBrowseDescription:
-      "Explorez les catalogues par plateforme de streaming sur YaxouDBST.",
-    liveTvTitle: "Live TV - YaxouDBST",
+      "Explorez les catalogues par plateforme de streaming sur CouscousFlix.",
+    liveTvTitle: "Live TV - CouscousFlix",
     liveTvDescription:
-      "Accédez aux chaînes en direct et au direct TV sur YaxouDBST.",
-    extensionTitle: "Extension - YaxouDBST",
+      "Accédez aux chaînes en direct et au direct TV sur CouscousFlix.",
+    extensionTitle: "Extension - CouscousFlix",
     extensionDescription:
-      "Installez l’extension navigateur YaxouDBST et ses intégrations.",
-    top10Title: "Top 10 - YaxouDBST",
+      "Installez l’extension navigateur CouscousFlix et ses intégrations.",
+    top10Title: "Top 10 - CouscousFlix",
     top10Description:
-      "Consultez le Top 10 films et séries de la communauté YaxouDBST.",
-    settingsTitle: "Paramètres - YaxouDBST",
+      "Consultez le Top 10 films et séries de la communauté CouscousFlix.",
+    settingsTitle: "Paramètres - CouscousFlix",
     settingsDescription:
-      "Réglez la langue, les préférences et les options de votre expérience YaxouDBST.",
-    aboutTitle: "À propos de YaxouDBST",
+      "Réglez la langue, les préférences et les options de votre expérience CouscousFlix.",
+    aboutTitle: "À propos de CouscousFlix",
     aboutDescription:
-      "Découvrez ce qu’est YaxouDBST et les fonctionnalités de la plateforme.",
-    privacyTitle: "Confidentialité - YaxouDBST",
+      "Découvrez ce qu’est CouscousFlix et les fonctionnalités de la plateforme.",
+    privacyTitle: "Confidentialité - CouscousFlix",
     privacyDescription:
-      "Consultez la politique de confidentialité et les pratiques de YaxouDBST.",
-    cinegraphTitle: "CineGraph - YaxouDBST",
+      "Consultez la politique de confidentialité et les pratiques de CouscousFlix.",
+    cinegraphTitle: "CineGraph - CouscousFlix",
     cinegraphDescription:
       "Explorez les liens entre films, séries, genres et talents avec CineGraph.",
-    wishboardTitle: "Wishboard - YaxouDBST",
+    wishboardTitle: "Wishboard - CouscousFlix",
     wishboardDescription:
       "Demandez un ajout de contenu et suivez les requêtes communautaires.",
-    wrappedTitle: "Wrapped - YaxouDBST",
-    wrappedDescription: "Retrouvez vos statistiques et votre récap YaxouDBST.",
-    profileTitle: "Profil - YaxouDBST",
+    wrappedTitle: "Wrapped - CouscousFlix",
+    wrappedDescription: "Retrouvez vos statistiques et votre récap CouscousFlix.",
+    profileTitle: "Profil - CouscousFlix",
     profileDescription:
-      "Retrouvez vos listes, favoris, alertes et historique sur YaxouDBST.",
-    authTitle: "Connexion - YaxouDBST",
-    authDescription: "Connectez-vous à votre compte YaxouDBST.",
-    vipTitle: "VIP - YaxouDBST",
-    vipDescription: "Découvrez les avantages VIP et les options premium YaxouDBST.",
-    genericPageTitle: "Page YaxouDBST",
-    genericPageDescription: "Découvrez cette page sur YaxouDBST.",
+      "Retrouvez vos listes, favoris, alertes et historique sur CouscousFlix.",
+    authTitle: "Connexion - CouscousFlix",
+    authDescription: "Connectez-vous à votre compte CouscousFlix.",
+    vipTitle: "VIP - CouscousFlix",
+    vipDescription: "Découvrez les avantages VIP et les options premium CouscousFlix.",
+    genericPageTitle: "Page CouscousFlix",
+    genericPageDescription: "Découvrez cette page sur CouscousFlix.",
   },
   en: {
     tmdbLanguage: "en-US",
     ogLocale: "en_US",
     alternateOgLocale: "fr_FR",
-    defaultTitle: "YaxouDBST - Movies and TV streaming",
+    defaultTitle: "CouscousFlix - Movies and TV streaming",
     defaultDescription:
-      "Watch movies, TV shows, collections and community pages on YaxouDBST.",
+      "Watch movies, TV shows, collections and community pages on CouscousFlix.",
     movieWord: "movies",
     tvWord: "TV shows",
     providerFallback: "Platform",
@@ -212,12 +212,12 @@ const COPY = {
     knownForLabel: "Known for",
     bornLabel: "Born",
     movieFallback:
-      "Discover {{title}} on YaxouDBST with synopsis, rating and online playback.",
+      "Discover {{title}} on CouscousFlix with synopsis, rating and online playback.",
     tvFallback:
-      "Discover {{title}} on YaxouDBST with synopsis, rating, seasons and online playback.",
+      "Discover {{title}} on CouscousFlix with synopsis, rating, seasons and online playback.",
     collectionFallback:
-      "Browse every movie in the {{title}} collection on YaxouDBST.",
-    personFallback: "See the biography and filmography of {{title}} on YaxouDBST.",
+      "Browse every movie in the {{title}} collection on CouscousFlix.",
+    personFallback: "See the biography and filmography of {{title}} on CouscousFlix.",
     watchMovieLabel: "Watch movie",
     watchSeriesLabel: "Watch series",
     watchAnimeLabel: "Watch anime",
@@ -236,67 +236,67 @@ const COPY = {
     syncProLabel: "Sync Pro",
     movieLabel: "Movie",
     tvLabel: "TV Show",
-    sharedListTitle: "Shared List - YaxouDBST",
-    sharedListDescription: "Browse a list shared by the YaxouDBST community.",
-    watchPartyTitle: "Watch Party - YaxouDBST",
+    sharedListTitle: "Shared List - CouscousFlix",
+    sharedListDescription: "Browse a list shared by the CouscousFlix community.",
+    watchPartyTitle: "Watch Party - CouscousFlix",
     watchPartyDescription:
-      "Create, join and share synchronized watch parties on YaxouDBST.",
-    homeTitle: "YaxouDBST - Free movie and TV streaming",
+      "Create, join and share synchronized watch parties on CouscousFlix.",
+    homeTitle: "CouscousFlix - Free movie and TV streaming",
     homeDescription:
-      "Explore movies, TV shows, collections, alerts and recommendations on YaxouDBST.",
-    searchTitle: "Search - YaxouDBST",
+      "Explore movies, TV shows, collections, alerts and recommendations on CouscousFlix.",
+    searchTitle: "Search - CouscousFlix",
     searchDescription:
-      "Search for a movie, TV show, collection or person on YaxouDBST.",
-    moviesTitle: "Movies - YaxouDBST",
+      "Search for a movie, TV show, collection or person on CouscousFlix.",
+    moviesTitle: "Movies - CouscousFlix",
     moviesDescription:
-      "Browse popular, recent and recommended movies on YaxouDBST.",
-    tvTitle: "TV Shows - YaxouDBST",
-    tvDescription: "Browse popular, recent and recommended TV shows on YaxouDBST.",
-    collectionsTitle: "Collections - YaxouDBST",
+      "Browse popular, recent and recommended movies on CouscousFlix.",
+    tvTitle: "TV Shows - CouscousFlix",
+    tvDescription: "Browse popular, recent and recommended TV shows on CouscousFlix.",
+    collectionsTitle: "Collections - CouscousFlix",
     collectionsDescription:
-      "Browse movie sagas and franchises available on YaxouDBST.",
-    alertsTitle: "My Alerts - YaxouDBST",
+      "Browse movie sagas and franchises available on CouscousFlix.",
+    alertsTitle: "My Alerts - CouscousFlix",
     alertsDescription: "Manage your release and new episode alerts.",
-    rouletteTitle: "Roulette - YaxouDBST",
+    rouletteTitle: "Roulette - CouscousFlix",
     rouletteDescription:
-      "Let YaxouDBST pick a movie or TV show for your next session.",
-    suggestionTitle: "Suggestion - YaxouDBST",
+      "Let CouscousFlix pick a movie or TV show for your next session.",
+    suggestionTitle: "Suggestion - CouscousFlix",
     suggestionDescription:
       "Get a surprise recommendation based on your filters.",
-    providerBrowseTitle: "Where to Watch - YaxouDBST",
+    providerBrowseTitle: "Where to Watch - CouscousFlix",
     providerBrowseDescription:
-      "Explore streaming catalogs by platform on YaxouDBST.",
-    liveTvTitle: "Live TV - YaxouDBST",
-    liveTvDescription: "Access live channels and TV streams on YaxouDBST.",
-    extensionTitle: "Extension - YaxouDBST",
+      "Explore streaming catalogs by platform on CouscousFlix.",
+    liveTvTitle: "Live TV - CouscousFlix",
+    liveTvDescription: "Access live channels and TV streams on CouscousFlix.",
+    extensionTitle: "Extension - CouscousFlix",
     extensionDescription:
-      "Install the YaxouDBST browser extension and integrations.",
-    top10Title: "Top 10 - YaxouDBST",
-    top10Description: "See the YaxouDBST community Top 10 movies and TV shows.",
-    settingsTitle: "Settings - YaxouDBST",
+      "Install the CouscousFlix browser extension and integrations.",
+    top10Title: "Top 10 - CouscousFlix",
+    top10Description: "See the CouscousFlix community Top 10 movies and TV shows.",
+    settingsTitle: "Settings - CouscousFlix",
     settingsDescription:
-      "Adjust language, preferences and experience options on YaxouDBST.",
-    aboutTitle: "About YaxouDBST",
-    aboutDescription: "Learn what YaxouDBST is and what the platform offers.",
-    privacyTitle: "Privacy - YaxouDBST",
-    privacyDescription: "Read the YaxouDBST privacy policy and data practices.",
-    cinegraphTitle: "CineGraph - YaxouDBST",
+      "Adjust language, preferences and experience options on CouscousFlix.",
+    aboutTitle: "About CouscousFlix",
+    aboutDescription: "Learn what CouscousFlix is and what the platform offers.",
+    privacyTitle: "Privacy - CouscousFlix",
+    privacyDescription: "Read the CouscousFlix privacy policy and data practices.",
+    cinegraphTitle: "CineGraph - CouscousFlix",
     cinegraphDescription:
       "Explore links between movies, shows, genres and talent with CineGraph.",
-    wishboardTitle: "Wishboard - YaxouDBST",
+    wishboardTitle: "Wishboard - CouscousFlix",
     wishboardDescription:
       "Request content additions and track community requests.",
-    wrappedTitle: "Wrapped - YaxouDBST",
-    wrappedDescription: "See your YaxouDBST stats and recap.",
-    profileTitle: "Profile - YaxouDBST",
+    wrappedTitle: "Wrapped - CouscousFlix",
+    wrappedDescription: "See your CouscousFlix stats and recap.",
+    profileTitle: "Profile - CouscousFlix",
     profileDescription:
-      "Find your lists, favorites, alerts and history on YaxouDBST.",
-    authTitle: "Login - YaxouDBST",
-    authDescription: "Sign in to your YaxouDBST account.",
-    vipTitle: "VIP - YaxouDBST",
-    vipDescription: "Discover YaxouDBST VIP benefits and premium options.",
-    genericPageTitle: "YaxouDBST Page",
-    genericPageDescription: "Discover this page on YaxouDBST.",
+      "Find your lists, favorites, alerts and history on CouscousFlix.",
+    authTitle: "Login - CouscousFlix",
+    authDescription: "Sign in to your CouscousFlix account.",
+    vipTitle: "VIP - CouscousFlix",
+    vipDescription: "Discover CouscousFlix VIP benefits and premium options.",
+    genericPageTitle: "CouscousFlix Page",
+    genericPageDescription: "Discover this page on CouscousFlix.",
   },
 };
 
@@ -422,7 +422,7 @@ function formatRating(value) {
     : numberValue.toFixed(1);
 }
 
-function buildImageUrl(origin, payload, fallbackPath = "/yaxoudbst.png") {
+function buildImageUrl(origin, payload, fallbackPath = "/couscousflix.png") {
   const imagePath =
     payload.backdrop_path || payload.poster_path || payload.profile_path;
   if (!imagePath) return new URL(fallbackPath, origin).toString();
@@ -430,7 +430,7 @@ function buildImageUrl(origin, payload, fallbackPath = "/yaxoudbst.png") {
   return `${TMDB_IMAGE_BASE}/${size}${imagePath}`;
 }
 
-function resolveExternalImageUrl(origin, value, fallbackPath = "/yaxoudbst.png") {
+function resolveExternalImageUrl(origin, value, fallbackPath = "/couscousflix.png") {
   const normalized = String(value || "").trim();
 
   if (!normalized) {
@@ -537,7 +537,7 @@ function buildBaseMetadata(requestUrl, previewLanguage, payload) {
     ),
     canonicalUrl: requestUrl.toString(),
     imageUrl:
-      payload.imageUrl || new URL("/yaxoudbst.png", requestUrl.origin).toString(),
+      payload.imageUrl || new URL("/couscousflix.png", requestUrl.origin).toString(),
     imageAlt: payload.imageAlt || SITE_NAME,
     ogType: payload.ogType || "website",
     ogLocale: copy.ogLocale,
@@ -840,8 +840,8 @@ function buildWatchPartyMetadata(requestUrl, roomData, previewLanguage, mode) {
   ];
   const descriptionBody = titleText
     ? previewLanguage === "fr"
-      ? `Rejoignez cette Watch Party YaxouDBST pour regarder ${titleText}${episodePart} en synchronisation.`
-      : `Join this YaxouDBST Watch Party to watch ${titleText}${episodePart} in sync.`
+      ? `Rejoignez cette Watch Party CouscousFlix pour regarder ${titleText}${episodePart} en synchronisation.`
+      : `Join this CouscousFlix Watch Party to watch ${titleText}${episodePart} in sync.`
     : copy.watchPartyDescription;
 
   return buildBaseMetadata(requestUrl, previewLanguage, {
@@ -851,7 +851,7 @@ function buildWatchPartyMetadata(requestUrl, roomData, previewLanguage, mode) {
       requestUrl.origin,
       media.poster || roomData.poster,
     ),
-    imageAlt: titleText ? `${titleText} - Watch Party` : "Watch Party - YaxouDBST",
+    imageAlt: titleText ? `${titleText} - Watch Party` : "Watch Party - CouscousFlix",
     ogType: "website",
   });
 }
@@ -864,8 +864,8 @@ function buildGenreMetadata(requestUrl, mediaType, genreId, previewLanguage) {
   const contentType = mediaType === "movie" ? copy.movieWord : copy.tvWord;
   const description =
     previewLanguage === "fr"
-      ? `Retrouvez les ${contentType} du genre ${genreName} sur YaxouDBST.`
-      : `Browse ${contentType} in the ${genreName} genre on YaxouDBST.`;
+      ? `Retrouvez les ${contentType} du genre ${genreName} sur CouscousFlix.`
+      : `Browse ${contentType} in the ${genreName} genre on CouscousFlix.`;
   const title =
     previewLanguage === "fr"
       ? `${genreName} - ${contentType} - ${SITE_NAME}`
@@ -902,11 +902,11 @@ function buildProviderMetadata(
           : "movies and TV shows";
   const description = type
     ? previewLanguage === "fr"
-      ? `Retrouvez les ${contentType} de ${providerName}${genreName ? ` dans ${genreName}` : ""} sur YaxouDBST.`
-      : `Browse ${contentType} on ${providerName}${genreName ? ` in ${genreName}` : ""} on YaxouDBST.`
+      ? `Retrouvez les ${contentType} de ${providerName}${genreName ? ` dans ${genreName}` : ""} sur CouscousFlix.`
+      : `Browse ${contentType} on ${providerName}${genreName ? ` in ${genreName}` : ""} on CouscousFlix.`
     : previewLanguage === "fr"
-      ? `Explorez le catalogue ${providerName} sur YaxouDBST.`
-      : `Explore the ${providerName} catalog on YaxouDBST.`;
+      ? `Explorez le catalogue ${providerName} sur CouscousFlix.`
+      : `Explore the ${providerName} catalog on CouscousFlix.`;
 
   return buildBaseMetadata(requestUrl, previewLanguage, {
     title: type
@@ -920,12 +920,12 @@ function buildWrappedMetadata(requestUrl, year, previewLanguage) {
   const copy = COPY[previewLanguage];
   const description = year
     ? previewLanguage === "fr"
-      ? `Retrouvez votre récap YaxouDBST ${year} et partagez vos stats.`
-      : `See your YaxouDBST ${year} recap and share your stats.`
+      ? `Retrouvez votre récap CouscousFlix ${year} et partagez vos stats.`
+      : `See your CouscousFlix ${year} recap and share your stats.`
     : copy.wrappedDescription;
 
   return buildBaseMetadata(requestUrl, previewLanguage, {
-    title: year ? `YaxouDBST Wrapped ${year}` : copy.wrappedTitle,
+    title: year ? `CouscousFlix Wrapped ${year}` : copy.wrappedTitle,
     description,
   });
 }
@@ -1059,32 +1059,32 @@ function buildStaticMetadata(requestUrl, previewLanguage) {
       });
     case "/debrid":
       return buildBaseMetadata(requestUrl, previewLanguage, {
-        title: "Debrid - YaxouDBST",
+        title: "Debrid - CouscousFlix",
         description:
           previewLanguage === "fr"
-            ? "Débridez et gérez vos liens premium sur YaxouDBST."
-            : "Debrid and manage your premium links on YaxouDBST.",
+            ? "Débridez et gérez vos liens premium sur CouscousFlix."
+            : "Debrid and manage your premium links on CouscousFlix.",
       });
     case "/dmca":
       return buildBaseMetadata(requestUrl, previewLanguage, {
-        title: "DMCA - YaxouDBST",
+        title: "DMCA - CouscousFlix",
         description:
           previewLanguage === "fr"
-            ? "Informations DMCA et demandes legales pour YaxouDBST."
-            : "DMCA information and legal requests for YaxouDBST.",
+            ? "Informations DMCA et demandes legales pour CouscousFlix."
+            : "DMCA information and legal requests for CouscousFlix.",
       });
     case "/admin":
       return buildBaseMetadata(requestUrl, previewLanguage, {
-        title: "Admin - YaxouDBST",
-        description: "YaxouDBST administration.",
+        title: "Admin - CouscousFlix",
+        description: "CouscousFlix administration.",
       });
     case "/ftv":
       return buildBaseMetadata(requestUrl, previewLanguage, {
-        title: "France TV - YaxouDBST",
+        title: "France TV - CouscousFlix",
         description:
           previewLanguage === "fr"
-            ? "Accédez au catalogue et au live France TV via YaxouDBST."
-            : "Access the France TV catalog and live streams via YaxouDBST.",
+            ? "Accédez au catalogue et au live France TV via CouscousFlix."
+            : "Access the France TV catalog and live streams via CouscousFlix.",
       });
     default:
       if (/^\/watchparty\/(?:join|room)\//.test(pathname)) {
@@ -1111,11 +1111,11 @@ function buildStaticMetadata(requestUrl, previewLanguage) {
 
       if (/^\/ftv\/(?:info|watch)\//.test(pathname)) {
         return buildBaseMetadata(requestUrl, previewLanguage, {
-          title: "France TV - YaxouDBST",
+          title: "France TV - CouscousFlix",
           description:
             previewLanguage === "fr"
-              ? "Accédez au catalogue et au live France TV via YaxouDBST."
-              : "Access the France TV catalog and live streams via YaxouDBST.",
+              ? "Accédez au catalogue et au live France TV via CouscousFlix."
+              : "Access the France TV catalog and live streams via CouscousFlix.",
         });
       }
 

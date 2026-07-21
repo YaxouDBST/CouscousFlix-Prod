@@ -31,7 +31,7 @@ export const BG_STORAGE_KEYS = {
 // `storage` event ne fire que cross-tab. On ajoute un event custom pour
 // notifier les composants montés dans la même page (SquareBackground sur
 // chaque route) quand l'utilisateur change un réglage.
-export const BG_PREFS_EVENT = 'yaxoudbst:bg-prefs-changed';
+export const BG_PREFS_EVENT = 'couscousflix:bg-prefs-changed';
 
 export function notifyBgPrefsChanged() {
   window.dispatchEvent(new Event(BG_PREFS_EVENT));
@@ -74,8 +74,8 @@ export function readBgPrefs(): BgPrefs {
   const sizeRaw = parseInt((typeof window === 'undefined' ? '' : localStorage.getItem(BG_STORAGE_KEYS.squareSize)) || '48', 10);
   const squareSize = [32, 48, 64, 80].includes(sizeRaw) ? sizeRaw : 48;
 
-  const forceColor = typeof window !== 'undefined' && localStorage.getItem(BG_STORAGE_KEYS.forceColor) === '1';
-  const forceSquareSize = typeof window !== 'undefined' && localStorage.getItem(BG_STORAGE_KEYS.forceSquareSize) === '1';
+  const forceColor = typeof window !== 'undefined' && localStorage.getItem(BG_STORAGE_KEYS.forceColor) !== '0';
+  const forceSquareSize = typeof window !== 'undefined' && localStorage.getItem(BG_STORAGE_KEYS.forceSquareSize) !== '0';
   // Default true — le halo est activé par défaut. Désactivable depuis Apparence.
   const haloEnabled = typeof window === 'undefined'
     ? true

@@ -7,7 +7,7 @@ const ExtractionPage: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = `${t('help.extraction.title')} — YaxouDBST`;
+    document.title = `${t('help.extraction.title')} — CouscousFlix`;
   }, [t]);
 
   const sections: TutoSection[] = [

@@ -650,7 +650,7 @@ const appReady = (async () => {
       app.use("/api/top10", top10Router);
       console.log("Top 10 routes initialized successfully");
 
-      // Initialize Wrapped routes (YaxouDBST Wrapped 2026 data collection)
+      // Initialize Wrapped routes (CouscousFlix Wrapped 2026 data collection)
       const {
         router: wrappedRouter,
         initWrappedRoutes,

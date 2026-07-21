@@ -37,7 +37,7 @@ const RedirectPopup: React.FC<RedirectPopupProps> = ({
   };
 
   const handleTelegram = () => {
-    window.open('https://t.me/yaxoudbst_site', '_blank');
+    window.open('https://t.me/couscousflix_site', '_blank');
   };
 
 
@@ -83,7 +83,7 @@ const RedirectPopup: React.FC<RedirectPopupProps> = ({
                   {t('redirect.ourNewAddress')}
                 </h2>
                 <div className="bg-red-600/20 border-2 border-red-500 rounded-lg p-4 mb-4">
-                  <p className="text-3xl font-bold text-white">yaxoudbst.date</p>
+                  <p className="text-3xl font-bold text-white">couscousflix.date</p>
                 </div>
                 <p className="text-gray-300 text-sm">
                   {t('redirect.joinTelegramNews')}

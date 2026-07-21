@@ -10,7 +10,7 @@ const DernierLecteurPage: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = `${t('help.dernierLecteur.title')} — YaxouDBST`;
+    document.title = `${t('help.dernierLecteur.title')} — CouscousFlix`;
   }, [t]);
 
   const sections: TutoSection[] = [

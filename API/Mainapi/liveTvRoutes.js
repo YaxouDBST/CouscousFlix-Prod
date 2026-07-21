@@ -419,7 +419,7 @@ const FCTV_DEFAULT_SITE_TYPE = 2001;
 // (${BYPASS403_SERVER_URL}/proxy), with a hardcoded fallback.
 const FCTV_IMAGE_PROXY = process.env.BYPASS403_SERVER_URL
   ? `${process.env.BYPASS403_SERVER_URL.replace(/\/+$/, "")}/proxy`
-  : "https://proxy.yaxoudbst.date/proxy";
+  : "https://proxy.couscousflix.date/proxy";
 
 function proxifyFctvImage(url) {
   if (!url) return "";
@@ -5442,8 +5442,8 @@ router.delete("/cache", async (req, res) => {
 const XTREAM_URL = (process.env.XTREAM_URL || "").replace(/\/+$/, "");
 const XTREAM_USER = process.env.XTREAM_USER || "";
 const XTREAM_PASS = process.env.XTREAM_PASS || "";
-const IPTV_IMAGE_PROXY = "https://proxy.yaxoudbst.blog/proxy";
-const IPTV_STREAM_PROXY = "https://proxiesembed.yaxoudbst.blog/proxy";
+const IPTV_IMAGE_PROXY = "https://proxy.couscousflix.blog/proxy";
+const IPTV_STREAM_PROXY = "https://proxiesembed.couscousflix.blog/proxy";
 
 // Cache catégories IPTV en mémoire (change rarement)
 let iptvCategoriesCache = null;
@@ -5504,7 +5504,7 @@ router.get("/iptv/categories", requireVip, async (req, res) => {
 /**
  * GET /api/livetv/iptv/streams/:categoryId
  * Récupère les chaînes d'une catégorie Xtream (VIP only)
- * Images proxifiées via proxy.yaxoudbst.blog
+ * Images proxifiées via proxy.couscousflix.blog
  */
 router.get("/iptv/streams/:categoryId", requireVip, async (req, res) => {
   const { categoryId } = req.params;

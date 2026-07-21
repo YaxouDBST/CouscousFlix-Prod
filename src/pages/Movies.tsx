@@ -325,7 +325,7 @@ const Movies: React.FC = () => {
     { id: 37, name: 'Western', route: '/genre/movie/37' },
   ]);
 
-  // Track page visit for YaxouDBST Wrapped
+  // Track page visit for CouscousFlix Wrapped
   useWrappedTracker({
     mode: 'page',
     pageData: { pageName: 'movies' },
@@ -348,8 +348,8 @@ const Movies: React.FC = () => {
 
       // Check for cached data first (only for first page)
       if (pageNumber === 1) {
-        const cachedData = sessionStorage.getItem('yaxoudbst_movies_data');
-        const cacheTimestamp = sessionStorage.getItem('yaxoudbst_movies_data_timestamp');
+        const cachedData = sessionStorage.getItem('couscousflix_movies_data');
+        const cacheTimestamp = sessionStorage.getItem('couscousflix_movies_data_timestamp');
 
         // Use cache if it exists and is less than 15 minutes old
         if (cachedData && cacheTimestamp) {
@@ -655,8 +655,8 @@ const Movies: React.FC = () => {
           categories: [] // Categories will be regenerated from movies
         };
 
-        sessionStorage.setItem('yaxoudbst_movies_data', JSON.stringify(cacheData));
-        sessionStorage.setItem('yaxoudbst_movies_data_timestamp', Date.now().toString());
+        sessionStorage.setItem('couscousflix_movies_data', JSON.stringify(cacheData));
+        sessionStorage.setItem('couscousflix_movies_data_timestamp', Date.now().toString());
       }
     } catch (error) {
       console.error('Error fetching movies:', error);
@@ -673,8 +673,8 @@ const Movies: React.FC = () => {
 
   // Fetch representative TMDB images for each genre and cache for 1 day
   useEffect(() => {
-    const cacheKey = 'yaxoudbst_movie_genre_images';
-    const cacheTsKey = 'yaxoudbst_movie_genre_images_ts';
+    const cacheKey = 'couscousflix_movie_genre_images';
+    const cacheTsKey = 'couscousflix_movie_genre_images_ts';
     const cached = sessionStorage.getItem(cacheKey);
     const cachedTs = sessionStorage.getItem(cacheTsKey);
     const oneDayMs = 24 * 60 * 60 * 1000;
@@ -855,7 +855,7 @@ const Movies: React.FC = () => {
 
   useEffect(() => {
     // Simple title for Movies page
-    document.title = `${t('movies.title')} - YaxouDBST`;
+    document.title = `${t('movies.title')} - CouscousFlix`;
   }, []);
 
   React.useEffect(() => {

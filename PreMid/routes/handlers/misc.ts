@@ -38,7 +38,7 @@ export async function handleMiscRoutes(
       context,
       createPagePresence(
         'Équipe son navigateur pour boxer les hosters relous',
-        pageTitle || 'Extension YaxouDBST',
+        pageTitle || 'Extension CouscousFlix',
         pageImage,
       ),
     )
@@ -218,8 +218,8 @@ export async function handleMiscRoutes(
     return finalizeRoutePresence(
       context,
       createPagePresence(
-        'Raconte l\'histoire de YaxouDBST comme une légende locale',
-        pageTitle || 'À propos de YaxouDBST',
+        'Raconte l\'histoire de CouscousFlix comme une légende locale',
+        pageTitle || 'À propos de CouscousFlix',
         pageImage,
       ),
     )
@@ -265,7 +265,7 @@ export async function handleMiscRoutes(
       context,
       createPagePresence(
         'Tripatouille les réglages jusqu\'à friser la perfection',
-        'Réglages YaxouDBST',
+        'Réglages CouscousFlix',
         pageImage,
       ),
     )
@@ -276,7 +276,7 @@ export async function handleMiscRoutes(
       context,
       createPagePresence(
         'Scrute le top 10 comme un analyste de canapé',
-        pageTitle || 'Top 10 YaxouDBST',
+        pageTitle || 'Top 10 CouscousFlix',
         pageImage,
       ),
     )
@@ -323,7 +323,7 @@ export async function handleMiscRoutes(
     const wrappedYear = getMatchPart(wrappedMatch, 1)
     const state = wrappedYear
       ? `Wrapped ${wrappedYear}`
-      : String(firstNonEmpty(getText('h1'), 'Wrapped YaxouDBST'))
+      : String(firstNonEmpty(getText('h1'), 'Wrapped CouscousFlix'))
 
     return finalizeRoutePresence(
       context,
@@ -339,7 +339,7 @@ export async function handleMiscRoutes(
     return finalizeRoutePresence(
       context,
       createPagePresence(
-        'S\'est perdu dans YaxouDBST, ce qui était statistiquement évitable',
+        'S\'est perdu dans CouscousFlix, ce qui était statistiquement évitable',
         '404 - page introuvable',
         pageImage,
       ),

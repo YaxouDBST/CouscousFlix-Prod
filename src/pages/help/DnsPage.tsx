@@ -21,11 +21,11 @@ const EXTERNAL_RESOURCES: Array<{
     href: 'https://developers.cloudflare.com/1.1.1.1/setup/',
   },
   { labelKey: 'helpDns.otherChangeTonDns', href: 'https://changetondns.fr/' },
-  { labelKey: 'helpDns.otherMirrorsYaxouDBSTHealth', href: 'https://yaxoudbst.online' },
-  { labelKey: 'helpDns.otherMirrors', href: 'https://rentry.co/yaxoudbst' },
+  { labelKey: 'helpDns.otherMirrorsCouscousFlixHealth', href: 'https://couscousflix.online' },
+  { labelKey: 'helpDns.otherMirrors', href: 'https://rentry.co/couscousflix' },
   {
     labelKey: 'helpDns.otherTelegram',
-    href: import.meta.env.VITE_SUPPORT_TELEGRAM_URL || 'https://t.me/yaxoudbst_site',
+    href: import.meta.env.VITE_SUPPORT_TELEGRAM_URL || 'https://t.me/couscousflix_site',
   },
 ];
 
@@ -70,7 +70,7 @@ const DnsPage: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = `${t('helpDns.title')} — YaxouDBST`;
+    document.title = `${t('helpDns.title')} — CouscousFlix`;
   }, [t]);
 
   const renderInstallGrid = () => (

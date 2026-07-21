@@ -28,41 +28,41 @@ const supportedSources = [
   { name: 'Purstream', color: '#d946ef' },
 ];
 
-// Timeline / Histoire de YaxouDBST
+// Timeline / Histoire de CouscousFlix
 const historyItems = [
   {
     icon: <Sparkles className="w-5 h-5" />,
-    titleKey: 'whatIsYaxouDBST.observation',
-    descKey: 'whatIsYaxouDBST.observationDesc',
+    titleKey: 'whatIsCouscousFlix.observation',
+    descKey: 'whatIsCouscousFlix.observationDesc',
     color: '#f59e0b',
   },
   {
     icon: <Rocket className="w-5 h-5" />,
-    titleKey: 'whatIsYaxouDBST.theIdea',
-    descKey: 'whatIsYaxouDBST.theIdeaDesc',
+    titleKey: 'whatIsCouscousFlix.theIdea',
+    descKey: 'whatIsCouscousFlix.theIdeaDesc',
     color: '#3b82f6',
   },
   {
     icon: <Heart className="w-5 h-5" />,
-    titleKey: 'whatIsYaxouDBST.passionProject',
-    descKey: 'whatIsYaxouDBST.passionProjectDesc',
+    titleKey: 'whatIsCouscousFlix.passionProject',
+    descKey: 'whatIsCouscousFlix.passionProjectDesc',
     color: '#ec4899',
   },
   {
     icon: <Users className="w-5 h-5" />,
-    titleKey: 'whatIsYaxouDBST.community',
-    descKey: 'whatIsYaxouDBST.communityDesc',
+    titleKey: 'whatIsCouscousFlix.community',
+    descKey: 'whatIsCouscousFlix.communityDesc',
     color: '#22c55e',
   },
   {
     icon: <Star className="w-5 h-5" />,
-    titleKey: 'whatIsYaxouDBST.alwaysFurther',
-    descKey: 'whatIsYaxouDBST.alwaysFurtherDesc',
+    titleKey: 'whatIsCouscousFlix.alwaysFurther',
+    descKey: 'whatIsCouscousFlix.alwaysFurtherDesc',
     color: '#a855f7',
   },
 ];
 
-const WhatIsYaxouDBSTPage: React.FC = () => {
+const WhatIsCouscousFlixPage: React.FC = () => {
   const { t } = useTranslation();
   // Masquer le footer
   useEffect(() => undefined, []);
@@ -88,7 +88,7 @@ const WhatIsYaxouDBSTPage: React.FC = () => {
         {/* Back Button */}
         <Link to="/" className="inline-flex items-center text-white/50 hover:text-white transition-colors mb-8">
           <ArrowLeft className="w-5 h-5 mr-2" />
-          {t('whatIsYaxouDBST.backToHome')}
+          {t('whatIsCouscousFlix.backToHome')}
         </Link>
 
         {/* Hero Section */}
@@ -98,7 +98,7 @@ const WhatIsYaxouDBSTPage: React.FC = () => {
             animate={{ opacity: 1, scale: 1 }}
             className="mb-6 relative"
           >
-            {/* Logo YaxouDBST - tilted left like the mammoth image */}
+            {/* Logo CouscousFlix - tilted left like the mammoth image */}
             <motion.div
               initial={{ opacity: 0, rotate: -15, scale: 0.7 }}
               animate={{ opacity: 1, rotate: -8, scale: 1 }}
@@ -106,8 +106,8 @@ const WhatIsYaxouDBSTPage: React.FC = () => {
               className="flex justify-center mb-8"
             >
               <img
-                src="/yaxoudbst.png"
-                alt="YaxouDBST Logo"
+                src="/couscousflix.png"
+                alt="CouscousFlix Logo"
                 className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 drop-shadow-[0_0_40px_rgba(220,38,38,0.35)]"
                 style={{ transform: 'rotate(-8deg)' }}
               />
@@ -115,9 +115,9 @@ const WhatIsYaxouDBSTPage: React.FC = () => {
 
             <h1 className="text-4xl md:text-6xl font-black tracking-tight mb-4 pb-4">
               <span className="block py-2 leading-tight">
-                <ShinyText text={t('whatIsYaxouDBST.title').split('YaxouDBST')[0]} speed={3} color="#ffffff" shineColor="#dc2626" className="inline" />
-                <ShinyText text="YaxouDBST" speed={2} color="#dc2626" shineColor="#ffffff" className="inline" />
-                <ShinyText text={t('whatIsYaxouDBST.title').includes('?') ? ' ?' : ''} speed={3} color="#ffffff" shineColor="#dc2626" className="inline" />
+                <ShinyText text={t('whatIsCouscousFlix.title').split('CouscousFlix')[0]} speed={3} color="#ffffff" shineColor="#dc2626" className="inline" />
+                <ShinyText text="CouscousFlix" speed={2} color="#dc2626" shineColor="#ffffff" className="inline" />
+                <ShinyText text={t('whatIsCouscousFlix.title').includes('?') ? ' ?' : ''} speed={3} color="#ffffff" shineColor="#dc2626" className="inline" />
               </span>
             </h1>
           </motion.div>
@@ -130,7 +130,7 @@ const WhatIsYaxouDBSTPage: React.FC = () => {
             className="max-w-3xl mx-auto mb-8"
           >
             <p className="text-lg sm:text-xl text-white/70 leading-relaxed">
-              {t('whatIsYaxouDBST.accessTo')}
+              {t('whatIsCouscousFlix.accessTo')}
             </p>
           </motion.div>
 
@@ -167,7 +167,7 @@ const WhatIsYaxouDBSTPage: React.FC = () => {
             className="mb-10"
           >
             <p className="text-xl sm:text-2xl text-white/50 font-light">
-              {t('whatIsYaxouDBST.inOnePlace')} <span className="text-white font-semibold">{t('whatIsYaxouDBST.forFree')}</span>.
+              {t('whatIsCouscousFlix.inOnePlace')} <span className="text-white font-semibold">{t('whatIsCouscousFlix.forFree')}</span>.
             </p>
           </motion.div>
 
@@ -180,7 +180,7 @@ const WhatIsYaxouDBSTPage: React.FC = () => {
             <Link to="/">
               <Button className="bg-red-600 hover:bg-red-700 text-white px-10 h-13 text-lg font-semibold gap-2 rounded-full shadow-lg shadow-red-600/25">
                 <Tv className="w-5 h-5" />
-                {t('whatIsYaxouDBST.startWatching')}
+                {t('whatIsCouscousFlix.startWatching')}
               </Button>
             </Link>
           </motion.div>
@@ -203,22 +203,22 @@ const WhatIsYaxouDBSTPage: React.FC = () => {
                 <div className="flex items-center justify-center gap-3">
                   <Crown className="w-6 h-6 text-yellow-500 group-hover:scale-110 transition-transform" />
                   <div>
-                    <p className="text-white/50 text-sm">{t('whatIsYaxouDBST.wantMore')}</p>
+                    <p className="text-white/50 text-sm">{t('whatIsCouscousFlix.wantMore')}</p>
                     <p className="text-yellow-400 font-semibold text-base sm:text-lg group-hover:text-yellow-300 transition-colors">
-                      {t('whatIsYaxouDBST.discoverVip')}
+                      {t('whatIsCouscousFlix.discoverVip')}
                     </p>
                   </div>
                   <Crown className="w-6 h-6 text-yellow-500 group-hover:scale-110 transition-transform" />
                 </div>
                 <p className="text-white/40 text-xs sm:text-sm text-center max-w-md leading-relaxed">
-                  {t('whatIsYaxouDBST.vipKeepsSiteAlive')}
+                  {t('whatIsCouscousFlix.vipKeepsSiteAlive')}
                 </p>
               </div>
             </AnimatedBorderCard>
           </Link>
         </motion.div>
 
-        {/* Histoire de YaxouDBST */}
+        {/* Histoire de CouscousFlix */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -227,9 +227,9 @@ const WhatIsYaxouDBSTPage: React.FC = () => {
           className="max-w-4xl mx-auto mb-20"
         >
           <motion.div variants={itemVariants} className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">{t('whatIsYaxouDBST.historyTitle')}</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">{t('whatIsCouscousFlix.historyTitle')}</h2>
             <p className="text-white/50 max-w-2xl mx-auto">
-              {t('whatIsYaxouDBST.historyDesc')}
+              {t('whatIsCouscousFlix.historyDesc')}
             </p>
           </motion.div>
 
@@ -291,20 +291,20 @@ const WhatIsYaxouDBSTPage: React.FC = () => {
           className="max-w-5xl mx-auto mb-20"
         >
           <motion.div variants={itemVariants} className="text-center mb-10">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">{t('whatIsYaxouDBST.allYouNeed')}</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">{t('whatIsCouscousFlix.allYouNeed')}</h2>
             <p className="text-white/50 max-w-xl mx-auto">
-              {t('whatIsYaxouDBST.allYouNeedDesc')}
+              {t('whatIsCouscousFlix.allYouNeedDesc')}
             </p>
           </motion.div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {[
-              { icon: <Globe className="w-6 h-6" />, title: t('whatIsYaxouDBST.multiSources'), desc: t('whatIsYaxouDBST.multiSourcesDesc'), color: '#3b82f6' },
-              { icon: <Film className="w-6 h-6" />, title: t('whatIsYaxouDBST.hugeCatalog'), desc: t('whatIsYaxouDBST.hugeCatalogDesc'), color: '#f97316' },
-              { icon: <Tv className="w-6 h-6" />, title: t('whatIsYaxouDBST.directTV'), desc: t('whatIsYaxouDBST.directTVDesc'), color: '#14b8a6' },
-              { icon: <Users className="w-6 h-6" />, title: t('whatIsYaxouDBST.watchPartyFeature'), desc: t('whatIsYaxouDBST.watchPartyFeatureDesc'), color: '#ec4899' },
-              { icon: <Star className="w-6 h-6" />, title: t('whatIsYaxouDBST.sharedLists'), desc: t('whatIsYaxouDBST.sharedListsDesc'), color: '#f59e0b' },
-              { icon: <Sparkles className="w-6 h-6" />, title: t('whatIsYaxouDBST.modernUI'), desc: t('whatIsYaxouDBST.modernUIDesc'), color: '#a855f7' },
+              { icon: <Globe className="w-6 h-6" />, title: t('whatIsCouscousFlix.multiSources'), desc: t('whatIsCouscousFlix.multiSourcesDesc'), color: '#3b82f6' },
+              { icon: <Film className="w-6 h-6" />, title: t('whatIsCouscousFlix.hugeCatalog'), desc: t('whatIsCouscousFlix.hugeCatalogDesc'), color: '#f97316' },
+              { icon: <Tv className="w-6 h-6" />, title: t('whatIsCouscousFlix.directTV'), desc: t('whatIsCouscousFlix.directTVDesc'), color: '#14b8a6' },
+              { icon: <Users className="w-6 h-6" />, title: t('whatIsCouscousFlix.watchPartyFeature'), desc: t('whatIsCouscousFlix.watchPartyFeatureDesc'), color: '#ec4899' },
+              { icon: <Star className="w-6 h-6" />, title: t('whatIsCouscousFlix.sharedLists'), desc: t('whatIsCouscousFlix.sharedListsDesc'), color: '#f59e0b' },
+              { icon: <Sparkles className="w-6 h-6" />, title: t('whatIsCouscousFlix.modernUI'), desc: t('whatIsCouscousFlix.modernUIDesc'), color: '#a855f7' },
             ].map((feature) => (
               <motion.div key={feature.title} variants={itemVariants}>
                 <AnimatedBorderCard
@@ -343,31 +343,31 @@ const WhatIsYaxouDBSTPage: React.FC = () => {
             className="p-8 backdrop-blur-sm"
           >
             <img
-              src="/yaxoudbst.png"
-              alt="YaxouDBST Logo"
+              src="/couscousflix.png"
+              alt="CouscousFlix Logo"
               className="w-12 h-12 mx-auto mb-4 drop-shadow-lg"
             />
-            <h3 className="text-xl font-bold text-white mb-2">{t('whatIsYaxouDBST.readyToTry')}</h3>
+            <h3 className="text-xl font-bold text-white mb-2">{t('whatIsCouscousFlix.readyToTry')}</h3>
             <p className="text-white/50 text-sm mb-6 max-w-md mx-auto">
-              {t('whatIsYaxouDBST.readyToTryDesc')}
+              {t('whatIsCouscousFlix.readyToTryDesc')}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link to="/">
                 <Button className="bg-red-600 hover:bg-red-700 text-white px-6 h-11 gap-2">
                   <Tv className="w-4 h-4" />
-                  {t('whatIsYaxouDBST.exploreYaxouDBST')}
+                  {t('whatIsCouscousFlix.exploreCouscousFlix')}
                 </Button>
               </Link>
               <Link to="/vip">
                 <Button variant="secondary" className="px-6 h-11 gap-2 border border-yellow-500/30 text-yellow-400 hover:bg-yellow-500/10">
                   <Crown className="w-4 h-4" />
-                  {t('whatIsYaxouDBST.becomeVip')}
+                  {t('whatIsCouscousFlix.becomeVip')}
                 </Button>
               </Link>
               <Link to="/">
                 <Button variant="ghost" className="border border-white/20 hover:border-white/40 text-white h-11 px-5 gap-2">
                   <ArrowLeft className="w-4 h-4" />
-                  {t('whatIsYaxouDBST.returnBtn')}
+                  {t('whatIsCouscousFlix.returnBtn')}
                 </Button>
               </Link>
             </div>
@@ -385,4 +385,4 @@ function hexToRgb(hex: string): string {
   return `${parseInt(result[1], 16)} ${parseInt(result[2], 16)} ${parseInt(result[3], 16)}`;
 }
 
-export default WhatIsYaxouDBSTPage;
+export default WhatIsCouscousFlixPage;

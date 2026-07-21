@@ -3,19 +3,19 @@ import { useTranslation } from 'react-i18next';
 import { Github, AlertTriangle } from 'lucide-react';
 import TutoLayout, { TutoSection } from '../../components/TutoLayout';
 
-const YAXOUDBST_OPEN_SOURCE_GITHUB_URL = 'https://github.com/yaxoudbstcorp/YaxouDBSTOpenSource';
-const YAXOUDBST_LICENSE_URL = 'https://creativecommons.org/licenses/by-nc/4.0/';
+const COUSCOUSFLIX_OPEN_SOURCE_GITHUB_URL = 'https://github.com/couscousflixcorp/CouscousFlixOpenSource';
+const COUSCOUSFLIX_LICENSE_URL = 'https://creativecommons.org/licenses/by-nc/4.0/';
 
 const OpenSourcePage: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = `${t('help.openSource.title')} — YaxouDBST`;
+    document.title = `${t('help.openSource.title')} — CouscousFlix`;
   }, [t]);
 
   const repoLink = (
     <a
-      href={YAXOUDBST_OPEN_SOURCE_GITHUB_URL}
+      href={COUSCOUSFLIX_OPEN_SOURCE_GITHUB_URL}
       target="_blank"
       rel="noopener noreferrer"
       className="font-medium text-indigo-400 hover:text-indigo-300 underline underline-offset-2 decoration-indigo-500/40 hover:decoration-indigo-400"
@@ -24,7 +24,7 @@ const OpenSourcePage: React.FC = () => {
 
   const licenseLink = (
     <a
-      href={YAXOUDBST_LICENSE_URL}
+      href={COUSCOUSFLIX_LICENSE_URL}
       target="_blank"
       rel="noopener noreferrer"
       className="font-medium text-indigo-400 hover:text-indigo-300 underline underline-offset-2 decoration-indigo-500/40 hover:decoration-indigo-400"

@@ -1,21 +1,21 @@
 /**
- * YaxouDBST Android Cast bridge — minimal shim matching the API that the YaxouDBST
+ * CouscousFlix Android Cast bridge — minimal shim matching the API that the CouscousFlix
  * web app already expects when running inside the native Android WebView.
  *
  * The web side (see `src/components/HLSPlayer.tsx` around line 5253) detects
- * `window.YaxouDBSTAndroidCast` and routes casts through it instead of the Google
+ * `window.CouscousFlixAndroidCast` and routes casts through it instead of the Google
  * cast_sender.js SDK (which doesn't function in a WebView). When the shim is
- * present, YaxouDBST's existing Cast buttons in each web player "just work" — the
+ * present, CouscousFlix's existing Cast buttons in each web player "just work" — the
  * UI is identical to the browser experience with a Chromecast detected.
  *
- * Shape expected by YaxouDBST:
- *   window.YaxouDBSTAndroidCast = {
+ * Shape expected by CouscousFlix:
+ *   window.CouscousFlixAndroidCast = {
  *     isSupported(): Promise<boolean>,
  *     loadMedia(url, title, poster, currentTimeSec): Promise<void>,
  *     stop(): Promise<void>,
  *   }
  *
- * YaxouDBST also listens for these DOM events on window (dispatched by this shim
+ * CouscousFlix also listens for these DOM events on window (dispatched by this shim
  * when the native side emits the corresponding CAST_SESSION_* events):
  *   CAST_SESSION_STARTED / CAST_SESSION_RESUMED — no detail
  *   CAST_SESSION_ENDED                           — no detail
@@ -25,8 +25,8 @@
 export function buildCastShim(): string {
   return `
 (function() {
-  if (window.__YAXOUDBST_ANDROID_CAST_INSTALLED__) return;
-  window.__YAXOUDBST_ANDROID_CAST_INSTALLED__ = true;
+  if (window.__COUSCOUSFLIX_ANDROID_CAST_INSTALLED__) return;
+  window.__COUSCOUSFLIX_ANDROID_CAST_INSTALLED__ = true;
 
   var pendingCallbacks = Object.create(null);
   var idCounter = 0;
@@ -58,7 +58,7 @@ export function buildCastShim(): string {
     });
   }
 
-  window.YaxouDBSTAndroidCast = {
+  window.CouscousFlixAndroidCast = {
     isSupported: function() {
       return callNative('CASTSHIM_INIT').then(function(payload) {
         return !!(payload && payload.supported);
@@ -67,7 +67,7 @@ export function buildCastShim(): string {
     loadMedia: function(url, title, poster, currentTime) {
       return callNative('CASTSHIM_LOAD_MEDIA', {
         url: url || '',
-        title: title || 'YaxouDBST',
+        title: title || 'CouscousFlix',
         poster: poster || '',
         currentTime: (typeof currentTime === 'number' && currentTime >= 0) ? currentTime : 0,
       });
@@ -77,7 +77,7 @@ export function buildCastShim(): string {
     },
   };
 
-  window.addEventListener('__YAXOUDBST_CAST_SHIM__', function(e) {
+  window.addEventListener('__COUSCOUSFLIX_CAST_SHIM__', function(e) {
     var detail = e && e.detail;
     if (!detail) return;
 
@@ -109,7 +109,7 @@ export function buildCastShim(): string {
           window.dispatchEvent(new CustomEvent('CAST_SESSION_FAILED', { detail: { error: detail.error || 0 } }));
           break;
         case 'PICKER_DISMISSED':
-          // No matching YaxouDBST listener; swallow.
+          // No matching CouscousFlix listener; swallow.
           break;
       }
     }

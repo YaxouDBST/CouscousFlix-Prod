@@ -947,7 +947,7 @@ function createWishboardRouter(mysqlPool, redis) {
             }
 
             // Resolve user data (username, avatar) for each greenlighter via the
-            // shared helper. Greenlight uses the user's FIRST YaxouDBST profile
+            // shared helper. Greenlight uses the user's FIRST CouscousFlix profile
             // (preferProfile) for pdp + username, not the OAuth/Discord identity.
             const leaderboard = await Promise.all(rows.map(async (row) => {
                 const identity = await resolveAdminIdentity(row.admin_id, row.admin_auth_type, { preferProfile: true });

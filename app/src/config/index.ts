@@ -1,9 +1,9 @@
 export const CONFIG = {
-  SITE_URL: 'https://yaxoudbst.cash',
+  SITE_URL: 'https://couscousflix.cash',
   DNS_PRIMARY: '1.1.1.1',
   DNS_SECONDARY: '1.0.0.1',
   DNS_DOH_URL: 'https://cloudflare-dns.com/dns-query',
-  APP_NAME: 'YaxouDBST',
+  APP_NAME: 'CouscousFlix',
   USER_AGENT:
     'Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Mobile Safari/537.36',
   USER_AGENT_IOS:
@@ -11,7 +11,7 @@ export const CONFIG = {
 };
 
 export const UPDATE_CHECK = {
-  RENTRY_URL: 'https://rentry.co/yaxoudbst',
+  RENTRY_URL: 'https://rentry.co/couscousflix',
   MANIFEST_PATH: '/app/version.json',
   GITHUB_VERSION_RAW_PATH: '/raw/refs/heads/main/app/version.json',
   TIMEOUT_MS: 5000,
@@ -19,7 +19,7 @@ export const UPDATE_CHECK = {
 };
 
 export const FALLBACK_CONFIG = {
-  PRIMARY_URL: 'https://yaxoudbst.cash',
-  GITHUB_URL: 'https://github.com/yaxoudbstcorp/YaxouDBSTOpenSource',
-  TELEGRAM_URL: 'https://t.me/yaxoudbst_site',
+  PRIMARY_URL: 'https://couscousflix.cash',
+  GITHUB_URL: 'https://github.com/couscousflixcorp/CouscousFlixOpenSource',
+  TELEGRAM_URL: 'https://t.me/couscousflix_site',
 };

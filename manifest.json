@@ -1,6 +1,6 @@
 {
-  "name": "YaxouDBST",
-  "short_name": "YaxouDBST",
+  "name": "CouscousFlix",
+  "short_name": "CouscousFlix",
   "description": "Streaming de films et séries en français gratuit",
   "start_url": "/",
   "display": "standalone",
@@ -9,13 +9,13 @@
   "orientation": "any",
   "icons": [
     {
-      "src": "/yaxoudbst.png",
+      "src": "/couscousflix.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/yaxoudbst.png",
+      "src": "/couscousflix.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
@@ -27,21 +27,21 @@
       "short_name": "Films",
       "description": "Voir les films",
       "url": "/movies",
-      "icons": [{ "src": "/yaxoudbst.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/couscousflix.png", "sizes": "192x192" }]
     },
     {
       "name": "Séries",
       "short_name": "Séries",
       "description": "Voir les séries",
       "url": "/tv-shows",
-      "icons": [{ "src": "/yaxoudbst.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/couscousflix.png", "sizes": "192x192" }]
     },
     {
       "name": "Recherche",
       "short_name": "Recherche",
       "description": "Rechercher des films et séries",
       "url": "/search",
-      "icons": [{ "src": "/yaxoudbst.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/couscousflix.png", "sizes": "192x192" }]
     }
   ],
   "related_applications": [],

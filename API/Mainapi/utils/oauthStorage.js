@@ -295,7 +295,7 @@ async function claimAuthorizationRequest(connection, payload, decision) {
   }
 
   if (requestRecord.consumedAt) {
-    throw createOAuthStorageError('Cette demande OAuth a déjà été utilisée. Regénérez une nouvelle demande depuis YaxouDBST Translate.', 400, 'invalid_grant');
+    throw createOAuthStorageError('Cette demande OAuth a déjà été utilisée. Regénérez une nouvelle demande depuis CouscousFlix Translate.', 400, 'invalid_grant');
   }
 
   const [updateResult] = await connection.execute(
@@ -304,7 +304,7 @@ async function claimAuthorizationRequest(connection, payload, decision) {
   );
 
   if (!updateResult || updateResult.affectedRows !== 1) {
-    throw createOAuthStorageError('Cette demande OAuth a déjà été utilisée. Regénérez une nouvelle demande depuis YaxouDBST Translate.', 400, 'invalid_grant');
+    throw createOAuthStorageError('Cette demande OAuth a déjà été utilisée. Regénérez une nouvelle demande depuis CouscousFlix Translate.', 400, 'invalid_grant');
   }
 
   return requestRecord;
@@ -315,7 +315,7 @@ async function createAuthorizationCode(pool, payload) {
     throw new Error('MySQL pool not ready for OAuth authorization code creation');
   }
 
-  const code = generateOpaqueToken('yaxoudbst_code');
+  const code = generateOpaqueToken('couscousflix_code');
   const codeHash = hashOpaqueToken(code);
   const expiresAt = new Date(Date.now() + AUTHORIZATION_CODE_TTL_MS);
 
@@ -385,7 +385,7 @@ async function exchangeAuthorizationCode(pool, payload) {
       [authorizationCode.codeHash]
     );
 
-    const accessToken = generateOpaqueToken('yaxoudbst_oat');
+    const accessToken = generateOpaqueToken('couscousflix_oat');
     const tokenHash = hashOpaqueToken(accessToken);
     const expiresAt = new Date(Date.now() + ACCESS_TOKEN_TTL_MS);
 

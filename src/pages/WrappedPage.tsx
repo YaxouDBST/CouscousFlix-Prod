@@ -364,7 +364,7 @@ const SlideIntro: React.FC<{ slide: WrappedSlide; stats: WrappedData['stats'] }>
                 className="p-4 sm:p-6 md:p-8 backdrop-blur-md"
             >
                 <p className="mb-5 text-sm leading-relaxed text-white/90 sm:text-base md:text-lg">
-                    {i18n.t('wrapped.spentOnYaxouDBST')}
+                    {i18n.t('wrapped.spentOnCouscousFlix')}
                 </p>
                 
                 {/* Cascading Time Counter */}
@@ -1174,8 +1174,8 @@ const CreditsRoll: React.FC<{ topContent: WrappedData['topContent']; topGenres?:
         ...(topContent.length ? [{ label: t('wrapped.creditsStarring'), value: topContent.slice(0, 5).map(c => c.title).join(' · ') }] : []),
         ...(topGenres?.length ? [{ label: t('wrapped.creditsGenre'), value: topGenres[0].name }] : []),
         { label: t('wrapped.creditsRuntime'), value: formatCompactDuration(stats.totalMinutes, t) },
-        { label: t('wrapped.creditsProducedBy'), value: 'YAXOUDBST' },
-        { label: '©', value: 'yaxoudbst.date' },
+        { label: t('wrapped.creditsProducedBy'), value: 'COUSCOUSFLIX' },
+        { label: '©', value: 'couscousflix.date' },
     ];
 
     return (
@@ -2320,19 +2320,14 @@ const WrappedPage: React.FC = () => {
                         className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center"
                     >
                         <button
-                            onClick={() => navigate('/login-bip39')}
+                            onClick={() => {
+                                const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=803260771655-6uk6p477ec6im3th4qe9mh8emakes0ja.apps.googleusercontent.com&redirect_uri=${encodeURIComponent(`${window.location.origin}/auth/google`)}&response_type=token&scope=email%20profile`;
+                                window.location.replace(googleAuthUrl);
+                            }}
                             className="flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-purple-600 px-6 py-3 text-white transition-colors hover:bg-purple-500 sm:min-w-[180px] sm:w-auto"
                         >
                             <LogIn className="w-4 h-4" />
-                            {t('wrapped.loginAction')}
-                        </button>
-
-                        <button
-                            onClick={() => navigate('/create-account')}
-                            className="flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 px-6 py-3 text-white transition-colors hover:bg-white/10 sm:min-w-[180px] sm:w-auto"
-                        >
-                            <UserPlus className="w-4 h-4" />
-                            {t('wrapped.createAccountAction')}
+                            {t('auth.loginWithGoogle')}
                         </button>
                     </motion.div>
                 </div>
@@ -2939,7 +2934,7 @@ const WrappedPage: React.FC = () => {
 
         ctx.fillStyle = '#ffffff';
         ctx.font = '900 54px Inter, system-ui, sans-serif';
-        ctx.fillText('YAXOUDBST', 356, 262);
+        ctx.fillText('COUSCOUSFLIX', 356, 262);
         ctx.fillStyle = accentGradient;
         ctx.fillText('Wrapped', 557, 262);
 
@@ -2952,7 +2947,7 @@ const WrappedPage: React.FC = () => {
 
         ctx.fillStyle = 'rgba(255,255,255,0.52)';
         ctx.font = '800 22px Inter, system-ui, sans-serif';
-        fillCenteredText(`YAXOUDBST WRAPPED ${year}`, 330);
+        fillCenteredText(`COUSCOUSFLIX WRAPPED ${year}`, 330);
 
         ctx.fillStyle = '#ffffff';
         ctx.font = '900 68px Inter, system-ui, sans-serif';
@@ -3080,7 +3075,7 @@ const WrappedPage: React.FC = () => {
 
         ctx.fillStyle = 'rgba(255,255,255,0.36)';
         ctx.font = '600 26px Inter, system-ui, sans-serif';
-        const domainLabel = 'yaxoudbst.date';
+        const domainLabel = 'couscousflix.date';
         ctx.fillText(domainLabel, width - 78 - ctx.measureText(domainLabel).width, footerTextY);
 
         return new Promise((resolve) => {
@@ -3172,7 +3167,7 @@ const WrappedPage: React.FC = () => {
                 return;
             }
 
-            downloadBlob(blob, `yaxoudbst-wrapped-${year}-${shareFormat}.png`);
+            downloadBlob(blob, `couscousflix-wrapped-${year}-${shareFormat}.png`);
             toast.success(t('wrapped.imageDownloaded'));
         } catch (error) {
             console.error('[Wrapped] Unable to download share image:', error);
@@ -3193,7 +3188,7 @@ const WrappedPage: React.FC = () => {
                 return;
             }
 
-            const file = new File([blob], `yaxoudbst-wrapped-${year}-${shareFormat}.png`, { type: 'image/png' });
+            const file = new File([blob], `couscousflix-wrapped-${year}-${shareFormat}.png`, { type: 'image/png' });
             if (navigator.share && typeof navigator.canShare === 'function' && navigator.canShare({ files: [file] })) {
                 await navigator.share({
                     title: t('wrapped.shareTitle', { year }),
@@ -3203,7 +3198,7 @@ const WrappedPage: React.FC = () => {
                 return;
             }
 
-            downloadBlob(blob, `yaxoudbst-wrapped-${year}-${shareFormat}.png`);
+            downloadBlob(blob, `couscousflix-wrapped-${year}-${shareFormat}.png`);
             toast.success(t('wrapped.imageShareFallback'));
         } catch (error) {
             if (!isShareAbortError(error)) {

@@ -1,6 +1,6 @@
-# YaxouDBST — Application Mobile
+# CouscousFlix — Application Mobile
 
-Application iOS & Android pour YaxouDBST. WebView avec l'extension YaxouDBST intégrée (remplacement du userscript Tampermonkey) et changeur DNS 1.1.1.1.
+Application iOS & Android pour CouscousFlix. WebView avec l'extension CouscousFlix intégrée (remplacement du userscript Tampermonkey) et changeur DNS 1.1.1.1.
 
 > ⚠️ **Statut iOS : non testé, non compilé**
 >
@@ -39,7 +39,7 @@ app/
 
 ### Comment ça marche
 
-1. **WebView** charge `yaxoudbst.cash`
+1. **WebView** charge `couscousflix.cash`
 2. **Bridge runtime** est injecté AVANT le chargement de la page — fournit `GM_xmlhttpRequest`, `GM_getValue`, `GM_setValue`, `GM_deleteValue`, `unsafeWindow`
 3. **Userscript original** est injecté et fonctionne comme dans Tampermonkey
 4. Quand le userscript fait une requête via `GM_xmlhttpRequest`, le bridge envoie un message à React Native
@@ -97,8 +97,8 @@ L'APK sera dans `android/app/build/outputs/apk/release/`.
 
 > ⚠️ Section non vérifiée — voir l'avertissement en haut du README. Les étapes ci-dessous sont les étapes Xcode standard pour un projet React Native, mais elles n'ont pas été exécutées sur ce projet.
 
-1. Ouvrir `ios/YaxouDBST.xcworkspace` dans Xcode
-2. Sélectionner le scheme "YaxouDBST" et la target device
+1. Ouvrir `ios/CouscousFlix.xcworkspace` dans Xcode
+2. Sélectionner le scheme "CouscousFlix" et la target device
 3. Product → Archive
 
 ## DNS 1.1.1.1
@@ -117,7 +117,7 @@ L'APK sera dans `android/app/build/outputs/apk/release/`.
 
 ## Mise à jour du userscript
 
-Quand le userscript (`../userscript/yaxoudbst.user.js`) est modifié :
+Quand le userscript (`../userscript/couscousflix.user.js`) est modifié :
 
 ```bash
 node scripts/build-userscript.js
@@ -128,6 +128,6 @@ Puis rebuild l'app.
 ## Notes
 
 - Le `DnsPackage.kt` doit être enregistré dans `MainApplication.kt` (ajouté au `getPackages()`)
-- Pour iOS, le bridging header doit pointer vers `YaxouDBST-Bridging-Header.h`
+- Pour iOS, le bridging header doit pointer vers `CouscousFlix-Bridging-Header.h`
 - L'app exclut son propre trafic du VPN DNS pour éviter les boucles
 - Le mode audio en arrière-plan est activé pour la lecture vidéo continue

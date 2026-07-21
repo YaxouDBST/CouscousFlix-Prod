@@ -1569,7 +1569,7 @@ class ProxyServer:
         return {
             'Authorization': f'Bearer {REAL_DEBRID_API_KEY}',
             'Accept': 'application/json',
-            'User-Agent': 'yaxoudbst-proxiesembed/1.0',
+            'User-Agent': 'couscousflix-proxiesembed/1.0',
         }
 
     async def _unlock_with_deepbrid(self, link: str, password: str) -> Response:

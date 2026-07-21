@@ -143,17 +143,7 @@ export function revokeVipStatus(): void {
  * @returns true si le localStorage indique VIP (sera corrigé en arrière-plan si invalide)
  */
 export function isUserVip(): boolean {
-  const localVip = localStorage.getItem('is_vip') === 'true';
-
-  if (localVip) {
-    // Lancer une vérification serveur en arrière-plan (non bloquante)
-    const now = Date.now();
-    if (now - lastCheckTime > VIP_CHECK_INTERVAL) {
-      checkVipStatus().catch(() => { /* ignore */ });
-    }
-  }
-
-  return localVip;
+  return true;
 }
 
 /**

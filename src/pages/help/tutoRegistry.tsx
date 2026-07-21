@@ -369,7 +369,7 @@ export const TUTO_REGISTRY: TutoMeta[] = [
       'help.premid.step2',
       'help.premid.step3',
       'help.premid.step4',
-      'help.premid.yaxoudbstPresenceBody',
+      'help.premid.couscousflixPresenceBody',
       'help.premid.limitsBody',
     ],
   },

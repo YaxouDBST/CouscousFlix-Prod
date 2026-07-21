@@ -8,7 +8,7 @@ const ChromecastPage: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = `${t('help.chromecast.title')} — YaxouDBST`;
+    document.title = `${t('help.chromecast.title')} — CouscousFlix`;
   }, [t]);
 
   const sections: TutoSection[] = [

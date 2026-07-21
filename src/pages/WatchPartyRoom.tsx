@@ -226,7 +226,7 @@ const WatchPartyRoom: React.FC = () => {
     [safeRemarkGfm],
   );
 
-  // Track page visit for YaxouDBST Wrapped
+  // Track page visit for CouscousFlix Wrapped
   useWrappedTracker({
     mode: 'page',
     pageData: { pageName: 'watchparty' },

@@ -58,9 +58,9 @@ const faqItemsData = [
   { questionKey: 'extension.faq5Q', answerKey: 'extension.faq5A' },
 ];
 
-const USERSCRIPT_URL = 'https://github.com/yaxoudbstcorp/YaxouDBSTOpenSource/tree/main/userscript';
-const USERSCRIPT_INSTALL_URL = 'https://github.com/yaxoudbstcorp/YaxouDBSTOpenSource/raw/refs/heads/main/userscript/yaxoudbst.user.js';
-const YAXOUDBST_OPEN_SOURCE_GITHUB_URL = 'https://github.com/yaxoudbstcorp/YaxouDBSTOpenSource';
+const USERSCRIPT_URL = 'https://github.com/couscousflixcorp/CouscousFlixOpenSource/tree/main/userscript';
+const USERSCRIPT_INSTALL_URL = 'https://github.com/couscousflixcorp/CouscousFlixOpenSource/raw/refs/heads/main/userscript/couscousflix.user.js';
+const COUSCOUSFLIX_OPEN_SOURCE_GITHUB_URL = 'https://github.com/couscousflixcorp/CouscousFlixOpenSource';
 const TAMPERMONKEY_URL = 'https://www.tampermonkey.net/';
 
 const installTutorial = {
@@ -73,13 +73,13 @@ const installTutorial = {
   ],
   actions: [
     { href: TAMPERMONKEY_URL, labelKey: 'extension.installTampermonkey', variant: 'secondary' as const },
-    { href: USERSCRIPT_INSTALL_URL, labelKey: 'extension.installYaxouDBSTUserscript', variant: 'primary' as const },
+    { href: USERSCRIPT_INSTALL_URL, labelKey: 'extension.installCouscousFlixUserscript', variant: 'primary' as const },
   ],
 };
 
-type YaxouDBSTExtensionWindow = Window & {
-  __YAXOUDBST_EXTENSION_INSTALLED?: boolean;
-  hasYaxouDBSTExtension?: boolean;
+type CouscousFlixExtensionWindow = Window & {
+  __COUSCOUSFLIX_EXTENSION_INSTALLED?: boolean;
+  hasCouscousFlixExtension?: boolean;
 };
 
 const ExtensionPage: React.FC = () => {
@@ -95,12 +95,12 @@ const ExtensionPage: React.FC = () => {
   // Détecter si l'extension est déjà installée
   useEffect(() => {
     const checkExtension = () => {
-      const yaxoudbstWindow = window as YaxouDBSTExtensionWindow;
+      const couscousflixWindow = window as CouscousFlixExtensionWindow;
 
       if (
-        yaxoudbstWindow.__YAXOUDBST_EXTENSION_INSTALLED ||
-        yaxoudbstWindow.hasYaxouDBSTExtension ||
-        document.documentElement.dataset.yaxoudbstExtension === 'true'
+        couscousflixWindow.__COUSCOUSFLIX_EXTENSION_INSTALLED ||
+        couscousflixWindow.hasCouscousFlixExtension ||
+        document.documentElement.dataset.couscousflixExtension === 'true'
       ) {
         setExtensionDetected(true);
       }
@@ -112,13 +112,13 @@ const ExtensionPage: React.FC = () => {
     const handleExtensionLoaded = () => {
       setExtensionDetected(true);
     };
-    window.addEventListener('yaxoudbst-extension-loaded', handleExtensionLoaded);
+    window.addEventListener('couscousflix-extension-loaded', handleExtensionLoaded);
     
     // Re-check périodique au cas où
     const interval = setInterval(checkExtension, 1000);
     
     return () => {
-      window.removeEventListener('yaxoudbst-extension-loaded', handleExtensionLoaded);
+      window.removeEventListener('couscousflix-extension-loaded', handleExtensionLoaded);
       clearInterval(interval);
     };
   }, []);
@@ -447,7 +447,7 @@ const ExtensionPage: React.FC = () => {
                 {t('extension.githubNotice')}
               </p>
               <a
-                href={YAXOUDBST_OPEN_SOURCE_GITHUB_URL}
+                href={COUSCOUSFLIX_OPEN_SOURCE_GITHUB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-lg border border-white/20 px-6 sm:px-8 text-sm sm:text-base font-semibold text-white transition-all duration-200 hover:border-white/40 hover:bg-white/10 active:scale-95"
@@ -538,7 +538,7 @@ const ExtensionPage: React.FC = () => {
               <p className="text-sm text-white/55 text-center max-w-xl">
                 {t('extension.githubNotice')}
               </p>
-              <a href={YAXOUDBST_OPEN_SOURCE_GITHUB_URL} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
+              <a href={COUSCOUSFLIX_OPEN_SOURCE_GITHUB_URL} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto">
                 <Button variant="ghost" className="border border-white/20 hover:border-white/40 text-white h-11 px-5 gap-2 w-full sm:w-auto">
                   <Github className="w-4 h-4 flex-shrink-0" />
                   {t('extension.viewOpenSourceGithub')}

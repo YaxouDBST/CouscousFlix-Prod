@@ -12,8 +12,8 @@ import {
 import { useTranslation } from 'react-i18next';
 import LegalDocumentPage, { LegalSection } from '../components/legal/LegalDocumentPage';
 
-const CONTACT_EMAIL = 'yaxoudbststreaming@gmail.com';
-const TELEGRAM_URL = 'https://t.me/yaxoudbst_site';
+const CONTACT_EMAIL = 'couscousflixstreaming@gmail.com';
+const TELEGRAM_URL = 'https://t.me/couscousflix_site';
 
 const TermsOfService = () => {
   const { t } = useTranslation();

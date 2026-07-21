@@ -8,7 +8,7 @@ const RecupererComptePage: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = `${t('help.recupererCompte.title')} — YaxouDBST`;
+    document.title = `${t('help.recupererCompte.title')} — CouscousFlix`;
   }, [t]);
 
   const sections: TutoSection[] = [

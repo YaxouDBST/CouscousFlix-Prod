@@ -7,15 +7,15 @@ const cors = require("cors");
 const { getOAuthAllowedCorsOrigins } = require('../utils/oauthClients');
 
 const STATIC_ALLOWED_DOMAINS = [
-  'yaxoudbst.date',
-  'yaxoudbst.chat',
-  'yaxoudbst.cloud',
-  'yaxoudbst.cash',
-  'yaxoudbst.blog',
-  'yaxoudbst.rodeo',
-  'yaxoudbst.club',
-  'yaxoudbst.site',
-  'yaxoudbst11.pages.dev',
+  'couscousflix.date',
+  'couscousflix.chat',
+  'couscousflix.cloud',
+  'couscousflix.cash',
+  'couscousflix.blog',
+  'couscousflix.rodeo',
+  'couscousflix.club',
+  'couscousflix.site',
+  'couscousflix11.pages.dev',
   'nakios.site',
   'cinezo.site',
   'filmib.cc'

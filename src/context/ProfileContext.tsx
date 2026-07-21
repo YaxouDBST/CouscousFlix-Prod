@@ -155,7 +155,7 @@ const API_URL = import.meta.env.VITE_MAIN_API;
 // file, transient backend bug, partial response) and preserve local state
 // instead of wiping it. NOT synced — prefixed to fall outside the syncable
 // allowlist and not in PROFILE_LOAD_PRESERVED_KEYS removal path.
-const KNOWN_PROFILE_DATA_KEY = '__yaxoudbst_known_profile_data';
+const KNOWN_PROFILE_DATA_KEY = '__couscousflix_known_profile_data';
 
 interface KnownProfileDataMap {
   [profileId: string]: number;

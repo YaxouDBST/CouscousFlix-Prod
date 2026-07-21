@@ -7,7 +7,7 @@ const SousTitresPage: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = `${t('help.sousTitres.title')} — YaxouDBST`;
+    document.title = `${t('help.sousTitres.title')} — CouscousFlix`;
   }, [t]);
 
   const sections: TutoSection[] = [

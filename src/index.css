@@ -28,10 +28,7 @@ google-cast-launcher {
    Pendant ce temps, on coupe pointer-events sur tous les slides Embla,
    ce qui empêche le navigateur de tester le hover et de déclencher des
    transitions/repaints. */
-body.is-scrolling .embla-slide,
-body.embla-scrolling .embla-slide {
-  pointer-events: none;
-}
+
 
 @layer base {
   body {
@@ -1137,7 +1134,7 @@ body {
   height: 100%;
 }
 
-/* Animations pour l'intro YaxouDBST */
+/* Animations pour l'intro CouscousFlix */
 @keyframes fadeout {
   from {
     opacity: 1;
@@ -1148,7 +1145,7 @@ body {
   }
 }
 
-@keyframes yaxoudbstPulse {
+@keyframes couscousflixPulse {
   0% {
     transform: scale(1);
   }
@@ -1162,7 +1159,7 @@ body {
   }
 }
 
-@keyframes yaxoudbstPulseMed {
+@keyframes couscousflixPulseMed {
   0% {
     transform: scale(1);
   }
@@ -1176,7 +1173,7 @@ body {
   }
 }
 
-@keyframes yaxoudbstReveal {
+@keyframes couscousflixReveal {
   0% {
     transform: translateY(10px);
     opacity: 0;
@@ -1188,7 +1185,7 @@ body {
   }
 }
 
-@keyframes yaxoudbstShine {
+@keyframes couscousflixShine {
   0% {
     background-position: -200% 0;
   }
@@ -1198,7 +1195,7 @@ body {
   }
 }
 
-@keyframes yaxoudbstShineFast {
+@keyframes couscousflixShineFast {
   0% {
     background-position: -200% 0;
   }
@@ -1284,7 +1281,7 @@ body {
   }
 }
 
-@keyframes yaxoudbstFlare {
+@keyframes couscousflixFlare {
   0% {
     opacity: 0.4;
     transform: translate(0, 0) scale(0.8);
@@ -1301,7 +1298,7 @@ body {
   }
 }
 
-@keyframes yaxoudbstFlareAlt {
+@keyframes couscousflixFlareAlt {
   0% {
     opacity: 0.4;
     transform: translate(0, 0) scale(0.8);
@@ -1318,7 +1315,7 @@ body {
   }
 }
 
-@keyframes yaxoudbstFlash {
+@keyframes couscousflixFlash {
   0% {
     opacity: 0.3;
     transform: scaleX(0.8);
@@ -1335,7 +1332,7 @@ body {
   }
 }
 
-@keyframes yaxoudbstFlashAlt {
+@keyframes couscousflixFlashAlt {
 
   0%,
   100% {
@@ -1490,35 +1487,35 @@ body {
 }
 
 /* Animation des particules */
-.animate-yaxoudbst-particles div:nth-child(1) {
+.animate-couscousflix-particles div:nth-child(1) {
   animation: particleDrift1 7s ease-in-out infinite;
 }
 
-.animate-yaxoudbst-particles div:nth-child(2) {
+.animate-couscousflix-particles div:nth-child(2) {
   animation: particleDrift2 8s ease-in-out infinite;
 }
 
-.animate-yaxoudbst-particles div:nth-child(3) {
+.animate-couscousflix-particles div:nth-child(3) {
   animation: particleDrift3 6s ease-in-out infinite;
 }
 
-.animate-yaxoudbst-particles div:nth-child(4) {
+.animate-couscousflix-particles div:nth-child(4) {
   animation: particleDrift4 9s ease-in-out infinite;
 }
 
-.animate-yaxoudbst-particles div:nth-child(5) {
+.animate-couscousflix-particles div:nth-child(5) {
   animation: particleDrift2 7.5s ease-in-out infinite 1s;
 }
 
-.animate-yaxoudbst-particles div:nth-child(6) {
+.animate-couscousflix-particles div:nth-child(6) {
   animation: particleDrift4 6.5s ease-in-out infinite 0.5s;
 }
 
-.animate-yaxoudbst-particles div:nth-child(7) {
+.animate-couscousflix-particles div:nth-child(7) {
   animation: particleDrift1 8.5s ease-in-out infinite 1.5s;
 }
 
-.animate-yaxoudbst-particles div:nth-child(8) {
+.animate-couscousflix-particles div:nth-child(8) {
   animation: particleDrift3 7s ease-in-out infinite 2s;
 }
 
@@ -1528,27 +1525,27 @@ body {
 }
 
 .animate-pulse {
-  animation: yaxoudbstPulse 1.5s ease-in-out;
+  animation: couscousflixPulse 1.5s ease-in-out;
 }
 
 .animate-pulse-med {
-  animation: yaxoudbstPulseMed 2s ease-in-out infinite;
+  animation: couscousflixPulseMed 2s ease-in-out infinite;
 }
 
 .animate-pulse-slow {
-  animation: yaxoudbstPulse 2.5s ease-in-out infinite;
+  animation: couscousflixPulse 2.5s ease-in-out infinite;
 }
 
-.animate-yaxoudbst-reveal {
-  animation: yaxoudbstReveal 0.8s ease-out;
+.animate-couscousflix-reveal {
+  animation: couscousflixReveal 0.8s ease-out;
 }
 
-.animate-yaxoudbst-shine {
-  animation: yaxoudbstShine 2s linear infinite;
+.animate-couscousflix-shine {
+  animation: couscousflixShine 2s linear infinite;
 }
 
-.animate-yaxoudbst-shine-fast {
-  animation: yaxoudbstShineFast 1.5s linear infinite;
+.animate-couscousflix-shine-fast {
+  animation: couscousflixShineFast 1.5s linear infinite;
 }
 
 .animate-gentle-drift {
@@ -1567,20 +1564,20 @@ body {
   animation: lineDriftDown 8s ease-in-out infinite;
 }
 
-.animate-yaxoudbst-flare {
-  animation: yaxoudbstFlare 3s ease-in-out infinite;
+.animate-couscousflix-flare {
+  animation: couscousflixFlare 3s ease-in-out infinite;
 }
 
-.animate-yaxoudbst-flare-alt {
-  animation: yaxoudbstFlareAlt 4s ease-in-out infinite;
+.animate-couscousflix-flare-alt {
+  animation: couscousflixFlareAlt 4s ease-in-out infinite;
 }
 
-.animate-yaxoudbst-flash {
-  animation: yaxoudbstFlash 2s ease-in-out infinite;
+.animate-couscousflix-flash {
+  animation: couscousflixFlash 2s ease-in-out infinite;
 }
 
-.animate-yaxoudbst-flash-alt {
-  animation: yaxoudbstFlashAlt 3s ease-in-out infinite;
+.animate-couscousflix-flash-alt {
+  animation: couscousflixFlashAlt 3s ease-in-out infinite;
 }
 
 /* Animations rayons lumineux */
@@ -1857,7 +1854,7 @@ body,
   flex-shrink: 0;
 }
 
-/* Animation pour le logo YAXOUDBST */
+/* Animation pour le logo COUSCOUSFLIX */
 @keyframes shine-slow {
   0% {
     background-position: -200% 0;

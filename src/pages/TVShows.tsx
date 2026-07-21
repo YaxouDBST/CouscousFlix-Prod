@@ -329,7 +329,7 @@ const TVShows: React.FC = () => {
     { id: 10768, name: 'Guerre & Politique', route: '/genre/tv/10768' },
   ]);
 
-  // Track page visit for YaxouDBST Wrapped
+  // Track page visit for CouscousFlix Wrapped
   useWrappedTracker({
     mode: 'page',
     pageData: { pageName: 'tv-shows' },
@@ -410,8 +410,8 @@ const TVShows: React.FC = () => {
       setLoading(true);
 
       // Check for cached data first
-      const cachedData = sessionStorage.getItem('yaxoudbst_tvshows_data');
-      const cacheTimestamp = sessionStorage.getItem('yaxoudbst_tvshows_data_timestamp');
+      const cachedData = sessionStorage.getItem('couscousflix_tvshows_data');
+      const cacheTimestamp = sessionStorage.getItem('couscousflix_tvshows_data_timestamp');
 
       // Use cache if it exists and is less than 15 minutes old
       if (cachedData && cacheTimestamp) {
@@ -645,8 +645,8 @@ const TVShows: React.FC = () => {
         categories: [] // Categories will be regenerated from tvShows
       };
 
-      sessionStorage.setItem('yaxoudbst_tvshows_data', JSON.stringify(cacheData));
-      sessionStorage.setItem('yaxoudbst_tvshows_data_timestamp', Date.now().toString());
+      sessionStorage.setItem('couscousflix_tvshows_data', JSON.stringify(cacheData));
+      sessionStorage.setItem('couscousflix_tvshows_data_timestamp', Date.now().toString());
     } catch (error) {
       console.error('Error fetching TV shows:', error);
       setError(t('home.errorLoadingData'));
@@ -661,8 +661,8 @@ const TVShows: React.FC = () => {
 
   // Fetch representative TMDB images for each TV genre and cache for 24h
   useEffect(() => {
-    const cacheKey = 'yaxoudbst_tv_genre_images';
-    const cacheTsKey = 'yaxoudbst_tv_genre_images_ts';
+    const cacheKey = 'couscousflix_tv_genre_images';
+    const cacheTsKey = 'couscousflix_tv_genre_images_ts';
     const cached = sessionStorage.getItem(cacheKey);
     const cachedTs = sessionStorage.getItem(cacheTsKey);
     const oneDayMs = 24 * 60 * 60 * 1000;
@@ -706,7 +706,7 @@ const TVShows: React.FC = () => {
 
   useEffect(() => {
     // Simple title for TV Shows page
-    document.title = `${t('tvShows.title')} - YaxouDBST`;
+    document.title = `${t('tvShows.title')} - CouscousFlix`;
   }, []);
 
   // Auto-rotate featured shows

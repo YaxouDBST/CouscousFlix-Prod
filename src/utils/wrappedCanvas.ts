@@ -1,5 +1,5 @@
 /**
- * Shared canvas helpers for YaxouDBST Wrapped share cards.
+ * Shared canvas helpers for CouscousFlix Wrapped share cards.
  * No React dependencies — pure canvas / DOM utilities.
  */
 import inter800Url from '@fontsource/inter/files/inter-latin-800-normal.woff2?url';

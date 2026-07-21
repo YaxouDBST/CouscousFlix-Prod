@@ -1,5 +1,5 @@
 /**
- * YaxouDBST Wrapped 2026 - Data Collection Routes
+ * CouscousFlix Wrapped 2026 - Data Collection Routes
  * Collects viewing data and page visits for the annual Wrapped summary
  *
  * Performance notes:
@@ -1218,12 +1218,12 @@ function determinePersona(data) {
 
     const personas = [
         // --- Intensité ---
-        { condition: totalHours > 1000, persona: { id: 'legend', title: 'La Légende Vivante', emoji: '👑', subtitle: 'T\'as carrément habité sur YaxouDBST', description: 'Plus de 1000h. On devrait te salarier.', color: '#FFD700' } },
+        { condition: totalHours > 1000, persona: { id: 'legend', title: 'La Légende Vivante', emoji: '👑', subtitle: 'T\'as carrément habité sur CouscousFlix', description: 'Plus de 1000h. On devrait te salarier.', color: '#FFD700' } },
         { condition: totalHours > 500, persona: { id: 'marathon', title: 'Le Marathonien Ultime', emoji: '🏃', subtitle: 'Ton canapé a pris ta forme', description: 'T\'as fait du binge un sport olympique.', color: '#FF6B35' } },
         { condition: percentile != null && percentile >= 99 && totalHours > 200, persona: { id: 'elite-1pct', title: 'Le Top 1%', emoji: '💎', subtitle: 'Dans le club très fermé', description: 'Tu regardes plus que 99% des gens ici. Respect.', color: '#00E5FF' } },
         // --- Rythme ---
         { condition: isNightOwl && totalHours > 100, persona: { id: 'night-owl', title: 'L\'Oiseau de Nuit', emoji: '🦉', subtitle: 'La nuit, ton écran est le seul allumé', description: 'Tes meilleures sessions ? Entre minuit et 5h.', color: '#1A237E' } },
-        { condition: isEarlyBird && totalHours > 100, persona: { id: 'early-bird', title: 'Le Lève-tôt', emoji: '🌅', subtitle: 'Un épisode avant le café', description: 'Tu lances YaxouDBST quand les autres dorment encore.', color: '#FF8A65' } },
+        { condition: isEarlyBird && totalHours > 100, persona: { id: 'early-bird', title: 'Le Lève-tôt', emoji: '🌅', subtitle: 'Un épisode avant le café', description: 'Tu lances CouscousFlix quand les autres dorment encore.', color: '#FF8A65' } },
         // --- Type dominant ---
         { condition: animePercent > 80, persona: { id: 'weeb-supreme', title: 'Weeb Suprême', emoji: '⛩️', subtitle: 'Tu penses en sous-titres', description: '+80% d\'anime. T\'es plus à Tokyo qu\'à Paris.', color: '#E91E63' } },
         { condition: animePercent > 50, persona: { id: 'otaku', title: 'L\'Otaku Assumé', emoji: '🍜', subtitle: 'Ton cœur bat au rythme des openings', description: 'L\'anime, c\'est pas une phase, c\'est un mode de vie.', color: '#9C27B0' } },
@@ -1323,7 +1323,7 @@ function generateSlides(data) {
             title: pick('intro-t', [`${year}, hors catégorie.`, `${year}, niveau final.`]),
             subtitle: 'On a recompté trois fois, c\'est réel.',
             texts: [
-                `${totalDurationLabel} de visionnage, soit ${totalDays} jours complets devant un écran. T'es plus un utilisateur, t'es un pilier de YaxouDBST.`,
+                `${totalDurationLabel} de visionnage, soit ${totalDays} jours complets devant un écran. T'es plus un utilisateur, t'es un pilier de CouscousFlix.`,
                 `${totalDurationLabel} cette année. Des séries entières sont nées et mortes pendant que toi, t'étais là.`,
                 `${totalDurationLabel} au compteur. Ton canapé devrait être classé monument historique.`
             ],
@@ -1334,7 +1334,7 @@ function generateSlides(data) {
             title: pick('intro-t', [`${year}, du très lourd.`, `${year}, régime intensif.`]),
             subtitle: 'Et c\'est peu de le dire.',
             texts: [
-                `${totalDurationLabel} sur YaxouDBST, soit ${totalDays} jours non-stop. Le canapé a officiellement pris ta forme.`,
+                `${totalDurationLabel} sur CouscousFlix, soit ${totalDays} jours non-stop. Le canapé a officiellement pris ta forme.`,
                 `${totalDurationLabel} de visionnage. Certains font des marathons. Toi, t'as couru toute l'année.`,
                 `${totalDurationLabel} cette année. Quelque part entre la passion et le record du monde.`
             ],
@@ -1345,7 +1345,7 @@ function generateSlides(data) {
             title: `${year}, t'as tout donné.`,
             subtitle: 'Et on a tout vu.',
             texts: [
-                `${totalDurationLabel} sur YaxouDBST cette année. Soit ${totalDays} jours non-stop. À ce stade, c'est plus un hobby, c'est un mode de vie.`,
+                `${totalDurationLabel} sur CouscousFlix cette année. Soit ${totalDays} jours non-stop. À ce stade, c'est plus un hobby, c'est un mode de vie.`,
                 `${totalDurationLabel} de visionnage, ${totalDays} jours pleins. T'as pas regardé une année, t'en as vécu deux.`,
                 `${totalDurationLabel} au total. Si regarder était un sport, t'aurais une fédération à ton nom.`
             ],
@@ -1358,7 +1358,7 @@ function generateSlides(data) {
             texts: [
                 `${totalDurationLabel} de visionnage. Genre, plus que certains mi-temps de boulot. Validé.`,
                 `${totalDurationLabel} cette année. T'as trouvé ton rythme de croisière, et il est soutenu.`,
-                `${totalDurationLabel} sur YaxouDBST. Une vraie deuxième vie, bien remplie.`
+                `${totalDurationLabel} sur CouscousFlix. Une vraie deuxième vie, bien remplie.`
             ],
             highlight: shortLabel
         },
@@ -1367,7 +1367,7 @@ function generateSlides(data) {
             title: `Solide, ${year}.`,
             subtitle: 'Vraiment solide.',
             texts: [
-                `${totalDurationLabel} sur YaxouDBST. Tu sais ce que t'aimes, et tu fonces.`,
+                `${totalDurationLabel} sur CouscousFlix. Tu sais ce que t'aimes, et tu fonces.`,
                 `${totalDurationLabel} de visionnage. Pas d'excès, pas de manque : l'équilibre du connaisseur.`,
                 `${totalDurationLabel} cette année. Régulier, précis, efficace.`
             ],
@@ -1633,8 +1633,8 @@ function generateSlides(data) {
             title: 'Team après-midi',
             subtitle: `Ton pic : ${hourLabel(peakHour)}`,
             texts: [
-                `C'est en pleine après-midi que tu lances le plus souvent YaxouDBST. La pause de ${hourLabel(peakHour)}, c'est sacré.`,
-                `${hourLabel(peakHour)} : l'heure où ta journée fait une pause et où YaxouDBST prend le relais.`
+                `C'est en pleine après-midi que tu lances le plus souvent CouscousFlix. La pause de ${hourLabel(peakHour)}, c'est sacré.`,
+                `${hourLabel(peakHour)} : l'heure où ta journée fait une pause et où CouscousFlix prend le relais.`
             ],
             highlight: '☀️',
             subtext: ''
@@ -1642,9 +1642,9 @@ function generateSlides(data) {
         {
             condition: true,
             title: `${hourLabel(peakHour)}, ton heure de pointe`,
-            subtitle: 'Ton horloge YaxouDBST',
+            subtitle: 'Ton horloge CouscousFlix',
             texts: [
-                `C'est vers ${hourLabel(peakHour)} que tu lances YaxouDBST le plus souvent. On connaît tes habitudes maintenant.`,
+                `C'est vers ${hourLabel(peakHour)} que tu lances CouscousFlix le plus souvent. On connaît tes habitudes maintenant.`,
                 `${hourLabel(peakHour)}, ton rendez-vous quotidien. La ponctualité, c'est une qualité.`
             ],
             highlight: '⏰',
@@ -1698,7 +1698,7 @@ function generateSlides(data) {
                 title: `${longestStreak} jours non-stop`,
                 subtitle: `${streakWeeks} semaines sans lâcher`,
                 texts: [
-                    `${streakWeeks} semaines sans lâcher YaxouDBST. Discipline de fer (pour le streaming au moins).`,
+                    `${streakWeeks} semaines sans lâcher CouscousFlix. Discipline de fer (pour le streaming au moins).`,
                     `${longestStreak} jours d'affilée. La régularité d'une montre suisse, le plaisir en plus.`
                 ],
                 highlight: '⚡',
@@ -1765,7 +1765,7 @@ function generateSlides(data) {
             ]
         };
         const genericTexts = [
-            `${browseLabel} à naviguer sur YaxouDBST, surtout sur ${pageLabels[topPage.page_name]}. L'art de choisir, c'est tout un sport.`,
+            `${browseLabel} à naviguer sur CouscousFlix, surtout sur ${pageLabels[topPage.page_name]}. L'art de choisir, c'est tout un sport.`,
             `${browseLabel} de balade dans le catalogue, ${pageLabels[topPage.page_name]} en tête. Flâner, c'est déjà regarder un peu.`
         ];
         slides.push({
@@ -1858,7 +1858,7 @@ function generateSlides(data) {
         });
     }
     if (percentile != null && percentile >= 90) {
-        funFacts.push({ title: `Top ${100 - percentile}% des viewers`, subtitle: 'Carrément l\'élite', text: `Tu regardes plus que ${percentile}% des gens sur YaxouDBST. Médaille méritée.`, highlight: '🏆', subtext: '' });
+        funFacts.push({ title: `Top ${100 - percentile}% des viewers`, subtitle: 'Carrément l\'élite', text: `Tu regardes plus que ${percentile}% des gens sur CouscousFlix. Médaille méritée.`, highlight: '🏆', subtext: '' });
     }
     if (avgSessionMinutes > 90) {
         funFacts.push({
@@ -1890,7 +1890,7 @@ function generateSlides(data) {
         funFacts.push({
             title: `${totalActiveDays} jours actifs`, subtitle: '',
             text: pick('ff-days', [
-                `T'as lancé YaxouDBST ${totalActiveDays} jours cette année — ${activePct}% de tes journées. La fidélité, la vraie.`,
+                `T'as lancé CouscousFlix ${totalActiveDays} jours cette année — ${activePct}% de tes journées. La fidélité, la vraie.`,
                 `${totalActiveDays} jours avec au moins une session. Presque ${activePct}% de l'année passée ensemble.`
             ]),
             highlight: '📆', subtext: ''
@@ -1954,7 +1954,7 @@ function generateSlides(data) {
         title: pick('closing-t', [`On remet ça en ${year + 1} ?`, `${year}, c'est dans la boîte.`]),
         subtitle: pick('closing-st', ['Nous, on est partants.', 'Clap de fin.']),
         text: pick('closing', [
-            `${totalDurationLabel}. ${uniqueTitles} titres. 1 seul toi. Merci d'avoir passé l'année sur YaxouDBST.`,
+            `${totalDurationLabel}. ${uniqueTitles} titres. 1 seul toi. Merci d'avoir passé l'année sur CouscousFlix.`,
             `${totalDurationLabel} de visionnage, ${uniqueTitles} titres traversés, et une année qui te ressemble. Merci d'avoir été là.`
         ]),
         highlight: '💜',

@@ -21,7 +21,7 @@ async function logSyncErrorToDiscord(errorMessage, context = {}) {
         { name: 'Profile ID', value: context.profileId ? `\`${context.profileId.substring(0, 8)}...\`` : 'N/A', inline: true },
       ],
       timestamp: new Date().toISOString(),
-      footer: { text: 'YaxouDBST Sync API' }
+      footer: { text: 'CouscousFlix Sync API' }
     };
 
     if (context.error) {

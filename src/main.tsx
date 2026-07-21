@@ -10,17 +10,17 @@ import { registerBlockDetection } from './services/blockDetection'
 import './index.css'
 import './styles/light-mode.css'
 
-type YaxouDBSTConsoleWarningWindow = Window & {
-  __yaxoudbstConsoleSafetyWarningStarted?: boolean;
-  __yaxoudbstConsoleSafetyWarningTimerId?: number;
+type CouscousFlixConsoleWarningWindow = Window & {
+  __couscousflixConsoleSafetyWarningStarted?: boolean;
+  __couscousflixConsoleSafetyWarningTimerId?: number;
 };
 
-type YaxouDBSTConsoleWarningLine = {
+type CouscousFlixConsoleWarningLine = {
   text: string;
   style: string;
 };
 
-const YAXOUDBST_CONSOLE_SAFETY_WARNING_LINES: YaxouDBSTConsoleWarningLine[] = [
+const COUSCOUSFLIX_CONSOLE_SAFETY_WARNING_LINES: CouscousFlixConsoleWarningLine[] = [
   {
     text: 'ATTENDS !',
     style: [
@@ -51,7 +51,7 @@ const YAXOUDBST_CONSOLE_SAFETY_WARNING_LINES: YaxouDBSTConsoleWarningLine[] = [
     ].join('; '),
   },
   {
-    text: 'Coller quelque chose ici peut donner à un attaquant accès à ton compte YaxouDBST.',
+    text: 'Coller quelque chose ici peut donner à un attaquant accès à ton compte CouscousFlix.',
     style: [
       'font-size: 22px',
       'font-weight: 900',
@@ -92,9 +92,9 @@ const YAXOUDBST_CONSOLE_SAFETY_WARNING_LINES: YaxouDBSTConsoleWarningLine[] = [
   },
 ];
 
-const emitYaxouDBSTConsoleSafetyWarning = () => {
+const emitCouscousFlixConsoleSafetyWarning = () => {
   console.log(
-    '%c YAXOUDBST SECURITY WARNING ',
+    '%c COUSCOUSFLIX SECURITY WARNING ',
     [
       'font-size: 16px',
       'font-weight: 900',
@@ -108,29 +108,29 @@ const emitYaxouDBSTConsoleSafetyWarning = () => {
     ].join('; ')
   );
 
-  YAXOUDBST_CONSOLE_SAFETY_WARNING_LINES.forEach((line) => {
+  COUSCOUSFLIX_CONSOLE_SAFETY_WARNING_LINES.forEach((line) => {
     console.log(`%c${line.text}`, line.style);
   });
 };
 
-const startYaxouDBSTConsoleSafetyWarning = () => {
+const startCouscousFlixConsoleSafetyWarning = () => {
   if (typeof window === 'undefined') return;
 
-  const globalWindow = window as YaxouDBSTConsoleWarningWindow;
-  if (globalWindow.__yaxoudbstConsoleSafetyWarningStarted) return;
+  const globalWindow = window as CouscousFlixConsoleWarningWindow;
+  if (globalWindow.__couscousflixConsoleSafetyWarningStarted) return;
 
-  globalWindow.__yaxoudbstConsoleSafetyWarningStarted = true;
+  globalWindow.__couscousflixConsoleSafetyWarningStarted = true;
 
-  emitYaxouDBSTConsoleSafetyWarning();
-  window.setTimeout(emitYaxouDBSTConsoleSafetyWarning, 700);
-  window.setTimeout(emitYaxouDBSTConsoleSafetyWarning, 1400);
+  emitCouscousFlixConsoleSafetyWarning();
+  window.setTimeout(emitCouscousFlixConsoleSafetyWarning, 700);
+  window.setTimeout(emitCouscousFlixConsoleSafetyWarning, 1400);
   // The previous 30s setInterval kept printing forever, blocking idle and
   // flooding the DevTools console for power users. The three staggered
   // emissions above cover the case where devtools opens slightly after page
   // load; that's enough deterrent without permanent main-thread work. — perf
 };
 
-startYaxouDBSTConsoleSafetyWarning();
+startCouscousFlixConsoleSafetyWarning();
 
 // Register block detection on both the default axios (used by most services)
 // and the api instance (used by contentAPI). Both need their own interceptors

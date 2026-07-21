@@ -176,7 +176,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ role }) => {
         </div>
         <div className="mb-2 flex justify-center">
           <ShinyText
-            text={role === 'uploader' ? t('admin.uploaderSpace') : t('admin.yaxoudbstAdministration')}
+            text={role === 'uploader' ? t('admin.uploaderSpace') : t('admin.couscousflixAdministration')}
             speed={2}
             color="#ffffff"
             shineColor="#fbbf24"

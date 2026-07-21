@@ -26,25 +26,25 @@ function detectHosterFromPrefs(url: string): string | null {
 
 // Constante pour le serveur proxy embed
 // ===== Extension Nexus Extractors Bridge =====
-// When the YaxouDBST extension is installed, extraction runs locally (no server needed).
+// When the CouscousFlix extension is installed, extraction runs locally (no server needed).
 // Falls back to server-side extraction when extension is not available.
 
 declare global {
   interface Window {
-    hasYaxouDBSTExtension?: boolean;
-    hasYaxouDBSTNexusExtractor?: boolean;
-    yaxoudbstExtractM3u8?: (type: string | null, url: string) => Promise<M3u8Result>;
-    yaxoudbstExtractAllM3u8?: (sources: (string | PlayerInfo)[]) => Promise<{ success: boolean; total: number; successCount: number; results: any[] }>;
-    yaxoudbstDetectEmbeds?: (sources: (string | PlayerInfo)[]) => Promise<{ embeds: any[] }>;
-    yaxoudbstSetupHeaders?: (type: string, url: string) => Promise<{ success: boolean; error?: string }>;
+    hasCouscousFlixExtension?: boolean;
+    hasCouscousFlixNexusExtractor?: boolean;
+    couscousflixExtractM3u8?: (type: string | null, url: string) => Promise<M3u8Result>;
+    couscousflixExtractAllM3u8?: (sources: (string | PlayerInfo)[]) => Promise<{ success: boolean; total: number; successCount: number; results: any[] }>;
+    couscousflixDetectEmbeds?: (sources: (string | PlayerInfo)[]) => Promise<{ embeds: any[] }>;
+    couscousflixSetupHeaders?: (type: string, url: string) => Promise<{ success: boolean; error?: string }>;
   }
 }
 
 /**
- * Check if the YaxouDBST extension with Nexus extractors is available
+ * Check if the CouscousFlix extension with Nexus extractors is available
  */
 function hasNexusExtractors(): boolean {
-  return !!(window.hasYaxouDBSTNexusExtractor && window.yaxoudbstExtractM3u8);
+  return !!(window.hasCouscousFlixNexusExtractor && window.couscousflixExtractM3u8);
 }
 
 /**
@@ -69,7 +69,7 @@ async function waitForNexusExtractors(timeoutMs = 1500): Promise<boolean> {
       if (timeoutId !== null) {
         window.clearTimeout(timeoutId);
       }
-      window.removeEventListener('yaxoudbst-extension-loaded', handleLoaded);
+      window.removeEventListener('couscousflix-extension-loaded', handleLoaded);
     };
 
     const finish = (ready: boolean) => {
@@ -83,7 +83,7 @@ async function waitForNexusExtractors(timeoutMs = 1500): Promise<boolean> {
       finish(hasNexusExtractors());
     };
 
-    window.addEventListener('yaxoudbst-extension-loaded', handleLoaded, { once: true });
+    window.addEventListener('couscousflix-extension-loaded', handleLoaded, { once: true });
 
     intervalId = window.setInterval(() => {
       if (hasNexusExtractors()) {
@@ -103,10 +103,10 @@ async function waitForNexusExtractors(timeoutMs = 1500): Promise<boolean> {
 async function tryExtensionFirst(type: string, url: string, serverFallback: () => Promise<M3u8Result | null>): Promise<M3u8Result | null> {
   const extensionReady = hasNexusExtractors() || await waitForNexusExtractors();
 
-  if (extensionReady && window.yaxoudbstExtractM3u8) {
+  if (extensionReady && window.couscousflixExtractM3u8) {
     try {
       console.log(`[NEXUS] Using extension for ${type} extraction: ${url}`);
-      const result = await window.yaxoudbstExtractM3u8!(type, url);
+      const result = await window.couscousflixExtractM3u8!(type, url);
       if (result && result.success) {
         console.log(`[NEXUS] Extension extraction success for ${type}`);
         return result;
@@ -1155,10 +1155,10 @@ export async function extractM3u8OnDetection(
   const extensionReady = hasNexusExtractors() || await waitForNexusExtractors();
 
   // If extension with Nexus extractors is available, use its bulk extraction for better performance
-  if (extensionReady && window.yaxoudbstExtractAllM3u8) {
-    console.log('🔌 Using YaxouDBST Extension Nexus extractors for parallel extraction');
+  if (extensionReady && window.couscousflixExtractAllM3u8) {
+    console.log('🔌 Using CouscousFlix Extension Nexus extractors for parallel extraction');
     try {
-      const extensionResult = await window.yaxoudbstExtractAllM3u8(sources);
+      const extensionResult = await window.couscousflixExtractAllM3u8(sources);
       if (extensionResult && extensionResult.results) {
         return extensionResult.results.map((r: any) => ({
           type: r.type || 'unknown',

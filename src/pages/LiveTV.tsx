@@ -732,7 +732,7 @@ const LiveTV: React.FC = () => {
     }
   }, [selectedChannel]);
 
-  // YaxouDBST Wrapped 2026 - Track Live TV viewing time (only when channel is open)
+  // CouscousFlix Wrapped 2026 - Track Live TV viewing time (only when channel is open)
   useWrappedTracker({
     mode: 'viewing',
     viewingData: selectedChannel ? {
@@ -791,7 +791,7 @@ const LiveTV: React.FC = () => {
         // 2. Si extension, récupérer le manifest extension
         let extensionCatalogs: Catalog[] = [];
         if (isExtensionAvailable()) {
-          console.log("Using YaxouDBST Extension");
+          console.log("Using CouscousFlix Extension");
           try {
             const result = await fetchFromExtension<{ catalogs?: Catalog[] }>('GET_MANIFEST');
             extensionCatalogs = result.catalogs || [];

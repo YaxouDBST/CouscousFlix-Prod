@@ -181,7 +181,7 @@ export default function UpdateScreen({
         {stage === 'need_permission' && (
           <>
             <Text style={styles.statusText}>
-              Autorise YaxouDBST à installer des APK pour continuer.
+              Autorise CouscousFlix à installer des APK pour continuer.
             </Text>
             <TouchableOpacity
               onPress={onOpenSettings}

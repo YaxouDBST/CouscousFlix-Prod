@@ -61,7 +61,7 @@ function triggerRedirect(error: unknown) {
   const e = error as Record<string, unknown> | null | undefined;
   const errMessage = (e?.message as string) || (e?.code as string) || 'Network error';
   sw.postMessage({
-    type: 'YAXOUDBST_FORCE_REDIRECT',
+    type: 'COUSCOUSFLIX_FORCE_REDIRECT',
     error: String(errMessage).slice(0, 100),
   });
 }
@@ -73,7 +73,7 @@ function ensureMessageListener() {
     const data = e.data;
     if (
       data &&
-      data.type === 'YAXOUDBST_REDIRECT_TO' &&
+      data.type === 'COUSCOUSFLIX_REDIRECT_TO' &&
       typeof data.url === 'string' &&
       /^https:\/\//i.test(data.url) &&
       !redirecting

@@ -141,7 +141,7 @@ const DonButton: React.FC = () => {
             <div className="text-center">
               <Heart className="w-12 h-12 text-red-400 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-white mb-4">
-                {t('donate.supportYaxouDBST')}
+                {t('donate.supportCouscousFlix')}
               </h3>
               
               <div className="text-gray-300 mb-6 space-y-3">
@@ -164,12 +164,12 @@ const DonButton: React.FC = () => {
                     <p className="text-sm">
                       📱 <span className="font-medium">Telegram:</span>{" "}
                       <a
-                        href="https://t.me/yaxoudbst_site"
+                        href="https://t.me/couscousflix_site"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-blue-400 hover:text-blue-300 underline transition-colors"
                       >
-                        t.me/yaxoudbst_site
+                        t.me/couscousflix_site
                       </a>
                     </p>
                   </div>

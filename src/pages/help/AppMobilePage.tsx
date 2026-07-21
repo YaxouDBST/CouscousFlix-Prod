@@ -9,7 +9,7 @@ const AppMobilePage: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = `${t('help.appMobile.title')} — YaxouDBST`;
+    document.title = `${t('help.appMobile.title')} — CouscousFlix`;
   }, [t]);
 
   const sections: TutoSection[] = [

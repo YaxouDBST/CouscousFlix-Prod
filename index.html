@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <meta name="robots" content="index, follow, noarchive, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta name="google" content="notranslate">
-    <meta name="apple-mobile-web-app-title" content="YaxouDBST" />
-    <meta name="application-name" content="YaxouDBST" />
+    <meta name="apple-mobile-web-app-title" content="CouscousFlix" />
+    <meta name="application-name" content="CouscousFlix" />
     <meta name="msapplication-TileColor" content="#000000" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="Regardez des milliers de films et séries en streaming HD . Catalogue complet en VF et VOSTFR, live TV, collections et watch parties synchronisées entre amis(en dev)." />
@@ -42,10 +42,10 @@
       {
         "@context": "https://schema.org",
         "@type": "Organization",
-        "name": "YaxouDBST",
-        "alternateName": "YaxouDBST Streaming",
+        "name": "CouscousFlix",
+        "alternateName": "CouscousFlix Streaming",
         "url": "",
-        "description": "YaxouDBST est une plateforme française open-source (CC BY-NC 4.0) de streaming multimédia : films, séries, anime, TV en direct et Watch Parties synchronisées.",
+        "description": "CouscousFlix est une plateforme française open-source (CC BY-NC 4.0) de streaming multimédia : films, séries, anime, TV en direct et Watch Parties synchronisées.",
         "logo": {
           "@type": "ImageObject",
           "url": "/cat.png",
@@ -65,8 +65,8 @@
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "YaxouDBST",
-        "url": "https://YaxouDBST.cash",
+        "name": "CouscousFlix",
+        "url": "https://CouscousFlix.cash",
         "inLanguage": "fr",
         "potentialAction": {
           "@type": "SearchAction",
@@ -98,9 +98,9 @@
   <script>
     (() => {
       const buildId = '%VITE_APP_BUILD_ID%';
-      const buildStorageKey = 'yaxoudbst_build_id';
-      const recoveryStorageKey = `yaxoudbst_build_recovery_${buildId}`;
-      const refreshSearchParam = 'yaxoudbst_build_refresh';
+      const buildStorageKey = 'couscousflix_build_id';
+      const recoveryStorageKey = `couscousflix_build_recovery_${buildId}`;
+      const refreshSearchParam = 'couscousflix_build_refresh';
 
       const buildRecoveryUrl = () => {
         const url = new URL(window.location.href);
@@ -139,7 +139,7 @@
         const alreadyRecovered = sessionStorage.getItem(recoveryStorageKey) === 'done';
 
         if (previousBuildId && previousBuildId !== buildId && !alreadyRecovered) {
-          window.__YAXOUDBST_CACHE_RECOVERY__ = recoverClientCache();
+          window.__COUSCOUSFLIX_CACHE_RECOVERY__ = recoverClientCache();
           return;
         }
 
@@ -167,7 +167,7 @@
           // Ignore storage errors.
         }
 
-        window.__YAXOUDBST_CACHE_RECOVERY__ = recoverClientCache();
+        window.__COUSCOUSFLIX_CACHE_RECOVERY__ = recoverClientCache();
       }, true);
     })();
   </script>

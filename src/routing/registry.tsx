@@ -72,11 +72,7 @@ export const ROUTES: RouteEntry[] = [
   { path: '/wishboard/my-requests',   loader: lz(() => import('../pages/Greenlight/WishboardUserRequests')) },
   { path: '/wishboard/submit-link',   loader: lz(() => import('../pages/Greenlight/SubmitLinkPage')) },
 
-  // VIP
-  { path: '/vip',                     loader: lz(() => import('../pages/VipPage')) },
-  { path: '/vip/don',                 loader: lz(() => import('../pages/VipDonatePage')) },
-  { path: '/vip/invoice/:publicId',   loader: lz(() => import('../pages/VipInvoicePage')) },
-  { path: '/vip/cadeau/:giftToken',   loader: lz(() => import('../pages/VipGiftPage')) },
+
 
   // Other
   { path: '/about',                   loader: lz(() => import('../pages/WhatIsCouscousFlixPage')) },

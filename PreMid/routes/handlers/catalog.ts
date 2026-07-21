@@ -31,7 +31,7 @@ export async function handleCatalogRoutes(
       context,
       createPagePresence(
         'Farfouille l\'accueil comme un critique sous caféine',
-        'Accueil YaxouDBST',
+        'Accueil CouscousFlix',
         pageImage,
       ),
     )
@@ -77,7 +77,7 @@ export async function handleCatalogRoutes(
       context,
       createPagePresence(
         'Fouille les collections comme un conservateur insomniaque',
-        pageTitle || 'Collections YaxouDBST',
+        pageTitle || 'Collections CouscousFlix',
         pageImage,
       ),
     )
@@ -114,7 +114,7 @@ export async function handleCatalogRoutes(
         [
           'Fiche film sous la loupe 🎬',
           'Film inspecté comme un dossier brûlant 🍿',
-          'Autopsie ciné en cours sur YaxouDBST 🎞️',
+          'Autopsie ciné en cours sur CouscousFlix 🎞️',
         ],
         contentImage,
       ),
@@ -206,7 +206,7 @@ export async function handleCatalogRoutes(
       context,
       createPagePresence(
         'Laisse le destin choisir quelle idée brillante',
-        pageTitle || 'Roulette YaxouDBST',
+        pageTitle || 'Roulette CouscousFlix',
         pageImage,
       ),
     )

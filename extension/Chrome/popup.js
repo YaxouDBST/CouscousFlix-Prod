@@ -1,4 +1,4 @@
-// YaxouDBST Extension - Popup Logic
+// CouscousFlix Extension - Popup Logic
 
 document.addEventListener('DOMContentLoaded', async () => {
   const toggleBtn = document.getElementById('toggleBtn');

@@ -1,20 +1,20 @@
-window.hasYaxouDBSTExtension = true;
-window.hasYaxouDBSTNexusExtractor = true; // Signals that M3U8 extraction is available locally
-window.dispatchEvent(new CustomEvent('yaxoudbst-extension-loaded'));
-console.log("YaxouDBST Extension loaded in page context (with Nexus M3U8 extractors) [Firefox]");
+window.hasCouscousFlixExtension = true;
+window.hasCouscousFlixNexusExtractor = true; // Signals that M3U8 extraction is available locally
+window.dispatchEvent(new CustomEvent('couscousflix-extension-loaded'));
+console.log("CouscousFlix Extension loaded in page context (with Nexus M3U8 extractors) [Firefox]");
 
 /**
  * Helper: Extract M3U8 from a single embed URL via the extension
- * Usage: const result = await window.yaxoudbstExtractM3u8('voe', 'https://voe.sx/xxx');
- *        or: const result = await window.yaxoudbstExtractM3u8(null, 'https://vidzy.org/xxx'); // auto-detect
+ * Usage: const result = await window.couscousflixExtractM3u8('voe', 'https://voe.sx/xxx');
+ *        or: const result = await window.couscousflixExtractM3u8(null, 'https://vidzy.org/xxx'); // auto-detect
  * Returns: { success, hlsUrl?, m3u8Url?, source?, error? }
  */
-window.yaxoudbstExtractM3u8 = function(type, url) {
+window.couscousflixExtractM3u8 = function(type, url) {
     return new Promise((resolve, reject) => {
         const messageId = 'nexus_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
 
         const handler = (event) => {
-            if (event.data && event.data.source === 'YAXOUDBST_EXTENSION' && event.data.messageId === messageId) {
+            if (event.data && event.data.source === 'COUSCOUSFLIX_EXTENSION' && event.data.messageId === messageId) {
                 window.removeEventListener('message', handler);
                 if (event.data.success) {
                     resolve(event.data.data);
@@ -33,7 +33,7 @@ window.yaxoudbstExtractM3u8 = function(type, url) {
         }, 15000);
 
         window.postMessage({
-            source: 'YAXOUDBST_WEB',
+            source: 'COUSCOUSFLIX_WEB',
             type: 'EXTENSION_REQUEST',
             action: 'EXTRACT_M3U8',
             messageId,
@@ -44,16 +44,16 @@ window.yaxoudbstExtractM3u8 = function(type, url) {
 
 /**
  * Helper: Extract all M3U8 from a list of embed sources in parallel
- * Usage: const results = await window.yaxoudbstExtractAllM3u8(['https://voe.sx/x', 'https://vidzy.org/y']);
- *        or with player info: await window.yaxoudbstExtractAllM3u8([{link:'url', player:'voe'}]);
+ * Usage: const results = await window.couscousflixExtractAllM3u8(['https://voe.sx/x', 'https://vidzy.org/y']);
+ *        or with player info: await window.couscousflixExtractAllM3u8([{link:'url', player:'voe'}]);
  * Returns: { success, total, successCount, results: [...] }
  */
-window.yaxoudbstExtractAllM3u8 = function(sources) {
+window.couscousflixExtractAllM3u8 = function(sources) {
     return new Promise((resolve, reject) => {
         const messageId = 'nexus_all_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
 
         const handler = (event) => {
-            if (event.data && event.data.source === 'YAXOUDBST_EXTENSION' && event.data.messageId === messageId) {
+            if (event.data && event.data.source === 'COUSCOUSFLIX_EXTENSION' && event.data.messageId === messageId) {
                 window.removeEventListener('message', handler);
                 if (event.data.success) {
                     resolve(event.data.data);
@@ -72,7 +72,7 @@ window.yaxoudbstExtractAllM3u8 = function(sources) {
         }, 30000);
 
         window.postMessage({
-            source: 'YAXOUDBST_WEB',
+            source: 'COUSCOUSFLIX_WEB',
             type: 'EXTENSION_REQUEST',
             action: 'EXTRACT_ALL_M3U8',
             messageId,
@@ -83,15 +83,15 @@ window.yaxoudbstExtractAllM3u8 = function(sources) {
 
 /**
  * Helper: Detect supported embed types from a list of URLs
- * Usage: const embeds = await window.yaxoudbstDetectEmbeds(['url1', 'url2']);
+ * Usage: const embeds = await window.couscousflixDetectEmbeds(['url1', 'url2']);
  * Returns: { embeds: [{type, url, priority}, ...] }
  */
-window.yaxoudbstDetectEmbeds = function(sources) {
+window.couscousflixDetectEmbeds = function(sources) {
     return new Promise((resolve) => {
         const messageId = 'nexus_detect_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
 
         const handler = (event) => {
-            if (event.data && event.data.source === 'YAXOUDBST_EXTENSION' && event.data.messageId === messageId) {
+            if (event.data && event.data.source === 'COUSCOUSFLIX_EXTENSION' && event.data.messageId === messageId) {
                 window.removeEventListener('message', handler);
                 resolve(event.data.success ? event.data.data : { embeds: [] });
             }
@@ -101,7 +101,7 @@ window.yaxoudbstDetectEmbeds = function(sources) {
         setTimeout(() => { window.removeEventListener('message', handler); resolve({ embeds: [] }); }, 5000);
 
         window.postMessage({
-            source: 'YAXOUDBST_WEB',
+            source: 'COUSCOUSFLIX_WEB',
             type: 'EXTENSION_REQUEST',
             action: 'DETECT_EMBEDS',
             messageId,
@@ -112,14 +112,14 @@ window.yaxoudbstDetectEmbeds = function(sources) {
 
 /**
  * Helper: Setup DNR headers for a service URL (e.g. cinep for PurStream)
- * Usage: await window.yaxoudbstSetupHeaders('cinep', 'https://zebi.xalaflix.design/...');
+ * Usage: await window.couscousflixSetupHeaders('cinep', 'https://zebi.xalaflix.design/...');
  */
-window.yaxoudbstSetupHeaders = function(type, url) {
+window.couscousflixSetupHeaders = function(type, url) {
     return new Promise((resolve) => {
         const messageId = 'nexus_headers_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
 
         const handler = (event) => {
-            if (event.data && event.data.source === 'YAXOUDBST_EXTENSION' && event.data.messageId === messageId) {
+            if (event.data && event.data.source === 'COUSCOUSFLIX_EXTENSION' && event.data.messageId === messageId) {
                 window.removeEventListener('message', handler);
                 resolve(event.data.success ? event.data.data : { success: false, error: event.data.error });
             }
@@ -129,7 +129,7 @@ window.yaxoudbstSetupHeaders = function(type, url) {
         setTimeout(() => { window.removeEventListener('message', handler); resolve({ success: false, error: 'Timeout' }); }, 3000);
 
         window.postMessage({
-            source: 'YAXOUDBST_WEB',
+            source: 'COUSCOUSFLIX_WEB',
             type: 'EXTENSION_REQUEST',
             action: 'SETUP_HEADERS',
             messageId,

@@ -1,8 +1,8 @@
-# AGENTS.md - YaxouDBST
+# AGENTS.md - CouscousFlix
 
 ## Overview
 
-YaxouDBST is a French streaming platform monorepo: React 18 + TypeScript frontend (Vite), Node.js/Express + Python backends, browser extensions, Rust WASM sync engine, and Cloudflare Workers.
+CouscousFlix is a French streaming platform monorepo: React 18 + TypeScript frontend (Vite), Node.js/Express + Python backends, browser extensions, Rust WASM sync engine, and Cloudflare Workers.
 
 ## Setup
 

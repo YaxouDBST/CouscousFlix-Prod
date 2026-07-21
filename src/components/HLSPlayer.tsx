@@ -161,7 +161,7 @@ const dispatchDnsEmbedFallback = (
   return false;
 };
 
-const SOURCE_STREAM_QUALITY_CACHE_EVENT = 'yaxoudbst:source-stream-quality-cache-updated';
+const SOURCE_STREAM_QUALITY_CACHE_EVENT = 'couscousflix:source-stream-quality-cache-updated';
 const sourceStreamQualityCache = new Map<string, string>();
 const sourceStreamBitrateEstimateCache = new Map<string, number>();
 
@@ -1247,7 +1247,7 @@ const HLSPlayer = forwardRef<HLSPlayerRef, HLSPlayerProps>(({
 
   // Setup cinep DNR headers for PurStream sources (non-VIP extension users)
   useEffect(() => {
-    if (purstreamSources && purstreamSources.length > 0 && window.yaxoudbstSetupHeaders) {
+    if (purstreamSources && purstreamSources.length > 0 && window.couscousflixSetupHeaders) {
       // Only need one call per unique hostname
       const seen = new Set<string>();
       for (const s of purstreamSources) {
@@ -1256,7 +1256,7 @@ const HLSPlayer = forwardRef<HLSPlayerRef, HLSPlayerProps>(({
           const host = new URL(s.url).hostname;
           if (seen.has(host)) continue;
           seen.add(host);
-          window.yaxoudbstSetupHeaders!('cinep', s.url).catch(() => {});
+          window.couscousflixSetupHeaders!('cinep', s.url).catch(() => {});
         } catch { /* ignore invalid urls */ }
       }
     }
@@ -1387,7 +1387,7 @@ const HLSPlayer = forwardRef<HLSPlayerRef, HLSPlayerProps>(({
   // src. Two concurrent LOAD requests race on the receiver (the first gets
   // LOAD_CANCELLED), surfacing spurious errors or restarting playback.
   const castLoadInFlightRef = useRef<string | null>(null);
-  // Native Android cast bridge (injected by the YaxouDBST Android app WebView).
+  // Native Android cast bridge (injected by the CouscousFlix Android app WebView).
   // When present, clicking cast routes through the Google Cast SDK on-device
   // instead of the web cast_sender.js SDK (which isn't available inside WebView).
   const [nativeCastBridge, setNativeCastBridge] = useState<any>(null);
@@ -2005,7 +2005,7 @@ const HLSPlayer = forwardRef<HLSPlayerRef, HLSPlayerProps>(({
       }
     }
 
-    // Add custom sources (YaxouDBST players)
+    // Add custom sources (CouscousFlix players)
     if (customSources && customSources.length > 0) {
       customSources.forEach((source, index) => {
         const srcLower = source.toLowerCase();
@@ -2013,7 +2013,7 @@ const HLSPlayer = forwardRef<HLSPlayerRef, HLSPlayerProps>(({
         embedSources.push({
           type: 'custom',
           id: `custom_${index}`,
-          label: isSeek ? t('watch.seekStreamingPlayer', { n: index + 1 }) : t('watch.yaxoudbstPlayer', { n: index + 1 }),
+          label: isSeek ? t('watch.seekStreamingPlayer', { n: index + 1 }) : t('watch.couscousflixPlayer', { n: index + 1 }),
           url: source,
         });
       });
@@ -2156,7 +2156,7 @@ const HLSPlayer = forwardRef<HLSPlayerRef, HLSPlayerProps>(({
     // Définir les lecteurs VO/VOSTFR à conserver (enlever 6, 4 et 2)
     if (showVostfrMenu) {
       const vostfrSources = [
-        { id: 'peachify', label: 'Peachify', url: '' }, // Peachify (priorité, FR subs + accent YaxouDBST)
+        { id: 'peachify', label: 'Peachify', url: '' }, // Peachify (priorité, FR subs + accent CouscousFlix)
         { id: 'vostfr', label: 'Videasy', url: '' }, // Videasy
         { id: 'vidlink', label: 'Vidlink', url: '' }, // vidlink
         { id: 'vidsrccc', label: 'Vidsrc.io', url: '' }, // vidsrc.io
@@ -2361,8 +2361,8 @@ const HLSPlayer = forwardRef<HLSPlayerRef, HLSPlayerProps>(({
       if (purstreamSources && purstreamSources[index]) {
         targetUrl = purstreamSources[index].url || '';
         // Setup cinep headers via extension for non-VIP users (raw URLs)
-        if (targetUrl && window.yaxoudbstSetupHeaders) {
-          window.yaxoudbstSetupHeaders('cinep', targetUrl).catch(() => {});
+        if (targetUrl && window.couscousflixSetupHeaders) {
+          window.couscousflixSetupHeaders('cinep', targetUrl).catch(() => {});
         }
       }
     } else if (sourceType === 'vox') {
@@ -3598,7 +3598,7 @@ const HLSPlayer = forwardRef<HLSPlayerRef, HLSPlayerProps>(({
           return;
         }
 
-        const res = await axios.get(osUrl, { headers: { 'User-Agent': 'YaxouDBST/1.0' } });
+        const res = await axios.get(osUrl, { headers: { 'User-Agent': 'CouscousFlix/1.0' } });
         if (cancelled) return;
 
         if (Array.isArray(res.data)) {
@@ -3670,7 +3670,7 @@ const HLSPlayer = forwardRef<HLSPlayerRef, HLSPlayerProps>(({
 
       // OpenSubtitles requires a User-Agent header; set a simple one
       console.log(`Fetching OpenSubtitles from: ${osUrl}`);
-      const res = await axios.get(osUrl, { headers: { 'User-Agent': 'YaxouDBST/1.0' } });
+      const res = await axios.get(osUrl, { headers: { 'User-Agent': 'CouscousFlix/1.0' } });
       if (Array.isArray(res.data)) {
         console.log(`Found ${res.data.length} subtitle results for ${hasTvShowId ? 'TV show' : 'movie'}`);
         setExternalSubs(res.data);
@@ -3715,7 +3715,7 @@ const HLSPlayer = forwardRef<HLSPlayerRef, HLSPlayerProps>(({
           // Download and extract the .gz file locally using PAKO
           const response = await fetch(downloadLink, {
             headers: {
-              'User-Agent': 'YaxouDBST/1.0'
+              'User-Agent': 'CouscousFlix/1.0'
             }
           });
 
@@ -5067,7 +5067,7 @@ const HLSPlayer = forwardRef<HLSPlayerRef, HLSPlayerProps>(({
 
         await nativeCastBridge.loadMedia(
           finalUrl,
-          title || tvShow?.name || 'YaxouDBST',
+          title || tvShow?.name || 'CouscousFlix',
           posterUrl,
           videoRef.current?.currentTime || 0,
         );
@@ -5484,13 +5484,13 @@ const HLSPlayer = forwardRef<HLSPlayerRef, HLSPlayerProps>(({
     };
   }, [loadCurrentMediaOnCastSession, castSdkReady, src]);
 
-  // Detect the YaxouDBST Android app WebView cast bridge.
-  // When the React Native shell injects window.YaxouDBSTAndroidCast, we route
+  // Detect the CouscousFlix Android app WebView cast bridge.
+  // When the React Native shell injects window.CouscousFlixAndroidCast, we route
   // casts through the on-device Google Cast SDK instead of the web SDK
   // (chrome.cast is not available inside Android WebView).
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const bridge = (window as any).YaxouDBSTAndroidCast;
+    const bridge = (window as any).CouscousFlixAndroidCast;
     if (!bridge || typeof bridge.isSupported !== 'function') return;
 
     let cancelled = false;

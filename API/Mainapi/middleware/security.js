@@ -40,15 +40,15 @@ function domainRestriction(req, res, next) {
 
   const allowedDomains = [
     'localhost:3000',
-    'yaxoudbst.date',
-    'yaxoudbst.chat',
-    'yaxoudbst.cloud',
-    'yaxoudbst.cash',
-    'yaxoudbst.blog',
-    'yaxoudbst.rodeo',
-    'yaxoudbst.club',
-    'yaxoudbst.site',
-    'yaxoudbst11.pages.dev',
+    'couscousflix.date',
+    'couscousflix.chat',
+    'couscousflix.cloud',
+    'couscousflix.cash',
+    'couscousflix.blog',
+    'couscousflix.rodeo',
+    'couscousflix.club',
+    'couscousflix.site',
+    'couscousflix11.pages.dev',
     'nakios.site',
     'cinezo.site',
     'filmib.cc'
@@ -90,21 +90,21 @@ function domainRestriction(req, res, next) {
   // Route spécifique accessible mais avec fausse réponse
   if (req.path.startsWith('/api/imdb/movie')) {
     return res.json({
-      "iframe_src": "https://yaxoudbstfakesite.vercel.app/",
+      "iframe_src": "https://couscousflixfakesite.vercel.app/",
       "player_links": [
         {
           "player": "supervideo",
-          "link": "https://yaxoudbstfakesite.vercel.app/",
+          "link": "https://couscousflixfakesite.vercel.app/",
           "is_hd": false
         },
         {
           "player": "dropload",
-          "link": "https://yaxoudbstfakesite.vercel.app/",
+          "link": "https://couscousflixfakesite.vercel.app/",
           "is_hd": false
         },
         {
           "player": "mixdrop",
-          "link": "https://yaxoudbstfakesite.vercel.app/",
+          "link": "https://couscousflixfakesite.vercel.app/",
           "is_hd": false
         }
       ]
@@ -142,7 +142,7 @@ function domainRestriction(req, res, next) {
                       "players": [
                         {
                           "name": "Supervideo",
-                          "link": "https://yaxoudbstfakesite.vercel.app/"
+                          "link": "https://couscousflixfakesite.vercel.app/"
                         }
                       ]
                     }

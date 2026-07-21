@@ -1,31 +1,31 @@
 // ==UserScript==
-// @name         YaxouDBST Proxy Extension (Tampermonkey)
-// @namespace    https://yaxoudbst.cash
+// @name         CouscousFlix Proxy Extension (Tampermonkey)
+// @namespace    https://couscousflix.cash
 // @version      1.4.8
-// @description  Extension proxy pour Live TV YaxouDBST - Contourne CORS, injecte les headers et extrait les sources Nexus - version userscript Tampermonkey
-// @author       YaxouDBST
-// @updateURL    https://github.com/yaxoudbstcorp/YaxouDBSTOpenSource/raw/refs/heads/main/userscript/yaxoudbst.user.js
-// @downloadURL  https://github.com/yaxoudbstcorp/YaxouDBSTOpenSource/raw/refs/heads/main/userscript/yaxoudbst.user.js
+// @description  Extension proxy pour Live TV CouscousFlix - Contourne CORS, injecte les headers et extrait les sources Nexus - version userscript Tampermonkey
+// @author       CouscousFlix
+// @updateURL    https://github.com/couscousflixcorp/CouscousFlixOpenSource/raw/refs/heads/main/userscript/couscousflix.user.js
+// @downloadURL  https://github.com/couscousflixcorp/CouscousFlixOpenSource/raw/refs/heads/main/userscript/couscousflix.user.js
 // @match        http://localhost/*
 // @match        http://127.0.0.1/*
 // @match        https://localhost/*
 // @match        https://127.0.0.1/*
-// @match        https://yaxoudbst.cash/*
-// @match        https://*.yaxoudbst.cash/*
-// @match        https://yaxoudbst.club/*
-// @match        https://*.yaxoudbst.club/*
-// @match        https://yaxoudbst.cloud/*
-// @match        https://*.yaxoudbst.cloud/*
-// @match        https://yaxoudbst.tax/*
-// @match        https://*.yaxoudbst.tax/*
-// @match        https://yaxoudbst.golf/*
-// @match        https://yaxoudbst.chat/*
-// @match        https://*.yaxoudbst.chat/*
-// @match        https://*.yaxoudbst.golf/*
-// @match        https://yaxoudbst.date/*
-// @match        https://*.yaxoudbst.date/*
-// @match        https://yaxoudbst.show/*
-// @match        https://*.yaxoudbst.show/*
+// @match        https://couscousflix.cash/*
+// @match        https://*.couscousflix.cash/*
+// @match        https://couscousflix.club/*
+// @match        https://*.couscousflix.club/*
+// @match        https://couscousflix.cloud/*
+// @match        https://*.couscousflix.cloud/*
+// @match        https://couscousflix.tax/*
+// @match        https://*.couscousflix.tax/*
+// @match        https://couscousflix.golf/*
+// @match        https://couscousflix.chat/*
+// @match        https://*.couscousflix.chat/*
+// @match        https://*.couscousflix.golf/*
+// @match        https://couscousflix.date/*
+// @match        https://*.couscousflix.date/*
+// @match        https://couscousflix.show/*
+// @match        https://*.couscousflix.show/*
 // @grant        GM_xmlhttpRequest
 // @grant        GM_getValue
 // @grant        GM_setValue
@@ -42,15 +42,15 @@
   "use strict";
 
   const USERSCRIPT_MANIFEST = {
-    name: "YaxouDBST Proxy Extension",
+    name: "CouscousFlix Proxy Extension",
     version: "1.4.8",
     description:
-      "Extension proxy pour Live TV YaxouDBST - Contourne CORS, injecte les headers et extrait les sources Nexus",
+      "Extension proxy pour Live TV CouscousFlix - Contourne CORS, injecte les headers et extrait les sources Nexus",
   };
 
   const pageWindow =
     typeof unsafeWindow !== "undefined" ? unsafeWindow : window;
-  const storagePrefix = "yaxoudbst_userscript:";
+  const storagePrefix = "couscousflix_userscript:";
   const runtimeListeners = {
     onInstalled: [],
     onStartup: [],
@@ -411,7 +411,7 @@
     };
   }
 
-  class YaxouDBSTXMLHttpRequest {
+  class CouscousFlixXMLHttpRequest {
     constructor() {
       this._native = NativeXMLHttpRequest ? new NativeXMLHttpRequest() : null;
       this._useNative = Boolean(this._native);
@@ -527,7 +527,7 @@
         return;
       }
 
-      this.readyState = YaxouDBSTXMLHttpRequest.OPENED;
+      this.readyState = CouscousFlixXMLHttpRequest.OPENED;
       this._dispatch("readystatechange");
     }
 
@@ -575,7 +575,7 @@
       const request = getGMRequest();
       const payload = serializeBody(body);
 
-      this.readyState = YaxouDBSTXMLHttpRequest.OPENED;
+      this.readyState = CouscousFlixXMLHttpRequest.OPENED;
       this._dispatch("readystatechange");
 
       this._requestHandle = request({
@@ -590,7 +590,7 @@
         timeout: this._timeout || 30000,
         responseType: "arraybuffer",
         onprogress: (event) => {
-          this.readyState = YaxouDBSTXMLHttpRequest.LOADING;
+          this.readyState = CouscousFlixXMLHttpRequest.LOADING;
           this._dispatch("readystatechange");
           this._dispatch(
             "progress",
@@ -612,14 +612,14 @@
           this.responseURL = response.finalUrl || this._url;
           this._responseHeadersRaw = response.responseHeaders || "";
 
-          this.readyState = YaxouDBSTXMLHttpRequest.HEADERS_RECEIVED;
+          this.readyState = CouscousFlixXMLHttpRequest.HEADERS_RECEIVED;
           this._dispatch("readystatechange");
 
-          this.readyState = YaxouDBSTXMLHttpRequest.LOADING;
+          this.readyState = CouscousFlixXMLHttpRequest.LOADING;
           this._applyProxyResponse(buffer);
           this._dispatch("readystatechange");
 
-          this.readyState = YaxouDBSTXMLHttpRequest.DONE;
+          this.readyState = CouscousFlixXMLHttpRequest.DONE;
           this._dispatch("readystatechange");
           this._dispatch(
             "load",
@@ -637,19 +637,19 @@
           this.status = response?.status || 0;
           this.statusText =
             response?.statusText || response?.error || "Erreur réseau";
-          this.readyState = YaxouDBSTXMLHttpRequest.DONE;
+          this.readyState = CouscousFlixXMLHttpRequest.DONE;
           this._dispatch("readystatechange");
           this._dispatch("error");
           this._dispatch("loadend");
         },
         ontimeout: () => {
-          this.readyState = YaxouDBSTXMLHttpRequest.DONE;
+          this.readyState = CouscousFlixXMLHttpRequest.DONE;
           this._dispatch("readystatechange");
           this._dispatch("timeout");
           this._dispatch("loadend");
         },
         onabort: () => {
-          this.readyState = YaxouDBSTXMLHttpRequest.DONE;
+          this.readyState = CouscousFlixXMLHttpRequest.DONE;
           this._dispatch("readystatechange");
           this._dispatch("abort");
           this._dispatch("loadend");
@@ -667,7 +667,7 @@
         this._requestHandle?.abort?.();
       } catch {}
 
-      this.readyState = YaxouDBSTXMLHttpRequest.DONE;
+      this.readyState = CouscousFlixXMLHttpRequest.DONE;
       this._dispatch("readystatechange");
       this._dispatch("abort");
       this._dispatch("loadend");
@@ -757,7 +757,7 @@
         try {
           handler.call(this, event);
         } catch (error) {
-          console.error("[YaxouDBST Userscript] XHR handler error:", error);
+          console.error("[CouscousFlix Userscript] XHR handler error:", error);
         }
       }
 
@@ -767,18 +767,18 @@
           try {
             listener.call(this, event);
           } catch (error) {
-            console.error("[YaxouDBST Userscript] XHR listener error:", error);
+            console.error("[CouscousFlix Userscript] XHR listener error:", error);
           }
         }
       }
     }
   }
 
-  YaxouDBSTXMLHttpRequest.UNSENT = 0;
-  YaxouDBSTXMLHttpRequest.OPENED = 1;
-  YaxouDBSTXMLHttpRequest.HEADERS_RECEIVED = 2;
-  YaxouDBSTXMLHttpRequest.LOADING = 3;
-  YaxouDBSTXMLHttpRequest.DONE = 4;
+  CouscousFlixXMLHttpRequest.UNSENT = 0;
+  CouscousFlixXMLHttpRequest.OPENED = 1;
+  CouscousFlixXMLHttpRequest.HEADERS_RECEIVED = 2;
+  CouscousFlixXMLHttpRequest.LOADING = 3;
+  CouscousFlixXMLHttpRequest.DONE = 4;
 
   function patchPageFetch() {
     const patchedFetch = function (input, init) {
@@ -811,7 +811,7 @@
       return;
     }
 
-    pageWindow.XMLHttpRequest = YaxouDBSTXMLHttpRequest;
+    pageWindow.XMLHttpRequest = CouscousFlixXMLHttpRequest;
   }
 
   function isDirectMediaUrl(url) {
@@ -877,7 +877,7 @@
             }
           })
           .catch((error) => {
-            console.error("[YaxouDBST Userscript] Media proxy failed:", error);
+            console.error("[CouscousFlix Userscript] Media proxy failed:", error);
             srcDescriptor.set.call(mediaElement, nextUrl);
           });
       },
@@ -1035,13 +1035,13 @@
 
   // --- BEGIN extension/Chrome/extractors.js ---
   /**
-   * YaxouDBST Extension - Direct M3U8 Extractors
+   * CouscousFlix Extension - Direct M3U8 Extractors
    * Replaces server.py extraction logic - runs entirely in the extension service worker.
    * No VIP check needed since it runs locally.
    */
 
   // ===== Configuration =====
-  const PROXY_BASE = "https://proxiesembed.yaxoudbst.show";
+  const PROXY_BASE = "https://proxiesembed.couscousflix.show";
 
   // AES constants for SeekStreaming (embed4me)
   const SEEKSTREAMING_AES_KEY_HEX =
@@ -2376,7 +2376,7 @@
   // Export everything for use in background.js
   // (In service worker, we'll import via importScripts or just include in order)
   if (typeof globalThis !== "undefined") {
-    globalThis.YaxouDBSTExtractors = {
+    globalThis.CouscousFlixExtractors = {
       extractVoe,
       extractFsvid,
       extractVidzy,
@@ -2410,13 +2410,13 @@
     typeof location !== "undefined" &&
     (location.hostname === "localhost" || location.hostname === "127.0.0.1")
       ? "http://localhost:25565"
-      : "https://api.yaxoudbst.show";
+      : "https://api.couscousflix.show";
   const STREAM_PROXY_USER_AGENT =
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
 
   // Import extractors module
 
-  const Extractors = globalThis.YaxouDBSTExtractors;
+  const Extractors = globalThis.CouscousFlixExtractors;
 
   // Cache for Wiflix channels with their page slugs
   let wiflixChannelCache = {};
@@ -2466,11 +2466,11 @@
   // Load initial state
   (async () => {
     const storedEnabled = await gmGetValueCompat(
-      "yaxoudbst_extensionEnabled",
+      "couscousflix_extensionEnabled",
       null,
     );
     if (storedEnabled !== null) extensionEnabled = storedEnabled !== false;
-    const storedStats = await gmGetValueCompat("yaxoudbst_stats", null);
+    const storedStats = await gmGetValueCompat("couscousflix_stats", null);
     if (storedStats) {
       sessionStats = { ...sessionStats, ...storedStats };
       if (!sessionStats.byType) {
@@ -2486,7 +2486,7 @@
         };
       }
     }
-    const storedPrefs = await gmGetValueCompat("yaxoudbst_extraction_prefs", null);
+    const storedPrefs = await gmGetValueCompat("couscousflix_extraction_prefs", null);
     if (storedPrefs) extractionPrefs = storedPrefs;
   })();
 
@@ -2513,7 +2513,7 @@
         seekstreaming: 0,
       },
     };
-    gmSetValueCompat("yaxoudbst_stats", sessionStats);
+    gmSetValueCompat("couscousflix_stats", sessionStats);
   });
 
   // Configure DNR rules for CORS and Headers
@@ -2558,14 +2558,14 @@
           initiatorDomains: [
             "localhost",
             "127.0.0.1",
-            "yaxoudbst.cash",
-            "yaxoudbst.club",
-            "yaxoudbst.cloud",
-            "yaxoudbst.tax",
-            "yaxoudbst.golf",
-            "yaxoudbst.chat",
-            "yaxoudbst.date",
-            "yaxoudbst.show",
+            "couscousflix.cash",
+            "couscousflix.club",
+            "couscousflix.cloud",
+            "couscousflix.tax",
+            "couscousflix.golf",
+            "couscousflix.chat",
+            "couscousflix.date",
+            "couscousflix.show",
           ],
           resourceTypes: [
             "xmlhttprequest",
@@ -2698,7 +2698,7 @@
           sessionStats.byType[detectedType] =
             (sessionStats.byType[detectedType] || 0) + 1;
         }
-        await gmSetValueCompat("yaxoudbst_stats", sessionStats);
+        await gmSetValueCompat("couscousflix_stats", sessionStats);
         return await handleExtractM3u8(payload);
       }
       case "EXTRACT_ALL_M3U8": {
@@ -2713,7 +2713,7 @@
           return !srcType || isEmbedAllowed(srcType);
         });
         sessionStats.extractions++;
-        await gmSetValueCompat("yaxoudbst_stats", sessionStats);
+        await gmSetValueCompat("couscousflix_stats", sessionStats);
         return await handleExtractAllM3u8({
           ...payload,
           sources: filteredSources,
@@ -2763,7 +2763,7 @@
             m3u8: { ...DEFAULT_EXTRACTION_PREFS.m3u8, ...incoming.m3u8 },
             livetv: { ...DEFAULT_EXTRACTION_PREFS.livetv, ...incoming.livetv },
           };
-          await gmSetValueCompat("yaxoudbst_extraction_prefs", extractionPrefs);
+          await gmSetValueCompat("couscousflix_extraction_prefs", extractionPrefs);
           return { success: true };
         }
         return { success: false, error: "Invalid prefs shape" };
@@ -2959,38 +2959,38 @@
 
   // === API LOGIC ===
 
-  function getYaxouDBSTFrontendOrigin() {
+  function getCouscousFlixFrontendOrigin() {
     try {
       const currentOrigin = pageWindow.location?.origin;
       const currentHostname = pageWindow.location?.hostname ?? "";
 
       if (
-        currentHostname === "yaxoudbst.cash" ||
-        currentHostname.endsWith(".yaxoudbst.cash") ||
-        currentHostname === "yaxoudbst.club" ||
-        currentHostname.endsWith(".yaxoudbst.club") ||
-        currentHostname === "yaxoudbst.cloud" ||
-        currentHostname.endsWith(".yaxoudbst.cloud") ||
-        currentHostname === "yaxoudbst.tax" ||
-        currentHostname.endsWith(".yaxoudbst.tax") ||
-        currentHostname === "yaxoudbst.golf" ||
-        currentHostname === "yaxoudbst.chat" ||
-        currentHostname.endsWith(".yaxoudbst.chat") ||
-        currentHostname === "yaxoudbst.date" ||
-        currentHostname.endsWith(".yaxoudbst.date") ||
-        currentHostname === "yaxoudbst.show" ||
-        currentHostname.endsWith(".yaxoudbst.show") ||
-        currentHostname.endsWith(".yaxoudbst.golf")
+        currentHostname === "couscousflix.cash" ||
+        currentHostname.endsWith(".couscousflix.cash") ||
+        currentHostname === "couscousflix.club" ||
+        currentHostname.endsWith(".couscousflix.club") ||
+        currentHostname === "couscousflix.cloud" ||
+        currentHostname.endsWith(".couscousflix.cloud") ||
+        currentHostname === "couscousflix.tax" ||
+        currentHostname.endsWith(".couscousflix.tax") ||
+        currentHostname === "couscousflix.golf" ||
+        currentHostname === "couscousflix.chat" ||
+        currentHostname.endsWith(".couscousflix.chat") ||
+        currentHostname === "couscousflix.date" ||
+        currentHostname.endsWith(".couscousflix.date") ||
+        currentHostname === "couscousflix.show" ||
+        currentHostname.endsWith(".couscousflix.show") ||
+        currentHostname.endsWith(".couscousflix.golf")
       ) {
-        return (currentOrigin || "https://yaxoudbst.show").replace(/\/$/, "");
+        return (currentOrigin || "https://couscousflix.show").replace(/\/$/, "");
       }
     } catch {}
 
-    return "https://yaxoudbst.show";
+    return "https://couscousflix.show";
   }
 
   function buildBackendApiHeaders(accessKey, extraHeaders = {}) {
-    const frontendOrigin = getYaxouDBSTFrontendOrigin();
+    const frontendOrigin = getCouscousFlixFrontendOrigin();
     const headers = {
       Accept: "application/json",
       Origin: frontendOrigin,
@@ -5159,13 +5159,13 @@
     pageWindow.postMessage(
       success
         ? {
-            source: "YAXOUDBST_EXTENSION",
+            source: "COUSCOUSFLIX_EXTENSION",
             messageId,
             success: true,
             data: payload,
           }
         : {
-            source: "YAXOUDBST_EXTENSION",
+            source: "COUSCOUSFLIX_EXTENSION",
             messageId,
             success: false,
             error:
@@ -5193,22 +5193,22 @@
   }
 
   function exposePageApi() {
-    pageWindow.__YAXOUDBST_EXTENSION_INSTALLED = true;
-    pageWindow.hasYaxouDBSTUserscript = true;
-    pageWindow.hasYaxouDBSTNexusExtractor = true;
+    pageWindow.__COUSCOUSFLIX_EXTENSION_INSTALLED = true;
+    pageWindow.hasCouscousFlixUserscript = true;
+    pageWindow.hasCouscousFlixNexusExtractor = true;
 
     if (document.documentElement) {
-      document.documentElement.dataset.yaxoudbstExtension = "true";
+      document.documentElement.dataset.couscousflixExtension = "true";
     }
 
-    pageWindow.yaxoudbstExtractM3u8 = async function yaxoudbstExtractM3u8(type, url) {
+    pageWindow.couscousflixExtractM3u8 = async function couscousflixExtractM3u8(type, url) {
       const result = await requestAction("EXTRACT_M3U8", { type, url });
       return result.success
         ? result.data
         : { success: false, error: result.error || "Extraction impossible" };
     };
 
-    pageWindow.yaxoudbstExtractAllM3u8 = async function yaxoudbstExtractAllM3u8(
+    pageWindow.couscousflixExtractAllM3u8 = async function couscousflixExtractAllM3u8(
       sources,
     ) {
       const result = await requestAction("EXTRACT_ALL_M3U8", { sources });
@@ -5221,26 +5221,26 @@
           };
     };
 
-    pageWindow.yaxoudbstDetectEmbeds = async function yaxoudbstDetectEmbeds(sources) {
+    pageWindow.couscousflixDetectEmbeds = async function couscousflixDetectEmbeds(sources) {
       const result = await requestAction("DETECT_EMBEDS", { sources });
       return result.success ? result.data : { embeds: [] };
     };
 
-    pageWindow.yaxoudbstSetupHeaders = async function yaxoudbstSetupHeaders(type, url) {
+    pageWindow.couscousflixSetupHeaders = async function couscousflixSetupHeaders(type, url) {
       const result = await requestAction("SETUP_HEADERS", { type, url });
       return result.success
         ? result.data
         : { success: false, error: result.error || "Configuration impossible" };
     };
 
-    pageWindow.dispatchEvent(new CustomEvent("yaxoudbst-extension-loaded"));
+    pageWindow.dispatchEvent(new CustomEvent("couscousflix-extension-loaded"));
   }
 
   pageWindow.addEventListener("message", async (event) => {
     if (
       event.source !== pageWindow ||
       !event.data ||
-      event.data.source !== "YAXOUDBST_WEB" ||
+      event.data.source !== "COUSCOUSFLIX_WEB" ||
       event.data.type !== "EXTENSION_REQUEST"
     ) {
       return;
@@ -5265,6 +5265,6 @@
   Promise.resolve()
     .then(() => (typeof setupRules === "function" ? setupRules() : undefined))
     .catch((error) => {
-      console.error("[YaxouDBST Userscript] setupRules error:", error);
+      console.error("[CouscousFlix Userscript] setupRules error:", error);
     });
 })();

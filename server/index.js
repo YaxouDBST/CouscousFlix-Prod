@@ -31,7 +31,7 @@ app.use('/*', async (c, next) => {
   }
 });
 
-app.get('/health', (c) => c.json({ ok: true, runtime: 'node', app: 'yaxoudbst-hono' }));
+app.get('/health', (c) => c.json({ ok: true, runtime: 'node', app: 'couscousflix-hono' }));
 
 const toCloudflareCtx = (c) => ({
   request: new Request(c.req.url, { method: c.req.method, headers: c.req.raw.headers }),
@@ -63,5 +63,5 @@ app.get('*', async (c) => {
 
 const port = Number(process.env.PORT) || 3001;
 serve({ fetch: app.fetch, port, hostname: '0.0.0.0' }, (info) => {
-  console.log(`[server] YaxouDBST Hono → http://0.0.0.0:${info.port}`);
+  console.log(`[server] CouscousFlix Hono → http://0.0.0.0:${info.port}`);
 });

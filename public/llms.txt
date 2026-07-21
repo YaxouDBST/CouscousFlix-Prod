@@ -1,32 +1,32 @@
-# YaxouDBST
+# CouscousFlix
 
-> YaxouDBST est une plateforme française de streaming multimédia. Elle propose des films, séries, TV en direct, et des fonctionnalités sociales comme les Watch Parties synchronisées. Interface moderne, compatible multi-appareils, avec support navigateur et extensions.
+> CouscousFlix est une plateforme française de streaming multimédia. Elle propose des films, séries, TV en direct, et des fonctionnalités sociales comme les Watch Parties synchronisées. Interface moderne, compatible multi-appareils, avec support navigateur et extensions.
 
 ## Pages principales
 
-- [Accueil](https://yaxoudbst.llc/) : page d'accueil avec sélections et contenus mis en avant
-- [Films](https://yaxoudbst.llc/movies) : catalogue complet de films
-- [Séries TV](https://yaxoudbst.llc/tv-shows) : catalogue des séries et épisodes
-- [Recherche](https://yaxoudbst.llc/search) : recherche multimédia
-- [TV en direct](https://yaxoudbst.llc/live-tv) : chaînes en direct
-- [Collections](https://yaxoudbst.llc/collections) : collections thématiques
-- [Roulette](https://yaxoudbst.llc/roulette) : découverte aléatoire
-- [Watch Parties](https://yaxoudbst.llc/watchparty/list) : visionnage synchronisé entre amis
+- [Accueil](https://couscousflix.llc/) : page d'accueil avec sélections et contenus mis en avant
+- [Films](https://couscousflix.llc/movies) : catalogue complet de films
+- [Séries TV](https://couscousflix.llc/tv-shows) : catalogue des séries et épisodes
+- [Recherche](https://couscousflix.llc/search) : recherche multimédia
+- [TV en direct](https://couscousflix.llc/live-tv) : chaînes en direct
+- [Collections](https://couscousflix.llc/collections) : collections thématiques
+- [Roulette](https://couscousflix.llc/roulette) : découverte aléatoire
+- [Watch Parties](https://couscousflix.llc/watchparty/list) : visionnage synchronisé entre amis
 
 ## Informations
 
-- [À propos](https://yaxoudbst.llc/about) : présentation et mission
-- [VIP](https://yaxoudbst.llc/vip) : programme premium
-- [Extension](https://yaxoudbst.llc/extension) : extensions Chrome, Firefox et userscript
-- [Débrid](https://yaxoudbst.llc/debrid) : intégration des services de débridage
+- [À propos](https://couscousflix.llc/about) : présentation et mission
+- [VIP](https://couscousflix.llc/vip) : programme premium
+- [Extension](https://couscousflix.llc/extension) : extensions Chrome, Firefox et userscript
+- [Débrid](https://couscousflix.llc/debrid) : intégration des services de débridage
 
 ## Légal
 
-- [Conditions d'utilisation](https://yaxoudbst.llc/terms-of-service)
-- [Politique de confidentialité](https://yaxoudbst.llc/privacy)
-- [DMCA](https://yaxoudbst.llc/dmca) : procédure de retrait de contenu
+- [Conditions d'utilisation](https://couscousflix.llc/terms-of-service)
+- [Politique de confidentialité](https://couscousflix.llc/privacy)
+- [DMCA](https://couscousflix.llc/dmca) : procédure de retrait de contenu
 - Licence du projet : CC BY-NC 4.0 (usage non-commercial)
 
 ## Contact
 
-- Support : yaxoudbststreaming@gmail.com
+- Support : couscousflixstreaming@gmail.com

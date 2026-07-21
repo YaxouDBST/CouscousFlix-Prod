@@ -29,7 +29,7 @@ type CastShimRequest =
 
 function buildShimDispatch(detail: object): string {
   const json = JSON.stringify(detail);
-  return `(function(){try{window.dispatchEvent(new CustomEvent('__YAXOUDBST_CAST_SHIM__',{detail:${json}}));}catch(e){}})(); true;`;
+  return `(function(){try{window.dispatchEvent(new CustomEvent('__COUSCOUSFLIX_CAST_SHIM__',{detail:${json}}));}catch(e){}})(); true;`;
 }
 
 function sendShimResponse(
@@ -70,7 +70,7 @@ const pendingLoadMediaIds: Map<string, RefObject<InjectableRef | null>> = new Ma
 
 /**
  * Subscribes to native CAST_SESSION_* events and forwards them to the WebView
- * shim as `__YAXOUDBST_CAST_SHIM__` DOM events. Resolves any pending CASTSHIM_LOAD_MEDIA
+ * shim as `__COUSCOUSFLIX_CAST_SHIM__` DOM events. Resolves any pending CASTSHIM_LOAD_MEDIA
  * when STARTED / RESUMED arrives, or rejects on ENDED / FAILED / PICKER_DISMISSED.
  * Returns an unsubscribe function. Call once from BrowserScreen with the
  * WebView ref.
@@ -123,9 +123,9 @@ async function handleCastShimMessage(
 ): Promise<void> {
   switch (req.type) {
     case 'CASTSHIM_INIT': {
-      // Always resolve successfully — the shim's YaxouDBSTAndroidCast.isSupported()
+      // Always resolve successfully — the shim's CouscousFlixAndroidCast.isSupported()
       // reads `payload.supported` to return a boolean. Rejecting would make
-      // YaxouDBST treat the bridge as broken; returning supported:false lets it
+      // CouscousFlix treat the bridge as broken; returning supported:false lets it
       // fall back gracefully (hide cast UI, no error toast).
       try {
         const supported = await isCastSupported();
@@ -345,7 +345,7 @@ function sendToWebView(
 ) {
   const js = `
     (function() {
-      var evt = new CustomEvent('__YAXOUDBST_BRIDGE_RESPONSE', {
+      var evt = new CustomEvent('__COUSCOUSFLIX_BRIDGE_RESPONSE', {
         detail: ${JSON.stringify(response)}
       });
       window.dispatchEvent(evt);

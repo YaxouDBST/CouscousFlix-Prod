@@ -49,7 +49,7 @@ const PAYMENT_IMAGES = {
   ltc: 'https://upload.wikimedia.org/wikipedia/commons/f/f8/LTC-400.png'
 } as const;
 
-const SUPPORT_TELEGRAM_URL = import.meta.env.VITE_SUPPORT_TELEGRAM_URL || 'https://t.me/yaxoudbst_site';
+const SUPPORT_TELEGRAM_URL = import.meta.env.VITE_SUPPORT_TELEGRAM_URL || 'https://t.me/couscousflix_site';
 const PAYGATE_MIN_AMOUNT_EUR = 6.25;
 const isValidEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value.trim());
 const VipDonatePage: React.FC = () => {

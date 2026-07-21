@@ -8,7 +8,7 @@ const WatchpartyPage: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = `${t('help.watchparty.title')} — YaxouDBST`;
+    document.title = `${t('help.watchparty.title')} — CouscousFlix`;
   }, [t]);
 
   const sections: TutoSection[] = [

@@ -15,7 +15,7 @@ export const SCRIPT_AD_MODE_ENABLED = false;
 export const AD_SCRIPT_SRC = '//endedstrung.com/92/93/15/92931582a515c4ab9a953e76e3a6cadd.js';
 
 // Marker attribute used to keep injection idempotent.
-const AD_SCRIPT_MARKER = 'data-yaxoudbst-ad-script';
+const AD_SCRIPT_MARKER = 'data-couscousflix-ad-script';
 
 export const isScriptAdModeEnabled = (): boolean => SCRIPT_AD_MODE_ENABLED;
 

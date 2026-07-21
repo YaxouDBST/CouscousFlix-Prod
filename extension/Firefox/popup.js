@@ -1,4 +1,4 @@
-// YaxouDBST Extension - Popup Logic (Firefox)
+// CouscousFlix Extension - Popup Logic (Firefox)
 const browserAPI = typeof browser !== 'undefined' ? browser : chrome;
 
 document.addEventListener('DOMContentLoaded', async () => {

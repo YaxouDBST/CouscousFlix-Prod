@@ -8,7 +8,7 @@ const ComptePage: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = `${t('help.compte.title')} — YaxouDBST`;
+    document.title = `${t('help.compte.title')} — CouscousFlix`;
   }, [t]);
 
   const sections: TutoSection[] = [

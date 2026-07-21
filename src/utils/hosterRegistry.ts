@@ -102,7 +102,7 @@ let customCacheEpoch = -1;
 const customCompiled = new Map<string, RegExp[]>();
 
 if (typeof window !== 'undefined') {
-  window.addEventListener('yaxoudbst-source-priority-changed', () => {
+  window.addEventListener('couscousflix-source-priority-changed', () => {
     cacheEpoch += 1;
   });
 }
@@ -120,7 +120,7 @@ if (typeof window !== 'undefined') {
  *     ajouter / supprimer librement (min 1 pattern garanti par l'UI).
  *
  * Les 2 caches (built-in vs override) sont invalidés par le même
- * `cacheEpoch`, bumpé à chaque `yaxoudbst-source-priority-changed`.
+ * `cacheEpoch`, bumpé à chaque `couscousflix-source-priority-changed`.
  */
 export function getEffectivePatterns(
   id: BuiltinHosterId,

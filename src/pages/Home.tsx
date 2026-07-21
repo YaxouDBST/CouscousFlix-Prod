@@ -207,7 +207,7 @@ const Home: React.FC = () => {
   const sliderIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const cancelTokenSourceRef = useRef<CancelTokenSource | null>(null);
 
-  // Track page visit for YaxouDBST Wrapped
+  // Track page visit for CouscousFlix Wrapped
   useWrappedTracker({
     mode: 'page',
     pageData: { pageName: 'home' },
@@ -257,8 +257,8 @@ const Home: React.FC = () => {
       setLoading(true);
 
       // Check for cached data first
-      const cachedData = sessionStorage.getItem('yaxoudbst_home_data');
-      const cacheTimestamp = sessionStorage.getItem('yaxoudbst_home_data_timestamp');
+      const cachedData = sessionStorage.getItem('couscousflix_home_data');
+      const cacheTimestamp = sessionStorage.getItem('couscousflix_home_data_timestamp');
 
       // Use cache if it exists and is less than 15 minutes old
       if (cachedData && cacheTimestamp) {
@@ -446,8 +446,8 @@ const Home: React.FC = () => {
         allItems: filteredItems
       };
 
-      sessionStorage.setItem('yaxoudbst_home_data', JSON.stringify(cacheData));
-      sessionStorage.setItem('yaxoudbst_home_data_timestamp', Date.now().toString());
+      sessionStorage.setItem('couscousflix_home_data', JSON.stringify(cacheData));
+      sessionStorage.setItem('couscousflix_home_data_timestamp', Date.now().toString());
 
       // Organize content into categories
       organizeContentByCategories(filteredItems);
@@ -468,8 +468,8 @@ const Home: React.FC = () => {
   // Fetch curated TMDB collections for the "Les sagas incontournables" section
   const fetchSagaCollections = async () => {
     try {
-      const cacheKey = 'yaxoudbst_sagas_data';
-      const cacheTsKey = 'yaxoudbst_sagas_data_ts';
+      const cacheKey = 'couscousflix_sagas_data';
+      const cacheTsKey = 'couscousflix_sagas_data_ts';
       const cached = sessionStorage.getItem(cacheKey);
       const cachedTs = sessionStorage.getItem(cacheTsKey);
       const oneDayMs = 24 * 60 * 60 * 1000;
@@ -834,20 +834,20 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     // Simple title for homepage
-    document.title = `${t('nav.home')} - YaxouDBST`;
+    document.title = `${t('nav.home')} - CouscousFlix`;
 
     // Add or update structured data for a WebSite
     const structuredData = {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "YaxouDBST",
+      "name": "CouscousFlix",
       "url": SITE_URL,
       "potentialAction": {
         "@type": "SearchAction",
         "target": `${SITE_URL}/search?q={search_term_string}`,
         "query-input": "required name=search_term_string"
       },
-      "description": "YaxouDBST - Plateforme de streaming gratuite proposant des films et séries en français. Regardez en ligne sans inscription."
+      "description": "CouscousFlix - Plateforme de streaming gratuite proposant des films et séries en français. Regardez en ligne sans inscription."
     };
 
     // Add structured data to head
@@ -1065,9 +1065,6 @@ const Home: React.FC = () => {
             >
               {!loading && (
                 <div>
-                  <div className="pt-8 pb-20 sm:pt-12 sm:pb-32">
-                    <TelegramPromotion />
-                  </div>
 
                   {/* Tendances - Lazy loaded (index 3) */}
                   <div className="mb-16 px-4 md:px-8">

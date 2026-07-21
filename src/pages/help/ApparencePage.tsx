@@ -7,7 +7,7 @@ const ApparencePage: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = `${t('help.apparence.title')} — YaxouDBST`;
+    document.title = `${t('help.apparence.title')} — CouscousFlix`;
   }, [t]);
 
   const sections: TutoSection[] = [

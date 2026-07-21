@@ -37,7 +37,7 @@ const AdminPanel: React.FC = () => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (username === 'yaxoudbst' && password === 'yaxoudbst') {
+    if (username === 'couscousflix' && password === 'couscousflix') {
       setIsLoggedIn(true);
       setError('');
     } else {

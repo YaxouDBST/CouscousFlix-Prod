@@ -2,19 +2,19 @@
   "$schema": "https://schemas.premid.app/metadata/1.16",
   "apiVersion": 1,
   "author": {
-    "name": "YaxouDBST",
+    "name": "CouscousFlix",
     "id": "1259926474174238741"
   },
-  "service": "YaxouDBST",
+  "service": "CouscousFlix",
   "description": {
-    "en": "YaxouDBST is a streaming platform for movies, series, anime, and watch parties.",
-    "fr": "YaxouDBST est une plateforme de streaming pour films, series, anime et watch parties."
+    "en": "CouscousFlix is a streaming platform for movies, series, anime, and watch parties.",
+    "fr": "CouscousFlix est une plateforme de streaming pour films, series, anime et watch parties."
   },
-  "url": ["yaxoudbst.tax", "yaxoudbst.cash", "yaxoudbst.cloud"],
-  "regExp": "^https?[:][/][/]([a-z0-9-]+[.])*yaxoudbst[.](cash|tax|cloud)[/]",
+  "url": ["couscousflix.tax", "couscousflix.cash", "couscousflix.cloud"],
+  "regExp": "^https?[:][/][/]([a-z0-9-]+[.])*couscousflix[.](cash|tax|cloud)[/]",
   "version": "1.0.5",
-  "logo": "https://cdn.rcd.gg/PreMiD/websites/M/YaxouDBST/assets/logo.png",
-  "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/YaxouDBST/assets/thumbnail.png",
+  "logo": "https://cdn.rcd.gg/PreMiD/websites/M/CouscousFlix/assets/logo.png",
+  "thumbnail": "https://cdn.rcd.gg/PreMiD/websites/M/CouscousFlix/assets/thumbnail.png",
   "color": "#dc2626",
   "category": "videos",
   "tags": ["movies", "series", "anime", "watchparty", "streaming"],

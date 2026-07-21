@@ -774,7 +774,7 @@ const normalizeAdminAuthType = (raw) => {
 
 /**
  * GET /admin/admins
- * List every admin + uploader with their resolved identity (first YaxouDBST
+ * List every admin + uploader with their resolved identity (first CouscousFlix
  * profile name/avatar).
  */
 router.get('/admin/admins', isAdmin, async (req, res) => {

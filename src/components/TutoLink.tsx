@@ -9,7 +9,7 @@ interface TutoLinkProps {
 
 /**
  * Inline styled Link used inside tuto body paragraphs to point at another
- * YaxouDBST route. Rendered through i18next <Trans> numeric placeholders:
+ * CouscousFlix route. Rendered through i18next <Trans> numeric placeholders:
  *
  *   "bodyText": "Download on the <1>/app</1> page."
  *

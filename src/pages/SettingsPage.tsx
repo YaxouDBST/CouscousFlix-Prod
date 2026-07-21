@@ -162,12 +162,10 @@ const SECTIONS = [
   { id: 'appearance', labelKey: 'settings.sections.appearance', icon: Palette },
   { id: 'performance', labelKey: 'settings.sections.performance', icon: Gauge },
   { id: 'language', labelKey: 'settings.sections.language', icon: Globe },
-  { id: 'vip', labelKey: 'settings.sections.vip', icon: Crown },
   { id: 'sessions', labelKey: 'settings.sections.sessions', icon: Monitor },
   { id: 'accounts', labelKey: 'settings.sections.accounts', icon: Link2 },
   { id: 'privacy', labelKey: 'settings.sections.privacy', icon: Shield },
   { id: 'source-priority', labelKey: 'settings.sections.sourcePriority', icon: ListOrdered },
-  { id: 'intermission', labelKey: 'settings.sections.adPopup', icon: Megaphone },
   { id: 'extractions', labelKey: 'settings.sections.extractions', icon: Zap },
   { id: 'data', labelKey: 'settings.sections.data', icon: Database },
 ] as const;
@@ -452,10 +450,10 @@ const SettingsPage: React.FC = () => {
   });
 
   const [bgForceColor, setBgForceColor] = useState<boolean>(() => {
-    return localStorage.getItem(BG_STORAGE_KEYS.forceColor) === '1';
+    return localStorage.getItem(BG_STORAGE_KEYS.forceColor) !== '0';
   });
   const [bgForceSquareSize, setBgForceSquareSize] = useState<boolean>(() => {
-    return localStorage.getItem(BG_STORAGE_KEYS.forceSquareSize) === '1';
+    return localStorage.getItem(BG_STORAGE_KEYS.forceSquareSize) !== '0';
   });
   const [bgHaloEnabled, setBgHaloEnabled] = useState<boolean>(() => {
     return localStorage.getItem(BG_STORAGE_KEYS.haloEnabled) !== '0';
@@ -516,7 +514,7 @@ const SettingsPage: React.FC = () => {
   };
 
   const [introEnabled, setIntroEnabled] = useState(() => {
-    return localStorage.getItem('yaxoudbst_intro_enabled') === 'true';
+    return localStorage.getItem('couscousflix_intro_enabled') === 'true';
   });
 
   const [screensaverEnabled, setScreensaverEnabled] = useState(() => {
@@ -1021,9 +1019,9 @@ const SettingsPage: React.FC = () => {
   const handleIntroToggle = () => {
     const newValue = !introEnabled;
     setIntroEnabled(newValue);
-    localStorage.setItem('yaxoudbst_intro_enabled', String(newValue));
+    localStorage.setItem('couscousflix_intro_enabled', String(newValue));
     if (newValue) {
-      localStorage.removeItem('yaxoudbst_intro_seen');
+      localStorage.removeItem('couscousflix_intro_seen');
     }
     window.dispatchEvent(new Event('intro_settings_changed'));
   };
@@ -2470,118 +2468,6 @@ const SettingsPage: React.FC = () => {
             </section>
 
             {/* ════════════════════════════════════════════════════════ */}
-            {/* SECTION: VIP                                            */}
-            {/* ════════════════════════════════════════════════════════ */}
-            <section id="vip" className="scroll-mt-24">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 rounded-xl bg-gradient-to-br from-yellow-600/20 to-amber-600/20 border border-yellow-500/20">
-                  <Crown className="w-5 h-5 text-yellow-400" />
-                </div>
-                <div>
-            <h2 className="text-xl font-semibold text-white">{t('vip.title')}</h2>
-                  <p className="text-sm text-gray-500">{t('settings.vipDesc')}</p>
-                </div>
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 }}
-                className="bg-gray-800/30 rounded-xl border border-gray-700/40 p-6"
-              >
-                {!vipStatus.isVip ? (
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-3 p-4 bg-yellow-500/5 rounded-xl border border-yellow-500/10">
-                      <Key className="w-5 h-5 text-yellow-400 mt-0.5 flex-shrink-0" />
-                      <div>
-                        <h4 className="text-sm font-medium text-yellow-300">{t('settings.activateVipKey')}</h4>
-                        <p className="text-xs text-gray-400 mt-1">{t('settings.activateVipKeyDesc')}</p>
-                      </div>
-                    </div>
-                    <div className="flex flex-col md:flex-row gap-3">
-                      <input
-                        className="flex h-11 w-full rounded-lg pr-3 pl-4 py-2 text-sm bg-gray-900/60 border border-gray-700/50 focus:border-yellow-500/50 focus:bg-gray-900/80 text-white placeholder:text-gray-600 outline-none transition-colors"
-                        placeholder={t('settings.enterVipKey')}
-                        value={premiumKey}
-                        onChange={(e) => setPremiumKey(e.target.value)}
-                        onKeyDown={(e) => e.key === 'Enter' && handleActivatePremiumKey()}
-                      />
-                      <button
-                        className={`flex items-center justify-center font-medium h-11 text-sm px-6 rounded-lg bg-yellow-500 text-black hover:bg-yellow-400 transition-colors whitespace-nowrap flex-shrink-0 ${!premiumKey.trim() || isActivatingKey ? 'opacity-30 pointer-events-none' : ''
-                          }`}
-                        onClick={handleActivatePremiumKey}
-                        disabled={!premiumKey.trim() || isActivatingKey}
-                      >
-                        {isActivatingKey ? t('settings.activating') : t('settings.activate')}
-                      </button>
-                    </div>
-                    {vipKeyError && (
-                      <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        className="text-red-400 text-xs bg-red-500/10 p-3 rounded-lg border border-red-500/20"
-                      >
-                        {vipKeyError}
-                      </motion.p>
-                    )}
-                  </div>
-                ) : (
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-3 p-4 bg-yellow-500/10 rounded-xl border border-yellow-500/20">
-                      <Crown className="w-5 h-5 text-yellow-400 flex-shrink-0" />
-                      <div>
-                        <h4 className="text-sm font-semibold text-yellow-300">{t('settings.youAreVip')}</h4>
-                        <p className="text-xs text-gray-400 mt-0.5">{t('settings.vipDescription')}</p>
-                      </div>
-                    </div>
-
-                    <div className="flex items-center gap-3 p-4 bg-gray-800/30 rounded-xl border border-gray-700/40">
-                      <CalendarClock className="w-4 h-4 text-yellow-400 flex-shrink-0" />
-                      <div>
-                        <span className="text-xs text-gray-500">{t('settings.vipExpiresOn')}</span>
-                        <p className="text-sm text-white font-medium">
-                          {vipStatus.expiresAt
-                            ? (() => {
-                                const d = new Date(isNaN(Number(vipStatus.expiresAt)) ? vipStatus.expiresAt : Number(vipStatus.expiresAt));
-                                return isNaN(d.getTime()) ? t('settings.vipNoExpiration') : d.toLocaleDateString(i18n.language, { year: 'numeric', month: 'long', day: 'numeric' });
-                              })()
-                            : t('settings.vipNoExpiration')
-                          }
-                        </p>
-                      </div>
-                    </div>
-
-                    <div
-                      className="flex flex-col gap-2 border border-gray-700/40 rounded-xl px-4 pt-4 pb-3 cursor-pointer hover:border-gray-600/50 transition-colors"
-                      onMouseEnter={() => setIsVipKeyHovered(true)}
-                      onMouseLeave={() => setIsVipKeyHovered(false)}
-                    >
-                      <span className="text-xs text-gray-500">{t('settings.yourVipKey')}</span>
-                      <div className="flex items-center gap-2">
-                        <span className="text-white text-sm font-mono transition-opacity duration-200" style={{ opacity: isVipKeyHovered ? 0 : 1, display: isVipKeyHovered ? 'none' : 'block' }}>
-                          {localStorage.getItem('access_code')?.replace(/./g, '•') || '••••••••••••'}
-                        </span>
-                        <span className="text-white text-sm font-mono transition-opacity duration-200" style={{ opacity: isVipKeyHovered ? 1 : 0, display: isVipKeyHovered ? 'block' : 'none' }}>
-                          {localStorage.getItem('access_code') || ''}
-                        </span>
-                        <button onClick={copyPremiumKey} className="ml-auto p-1.5 rounded-lg hover:bg-gray-700/50 text-gray-500 hover:text-white transition-colors">
-                          <Copy className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
-                    </div>
-
-                    <button
-                      className="text-sm text-red-400 hover:text-red-300 hover:bg-red-500/10 px-4 py-2 rounded-lg transition-colors"
-                      onClick={handleRemovePremiumKey}
-                    >
-                      {t('settings.removeVipKey')}
-                    </button>
-                  </div>
-                )}
-              </motion.div>
-            </section>
-
-            {/* ════════════════════════════════════════════════════════ */}
             {/* SECTION: Sessions                                       */}
             {/* ════════════════════════════════════════════════════════ */}
             {isAuthenticated && (
@@ -2704,7 +2590,7 @@ const SettingsPage: React.FC = () => {
                 </div>
                 <div>
                   <h2 className="text-xl font-semibold text-white">{t('settings.linkedAccountsTitle', 'Comptes liés')}</h2>
-                  <p className="text-sm text-gray-500">{t('settings.linkedAccountsDesc', 'Choisissez quels moyens de connexion doivent ouvrir ce compte YaxouDBST.')}</p>
+                  <p className="text-sm text-gray-500">{t('settings.linkedAccountsDesc', 'Choisissez quels moyens de connexion doivent ouvrir ce compte CouscousFlix.')}</p>
                 </div>
               </div>
 
@@ -2730,11 +2616,11 @@ const SettingsPage: React.FC = () => {
                           ? t('settings.linkedAccountsRedirectSummary', {
                             method: authMethodLabel,
                             provider: accountProviderLabel,
-                            defaultValue: `Vous êtes connecté avec ${authMethodLabel}, mais YaxouDBST vous a redirigé vers ce compte ${accountProviderLabel}.`,
+                            defaultValue: `Vous êtes connecté avec ${authMethodLabel}, mais CouscousFlix vous a redirigé vers ce compte ${accountProviderLabel}.`,
                           })
                           : t('settings.linkedAccountsSessionNoLongerLinkedSummary', {
                               method: authMethodLabel,
-                              defaultValue: `Vous êtes connecté avec ${authMethodLabel} pour cette session, mais aucune redirection ${authMethodLabel} n'est active actuellement. Une prochaine connexion ${authMethodLabel} rouvrira son propre compte YaxouDBST.`,
+                              defaultValue: `Vous êtes connecté avec ${authMethodLabel} pour cette session, mais aucune redirection ${authMethodLabel} n'est active actuellement. Une prochaine connexion ${authMethodLabel} rouvrira son propre compte CouscousFlix.`,
                             })
                         : t('settings.linkedAccountsDirectSummary', {
                             provider: accountProviderLabel,
@@ -2757,7 +2643,7 @@ const SettingsPage: React.FC = () => {
               )}
 
               <div className="space-y-3">
-                {(['discord', 'google', 'bip39'] as LinkProvider[]).map((provider, index) => {
+                {(['google'] as LinkProvider[]).map((provider, index) => {
                   const status = linkedAccounts[provider];
                   const providerLabel = getProviderLabel(provider);
                   const isCurrentMethod = currentAuthMethod === provider;
@@ -2774,27 +2660,27 @@ const SettingsPage: React.FC = () => {
                     ? isCurrentMethod
                       ? t('settings.linkedAccountsTargetDirectDescription', {
                           provider: providerLabel,
-                          defaultValue: `C'est le compte YaxouDBST ${providerLabel} actuellement ouvert. Les connexions ${providerLabel} arrivent déjà ici sans redirection.`,
+                          defaultValue: `C'est le compte CouscousFlix ${providerLabel} actuellement ouvert. Les connexions ${providerLabel} arrivent déjà ici sans redirection.`,
                         })
                       : t('settings.linkedAccountsTargetRedirectedDescription', {
                           provider: providerLabel,
                           method: currentAuthLabel,
-                          defaultValue: `C'est le compte YaxouDBST ${providerLabel} actuellement ouvert. Vous êtes arrivé ici via ${currentAuthLabel}, car ce moyen est redirigé vers ce compte.`,
+                          defaultValue: `C'est le compte CouscousFlix ${providerLabel} actuellement ouvert. Vous êtes arrivé ici via ${currentAuthLabel}, car ce moyen est redirigé vers ce compte.`,
                         })
                     : status.linked
                       ? isCurrentMethod
                         ? t('settings.linkedAccountsCurrentMethodRedirectDescription', {
                             provider: providerLabel,
-                            defaultValue: `Vous êtes connecté avec ${providerLabel}. Comme il est lié à ce compte, YaxouDBST vous a redirigé ici.`,
+                            defaultValue: `Vous êtes connecté avec ${providerLabel}. Comme il est lié à ce compte, CouscousFlix vous a redirigé ici.`,
                           })
                         : t('settings.linkedAccountsLinkedDescription', {
                             provider: providerLabel,
-                            defaultValue: `Quand vous vous connecterez avec ${providerLabel}, YaxouDBST vous redirigera vers ce compte.`,
+                            defaultValue: `Quand vous vous connecterez avec ${providerLabel}, CouscousFlix vous redirigera vers ce compte.`,
                           })
                       : isCurrentMethod
                         ? t('settings.linkedAccountsCurrentMethodInactiveDescription', {
                             provider: providerLabel,
-                            defaultValue: `Vous êtes connecté avec ${providerLabel} pour cette session, mais aucune redirection n'est active actuellement. Une prochaine connexion ${providerLabel} rouvrira son propre compte YaxouDBST.`,
+                            defaultValue: `Vous êtes connecté avec ${providerLabel} pour cette session, mais aucune redirection n'est active actuellement. Une prochaine connexion ${providerLabel} rouvrira son propre compte CouscousFlix.`,
                           })
                         : t('settings.linkedAccountsInactiveDescription', {
                           provider: providerLabel,
@@ -3075,72 +2961,6 @@ const SettingsPage: React.FC = () => {
             </section>
 
             {/* ════════════════════════════════════════════════════════ */}
-            {/* SECTION: Popup pub                                      */}
-            {/* ════════════════════════════════════════════════════════ */}
-            <section id="intermission" className="scroll-mt-24">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="p-2 rounded-xl bg-gradient-to-br from-amber-600/20 to-orange-600/20 border border-amber-500/20">
-                  <Megaphone className="w-5 h-5 text-amber-400" />
-                </div>
-                <div>
-                  <h2 className="text-xl font-semibold text-white">{t('settings.adPopup.title')}</h2>
-                  <p className="text-sm text-gray-500">{t('settings.adPopup.description')}</p>
-                </div>
-              </div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="p-4 bg-gray-800/30 rounded-xl border border-gray-700/40"
-              >
-                <div className="mb-3">
-                  <h4 className="font-medium text-white mb-0.5 text-sm">{t('settings.adPopup.modeTitle')}</h4>
-                  <p className="text-xs text-gray-500 leading-relaxed">{t('settings.adPopup.modeDesc')}</p>
-                </div>
-                <div className="flex gap-2 flex-wrap">
-                  {([
-                    { id: 'normal',          labelKey: 'settings.adPopup.modes.normal.label',         descKey: 'settings.adPopup.modes.normal.desc' },
-                    { id: 'auto',            labelKey: 'settings.adPopup.modes.auto.label',           descKey: 'settings.adPopup.modes.auto.desc' },
-                    { id: 'click-anywhere',  labelKey: 'settings.adPopup.modes.clickAnywhere.label',  descKey: 'settings.adPopup.modes.clickAnywhere.desc' },
-                  ] as const).map((opt) => {
-                    const active = adPopupMode === opt.id;
-                    return (
-                      <button
-                        key={opt.id}
-                        type="button"
-                        onClick={() => handleAdPopupModeChange(opt.id)}
-                        className={`flex-1 min-w-[140px] p-3 rounded-xl text-left transition-colors border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500/60 ${
-                          active
-                            ? 'bg-amber-600/10 border-amber-500/40 text-white'
-                            : 'bg-gray-700/20 border-gray-700/40 text-gray-400 hover:bg-gray-700/40 hover:text-white'
-                        }`}
-                      >
-                        <div className="text-xs font-semibold">{t(opt.labelKey)}</div>
-                        <div className="text-[10px] text-gray-500 mt-0.5">{t(opt.descKey)}</div>
-                      </button>
-                    );
-                  })}
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.05 }}
-                className="flex items-center justify-between p-4 mt-4 bg-gray-800/30 rounded-xl border border-gray-700/40 hover:border-gray-600/50 transition-colors group"
-              >
-                <div className="flex-1 mr-4">
-                  <div className="flex items-center gap-2 mb-0.5">
-                    <AlertTriangle className="w-3.5 h-3.5 text-rose-400" />
-                    <h4 className="font-medium text-white text-sm">{t('settings.adPopup.adultTitle')}</h4>
-                  </div>
-                  <p className="text-xs text-gray-500 leading-relaxed">{t('settings.adPopup.adultDesc')}</p>
-                </div>
-                {renderToggle(adultAds, handleAdultAdsToggle, 'red')}
-              </motion.div>
-            </section>
-
-            {/* ════════════════════════════════════════════════════════ */}
             {/* SECTION: Extractions                                    */}
             {/* ════════════════════════════════════════════════════════ */}
             {/* M9 : data-settings-section="extractors" (en) alias of id=#extractions (fr)
@@ -3173,8 +2993,8 @@ const SettingsPage: React.FC = () => {
                   {EXTRACTION_METHOD_KEYS.map((key) => {
                     const selected = extractionPrefs.method === key;
                     const available =
-                      key === 'extension' ? !!(typeof window !== 'undefined' && window.hasYaxouDBSTExtension) :
-                      key === 'userscript' ? !!(typeof window !== 'undefined' && window.hasYaxouDBSTUserscript) :
+                      key === 'extension' ? !!(typeof window !== 'undefined' && window.hasCouscousFlixExtension) :
+                      key === 'userscript' ? !!(typeof window !== 'undefined' && window.hasCouscousFlixUserscript) :
                       key === 'server' ? isUserVip() :
                       true;
                     return (
@@ -3483,11 +3303,11 @@ const SettingsPage: React.FC = () => {
                       {linkModal.action === 'link'
                         ? t('settings.linkedAccountsModalLinkDescription', {
                             provider: getProviderLabel(linkModal.provider),
-                            defaultValue: `Quand vous vous connecterez avec ${getProviderLabel(linkModal.provider)}, YaxouDBST vous redirigera vers ce compte. Si vous désactivez plus tard cette liaison, ${getProviderLabel(linkModal.provider)} rouvrira son propre compte YaxouDBST.`,
+                            defaultValue: `Quand vous vous connecterez avec ${getProviderLabel(linkModal.provider)}, CouscousFlix vous redirigera vers ce compte. Si vous désactivez plus tard cette liaison, ${getProviderLabel(linkModal.provider)} rouvrira son propre compte CouscousFlix.`,
                           })
                         : t('settings.linkedAccountsModalUnlinkDescription', {
                             provider: getProviderLabel(linkModal.provider),
-                            defaultValue: `Si vous désactivez cette liaison, une future connexion avec ${getProviderLabel(linkModal.provider)} ne redirigera plus vers ce compte. Elle rouvrira le compte YaxouDBST propre à ${getProviderLabel(linkModal.provider)}.`,
+                            defaultValue: `Si vous désactivez cette liaison, une future connexion avec ${getProviderLabel(linkModal.provider)} ne redirigera plus vers ce compte. Elle rouvrira le compte CouscousFlix propre à ${getProviderLabel(linkModal.provider)}.`,
                           })}
                     </p>
                   </div>

@@ -10,11 +10,11 @@
 import { TOP_LEVEL_SOURCE_IDS, type TopLevelSourceId } from '../types/sourcePriority';
 
 // Préfixe `player` → match la règle de sync serveur (`SYNCABLE_PREFIXES` dans
-// API/Mainapi/utils/syncPolicy.js). Les anciens noms `yaxoudbst_remember_last_player`
-// / `yaxoudbst_last_player` étaient silencieusement filtrés par le client.
+// API/Mainapi/utils/syncPolicy.js). Les anciens noms `couscousflix_remember_last_player`
+// / `couscousflix_last_player` étaient silencieusement filtrés par le client.
 const TOGGLE_KEY = 'playerRememberLast';
 const VALUE_KEY = 'playerLastId';
-const CHANGE_EVENT = 'yaxoudbst-last-player-changed';
+const CHANGE_EVENT = 'couscousflix-last-player-changed';
 
 const VALID_IDS = new Set<string>(TOP_LEVEL_SOURCE_IDS);
 

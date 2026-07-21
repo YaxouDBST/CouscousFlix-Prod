@@ -45,10 +45,7 @@
    pointer events sur les slides : ça empêche le :hover de flipper en
    permanence quand les cards défilent sous le curseur (chaque flip
    déclenchait un cycle Layerize+Paint au compositor). */
-body.is-scrolling .embla-slide,
-body.embla-scrolling .embla-slide {
-  pointer-events: none;
-}
+
 
 /* Top 10 ranking number — Peephole : digit filled with poster, slow zoom.
    L'animation `peephole-zoom` fait varier `background-size` 180% → 240% sur 8s

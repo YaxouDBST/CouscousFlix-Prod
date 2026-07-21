@@ -41,7 +41,7 @@ function encodePayblisToken(payload) {
 }
 
 const PAYBLIS_DEFAULT_DOMAIN = 'pay.payblis.com';
-const PAYBLIS_DEFAULT_STORE_NAME = 'YaxouDBST';
+const PAYBLIS_DEFAULT_STORE_NAME = 'CouscousFlix';
 
 function isPayblisEnabled() {
   const raw = String(process.env.VIP_PAYBLIS_ENABLED || '').trim().toLowerCase();

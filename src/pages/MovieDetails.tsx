@@ -1205,15 +1205,15 @@ const VideoPlayer = ({ movieId, backdropPath }: { movieId: string; backdropPath?
     }
   }, [selectedDarkinoSource, selectedSource, darkinoSources, m3u8Timeout]); // Add m3u8Timeout dependency
 
-  // Helper function to transform coflix.upn display name to yaxoudbst
+  // Helper function to transform coflix.upn display name to couscousflix
   const getDisplayName = (quality: string) => {
     if (!quality) return '';
 
     let displayName = quality;
 
-    // Replace coflix.upn with yaxoudbst
+    // Replace coflix.upn with couscousflix
     if (displayName.includes('coflix.upn')) {
-      displayName = displayName.replace('coflix.upn', 'yaxoudbst');
+      displayName = displayName.replace('coflix.upn', 'couscousflix');
     }
 
     // Format "PAS DE PUBLICITE" to title case
@@ -1947,7 +1947,7 @@ const MovieDetails = (): JSX.Element => {
   const { resetVipStatus } = useAdFreePopup(); // Récupérer la fonction reset
   const { currentProfile } = useProfile();
 
-  // Track page visit for YaxouDBST Wrapped
+  // Track page visit for CouscousFlix Wrapped
   useWrappedTracker({
     mode: 'page',
     pageData: id ? { pageName: 'movie-details', contentId: id } : undefined,
@@ -2572,9 +2572,9 @@ const MovieDetails = (): JSX.Element => {
       setIsReleased(releaseDate ? releaseDate <= new Date() : true);
 
       // Simple movie title
-      document.title = `${movie.title} - YaxouDBST`;
+      document.title = `${movie.title} - CouscousFlix`;
     } else {
-      document.title = 'Film - YaxouDBST';
+      document.title = 'Film - CouscousFlix';
     }
   }, [movie, id]);
 
@@ -2749,12 +2749,12 @@ const MovieDetails = (): JSX.Element => {
   const movieYear = movie.release_date && !isNaN(new Date(movie.release_date).getTime())
     ? new Date(movie.release_date).getFullYear()
     : null;
-  const movieTitle = movieYear ? `${movie.title} (${movieYear}) - YaxouDBST` : `${movie.title} - YaxouDBST`;
+  const movieTitle = movieYear ? `${movie.title} (${movieYear}) - CouscousFlix` : `${movie.title} - CouscousFlix`;
   const movieCanonicalUrl = buildSiteUrl(`/movie/${encodedId || id}`);
   const movieSocialImage = movie.backdrop_path || movie.poster_path
     ? `https://image.tmdb.org/t/p/original${movie.backdrop_path || movie.poster_path}`
     : undefined;
-  const movieDescription = movie.overview?.trim() || `Découvrez ${movie.title} sur YaxouDBST.`;
+  const movieDescription = movie.overview?.trim() || `Découvrez ${movie.title} sur CouscousFlix.`;
 
   return (
     <MotionConfig reducedMotion="user">
@@ -4106,7 +4106,7 @@ const MovieDetails = (): JSX.Element => {
                                     onError={(e) => {
                                       const target = e.target as HTMLImageElement;
                                       target.onerror = null;
-                                      target.src = 'data:image/svg+xml;utf8,<svg width="500" height="750" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 750" preserveAspectRatio="xMidYMid meet"><rect width="100%" height="100%" fill="%23333"/><text x="50%" y="50%" fill="%23ccc" font-size="50" font-family="Arial, sans-serif" text-anchor="middle" dy=".3em">YAXOUDBST</text></svg>';
+                                      target.src = 'data:image/svg+xml;utf8,<svg width="500" height="750" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 750" preserveAspectRatio="xMidYMid meet"><rect width="100%" height="100%" fill="%23333"/><text x="50%" y="50%" fill="%23ccc" font-size="50" font-family="Arial, sans-serif" text-anchor="middle" dy=".3em">COUSCOUSFLIX</text></svg>';
                                     }}
                                   />
 
@@ -4121,7 +4121,7 @@ const MovieDetails = (): JSX.Element => {
                                         onError={(e) => {
                                           const target = e.target as HTMLImageElement;
                                           target.onerror = null;
-                                          target.src = 'data:image/svg+xml;utf8,<svg width="500" height="281" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 281" preserveAspectRatio="xMidYMid meet"><rect width="100%" height="100%" fill="%23333"/><text x="50%" y="50%" fill="%23ccc" font-size="30" font-family="Arial, sans-serif" text-anchor="middle" dy=".3em">YAXOUDBST</text></svg>';
+                                          target.src = 'data:image/svg+xml;utf8,<svg width="500" height="281" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 281" preserveAspectRatio="xMidYMid meet"><rect width="100%" height="100%" fill="%23333"/><text x="50%" y="50%" fill="%23ccc" font-size="30" font-family="Arial, sans-serif" text-anchor="middle" dy=".3em">COUSCOUSFLIX</text></svg>';
                                         }}
                                       />
 

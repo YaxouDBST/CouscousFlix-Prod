@@ -74,7 +74,7 @@ export default function SettingsScreen() {
   }, []);
 
   useEffect(() => {
-    AsyncStorage.getItem('yaxoudbst_extraction_prefs').then((raw) => {
+    AsyncStorage.getItem('couscousflix_extraction_prefs').then((raw) => {
       if (!raw) return;
       try {
         const parsed = JSON.parse(raw);
@@ -94,7 +94,7 @@ export default function SettingsScreen() {
 
   const updateExtractionPrefs = useCallback((next: ExtractionPrefs) => {
     setExtractionPrefs(next);
-    AsyncStorage.setItem('yaxoudbst_extraction_prefs', JSON.stringify(next));
+    AsyncStorage.setItem('couscousflix_extraction_prefs', JSON.stringify(next));
   }, []);
 
   const toggleDns = useCallback(async (value: boolean) => {
@@ -196,7 +196,7 @@ export default function SettingsScreen() {
 
       {/* Extension Section */}
       <View style={styles.section}>
-        <Text style={styles.sectionTitle}>Extension YaxouDBST</Text>
+        <Text style={styles.sectionTitle}>Extension CouscousFlix</Text>
 
         <View style={styles.card}>
           <View style={styles.row}>
@@ -213,7 +213,7 @@ export default function SettingsScreen() {
         </View>
 
         <Text style={styles.hint}>
-          L'extension YaxouDBST est intégrée directement dans l'application. Elle remplace
+          L'extension CouscousFlix est intégrée directement dans l'application. Elle remplace
           le userscript Tampermonkey et l'extension Chrome/Firefox.
         </Text>
       </View>

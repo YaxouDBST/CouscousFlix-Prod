@@ -4,7 +4,7 @@ import { Gamepad2, AlertTriangle } from 'lucide-react';
 import TutoLayout, { TutoSection } from '../../components/TutoLayout';
 
 const PREMID_HOME = 'https://premid.app/fr';
-const PREMID_YAXOUDBST_LIBRARY = 'https://premid.app/fr/library/yaxoudbst';
+const PREMID_COUSCOUSFLIX_LIBRARY = 'https://premid.app/fr/library/couscousflix';
 const PREMID_CHROME = 'https://chromewebstore.google.com/detail/premid/agnpmnnelkhngjfiibjjljipjmlhbecf';
 const PREMID_FIREFOX = 'https://addons.mozilla.org/fr/firefox/addon/premid/';
 
@@ -21,7 +21,7 @@ const PremidPage: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = `${t('help.premid.title')} — YaxouDBST`;
+    document.title = `${t('help.premid.title')} — CouscousFlix`;
   }, [t]);
 
   const sections: TutoSection[] = [
@@ -53,10 +53,10 @@ const PremidPage: React.FC = () => {
     },
     {
       kind: 'text',
-      titleKey: 'help.premid.yaxoudbstPresenceTitle',
-      bodyKey: 'help.premid.yaxoudbstPresenceBody',
+      titleKey: 'help.premid.couscousflixPresenceTitle',
+      bodyKey: 'help.premid.couscousflixPresenceBody',
       components: {
-        1: externalLink(PREMID_YAXOUDBST_LIBRARY),
+        1: externalLink(PREMID_COUSCOUSFLIX_LIBRARY),
       },
     },
     {

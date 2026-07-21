@@ -1,11 +1,11 @@
 {
   "manifest_version": 3,
-  "name": "YaxouDBST Proxy Extension",
+  "name": "CouscousFlix Proxy Extension",
   "version": "1.5.6",
-  "description": "Extension proxy pour Live TV YaxouDBST - Contourne CORS, injecte les headers et extrait les sources Nexus",
+  "description": "Extension proxy pour Live TV CouscousFlix - Contourne CORS, injecte les headers et extrait les sources Nexus",
   "browser_specific_settings": {
     "gecko": {
-      "id": "yaxoudbst-extension@yaxoudbst.cash",
+      "id": "couscousflix-extension@couscousflix.cash",
       "strict_min_version": "109.0",
       "data_collection_permissions": {
         "required": ["none"]
@@ -13,18 +13,18 @@
     }
   },
   "icons": {
-    "16": "yaxoudbst.png",
-    "48": "yaxoudbst.png",
-    "128": "yaxoudbst.png"
+    "16": "couscousflix.png",
+    "48": "couscousflix.png",
+    "128": "couscousflix.png"
   },
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "yaxoudbst.png",
-      "48": "yaxoudbst.png",
-      "128": "yaxoudbst.png"
+      "16": "couscousflix.png",
+      "48": "couscousflix.png",
+      "128": "couscousflix.png"
     },
-    "default_title": "YaxouDBST Extension"
+    "default_title": "CouscousFlix Extension"
   },
   "permissions": [
     "declarativeNetRequest",

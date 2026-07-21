@@ -12,7 +12,7 @@ ${castShim}
 
 ${bridge}
 
-// --- Userscript YaxouDBST ---
+// --- Userscript CouscousFlix ---
 ${USERSCRIPT_SOURCE}
 
 true;

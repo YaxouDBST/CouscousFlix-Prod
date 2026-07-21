@@ -33,7 +33,7 @@ interface DownloadLink {
   saison?: number;
   episode?: number;
   full_saison?: number;
-  source?: 'yaxoudbst' | 'darkiworld';
+  source?: 'couscousflix' | 'darkiworld';
   url?: string;
   added_at?: string | null;
   added_by?: { username: string; avatar: string | null };
@@ -800,10 +800,10 @@ const DownloadPage: React.FC = () => {
     }
   };
 
-  // Fonction pour trier les liens selon l'ordre de priorité (YaxouDBST en premier)
+  // Fonction pour trier les liens selon l'ordre de priorité (CouscousFlix en premier)
   const sortDownloadLinks = (links: DownloadLink[]): DownloadLink[] => {
-    const yaxoudbst = links.filter(l => l.source === 'yaxoudbst');
-    const rest = links.filter(l => l.source !== 'yaxoudbst');
+    const couscousflix = links.filter(l => l.source === 'couscousflix');
+    const rest = links.filter(l => l.source !== 'couscousflix');
 
     const priorityOrder: Record<string, number> = {
       '1fichier': 1,
@@ -826,7 +826,7 @@ const DownloadPage: React.FC = () => {
       return sizeB - sizeA;
     });
 
-    return [...yaxoudbst, ...sortedRest];
+    return [...couscousflix, ...sortedRest];
   };
   
   const [tmdbDetails, setTmdbDetails] = useState<TMDBDetails | null>(null);
@@ -1325,14 +1325,14 @@ const DownloadPage: React.FC = () => {
     setQueueInfo(null);
     setShowLinkSelector(true);
 
-    // Les liens YaxouDBST sont déjà des URLs directes (1fichier, Mega, …) ajoutées
+    // Les liens CouscousFlix sont déjà des URLs directes (1fichier, Mega, …) ajoutées
     // côté admin : pas de décodage Darkino nécessaire.
-    if (link.source === 'yaxoudbst' && link.url) {
+    if (link.source === 'couscousflix' && link.url) {
       setIsDecoding(false);
       setDecodedLink({
         success: true,
         id: link.id,
-        provider: link.provider || 'yaxoudbst',
+        provider: link.provider || 'couscousflix',
         embed_url: link.url,
         metadata: {
           language: link.language,
@@ -1714,16 +1714,16 @@ const DownloadPage: React.FC = () => {
                                 />
                               )}
                               <span className="font-medium text-sm sm:text-base truncate">{link.provider}</span>
-                              {link.source === 'yaxoudbst' && (
+                              {link.source === 'couscousflix' && (
                                 <span
                                   className="inline-block ml-2 px-2 py-0.5 text-xs font-semibold rounded bg-blue-500 text-white"
                                   title={
                                     link.added_by
                                       ? `Ajouté par ${link.added_by.username}${link.added_at ? ` le ${new Date(link.added_at).toLocaleDateString(i18n.language)}` : ''}`
-                                      : 'Lien YaxouDBST'
+                                      : 'Lien CouscousFlix'
                                   }
                                 >
-                                  YaxouDBST
+                                  CouscousFlix
                                 </span>
                               )}
                               {link.full_saison === 1 && (

@@ -236,8 +236,8 @@ export const SourcePriorityPanel: React.FC = () => {
   useEffect(() => subscribeToPriorityChanges(setPrefs), []);
   useEffect(() => {
     const h = () => setExtractionPrefsState(getExtractionPrefs());
-    window.addEventListener('yaxoudbst-extraction-prefs-changed', h);
-    return () => window.removeEventListener('yaxoudbst-extraction-prefs-changed', h);
+    window.addEventListener('couscousflix-extraction-prefs-changed', h);
+    return () => window.removeEventListener('couscousflix-extraction-prefs-changed', h);
   }, []);
 
   const hosterIsDisabledInExtractors = useMemo(() => {

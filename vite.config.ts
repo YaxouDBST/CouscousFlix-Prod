@@ -9,18 +9,18 @@ process.env.VITE_APP_BUILD_ID = buildId
 
 function injectSwConfig(): Plugin {
   const replacePlaceholders = (source: string): string => {
-    const mirrors = (process.env.VITE_DEFAULT_MIRRORS || 'yaxoudbst.health')
+    const mirrors = (process.env.VITE_DEFAULT_MIRRORS || 'couscousflix.health')
       .split(',')
       .map((s) => s.trim())
       .filter(Boolean)
     const configUrl =
-      process.env.VITE_MIRRORS_CONFIG_URL || 'https://rentry.co/yaxoudbst'
+      process.env.VITE_MIRRORS_CONFIG_URL || 'https://rentry.co/couscousflix'
     return source
-      .replace(/__YAXOUDBST_DEFAULT_MIRRORS__/g, JSON.stringify(mirrors))
-      .replace(/__YAXOUDBST_CONFIG_URL__/g, JSON.stringify(configUrl))
+      .replace(/__COUSCOUSFLIX_DEFAULT_MIRRORS__/g, JSON.stringify(mirrors))
+      .replace(/__COUSCOUSFLIX_CONFIG_URL__/g, JSON.stringify(configUrl))
   }
   return {
-    name: 'yaxoudbst-sw-inject',
+    name: 'couscousflix-sw-inject',
     // Mode build : transforme dist/sw.js après que Vite ait copié public/sw.js
     closeBundle() {
       const swPath = resolve(__dirname, 'dist/sw.js')

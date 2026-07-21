@@ -1,6 +1,6 @@
-export const SITE_NAME = 'YaxouDBST'
-export const FALLBACK_SITE_URL = 'https://yaxoudbst.cloud'
-export const FALLBACK_LOGO = `${FALLBACK_SITE_URL}/yaxoudbst512.png`
+export const SITE_NAME = 'CouscousFlix'
+export const FALLBACK_SITE_URL = 'https://couscousflix.cloud'
+export const FALLBACK_LOGO = `${FALLBACK_SITE_URL}/couscousflix512.png`
 export const TMDB_API_BASE = 'https://api.themoviedb.org/3'
 export const TMDB_IMAGE_BASE = 'https://image.tmdb.org/t/p'
 export const TMDB_API_KEY = 'f3d757824f08ea2cff45eb8f47ca3a1e'
@@ -35,7 +35,7 @@ export const SAFE_BUTTON_PATTERNS = [
 
 export const NON_BREAKING_SPACE_PATTERN = /\u00A0/g
 export const WHITESPACE_PATTERN = /\s+/g
-export const STRIP_SITE_NAME_PATTERN = /\s*(?:[-:]\s*)?YaxouDBST$/i
+export const STRIP_SITE_NAME_PATTERN = /\s*(?:[-:]\s*)?CouscousFlix$/i
 export const HTTPS_URL_PATTERN = /^https:\/\//i
 export const WORD_SEPARATOR_PATTERN = /[_-]+/g
 export const WORD_INITIAL_PATTERN = /\b\w/g

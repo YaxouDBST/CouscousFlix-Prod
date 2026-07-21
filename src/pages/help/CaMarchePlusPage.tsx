@@ -8,11 +8,11 @@ const CaMarchePlusPage: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = `${t('help.caMarchePlus.title')} — YaxouDBST`;
+    document.title = `${t('help.caMarchePlus.title')} — CouscousFlix`;
   }, [t]);
 
   const telegramUrl =
-    import.meta.env.VITE_SUPPORT_TELEGRAM_URL || 'https://t.me/yaxoudbst_site';
+    import.meta.env.VITE_SUPPORT_TELEGRAM_URL || 'https://t.me/couscousflix_site';
 
   const sections: TutoSection[] = [
     {
@@ -53,13 +53,13 @@ const CaMarchePlusPage: React.FC = () => {
           bodyKey: 'help.caMarchePlus.cause3Body',
           ctas: [
             {
-              labelKey: 'help.caMarchePlus.cause3CtaYaxouDBSTHealth',
-              href: 'https://yaxoudbst.online',
+              labelKey: 'help.caMarchePlus.cause3CtaCouscousFlixHealth',
+              href: 'https://couscousflix.online',
               external: true,
             },
             {
               labelKey: 'help.caMarchePlus.cause3CtaRentry',
-              href: 'https://rentry.co/yaxoudbst',
+              href: 'https://rentry.co/couscousflix',
               external: true,
             },
           ],

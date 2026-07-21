@@ -8,7 +8,7 @@ const TelechargementPage: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = `${t('help.telechargement.title')} — YaxouDBST`;
+    document.title = `${t('help.telechargement.title')} — CouscousFlix`;
   }, [t]);
 
   const sections: TutoSection[] = [

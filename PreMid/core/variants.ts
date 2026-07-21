@@ -333,9 +333,9 @@ export const PAGE_DETAIL_VARIANTS: Array<{
   {
     pattern: /^\/about$/i,
     variants: [
-      'Raconte l\'histoire de YaxouDBST comme une légende locale 📖',
-      'Explore les origines de YaxouDBST comme un archéologue du streaming 🏺',
-      'Lit le lore de YaxouDBST avec des étoiles dans les yeux ✨',
+      'Raconte l\'histoire de CouscousFlix comme une légende locale 📖',
+      'Explore les origines de CouscousFlix comme un archéologue du streaming 🏺',
+      'Lit le lore de CouscousFlix avec des étoiles dans les yeux ✨',
     ],
   },
   {
@@ -399,7 +399,7 @@ export const PAGE_DETAIL_VARIANTS: Array<{
     variants: [
       'Relit son année ciné comme un audit émotionnel 📊',
       'Observe son Wrapped comme un bilan existentiel premium 🪞',
-      'Revit son année YaxouDBST avec des statistiques et des frissons 📈',
+      'Revit son année CouscousFlix avec des statistiques et des frissons 📈',
     ],
   },
   {
@@ -407,7 +407,7 @@ export const PAGE_DETAIL_VARIANTS: Array<{
     variants: [
       'S\'est perdu avec une assurance spectaculaire 🧭',
       'Erre dans le 404 comme un aventurier sans carte 🗺️',
-      'A réussi l\'exploit de se perdre sur YaxouDBST, bravo 🫡',
+      'A réussi l\'exploit de se perdre sur CouscousFlix, bravo 🫡',
     ],
   },
 ]

@@ -128,9 +128,6 @@ const ProfileMenu: React.FC = () => {
     window.location.href = '/';
   };
 
-  const handleLogin = () => {
-    discordAuth.login();
-  };
 
   const handleGoogleLogin = () => {
     googleAuth.login();
@@ -295,22 +292,7 @@ const ProfileMenu: React.FC = () => {
                       </Link>
                     )}
 
-                    {/* Bouton VIP */}
-                    <motion.div
-                      whileHover={isVip ? undefined : { scale: 1.02 }}
-                      whileTap={isVip ? undefined : { scale: 0.98 }}
-                      className={`flex items-center justify-center gap-2 w-full px-3 py-3 max-md:py-3
-                        ${isVip
-                          ? 'bg-gradient-to-r from-yellow-500 to-amber-600 text-black cursor-default opacity-80'
-                          : 'bg-gradient-to-r from-purple-600 to-blue-600 text-white cursor-pointer hover:shadow-md'
-                        } rounded-lg transition-colors`}
-                      onClick={isVip ? undefined : handleOpenVipModal}
-                    >
-                      <Crown className="w-4 h-4 md:w-4 md:h-4 max-md:w-5 max-md:h-5" />
-                      <span className="font-medium max-md:text-base">
-                        {isVip ? t('vip.youAreVip') : t('vip.becomeVip')}
-                      </span>
-                    </motion.div>
+
 
                     <motion.div 
                       whileHover={{ scale: 1.02 }}
@@ -330,22 +312,7 @@ const ProfileMenu: React.FC = () => {
                   </div>
                   
                   <div className="space-y-3 max-md:space-y-4">
-                    <motion.button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={handleLogin}
-                      className="flex items-center justify-center gap-3 w-full px-4 py-3 max-md:py-4 bg-[#5865F2] hover:bg-[#4752C4] text-white rounded-lg transition-colors shadow-md"
-                    >
-                      <div className="flex items-center justify-center w-7 h-7 max-md:w-8 max-md:h-8 bg-white rounded-full p-0.5">
-                        <img 
-                          src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png"
-                          alt="Discord"
-                          className="w-5 h-5 max-md:w-6 max-md:h-6 object-contain"
-                        />
-                      </div>
-                      <span className="font-medium max-md:text-base">{t('auth.loginWithDiscord')}</span>
-                    </motion.button>
-                    
+
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
@@ -362,19 +329,6 @@ const ProfileMenu: React.FC = () => {
                       <span className="font-medium max-md:text-base">{t('auth.loginWithGoogle')}</span>
                     </motion.button>
 
-                    <motion.button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={() => window.location.href = '/login-bip39'}
-                      className="flex items-center justify-center gap-3 w-full px-4 py-3 max-md:py-4 bg-gradient-to-r from-green-600 to-green-700 hover:from-green-700 hover:to-green-800 text-white rounded-lg transition-colors shadow-md"
-                    >
-                      <div className="flex items-center justify-center w-7 h-7 max-md:w-8 max-md:h-8 bg-white/20 rounded-full p-0.5">
-                        <svg className="w-5 h-5 max-md:w-6 max-md:h-6" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/>
-                        </svg>
-                      </div>
-                      <span className="font-medium max-md:text-base">{t('auth.secretPhrase')}</span>
-                    </motion.button>
 
                     <Link
                       to="/settings"
@@ -387,22 +341,7 @@ const ProfileMenu: React.FC = () => {
                       <span className="font-medium max-md:text-base">{t('settings.title')}</span>
                     </Link>
 
-                    {/* Bouton VIP pour les non-connectés */}
-                    <motion.button
-                      whileHover={isVip ? undefined : { scale: 1.02 }}
-                      whileTap={isVip ? undefined : { scale: 0.98 }}
-                      onClick={isVip ? undefined : handleOpenVipModal}
-                      className={`flex items-center justify-center gap-3 w-full px-4 py-3 max-md:py-4
-                        ${isVip
-                          ? 'bg-gradient-to-r from-yellow-500 to-amber-600 text-black cursor-default opacity-80'
-                          : 'bg-gradient-to-r from-purple-600 to-blue-600 text-white cursor-pointer hover:shadow-md'
-                        } rounded-lg transition-colors`}
-                    >
-                      <Crown className="w-5 h-5 max-md:w-6 max-md:h-6" />
-                      <span className="font-medium max-md:text-base">
-                        {isVip ? t('vip.youAreVip') : t('vip.becomeVip')}
-                      </span>
-                    </motion.button>
+
                   </div>
                 </div>
               )}

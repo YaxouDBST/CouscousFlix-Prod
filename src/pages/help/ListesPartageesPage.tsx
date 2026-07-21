@@ -8,7 +8,7 @@ const ListesPartageesPage: React.FC = () => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    document.title = `${t('help.listesPartagees.title')} — YaxouDBST`;
+    document.title = `${t('help.listesPartagees.title')} — CouscousFlix`;
   }, [t]);
 
   const sections: TutoSection[] = [

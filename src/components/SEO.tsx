@@ -24,7 +24,7 @@ const SEO: React.FC<SEOProps> = (props) => {
     title = t('seo.defaultTitle'),
     description = t('seo.defaultDescription'),
     keywords = t('seo.defaultKeywords'),
-    ogImage = '/yaxoudbst.png',
+    ogImage = '/couscousflix.png',
     ogUrl = SITE_URL,
     ogType = 'website',
     twitterCard = 'summary_large_image',
@@ -37,7 +37,7 @@ const SEO: React.FC<SEOProps> = (props) => {
       { lang: 'x-default', href: SITE_URL },
     ],
   } = props;
-  const siteName = 'YaxouDBST';
+  const siteName = 'CouscousFlix';
   
   return (
     <Helmet>

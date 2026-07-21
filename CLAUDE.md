@@ -1,8 +1,8 @@
-# CLAUDE.md - YaxouDBST Project Guide
+# CLAUDE.md - CouscousFlix Project Guide
 
 ## Project Overview
 
-YaxouDBST is an open-source French streaming platform monorepo. It includes a React frontend, multiple Node.js/Python backend services, browser extensions, a Rust WASM sync engine, Cloudflare Workers, and a Discord Rich Presence integration.
+CouscousFlix is an open-source French streaming platform monorepo. It includes a React frontend, multiple Node.js/Python backend services, browser extensions, a Rust WASM sync engine, Cloudflare Workers, and a Discord Rich Presence integration.
 
 **License**: CC BY-NC 4.0
 
@@ -29,7 +29,7 @@ YaxouDBST is an open-source French streaming platform monorepo. It includes a Re
 ## Repository Structure
 
 ```
-yaxoudbst-main/
+couscousflix-main/
 ├── src/                    # React frontend (Vite)
 │   ├── pages/              # 58 page components
 │   ├── components/         # 118+ reusable components
@@ -183,18 +183,18 @@ Multiple player implementations depending on source type:
 
 ### Service Worker Fallback Domain
 
-Quand `yaxoudbst.cash` devient injoignable (blocage FAI), le SW (`public/sw.js`) intercepte les navigations et redirige vers un miroir alive :
+Quand `couscousflix.cash` devient injoignable (blocage FAI), le SW (`public/sw.js`) intercepte les navigations et redirige vers un miroir alive :
 
 1. SW race `fetch(req)` contre timeout 3s
 2. Sur échec réseau (TypeError/AbortError) → load mirrors list
-3. Mirrors fetch depuis `rentry.co/yaxoudbst` (HTML rendu, pas `/raw` car rentry impose `SECRET_RAW_ACCESS_CODE`) à chaque appel avec timeout 3s. Fallback sur `DEFAULT_MIRRORS` hardcodé au build via `VITE_DEFAULT_MIRRORS` si fetch échoue. Pas de cache SW — toujours frais, une modif rentry est visible immédiatement. `parseConfig` accepte JSON ou HTML (extrait les `<a href>` dans `<article>`).
+3. Mirrors fetch depuis `rentry.co/couscousflix` (HTML rendu, pas `/raw` car rentry impose `SECRET_RAW_ACCESS_CODE`) à chaque appel avec timeout 3s. Fallback sur `DEFAULT_MIRRORS` hardcodé au build via `VITE_DEFAULT_MIRRORS` si fetch échoue. Pas de cache SW — toujours frais, une modif rentry est visible immédiatement. `parseConfig` accepte JSON ou HTML (extrait les `<a href>` dans `<article>`).
 4. Redirige vers `https://${nextMirror}/` (racine, pas de path preservation — origine courante exclue)
 
 Complément côté React : `src/services/blockDetection.ts` pose un interceptor axios. Après 3 network errors consécutives + `navigator.onLine === true`, `postMessage` au SW qui répond avec l'URL cible, puis `location.replace`.
 
 Admin : éditer la paste rentry pour ajouter/retirer un miroir. Nouveaux clients voient la liste immédiatement ; clients existants après ≤ 24h (TTL cache SW).
 
-Scope : ne sauve QUE les users ayant déjà visité `yaxoudbst.cash` au moins une fois avant le blocage (sinon SW pas installé). Les nouveaux utilisateurs passent par Telegram `@yaxoudbst_site` ou les domaines sacrificiels (`baddomain/`).
+Scope : ne sauve QUE les users ayant déjà visité `couscousflix.cash` au moins une fois avant le blocage (sinon SW pas installé). Les nouveaux utilisateurs passent par Telegram `@couscousflix_site` ou les domaines sacrificiels (`baddomain/`).
 
 ### Deployment
 - Frontend: Cloudflare Pages (uses `CF_PAGES_COMMIT_SHA` for build ID)
