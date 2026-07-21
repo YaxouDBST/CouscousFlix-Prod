@@ -21,9 +21,7 @@ export const ROUTES: RouteEntry[] = [
   { path: '/tv-shows',                loader: lz(() => import('../pages/TVShows')),                 fallback: <GridSkeleton /> },
   { path: '/collections',             loader: lz(() => import('../pages/Collections')),             fallback: <GridSkeleton /> },
   { path: '/list-catalog',            loader: lz(() => import('../pages/SharedListsCatalogPage')),  fallback: <GridSkeleton /> },
-  { path: '/watchparty/list',         loader: lz(() => import('../pages/WatchPartyList')),          fallback: <GridSkeleton /> },
-  { path: '/wishboard',               loader: lz(() => import('../pages/Greenlight/WishboardPage')), fallback: <GridSkeleton /> },
-  { path: '/vip/invoices',            loader: lz(() => import('../pages/VipInvoicesPage')),         fallback: <GridSkeleton /> },
+
   { path: '/top10',                   loader: lz(() => import('../pages/Top10Page')),               fallback: <GridSkeleton /> },
 
   // Provider catalogs
@@ -50,11 +48,7 @@ export const ROUTES: RouteEntry[] = [
   { path: '/watch/anime/:id/season/:season/episode/:episode', loader: lz(() => import('../pages/Watch/WatchAnime')) },
   { path: '/live-tv',                 loader: lz(() => import('../pages/LiveTV')) },
 
-  // Watch party
-  { path: '/watchparty/create',       loader: lz(() => import('../pages/WatchPartyCreate')) },
-  { path: '/watchparty/room/:roomId', loader: lz(() => import('../pages/WatchPartyRoom')) },
-  { path: '/watchparty/join',         loader: lz(() => import('../pages/WatchPartyJoin')) },
-  { path: '/watchparty/join/:code',   loader: lz(() => import('../pages/WatchPartyJoin')) },
+
 
   // Auth & profile
   { path: '/auth',                    loader: lz(() => import('../components/DiscordAuth')) },
@@ -64,10 +58,7 @@ export const ROUTES: RouteEntry[] = [
   { path: '/profile-management',      loader: lz(() => import('../pages/ProfileManagement')) },
   { path: '/alerts',                  loader: lz(() => import('../pages/AlertsPage')) },
 
-  // Greenlight
-  { path: '/wishboard/new',           loader: lz(() => import('../pages/Greenlight/WishboardNewRequest')) },
-  { path: '/wishboard/my-requests',   loader: lz(() => import('../pages/Greenlight/WishboardUserRequests')) },
-  { path: '/wishboard/submit-link',   loader: lz(() => import('../pages/Greenlight/SubmitLinkPage')) },
+
 
 
 
@@ -84,6 +75,6 @@ export const ROUTES: RouteEntry[] = [
   { path: '/download/:type/:id',      loader: lz(() => import('../pages/DownloadPage')) },
   { path: '/roulette',                loader: lz(() => import('../pages/RoulettePage')) },
   { path: '/suggestion',              loader: lz(() => import('../pages/SuggestionPage')) },
-  { path: '/extension',               loader: lz(() => import('../pages/ExtensionPage')) },
-  { path: '/app',                     loader: lz(() => import('../pages/AppDownloadPage')) },
+
+
 ];

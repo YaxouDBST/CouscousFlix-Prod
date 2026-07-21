@@ -112,13 +112,13 @@ const Header: React.FC = () => {
       items: [
         { name: t('nav.sharedLists'), path: '/list-catalog', icon: <List size={20} />, color: 'indigo', desc: t('nav.sharedListsDesc') },
         { name: t('nav.suggestions'), path: '/suggestion', icon: <Star size={20} />, color: 'pink', desc: t('nav.suggestionsDesc') },
-        { name: t('nav.greenlight'), path: '/wishboard', icon: <Lightbulb size={20} />, color: 'green', desc: t('nav.greenlightDesc') },
+
       ]
     },
     {
       title: t('nav.live'),
       items: [
-        { name: t('nav.watchParty'), path: '/watchparty/list', icon: <Users size={20} />, color: 'orange', desc: t('nav.watchPartyDesc') },
+
         { name: t('nav.liveTV'), path: '/live-tv', icon: <Tv size={20} />, color: 'red', desc: t('nav.liveTVDesc') },
       ]
     },

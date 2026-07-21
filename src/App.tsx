@@ -9,7 +9,6 @@ import { AdFreePopupProvider } from './context/AdFreePopupContext';
 import { SearchProvider } from './context/SearchContext';
 import { AuthProvider } from './context/AuthContext';
 import { AdWarningProvider } from './context/AdWarningContext';
-import { VipModalProvider } from './context/VipModalContext';
 import { ProfileProvider, useProfile } from './context/ProfileContext';
 import { TurnstileProvider } from './context/TurnstileContext';
 import { LightModeProvider, useLightMode } from './context/LightModeContext';
@@ -1953,7 +1952,6 @@ function App() {
         <AdFreePopupProvider>
           <AuthProvider>
             <AdWarningProvider>
-              <VipModalProvider>
                 <ProfileProvider>
                   <TurnstileProvider>
                     <IntroProvider>
@@ -1966,7 +1964,6 @@ function App() {
                     </IntroProvider>
                   </TurnstileProvider>
                 </ProfileProvider>
-              </VipModalProvider>
             </AdWarningProvider>
           </AuthProvider>
         </AdFreePopupProvider>

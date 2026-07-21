@@ -441,11 +441,7 @@ voirdramaRouter.configure({
   shouldUpdateCache24h,
 });
 
-const {
-  router: vipDonationsRouter,
-  ensureVipDonationsTables
-} = require('./routes/vipDonations');
-const { router: vipPayblisRouter } = require('./routes/vipPayblis');
+
 const oauthRouter = require('./routes/oauth');
 
 // ==========================================================================
@@ -477,8 +473,7 @@ app.use('/api/admin/oauth-apps', require('./routes/adminOauthApps'));
 app.use('/api/sessions', require('./routes/sessions'));
 
 app.use('/api', require('./routes/admin'));
-app.use('/api', vipDonationsRouter);
-app.use('/api', vipPayblisRouter);
+
 app.use('/api/darkiworld', darkiworldRouter);
 app.use('/api/drama', voirdramaRouter);
 
@@ -542,8 +537,6 @@ const appReady = (async () => {
       await ensureCloneLinksStorage();
       console.log("Table clone_links initialized successfully");
 
-    await ensureVipDonationsTables(pool);
-    console.log('VIP donations tables initialized successfully');
 
     await ensureOAuthStorage(pool);
     console.log('OAuth tables initialized successfully');

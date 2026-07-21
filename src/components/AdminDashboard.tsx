@@ -25,7 +25,7 @@ import AdminReports from './AdminReports';
 import AdminSharedLists from './AdminSharedLists';
 import AdminTeam from './AdminTeam';
 import StreamingLinksManager from './StreamingLinksManager';
-import VipInvoicesManager from './VipInvoicesManager';
+
 import VipKeysManager from './VipKeysManager';
 import AnimatedBorderCard from './ui/animated-border-card';
 import ShinyText from './ui/shiny-text';
@@ -240,7 +240,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ role }) => {
             <ShieldCheck className="h-6 w-6 text-yellow-300" />
             {t('vipDonations.admin.dashboardTitle')}
           </h2>
-          <VipInvoicesManager />
+
         </div>
       ) : (
         <AnimatedBorderCard

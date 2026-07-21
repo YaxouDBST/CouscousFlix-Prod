@@ -22,6 +22,7 @@ const Footer: React.FC = () => {
             <p className="text-sm text-gray-400 leading-relaxed">
               {t('footer.disclaimerText')}
             </p>
+
           </div>
 
           {/* Technologies utilisées */}
