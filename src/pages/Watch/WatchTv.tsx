@@ -3097,10 +3097,11 @@ const WatchTv: React.FC = () => {
           }
 
           if (!applied) {
-            // Fallback final : vostfr
-            setSelectedSource('vostfr');
-            setOnlyVostfrAvailable(true);
-            currentSourceRef.current = 'vostfr';
+            // Fallback final : vidsrcwtf1
+            setSelectedSource('vidsrcwtf1');
+            setEmbedUrl(`https://vidsrc.wtf/api/1/tv/?id=${id}&s=${seasonNumber}&e=${episodeNumber}`);
+            setEmbedType('vidsrcwtf1');
+            currentSourceRef.current = 'vidsrcwtf1';
           }
         }
 
@@ -4483,7 +4484,7 @@ const WatchTv: React.FC = () => {
               }
 
               // Jamais de sandbox pour les liens Firebase Upload
-              if (urlLower.includes('uqload') || urlLower.includes('luluvdoo')) {
+              if (urlLower.includes('uqload') || urlLower.includes('luluvdoo') || urlLower.includes("videasy") || urlLower.includes("vidlink") || urlLower.includes("frembed") || urlLower.includes("vidsrc")) {
                 return undefined;
               }
 

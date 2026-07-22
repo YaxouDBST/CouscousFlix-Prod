@@ -828,6 +828,17 @@ const WatchAnime: React.FC = () => {
       }
       setLoadingOneUploadExtraction(false);
     }
+    // Fallback vidsrc.wtf 1 for Anime
+    if (decodedId && season && episode) {
+      sources.push({
+        language: selectedLanguage,
+        quality: 'Auto',
+        url: `https://vidsrc.wtf/api/1/tv/?id=${decodedId}&s=${season}&e=${episode}`,
+        player: 'vidsrcwtf1',
+        label: `${selectedLanguage.toUpperCase()} - Vidsrc.wtf 1 (y a une pub)`,
+        id: `vidsrcwtf1-${selectedLanguage}-${decodedId}-${season}-${episode}`
+      });
+    }
 
     // Tri par priorité hoster selon prefs utilisateur.
     // On annote chaque source avec son `type` détecté (via detectHoster, qui utilise
@@ -890,7 +901,15 @@ const WatchAnime: React.FC = () => {
     // Utiliser les sources filtrées pour la sélection
     const sourcesToSearch = filteredSources.length > 0 ? filteredSources : videoSources;
 
-    // Priority 1: Vidmoly HLS source in VF (always prioritize VF if available)
+    // Priority 1: Vidsrc.wtf 1 (User requested direct usage)
+    if (!sourceToSelect) {
+      sourceToSelect = sourcesToSearch.find(source => source.player === 'vidsrcwtf1');
+      if (sourceToSelect) {
+        console.log('Selected Vidsrc.wtf 1 source:', sourceToSelect.label);
+      }
+    }
+
+    // Priority 2: Vidmoly HLS source in VF (always prioritize VF if available)
     if (!sourceToSelect) {
       sourceToSelect = sourcesToSearch.find(source =>
         source.isM3u8 &&
@@ -1794,7 +1813,7 @@ const WatchAnime: React.FC = () => {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               sandbox={(() => {
                 const urlLower = embedUrl ? embedUrl.toLowerCase() : '';
-                if (urlLower.includes("mixdrop") || urlLower.includes("dood") || urlLower.includes("emmmmbed") || urlLower.includes("lecteur6") || urlLower.includes("supervideo") || urlLower.includes("dropload") || urlLower.includes('uqload') || urlLower.includes('luluvdoo') || urlLower.includes('sibnet')) {
+                if (urlLower.includes("mixdrop") || urlLower.includes("dood") || urlLower.includes("emmmmbed") || urlLower.includes("lecteur6") || urlLower.includes("supervideo") || urlLower.includes("dropload") || urlLower.includes('uqload') || urlLower.includes('luluvdoo') || urlLower.includes('sibnet') || urlLower.includes("videasy") || urlLower.includes("vidlink") || urlLower.includes("frembed") || urlLower.includes("vidsrc")) {
                   return undefined;
                 }
                 return "allow-scripts allow-same-origin allow-presentation allow-forms";

@@ -3279,9 +3279,9 @@ const WatchMovie: React.FC = () => {
                       setEmbedUrl(customSources[0]);
                       setEmbedType('custom');
                     } else {
-                      setSelectedSource('vostfr');
-                      setEmbedUrl(`https://player.videasy.net/movie/${id}`);
-                      setEmbedType('vostfr');
+                      setSelectedSource('vidsrcwtf1');
+                      setEmbedUrl(`https://vidsrc.wtf/api/1/movie/?id=${id}`);
+                      setEmbedType('vidsrcwtf1');
                     }
                   }
                 }
@@ -3986,12 +3986,7 @@ const WatchMovie: React.FC = () => {
             sandbox={(() => {
               const urlLower = embedUrl ? embedUrl.toLowerCase() : '';
 
-              // Jamais de sandbox pour Mixdrop, Doodstream, ou les lecteurs multi (emmmmbed.com, lecteur6.com)
-              if (urlLower.includes("mixdrop") || urlLower.includes("dood") || urlLower.includes("emmmmbed") || urlLower.includes("lecteur6")) {
-                return undefined;
-              }
-              // Jamais de sandbox pour supervideo ou dropload
-              if (urlLower.includes("supervideo") || urlLower.includes("dropload")) {
+              if (urlLower.includes("mixdrop") || urlLower.includes("dood") || urlLower.includes("emmmmbed") || urlLower.includes("lecteur6") || urlLower.includes("supervideo") || urlLower.includes("dropload") || urlLower.includes("videasy") || urlLower.includes("vidlink") || urlLower.includes("frembed") || urlLower.includes("vidsrc")) {
                 return undefined;
               }
               // Pour Coflix: jamais de sandbox pour les lecteurs multi
@@ -4079,7 +4074,7 @@ const WatchMovie: React.FC = () => {
           <div className="fixed top-6 right-8 z-[10000] flex items-center gap-2">
             {/* Bouton Ouvrir dans une nouvelle page */}
             <button
-              onClick={() => window.open(selectedSource === 'vostfr' ? `https://player.videasy.net/movie/${id}` : `https://frembed.click/api/film.php?id=${id}`, '_blank', 'noopener')}
+              onClick={() => window.open(embedUrl || `https://frembed.click/api/film.php?id=${id}`, '_blank', 'noopener')}
               className="flex items-center gap-2 px-3 py-2 rounded-lg bg-gray-800/90 border border-gray-600 hover:bg-gray-700/90 text-white font-medium text-sm transition-all duration-200"
               title={t('watch.openInNewPage')}
             >
@@ -4099,12 +4094,11 @@ const WatchMovie: React.FC = () => {
           </div>
 
           <iframe
-            src={selectedSource === 'vostfr' ? `https://player.videasy.net/movie/${id}` : `https://frembed.click/api/film.php?id=${id}`}
+            src={embedUrl || `https://frembed.click/api/film.php?id=${id}`}
             className="w-full h-full border-0"
             allowFullScreen
             referrerPolicy="strict-origin-when-cross-origin"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            sandbox="allow-scripts allow-same-origin allow-presentation allow-forms"
           ></iframe>
 
           <AnimatePresence>

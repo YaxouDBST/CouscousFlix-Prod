@@ -1992,14 +1992,14 @@ const HLSPlayer = forwardRef<HLSPlayerRef, HLSPlayerProps>(({
         embedSources.push({
           type: 'frembed',
           id: 'frembed_main',
-          label: t('watch.frembedPlayer'),
+          label: t('watch.frembedPlayer') + ' (y a une pub)',
           url: `https://frembed.click/api/film.php?id=${movieId}`,
         });
       } else if (tvShowId && seasonNumber && episodeNumber) {
         embedSources.push({
           type: 'frembed',
           id: 'frembed_main',
-          label: t('watch.frembedPlayer'),
+          label: t('watch.frembedPlayer') + ' (y a une pub)',
           url: `https://frembed.click/api/serie.php?id=${tvShowId}&sa=${seasonNumber}&epi=${episodeNumber}`,
         });
       }
@@ -8029,11 +8029,11 @@ const HLSPlayer = forwardRef<HLSPlayerRef, HLSPlayerProps>(({
                                   className="ml-4 pl-2 border-l-2 border-gray-700 mb-2"
                                 >
                                   {[
-                                    { id: 'peachify', label: 'Peachify' },
-                                    { id: 'vostfr', label: 'Videasy' },
-                                    { id: 'vidlink', label: 'Vidlink' },
-                                    { id: 'vidsrccc', label: 'Vidsrc.io' },
-                                    { id: 'vidsrcwtf1', label: 'Vidsrc.wtf 1' }
+                                    { id: 'peachify', label: 'Peachify (y a une pub)' },
+                                    { id: 'vostfr', label: 'Videasy (y a une pub)' },
+                                    { id: 'vidlink', label: 'Vidlink (y a une pub)' },
+                                    { id: 'vidsrccc', label: 'Vidsrc.io (y a une pub)' },
+                                    { id: 'vidsrcwtf1', label: 'Vidsrc.wtf 1 (y a une pub)' }
                                   ].map((vostfrSource, index) => {
                                     // IMPORTANT: `!= null` au lieu de truthy check — sinon seasonNumber=0
                                     // (épisode spécial / Spéciaux TMDB) tombe dans le fallback '#' qui fait
