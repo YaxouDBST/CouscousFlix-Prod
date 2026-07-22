@@ -40,6 +40,7 @@ function domainRestriction(req, res, next) {
 
   const allowedDomains = [
     'localhost:3000',
+    'couscousflix.uk',
     'couscousflix.date',
     'couscousflix.chat',
     'couscousflix.cloud',
