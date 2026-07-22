@@ -7,6 +7,7 @@ const cors = require("cors");
 const { getOAuthAllowedCorsOrigins } = require('../utils/oauthClients');
 
 const STATIC_ALLOWED_DOMAINS = [
+  'couscousflix.uk',
   'couscousflix.date',
   'couscousflix.chat',
   'couscousflix.cloud',
