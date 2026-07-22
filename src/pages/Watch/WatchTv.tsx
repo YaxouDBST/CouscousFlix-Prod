@@ -568,12 +568,15 @@ const WatchTv: React.FC = () => {
     setLoadingRivestream(false);
     setSelectedRivestreamSource(0);
     // Embed URL/type d'un épisode précédent ne doivent jamais survivre à une nav d'épisode :
-    // sinon un utilisateur arrivant sur un nouvel épisode verrait soit l'iframe pointant vers
-    // le mauvais épisode, soit (combiné au reorder ternary plus bas) un faux contenu durant le
-    // re-init.
-    setEmbedUrl(null);
-    setEmbedType(null);
-  }, [seasonNumber, episodeNumber]);
+    // On met immédiatement à jour vers vidsrcwtf1 pour éviter l'écran noir / menu des sources
+    if (id) {
+      setEmbedUrl(`https://vidsrc.wtf/api/1/tv/?id=${id}&s=${seasonNumber}&e=${episodeNumber}`);
+      setEmbedType('vidsrcwtf1');
+    } else {
+      setEmbedUrl(null);
+      setEmbedType(null);
+    }
+  }, [seasonNumber, episodeNumber, id]);
 
   // Bump à chaque changement de prefs de priorité pour re-trier les sortedX.
   const [, setPrefsVersion] = useState<number>(0);

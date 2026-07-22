@@ -875,6 +875,10 @@ const WatchAnime: React.FC = () => {
     });
     const sortedSources = sorted.map((a) => a.source);
 
+    if (initialVidsrcWtfSource) {
+      sortedSources.unshift(initialVidsrcWtfSource);
+    }
+
     setVideoSources(sortedSources);
     setExtractionProgress('');
 
