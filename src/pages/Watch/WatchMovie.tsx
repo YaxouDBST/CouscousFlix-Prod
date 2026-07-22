@@ -353,7 +353,7 @@ const WatchMovie: React.FC = () => {
   const { currentProfile } = useProfile();
 
   const id = encodedId ? getTmdbId(encodedId) : null;
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [loadingText, setLoadingText] = useState(t('watch.loadingSources'));
   const [movieTitle, setMovieTitle] = useState<string>('');
   const [backdropPath, setBackdropPath] = useState<string | null>(null);
@@ -2368,9 +2368,12 @@ const WatchMovie: React.FC = () => {
       console.error('Error in fetchVideoSources:', error);
 
       // Default to VOSTFR when no sources are available
-      setSelectedSource('vostfr');
-      setOnlyVostfrAvailable(true);
-      setLoadingError(false);
+      // But only if we haven't already applied vidsrcwtf1
+      if (!currentSourceRef.current) {
+        setSelectedSource('vostfr');
+        setOnlyVostfrAvailable(true);
+        setLoadingError(false);
+      }
 
       // Make sure to set all loading states to false in case of a top-level error
       setLoadingCoflix(false);

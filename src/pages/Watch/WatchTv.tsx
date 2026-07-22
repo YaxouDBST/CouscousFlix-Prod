@@ -460,7 +460,7 @@ const WatchTv: React.FC = () => {
   const seasonNumber = parseInt(seasonParam || '1', 10);
   const episodeNumber = parseInt(episodeParam || '1', 10);
 
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [contentCert] = useState<string>('');
   const [isBlocked] = useState(false);
   const [loadingText, setLoadingText] = useState(t('watch.loadingSources'));
@@ -985,6 +985,11 @@ const WatchTv: React.FC = () => {
       setLoadingNextEpisode(false);
     }
   }, [id, seasonNumber, episodeNumber, showTitle]);
+
+  // Helper function to check if next episode exists
+  useEffect(() => {
+    fetchNextEpisodeData();
+  }, [fetchNextEpisodeData]);
 
   // Helper function to check if next episode exists
   const isNextEpisodeAvailable = async (showId: string, season: number, episode: number) => {
@@ -4218,11 +4223,10 @@ const WatchTv: React.FC = () => {
             {t('watch.back')}
           </button>
 
-          {/* Next Episode Button (for embed view in the other embed section) */}
-          {nextEpisodeData && (
-            <div className="absolute top-4 right-4 z-50 flex items-center gap-2">
-              {/* Previous Episode Button - hide if at first episode of first season */}
-              {!(seasonNumber === 1 && episodeNumber === 1) && (() => {
+          {/* Navigation Buttons (for embed view in the other embed section) */}
+          <div className="absolute top-4 right-4 z-50 flex items-center gap-2">
+            {/* Previous Episode Button - hide if at first episode of first season */}
+            {!(seasonNumber === 1 && episodeNumber === 1) && (() => {
                 // Utiliser `seasonNumber` direct (et pas `|| 1`) : pour S0E2 par exemple,
                 // l'épisode précédent est S0E1, pas S1:01 — `0 || 1 = 1` cassait le label.
                 const prevLabel = episodeNumber > 1
@@ -4292,7 +4296,6 @@ const WatchTv: React.FC = () => {
                 );
               })()}
             </div>
-          )}
 
           {/* Episodes Menu */}
           <AnimatePresence>

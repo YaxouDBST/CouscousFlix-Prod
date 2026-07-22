@@ -171,7 +171,7 @@ const WatchAnime: React.FC = () => {
   const playerRef = useRef<HTMLDivElement>(null);
 
   // Basic state
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [contentCert, setContentCert] = useState<string>('');
   const [isBlocked, setIsBlocked] = useState(false);

@@ -8029,11 +8029,11 @@ const HLSPlayer = forwardRef<HLSPlayerRef, HLSPlayerProps>(({
                                   className="ml-4 pl-2 border-l-2 border-gray-700 mb-2"
                                 >
                                   {[
+                                    { id: 'vidsrcwtf1', label: 'Vidsrc.wtf 1' },
+                                    { id: 'vidsrccc', label: 'Vidsrc.io' },
                                     { id: 'peachify', label: 'Peachify (y a une pub)' },
                                     { id: 'vostfr', label: 'Videasy (y a une pub)' },
-                                    { id: 'vidlink', label: 'Vidlink (y a une pub)' },
-                                    { id: 'vidsrccc', label: 'Vidsrc.io (y a une pub)' },
-                                    { id: 'vidsrcwtf1', label: 'Vidsrc.wtf 1 (y a une pub)' }
+                                    { id: 'vidlink', label: 'Vidlink (y a une pub)' }
                                   ].map((vostfrSource, index) => {
                                     // IMPORTANT: `!= null` au lieu de truthy check — sinon seasonNumber=0
                                     // (épisode spécial / Spéciaux TMDB) tombe dans le fallback '#' qui fait
