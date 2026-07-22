@@ -3998,8 +3998,8 @@ const WatchMovie: React.FC = () => {
               if (embedType === 'coflix') {
                 return undefined;
               }
-              // Par défaut, pas de sandbox
-              return undefined;
+              // Par défaut, sandbox strict pour bloquer pubs
+              return "allow-scripts allow-same-origin allow-presentation";
             })()}
           ></iframe>
 
