@@ -569,7 +569,7 @@ const WatchTv: React.FC = () => {
     // Embed URL/type d'un épisode précédent ne doivent jamais survivre à une nav d'épisode :
     // On met immédiatement à jour vers vidsrcwtf1 pour éviter l'écran noir / menu des sources
     if (id) {
-      setEmbedUrl(`https://vidsrc.wtf/api/1/tv/?id=${id}&s=${seasonNumber}&e=${episodeNumber}`);
+      setEmbedUrl(`https://vidsrc.wtf/api/1/tv/?id=${id}&s=${seasonNumber}&e=${episodeNumber}&server=Ethan`);
       setEmbedType('vidsrcwtf1');
     } else {
       setEmbedUrl(null);
@@ -690,7 +690,7 @@ const WatchTv: React.FC = () => {
   const currentActiveUrlRef = useRef<string>('');
 
   // State for Embed player
-  const [embedUrl, setEmbedUrl] = useState<string | null>(`https://vidsrc.wtf/api/1/tv/?id=${id}&s=${seasonNumber}&e=${episodeNumber}`);
+  const [embedUrl, setEmbedUrl] = useState<string | null>(`https://vidsrc.wtf/api/1/tv/?id=${id}&s=${seasonNumber}&e=${episodeNumber}&server=Ethan`);
   const [embedType, setEmbedType] = useState<string | null>('vidsrcwtf1');
 
   const [showEmbedQuality, setShowEmbedQuality] = useState(false); // For the embed source menu
@@ -3090,7 +3090,7 @@ const WatchTv: React.FC = () => {
           let applied = false;
           
           setSelectedSource('vidsrcwtf1');
-          setEmbedUrl(`https://vidsrc.wtf/api/1/tv/?id=${id}&s=${seasonNumber}&e=${episodeNumber}`);
+          setEmbedUrl(`https://vidsrc.wtf/api/1/tv/?id=${id}&s=${seasonNumber}&e=${episodeNumber}&server=Ethan`);
           setEmbedType('vidsrcwtf1');
           currentSourceRef.current = 'vidsrcwtf1';
           applied = true;

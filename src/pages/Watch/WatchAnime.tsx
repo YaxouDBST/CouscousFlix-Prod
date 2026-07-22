@@ -199,7 +199,7 @@ const WatchAnime: React.FC = () => {
   const initialVidsrcWtfSource = decodedId && season && episode ? {
     language: selectedLanguage,
     quality: 'Auto',
-    url: `https://vidsrc.wtf/api/1/tv/?id=${decodedId}&s=${season}&e=${episode}`,
+    url: `https://vidsrc.wtf/api/1/tv/?id=${decodedId}&s=${season}&e=${episode}&server=Ethan`,
     player: 'vidsrcwtf1',
     label: `${selectedLanguage.toUpperCase()} - Vidsrc.wtf 1 (y a une pub)`,
     id: `vidsrcwtf1-${selectedLanguage}-${decodedId}-${season}-${episode}`
@@ -842,7 +842,7 @@ const WatchAnime: React.FC = () => {
       sources.push({
         language: selectedLanguage,
         quality: 'Auto',
-        url: `https://vidsrc.wtf/api/1/tv/?id=${decodedId}&s=${season}&e=${episode}`,
+        url: `https://vidsrc.wtf/api/1/tv/?id=${decodedId}&s=${season}&e=${episode}&server=Ethan`,
         player: 'vidsrcwtf1',
         label: `${selectedLanguage.toUpperCase()} - Vidsrc.wtf 1 (y a une pub)`,
         id: `vidsrcwtf1-${selectedLanguage}-${decodedId}-${season}-${episode}`

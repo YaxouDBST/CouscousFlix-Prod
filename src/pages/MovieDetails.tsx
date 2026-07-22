@@ -1852,7 +1852,7 @@ const VideoPlayer = ({ movieId, backdropPath }: { movieId: string; backdropPath?
                   selectedSource === 'videasy' ? `https://vidlink.pro/movie/${movieId}?primaryColor=0278fd&secondaryColor=a2a2a2&iconColor=eefdec&icons=default&player=default&title=true&poster=true&autoplay=true&nextbutton=false` :
                     selectedSource === 'vidsrccc' ? `https://vidsrc.io/embed/movie?tmdb=${movieId}` :
                       selectedSource === 'vidsrcsu' ? `https://vidsrc.su/embed/movie/${movieId}` :
-                        selectedSource === 'vidsrcwtf1' ? `https://vidsrc.wtf/api/1/movie/?id=${movieId}` :
+                        selectedSource === 'vidsrcwtf1' ? `https://vidsrc.wtf/api/1/movie/?id=${movieId}&server=Ethan` :
                           selectedSource === 'vidsrcwtf5' ? `https://vidsrc.wtf/api/5/movie/?id=${movieId}` :
                             selectedSource === 'adfree' ? adFreeSource || "" :
                               selectedSource === 'multi' ? coflixData?.player_links?.[selectedPlayerLink]?.decoded_url || "" : "";
@@ -1869,7 +1869,7 @@ const VideoPlayer = ({ movieId, backdropPath }: { movieId: string; backdropPath?
                   selectedSource === 'videasy' ? `https://vidlink.pro/movie/${movieId}?primaryColor=0278fd&secondaryColor=a2a2a2&iconColor=eefdec&icons=default&player=default&title=true&poster=true&autoplay=true&nextbutton=false` :
                     selectedSource === 'vidsrccc' ? `https://vidsrc.io/embed/movie?tmdb=${movieId}` :
                       selectedSource === 'vidsrcsu' ? `https://vidsrc.su/embed/movie/${movieId}` :
-                        selectedSource === 'vidsrcwtf1' ? `https://vidsrc.wtf/api/1/movie/?id=${movieId}` :
+                        selectedSource === 'vidsrcwtf1' ? `https://vidsrc.wtf/api/1/movie/?id=${movieId}&server=Ethan` :
                           selectedSource === 'vidsrcwtf5' ? `https://vidsrc.wtf/api/5/movie/?id=${movieId}` :
                             selectedSource === 'adfree' ? adFreeSource || "" :
                               selectedSource === 'multi' ? coflixData?.player_links?.[selectedPlayerLink]?.decoded_url || "" :

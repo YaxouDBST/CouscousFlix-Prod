@@ -536,7 +536,7 @@ const WatchMovie: React.FC = () => {
   // Used to reject stale auto-fallback sourceChange events from an unmounted/previous player.
   const currentActiveUrlRef = useRef<string>('');
 
-  const [embedUrl, setEmbedUrl] = useState<string | null>(`https://vidsrc.wtf/api/1/movie/?id=${id}`);
+  const [embedUrl, setEmbedUrl] = useState<string | null>(`https://vidsrc.wtf/api/1/movie/?id=${id}&server=Ethan`);
   const [embedType, setEmbedType] = useState<string | null>('vidsrcwtf1');
 
   // Ajouter un état pour afficher le menu qualité embed
@@ -2350,7 +2350,7 @@ const WatchMovie: React.FC = () => {
         let applied = false;
 
         setSelectedSource('vidsrcwtf1');
-        setEmbedUrl(`https://vidsrc.wtf/api/1/movie/?id=${id}`);
+        setEmbedUrl(`https://vidsrc.wtf/api/1/movie/?id=${id}&server=Ethan`);
         setEmbedType('vidsrcwtf1');
         currentSourceRef.current = 'vidsrcwtf1';
         applied = true;
@@ -3265,7 +3265,7 @@ const WatchMovie: React.FC = () => {
                       setEmbedType('custom');
                     } else {
                       setSelectedSource('vidsrcwtf1');
-                      setEmbedUrl(`https://vidsrc.wtf/api/1/movie/?id=${id}`);
+                      setEmbedUrl(`https://vidsrc.wtf/api/1/movie/?id=${id}&server=Ethan`);
                       setEmbedType('vidsrcwtf1');
                     }
                   }

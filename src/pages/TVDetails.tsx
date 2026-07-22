@@ -1568,7 +1568,7 @@ const VideoPlayer = forwardRef<VideoPlayerRefHandle, VideoPlayerProps>(({ showId
         newSrc = `https://vidsrc.su/embed/tv/${showId}/${seasonNumber}/${episodeNumber}`;
         break;
       case 'vidsrcwtf1':
-        newSrc = `https://vidsrc.wtf/api/1/tv/?id=${showId}&s=${seasonNumber}&e=${episodeNumber}`;
+        newSrc = `https://vidsrc.wtf/api/1/tv/?id=${showId}&s=${seasonNumber}&e=${episodeNumber}&server=Ethan`;
         break;
       case 'vidsrcwtf5':
         newSrc = `https://vidsrc.wtf/api/5/tv/?id=${showId}&s=${seasonNumber}&e=${episodeNumber}`;

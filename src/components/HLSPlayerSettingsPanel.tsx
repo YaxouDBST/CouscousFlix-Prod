@@ -1125,13 +1125,13 @@ const HLSPlayerSettingsPanel = (props: HLSPlayerSettingsPanelProps) => {
                                             vostfrSource.id === 'vidlink' ? `https://vidlink.pro/movie/${movieId}` :
                                               vostfrSource.id === 'vidsrccc' ? `https://vidsrc.io/embed/movie?tmdb=${movieId}` :
                                                 vostfrSource.id === 'vostfr' ? `https://player.videasy.net/movie/${movieId}` :
-                                                  `https://vidsrc.wtf/api/1/movie/?id=${movieId}` :
+                                                  `https://vidsrc.wtf/api/1/movie/?id=${movieId}&server=Ethan` :
                                           (tvShowId != null && seasonNumber != null && episodeNumber != null) ?
                                             vostfrSource.id === 'peachify' ? `https://peachify.top/embed/tv/${tvShowId}/${seasonNumber}/${episodeNumber}?sub=French&accent=dc2626` :
                                               vostfrSource.id === 'vidlink' ? `https://vidlink.pro/tv/${tvShowId}/${seasonNumber}/${episodeNumber}` :
                                                 vostfrSource.id === 'vidsrccc' ? `https://vidsrc.io/embed/tv?tmdb=${tvShowId}&season=${seasonNumber}&episode=${episodeNumber}` :
                                                   vostfrSource.id === 'vostfr' ? `https://player.videasy.net/tv/${tvShowId}/${seasonNumber}/${episodeNumber}` :
-                                                    `https://vidsrc.wtf/api/1/tv/?id=${tvShowId}&s=${seasonNumber}&e=${episodeNumber}` :
+                                                    `https://vidsrc.wtf/api/1/tv/?id=${tvShowId}&s=${seasonNumber}&e=${episodeNumber}&server=Ethan` :
                                             '#'; // Fallback if neither movie nor TV info is present
 
                                         // Active state check for VOSTFR sources in main menu
