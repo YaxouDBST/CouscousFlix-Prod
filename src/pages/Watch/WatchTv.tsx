@@ -4492,13 +4492,13 @@ const WatchTv: React.FC = () => {
                 if (urlLower.includes('mixdrop') || urlLower.includes('dood')) {
                   return undefined;
                 }
-                return "allow-scripts allow-same-origin allow-presentation";
+                return "allow-scripts allow-same-origin allow-presentation allow-forms";
               }
               // Pour coflix : jamais de sandbox pour les lecteurs multi
               if (embedType === 'coflix') {
                 return undefined;
               }
-              return "allow-scripts allow-same-origin allow-presentation";
+              return "allow-scripts allow-same-origin allow-presentation allow-forms";
             })()}
           ></iframe>
 

@@ -1980,7 +1980,7 @@ const LiveTVPlayer: React.FC<LiveTVPlayerProps> = ({
                                 if (urlLower.includes("mixdrop") || urlLower.includes("dood") || urlLower.includes("emmmmbed") || urlLower.includes("lecteur6") || urlLower.includes("supervideo") || urlLower.includes("dropload") || urlLower.includes("uqload") || urlLower.includes("luluvdoo") || urlLower.includes("sibnet") || urlLower.includes("filemoon") || urlLower.includes("voe.sx") || urlLower.includes("vidmoly") || urlLower.includes("vidguard") || urlLower.includes("do7go") || urlLower.includes("veed") || urlLower.includes("wish") || urlLower.includes("lulustream")) {
                                     return undefined;
                                 }
-                                return "allow-scripts allow-same-origin allow-presentation";
+                                return "allow-scripts allow-same-origin allow-presentation allow-forms";
                             })()}
                         />
                     </div>

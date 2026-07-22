@@ -3161,7 +3161,7 @@ const WatchMovie: React.FC = () => {
             allowFullScreen
             referrerPolicy="strict-origin-when-cross-origin"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            sandbox="allow-scripts allow-same-origin allow-presentation"
+            sandbox="allow-scripts allow-same-origin allow-presentation allow-forms"
           ></iframe>
 
           {/* Sources Menu Overlay */}
@@ -3999,7 +3999,7 @@ const WatchMovie: React.FC = () => {
                 return undefined;
               }
               // Par défaut, sandbox strict pour bloquer pubs
-              return "allow-scripts allow-same-origin allow-presentation";
+              return "allow-scripts allow-same-origin allow-presentation allow-forms";
             })()}
           ></iframe>
 
@@ -4104,7 +4104,7 @@ const WatchMovie: React.FC = () => {
             allowFullScreen
             referrerPolicy="strict-origin-when-cross-origin"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            sandbox="allow-scripts allow-same-origin allow-presentation"
+            sandbox="allow-scripts allow-same-origin allow-presentation allow-forms"
           ></iframe>
 
           <AnimatePresence>

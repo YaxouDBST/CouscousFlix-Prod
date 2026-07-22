@@ -1797,7 +1797,7 @@ const WatchAnime: React.FC = () => {
                 if (urlLower.includes("mixdrop") || urlLower.includes("dood") || urlLower.includes("emmmmbed") || urlLower.includes("lecteur6") || urlLower.includes("supervideo") || urlLower.includes("dropload") || urlLower.includes('uqload') || urlLower.includes('luluvdoo') || urlLower.includes('sibnet')) {
                   return undefined;
                 }
-                return "allow-scripts allow-same-origin allow-presentation";
+                return "allow-scripts allow-same-origin allow-presentation allow-forms";
               })()}
             ></iframe>
           ) : null}
