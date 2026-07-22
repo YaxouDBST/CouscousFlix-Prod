@@ -877,7 +877,7 @@ const checkMovieAvailability = async (movieId: string) => {
         const rawLinks = response.data.data.links;
         console.log('Raw API links:', rawLinks);
 
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        
         rawLinks.forEach((item: any) => {
           if (typeof item === 'string') {
             if (item.toLowerCase().endsWith('.mp4') && !uniqueUrls.has(item)) {
@@ -958,7 +958,7 @@ const checkDarkinoAvailability = async (
       return false;
     }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    
     const matchingMovie = searchResponse.data.results.find((result: any) => {
       return (result.have_streaming === 1 || result.have_streaming === 0) &&
         result.type !== 'series' &&
@@ -1031,7 +1031,7 @@ const VideoPlayer = ({ movieId, backdropPath }: { movieId: string; backdropPath?
   // Darkino states
   const [darkinoAvailable, setDarkinoAvailable] = useState(false);
   const [loadingDarkino, setLoadingDarkino] = useState(true);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  
   const [darkinoSources, setDarkinoSources] = useState<any[]>([]);
   // eslint-disable-next-line unused-imports/no-unused-vars
   const [darkinoId, setDarkinoId] = useState<string | null>(null);
@@ -1401,11 +1401,11 @@ const VideoPlayer = ({ movieId, backdropPath }: { movieId: string; backdropPath?
   useEffect(() => {
     const handleFullscreenChange = () => {
       const isFullscreen = document.fullscreenElement ||
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        
         (document as any).webkitFullscreenElement ||
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        
         (document as any).mozFullScreenElement ||
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        
         (document as any).msFullscreenElement;
 
       if (isFullscreen) {
@@ -1767,7 +1767,7 @@ const VideoPlayer = ({ movieId, backdropPath }: { movieId: string; backdropPath?
               }
             }}
             onError={handleHlsError} // Added onError prop
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            
             nextMovie={nextMovie as any} // Utiliser un cast temporaire
             onNextMovie={handleNextMovie}
             // Use backdropPath for HLS poster
@@ -1832,7 +1832,7 @@ const VideoPlayer = ({ movieId, backdropPath }: { movieId: string; backdropPath?
                 setSelectedMp4Source(prevIndex => prevIndex + 1);
               }
             }}
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            
             nextMovie={nextMovie as any}
             onNextMovie={handleNextMovie}
             poster={backdropPath ? `https://image.tmdb.org/t/p/original${backdropPath}` : undefined}
@@ -1941,12 +1941,12 @@ const MovieDetails = (): JSX.Element => {
 
   // eslint-disable-next-line unused-imports/no-unused-vars
   const [showVideo, setShowVideo] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  
   const [videos, setVideos] = useState<any[]>([]);
   const [loadingVideos, setLoadingVideos] = useState(false);
 
   // États pour les vidéos multi-langues
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  
   const [multiLangVideos, setMultiLangVideos] = useState<any[]>([]);
   const [loadingMultiLangVideos, setLoadingMultiLangVideos] = useState(false);
   const [showMultiLangView, setShowMultiLangView] = useState(false);
@@ -1966,7 +1966,7 @@ const MovieDetails = (): JSX.Element => {
   // eslint-disable-next-line unused-imports/no-unused-vars
   const [isAvailable, setIsAvailable] = useState<boolean>(true);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  
   const [recommendations, setRecommendations] = useState<any[]>([]);
   // eslint-disable-next-line unused-imports/no-unused-vars
   const [loadingSimilar, setLoadingSimilar] = useState(false);
@@ -1993,7 +1993,7 @@ const MovieDetails = (): JSX.Element => {
 
   // État pour la popup vidéo
   const [showVideoPopup, setShowVideoPopup] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  
   const [selectedVideo, setSelectedVideo] = useState<any>(null);
   const [isClosingVideo, setIsClosingVideo] = useState(false);
 
@@ -2054,20 +2054,20 @@ const MovieDetails = (): JSX.Element => {
       );
       const releaseDatesData = releaseDatesResponse.data.results;
       const newCertifications: { [key: string]: string } = {};
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      
       const frRelease = releaseDatesData.find((r: any) => r.iso_3166_1 === 'FR');
       if (frRelease && frRelease.release_dates) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        
         const theatricalRelease = frRelease.release_dates.find((rd: any) => rd.type === 3 || rd.type === 2); // Theatrical or Theatrical (limited)
         if (theatricalRelease && theatricalRelease.certification) {
           newCertifications['FR'] = theatricalRelease.certification;
         }
       }
       if (!newCertifications['FR']) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        
         const usRelease = releaseDatesData.find((r: any) => r.iso_3166_1 === 'US');
         if (usRelease && usRelease.release_dates) {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          
           const theatricalRelease = usRelease.release_dates.find((rd: any) => rd.certification !== "");
           if (theatricalRelease && theatricalRelease.certification) {
             newCertifications['US'] = theatricalRelease.certification;
@@ -2176,7 +2176,7 @@ const MovieDetails = (): JSX.Element => {
       setVideos(fetchedVideos);
 
       // Set trailer for the trailer popup
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      
       const trailer = fetchedVideos.find((v: any) => v.type === 'Trailer');
       if (trailer) {
         console.log('Trailer found:', trailer);
@@ -2291,11 +2291,11 @@ const MovieDetails = (): JSX.Element => {
       const watchedItems = JSON.parse(localStorage.getItem('watched_movie') || '[]');
 
       setWatchStatus({
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        
         watchlist: watchlistItems.some((item: any) => item.id === Number(id)),
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        
         favorite: favoriteItems.some((item: any) => item.id === Number(id)),
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        
         watched: watchedItems.some((item: any) => item.id === Number(id))
       });
     };
@@ -2321,12 +2321,12 @@ const MovieDetails = (): JSX.Element => {
       if (value) {
         const updatedItems = [
           itemToSave,
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          
           ...existingItems.filter((item: any) => item.id !== Number(id))
         ];
         localStorage.setItem(key, JSON.stringify(updatedItems));
       } else {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        
         const filteredItems = existingItems.filter((item: any) => item.id !== Number(id));
         localStorage.setItem(key, JSON.stringify(filteredItems));
       }
@@ -2508,7 +2508,7 @@ const MovieDetails = (): JSX.Element => {
       const movies = response.data.results.slice(0, 20);
 
       // Ne plus vérifier la disponibilité sur frembed, retourner directement les résultats TMDB
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      
       const availableMovies = movies.map((movie: any) => ({ ...movie, isAvailable: true }));
       console.log('Films disponibles:', availableMovies);
       setRecommendations(availableMovies);
@@ -2579,7 +2579,7 @@ const MovieDetails = (): JSX.Element => {
       const backdrops = response.data.backdrops;
       if (backdrops && backdrops.length > 0) {
         // Trier par résolution et choisir la meilleure
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        
         const bestBackdrop = backdrops.sort((a: any, b: any) => b.width - a.width)[0];
         setBackdropImage(`https://image.tmdb.org/t/p/w1280${bestBackdrop.file_path}`);
       }
@@ -3842,7 +3842,7 @@ const MovieDetails = (): JSX.Element => {
                     multiLangVideos.length > 0 ? (
                       (() => {
                         // Grouper les vidéos par langue
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        
                         const videosByLanguage = multiLangVideos.reduce((acc: any, video: any) => {
                           const lang = video.iso_639_1 || 'unknown';
                           if (!acc[lang]) acc[lang] = [];
@@ -3865,15 +3865,15 @@ const MovieDetails = (): JSX.Element => {
                           'unknown': t('details.langUnknown')
                         };
 
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        
                         return Object.entries(videosByLanguage).map(([langCode, videos]: [string, any]) => (
                           <div key={langCode} className="mb-8">
                             <h4 className="text-lg font-medium mb-4 text-purple-400 border-b border-gray-700 pb-2">
                               {languageNames[langCode] || langCode.toUpperCase()}
                             </h4>
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                              
+                              
                               {videos.map((video: Record<string, unknown>, videoIndex: number) => (
                                 <motion.div
                                   key={video.id}
@@ -3960,8 +3960,8 @@ const MovieDetails = (): JSX.Element => {
                     // Vue normale
                     videos.length > 0 ? (
                       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        
+                        
                         {videos.map((video: Record<string, unknown>, index: number) => (
                           <motion.div
                             key={video.id}
@@ -4128,7 +4128,7 @@ const MovieDetails = (): JSX.Element => {
                                             // Watchlist logic
                                             const storageKey = 'watchlist_movie';
                                             const typeWatchlist = JSON.parse(localStorage.getItem(storageKey) || '[]');
-                                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                            
                                             const exists = typeWatchlist.some((media: any) => media.id === part.id);
                                             if (!exists) {
                                               typeWatchlist.push({
@@ -4155,7 +4155,7 @@ const MovieDetails = (): JSX.Element => {
                                                 }, 500);
                                               }, 1500);
                                             } else {
-                                              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                              
                                               const updatedTypeWatchlist = typeWatchlist.filter((media: any) => media.id !== part.id);
                                               localStorage.setItem(storageKey, JSON.stringify(updatedTypeWatchlist));
                                               // Update button
@@ -4181,7 +4181,7 @@ const MovieDetails = (): JSX.Element => {
                                             {(() => {
                                               const storageKey = 'watchlist_movie';
                                               const typeWatchlist = JSON.parse(localStorage.getItem(storageKey) || '[]');
-                                              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                              
                                               const exists = typeWatchlist.some((media: any) => media.id === part.id);
                                               return exists ? t('search.removeFromWatchlist') : t('search.addToWatchlist');
                                             })()}
@@ -4190,14 +4190,14 @@ const MovieDetails = (): JSX.Element => {
                                             className={`w-4 h-4 ${(() => {
                                               const storageKey = 'watchlist_movie';
                                               const typeWatchlist = JSON.parse(localStorage.getItem(storageKey) || '[]');
-                                              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                              
                                               const exists = typeWatchlist.some((media: any) => media.id === part.id);
                                               return exists ? 'text-yellow-400' : 'text-black';
                                             })()}`}
                                             fill={(() => {
                                               const storageKey = 'watchlist_movie';
                                               const typeWatchlist = JSON.parse(localStorage.getItem(storageKey) || '[]');
-                                              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                              
                                               const exists = typeWatchlist.some((media: any) => media.id === part.id);
                                               return exists ? 'currentColor' : 'black';
                                             })()}

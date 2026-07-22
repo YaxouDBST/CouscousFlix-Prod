@@ -316,11 +316,11 @@ const WatchAnime: React.FC = () => {
             });
             const ratings = certResponse.data.results;
             let cert = '';
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
             const fr = ratings.find((r: any) => r.iso_3166_1 === 'FR');
             if (fr?.rating) cert = fr.rating;
             if (!cert) {
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
               const us = ratings.find((r: any) => r.iso_3166_1 === 'US');
               if (us?.rating) cert = us.rating;
             }
@@ -373,7 +373,7 @@ const WatchAnime: React.FC = () => {
         type AnimeResult = {
           name: string;
           url: string;
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
           seasons: Array<any>;
           alternative_names?: string[];
         };

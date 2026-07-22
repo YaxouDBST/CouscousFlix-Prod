@@ -1163,7 +1163,7 @@ const WatchMovie: React.FC = () => {
       // Process Coflix MULTI links for VOE.SX and UQLOAD extraction (ignore Omega)
       if (coflixResult && Array.isArray(coflixResult.player_links) && coflixResult.player_links.length > 0) {
         const decodedLinks = coflixResult.player_links
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
           .map((p: { decoded_url?: string; clone_url?: string; url?: string }) => getCoflixPreferredUrl(p as any))
           .filter((u: string) => !!u);
 
@@ -2254,7 +2254,7 @@ const WatchMovie: React.FC = () => {
               })),
               { category: 'moviesTv', topLevel: 'viper' },
             );
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
             setSelectedSource('viper' as any);
             setSelectedViperSource(0);
             setEmbedUrl(sortedViperLocal[0].url);
@@ -3242,7 +3242,7 @@ const WatchMovie: React.FC = () => {
                     setEmbedType('wiflix');
                     setEmbedType('wiflix');
                   } else if (viperSources.length > 0) {
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
                     setSelectedSource('viper' as any);
                     setSelectedViperSource(0);
                     setEmbedUrl(viperSources[0].url);

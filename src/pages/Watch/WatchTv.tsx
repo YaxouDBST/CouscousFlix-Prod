@@ -97,7 +97,7 @@ interface FStreamTvResponse {
   search: {
     query: string;
     results: number;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     bestMatch: any;
   };
   episodes: {
@@ -260,7 +260,6 @@ const checkCustomTVLink = async (showId: string, seasonNumber: number, episodeNu
 
       console.log('Raw API TV links:', rawLinks);
 
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       rawLinks.forEach((item: any) => {
         let urlToAdd: string | null = null;
         let label = "HD+";
@@ -319,7 +318,7 @@ const checkFrembedAvailability = async (showId: string, seasonNumber: number, ep
 };
 
 // New function to check if an episode exists in Omega data
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 const checkOmegaAvailability = (omegaData: any, seasonNumber: number, episodeNumber: number): boolean => {
   if (!omegaData || !omegaData.type || omegaData.type !== 'tv' || !omegaData.series || !omegaData.series.length) {
     return false;
@@ -353,7 +352,7 @@ const checkDarkinoAvailability = async (
   _showId: string,
   _updateRetryMessage?: (message: string) => void,
   _retryCount = 0
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+
 ): Promise<false | { available: boolean; sources: any[]; darkinoId: string | null }> => {
   // Source Darkino/Nightflix retirée : endpoints api.couscousflix.chat/api/search + /api/series/download désactivés.
   return false;
@@ -482,7 +481,7 @@ const WatchTv: React.FC = () => {
   const [coflixData, setCoflixData] = useState<CoflixTvEpisodeResponse | null>(null);
   const [omegaData, setOmegaData] = useState<OmegaTvEpisodeResponse | null>(null);
   const [darkinoAvailable, setDarkinoAvailable] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   const [darkinoSources, setDarkinoSources] = useState<any[]>([]);
   const [, setDarkinoShowId] = useState<string | null>(null);
   const [selectedDarkinoSource, setSelectedDarkinoSource] = useState<number>(0);
@@ -520,7 +519,7 @@ const WatchTv: React.FC = () => {
   const [loadingWiflix, setLoadingWiflix] = useState(true);
 
   // J1F (1jour1film) source states
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   const [, setJ1fData] = useState<any>(null);
   const [j1fSources, setJ1fSources] = useState<{ url: string; label: string; category: string }[]>([]);
   const [selectedJ1fSource, setSelectedJ1fSource] = useState<number>(0);
@@ -1079,7 +1078,7 @@ const WatchTv: React.FC = () => {
         }
         // Try Viper sources
         else if (viperSources.length > 0) {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
           setSelectedSource('viper' as any);
           setSelectedViperSource(0);
           setEmbedUrl(viperSources[0].url);
@@ -1219,7 +1218,7 @@ const WatchTv: React.FC = () => {
 
           // Find existing TV show entry or create new one
           const showIdInt = parseInt(id!);
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
           const existingShow = continueWatching.tv.find((tvShow: any) => tvShow.id === showIdInt);
 
           if (existingShow) {
@@ -1230,7 +1229,7 @@ const WatchTv: React.FC = () => {
             };
             existingShow.lastAccessed = new Date().toISOString();
             // Move to front of array
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
             continueWatching.tv = continueWatching.tv.filter((tvShow: any) => tvShow.id !== showIdInt);
             continueWatching.tv.unshift(existingShow);
           } else {
@@ -1283,7 +1282,7 @@ const WatchTv: React.FC = () => {
           updateVipRetryMessage
         ).catch(error => {
           console.error('Error checking Darkino availability:', error);
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
           return { available: false, sources: [] as any[], darkinoId: null };
         });
 
@@ -1465,12 +1464,12 @@ const WatchTv: React.FC = () => {
             processedOmegaDataForState = rawOmegaData;
             // Ajout: si supervideo ou dropload, tenter d'extraire le m3u8
             const omegaPlayers = extractOmegaPlayers(rawOmegaData, seasonNumber, episodeNumber);
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
             const supervideo = omegaPlayers.find((p: any) => p.player && p.player.toLowerCase().includes('supervideo'));
             if (supervideo) {
               await extractM3u8FromEmbed(supervideo, MAIN_API);
             }
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
             const dropload = omegaPlayers.find((p: any) => p.player && p.player.toLowerCase().includes('dropload'));
             if (dropload) {
               await extractM3u8FromEmbed(dropload, MAIN_API);
@@ -1487,7 +1486,7 @@ const WatchTv: React.FC = () => {
           // Pré-tri par priorité hoster (M4) — state ordonné par pin user.
           const prefsDk0 = getSourcePriorityPrefs();
           const sortedDarkinoSources = sortHostersByPriority(
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
             (darkinoResult.sources as any[]).map((s: any) => ({
               ...s,
               type: (detectHoster(s.m3u8 || '', {
@@ -1604,7 +1603,6 @@ const WatchTv: React.FC = () => {
           // Paralléliser les extractions Omega
           const omegaExtractionPromises = [];
 
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const supervideo = omegaPlayers.find((p: any) => p.player && p.player.toLowerCase().includes('supervideo'));
           if (supervideo) {
             console.log('?? Found supervideo player:', supervideo);
@@ -1617,7 +1615,6 @@ const WatchTv: React.FC = () => {
             );
           }
 
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const dropload = omegaPlayers.find((p: any) => p.player && p.player.toLowerCase().includes('dropload'));
           if (dropload) {
             console.log('?? Found dropload player:', dropload);
@@ -1785,7 +1782,7 @@ const WatchTv: React.FC = () => {
             : (coflixResult.player_links || []);
 
           const decodedLinks = multiLinks
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
             .map((p: any) => getCoflixPreferredUrl(p))
             .filter((u: string) => !!u);
 
@@ -1904,14 +1901,14 @@ const WatchTv: React.FC = () => {
 
             categories.forEach(category => {
               const categoryPlayers = episodeData.languages[category] || [];
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
               const fsvidPlayers = categoryPlayers.filter((player: any) =>
                 player.url && player.url.toLowerCase().includes('fsvid')
               );
 
               // Pour chaque catégorie, ne garder qu'une seule source fsvid (priorité à PREMIUM puis FSvid)
               if (fsvidPlayers.length > 0) {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
                 const premiumPlayer = fsvidPlayers.find((player: any) =>
                   player.player === 'PREMIUM'
                 );
@@ -1927,12 +1924,11 @@ const WatchTv: React.FC = () => {
               }
 
               // Traiter les autres sources (non-fsvid)
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
               const otherPlayers = categoryPlayers.filter((player: any) =>
                 !player.url || !player.url.toLowerCase().includes('fsvid')
               );
 
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               otherPlayers.forEach((player: any) => {
                 const source = {
                   url: player.url,
@@ -2075,7 +2071,7 @@ const WatchTv: React.FC = () => {
 
             categories.forEach(category => {
               const categoryPlayers = episodeData[category as keyof typeof episodeData] || [];
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
               categoryPlayers.forEach((player: any) => {
                 const source = {
                   url: player.url,
@@ -2117,7 +2113,7 @@ const WatchTv: React.FC = () => {
             const vostfrSources: { url: string; label: string; category: string }[] = [];
             categories.forEach(category => {
               const categoryPlayers = episodeData[category as keyof typeof episodeData] || [];
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
               categoryPlayers.forEach((player: any) => {
                 const source = {
                   url: player.url,
@@ -2695,7 +2691,7 @@ const WatchTv: React.FC = () => {
         setLoadingExtractions(false);
 
         // Check for Sibnet links for anime
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
         if (show.genres.some((genre: any) => genre.id === 16)) { // 16 is Animation genre
           setLoadingSibnet(true);
           try {
@@ -2748,7 +2744,7 @@ const WatchTv: React.FC = () => {
               console.log('✅ Selecting NEXUS HLS as primary source');
               const prefsNh = getSourcePriorityPrefs();
               const sortedHls = sortHostersByPriority(
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
                 finalHlsSources.map((s: any) => ({
                   ...s,
                   type: (detectHoster(s.url || '', {
@@ -2762,7 +2758,7 @@ const WatchTv: React.FC = () => {
                 { category: 'moviesTv', topLevel: 'nexus_hls' },
               );
               const topHls = sortedHls[0];
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
               const idxNh = finalHlsSources.findIndex((s: any) => s.url === topHls.url);
               setSelectedSource('nexus_hls');
               setSelectedNexusHlsSource(idxNh >= 0 ? idxNh : 0);
@@ -2777,7 +2773,7 @@ const WatchTv: React.FC = () => {
               console.log('✅ Selecting NEXUS FILE as primary source');
               const prefsNf = getSourcePriorityPrefs();
               const sortedFile = sortHostersByPriority(
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
                 finalFileSources.map((s: any) => ({
                   ...s,
                   type: (detectHoster(s.url || '', {
@@ -2791,7 +2787,7 @@ const WatchTv: React.FC = () => {
                 { category: 'moviesTv', topLevel: 'nexus_hls' },
               );
               const topFile = sortedFile[0];
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
               const idxNf = finalFileSources.findIndex((s: any) => s.url === topFile.url);
               setSelectedSource('nexus_file');
               setSelectedNexusFileSource(idxNf >= 0 ? idxNf : 0);
@@ -2805,7 +2801,7 @@ const WatchTv: React.FC = () => {
             case 'bravo': {
               const prefsBv = getSourcePriorityPrefs();
               const sortedBravo = sortHostersByPriority(
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
                 localBravoSources.map((s: any) => ({
                   ...s,
                   type: (detectHoster(s.url || '', {
@@ -2818,7 +2814,7 @@ const WatchTv: React.FC = () => {
                 })),
                 { category: 'moviesTv', topLevel: 'bravo' },
               );
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
               const allUnknownBv = sortedBravo.every((s: any) => s.type === 'unknown');
               const bestBravo = allUnknownBv
                 ? localBravoSources[localBravoSources.length - 1]
@@ -2848,7 +2844,7 @@ const WatchTv: React.FC = () => {
               console.log('✅ Selecting DARKINO as source');
               const prefsDk = getSourcePriorityPrefs();
               const sortedDk = sortHostersByPriority(
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
                 darkinoResult.sources.map((s: any) => ({
                   ...s,
                   type: (detectHoster(s.m3u8 || '', {
@@ -2862,7 +2858,7 @@ const WatchTv: React.FC = () => {
                 { category: 'moviesTv', topLevel: 'darkino' },
               );
               const topDk = sortedDk[0];
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
               const idxDk = darkinoResult.sources.findIndex((s: any) => s.m3u8 === topDk.m3u8);
               setSelectedSource('darkino');
               setSelectedDarkinoSource(idxDk >= 0 ? idxDk : 0);
@@ -2899,7 +2895,7 @@ const WatchTv: React.FC = () => {
               // Omega auto-select n'est valide que si un lecteur supervideo existe
               if (!isOmegaAvailable || !rawOmegaData) return false;
               const omegaPlayers = extractOmegaPlayers(rawOmegaData, seasonNumber, episodeNumber);
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
               const supervideo = omegaPlayers.find((p: any) => p.player && p.player.toLowerCase().includes('supervideo'));
               if (!supervideo) return false;
               console.log('✅ Selecting OMEGA (Supervideo) as source');
@@ -2969,7 +2965,7 @@ const WatchTv: React.FC = () => {
                 })),
                 { category: 'moviesTv', topLevel: 'viper' },
               );
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
               setSelectedSource('viper' as any);
               setSelectedViperSource(0);
               setEmbedUrl(sortedViperLocal[0].url);
@@ -2980,7 +2976,7 @@ const WatchTv: React.FC = () => {
             }
             case 'coflix': {
               // Coflix auto-select n'est valide que si multi links existent
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
               let multiLinks: any[] = [];
               if (coflixResult) {
                 multiLinks = (coflixResult.current_episode && coflixResult.current_episode.player_links)
@@ -2990,13 +2986,13 @@ const WatchTv: React.FC = () => {
               if (!multiLinks.length) return false;
               // Préserver l'ancien comportement : si pas de lecteur6 ET des mp4 dispo,
               // on préfère mp4 plutôt que coflix (fallback spécial legacy).
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
               const hasLecteur6 = multiLinks.some((p: any) => getCoflixPreferredUrl(p).toLowerCase().includes('lecteur6'));
               if (!hasLecteur6 && fetchedMp4Sources.length > 0) {
                 // Fall through : signal au picker de retomber sur MP4
                 return false;
               }
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
               const preferred = multiLinks.find((p: any) =>
                 (p.language && typeof p.language === 'string' && p.language.toLowerCase().includes('french')) ||
                 (p.quality && typeof p.quality === 'string' && p.quality.toLowerCase().includes('french')) ||
