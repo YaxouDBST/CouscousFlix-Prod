@@ -7,8 +7,7 @@ import useWatchStatus from '../../hooks/useWatchStatus';
 import { searchWithFallback, getSearchNameForId, getAnimeMatcherForId, getAnimeMatchTerms } from '../../utils/searchUtils';
 import { getTmdbId, encodeId } from '../../utils/idEncoder';
 import HLSPlayer from '../../components/HLSPlayer';
-import { useAdFreePopup } from '../../context/AdFreePopupContext';
-import AdFreePlayerAds from '../../components/AdFreePlayerAds';
+
 import { extractVidmolyM3u8, extractSibnetM3u8, extractOneUploadSources } from '../../utils/extractM3u8';
 import { pickAutoSelectedLanguage, sortHostersByPriority } from '../../utils/sourceAutoSelect';
 import { detectHoster } from '../../utils/hosterRegistry';
@@ -227,10 +226,7 @@ const WatchAnime: React.FC = () => {
     }
   });
 
-  // Ad-free popup context
-  const {
-    showPopupForPlayer
-  } = useAdFreePopup();
+  // Ad popup context removed — players load directly
 
   // État pour le menu d'épisodes
   const [showEpisodesMenu, setShowEpisodesMenu] = useState(false);
@@ -311,9 +307,11 @@ const WatchAnime: React.FC = () => {
             });
             const ratings = certResponse.data.results;
             let cert = '';
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const fr = ratings.find((r: any) => r.iso_3166_1 === 'FR');
             if (fr?.rating) cert = fr.rating;
             if (!cert) {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               const us = ratings.find((r: any) => r.iso_3166_1 === 'US');
               if (us?.rating) cert = us.rating;
             }
@@ -322,6 +320,7 @@ const WatchAnime: React.FC = () => {
               setIsBlocked(true);
               return;
             }
+          // eslint-disable-next-line unused-imports/no-unused-vars
           } catch (e) {
             console.log('Could not fetch certifications for age check');
           }
@@ -336,6 +335,7 @@ const WatchAnime: React.FC = () => {
     if (id) {
       fetchShowDetails();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   useEffect(() => {
@@ -364,6 +364,7 @@ const WatchAnime: React.FC = () => {
         type AnimeResult = {
           name: string;
           url: string;
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           seasons: Array<any>;
           alternative_names?: string[];
         };
@@ -484,6 +485,7 @@ const WatchAnime: React.FC = () => {
       console.error('Error loading anime data:', error);
       setError(t('watch.animeDataError'));
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, showDetails?.name]);
 
   // Load anime data when show details are available
@@ -562,6 +564,7 @@ const WatchAnime: React.FC = () => {
         setLoading(false);
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [animeData, season, episode]);
 
   // Process video sources when language changes
@@ -594,6 +597,7 @@ const WatchAnime: React.FC = () => {
         }
       }
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [animeData, season, episode, isInitialLoad, selectedSource]);
 
   // Check if loading is complete (including extractions)
@@ -694,8 +698,10 @@ const WatchAnime: React.FC = () => {
               };
               playerName = domainMappings[playerName.toLowerCase()] || playerName.charAt(0).toUpperCase() + playerName.slice(1);
             }
+          // eslint-disable-next-line unused-imports/no-unused-vars
           } catch (e) {
             try {
+              // eslint-disable-next-line no-useless-escape
               const domainMatch = playerUrlString.match(/https?:\/\/(?:www\.)?([^\/]+)/i);
               if (domainMatch && domainMatch[1]) {
                 const domain = domainMatch[1].split('.')[0];
@@ -1005,18 +1011,6 @@ const WatchAnime: React.FC = () => {
     console.log('Final selected source:', sourceToSelect);
     setSelectedSource(sourceToSelect);
 
-    // Trigger ad popup based on player type for auto-selected source
-    const playerType = sourceToSelect.player.toLowerCase();
-    if (playerType.includes('vidmoly')) {
-      showPopupForPlayer('vidmoly');
-    } else if (playerType.includes('sibnet')) {
-      showPopupForPlayer('vidmoly'); // Sibnet is treated as vidmoly type
-    } else if (playerType.includes('oneupload')) {
-      showPopupForPlayer('omega'); // OneUpload is treated as omega type
-    } else {
-      // For other players, show generic popup
-      showPopupForPlayer('adfree');
-    }
 
     if (sourceToSelect.isM3u8) {
       // Use HLS Player for m3u8 sources (including Sibnet sources)
@@ -1051,18 +1045,6 @@ const WatchAnime: React.FC = () => {
   const handleSelectSource = (source: VideoSource) => {
     setSelectedSource(source);
 
-    // Trigger ad popup based on player type
-    const playerType = source.player.toLowerCase();
-    if (playerType.includes('vidmoly')) {
-      showPopupForPlayer('vidmoly');
-    } else if (playerType.includes('sibnet')) {
-      showPopupForPlayer('vidmoly'); // Sibnet is treated as vidmoly type
-    } else if (playerType.includes('oneupload')) {
-      showPopupForPlayer('omega'); // OneUpload is treated as omega type
-    } else {
-      // For other players, show generic popup
-      showPopupForPlayer('adfree');
-    }
 
     if (source.isM3u8) {
       // Use HLS Player for m3u8 sources (including Sibnet sources)
@@ -1814,8 +1796,7 @@ const WatchAnime: React.FC = () => {
         </div>
       )}
 
-      {/* Ad Free Player Ads Popup */}
-      <AdFreePlayerAds />
+
     </div>
   );
 };

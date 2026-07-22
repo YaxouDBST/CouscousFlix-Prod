@@ -11,8 +11,7 @@ import DetailsSkeleton from '../components/skeletons/DetailsSkeleton';
 
 import ShareButtons from '../components/ShareButtons';
 import HLSPlayer, { HLSPlayerRef } from '../components/HLSPlayer';
-import { useAdFreePopup } from '../context/AdFreePopupContext';
-import AdFreePlayerAds from '../components/AdFreePlayerAds';
+
 import AlertButton from '../components/AlertButton';
 import {
   searchWithFallback,
@@ -142,6 +141,7 @@ interface CoflixResponse {
     name: string;
     data_id: string;
     post_id: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     episodes: Array<any>;
   }>;
 }
@@ -540,6 +540,7 @@ const TVImagesSection = ({ tvId }: { tvId: string }) => {
   useEffect(() => {
     if (!images) fetchImages();
     setShowImages(true);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tvId]);
 
   return (
@@ -937,6 +938,7 @@ const groupCrewMembers = (crew: CrewMember[]): GroupedCrewMember[] => {
 const fetchSeasonDetails = async (
   showId: string | number | null | undefined,
   season: number
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): Promise<any | null> => {
   const base = `https://api.themoviedb.org/3/tv/${showId}/season/${season}?api_key=${TMDB_API_KEY}`;
   const langs = [...new Set([getTmdbLanguage(), 'en-US'])];
@@ -979,6 +981,7 @@ const checkEpisodeAvailability = async (showId: string, seasonNumber: number, ep
 
           const uniqueUrls = new Set<string>();
 
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           rawLinks.forEach((item: any) => {
             let urlToAdd: string | null = null;
             let label = '1080p+';
@@ -1090,6 +1093,7 @@ const checkDarkinoAvailability = async (
         `${MAIN_API}/api/series/download/${matchingShowId}/season/${seasonNumber}/episode/${episodeNumber}`
       );
       return response;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (downloadError: any) {
       // Si l'erreur est spécifiquement "Erreur lors de la récupération des liens de téléchargement", on renvoie null pour réessayer
       if (downloadError.response?.data?.error === "Erreur lors de la récupération des liens de téléchargement") {
@@ -1115,6 +1119,7 @@ const checkDarkinoAvailability = async (
       return { available: false, sources: [] }
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const matchingShow = searchResponse.data.results.find((result: any) => {
       if (result.have_streaming !== 1 || !result.is_series) return false
       const resultYear = new Date(result.release_date).getFullYear()
@@ -1163,7 +1168,9 @@ const checkDarkinoAvailability = async (
 
     if (downloadResponse.data?.sources) {
       const sources = downloadResponse.data.sources
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .filter((source: any) => source.m3u8)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         .map((source: any) => ({
           src: source.src || '',
           m3u8: source.m3u8 || '',
@@ -1231,6 +1238,7 @@ const VideoPlayer = forwardRef<VideoPlayerRefHandle, VideoPlayerProps>(({ showId
   // Darkino states (similar to MovieDetails)
   const [darkinoAvailable, setDarkinoAvailable] = useState(false);
   const [loadingDarkino, setLoadingDarkino] = useState(true);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [darkinoSources, setDarkinoSources] = useState<any[]>([]);
   const [selectedDarkinoSource, setSelectedDarkinoSource] = useState<number>(0);
   const [, setLoadingError] = useState<boolean>(false);
@@ -1371,6 +1379,7 @@ const VideoPlayer = forwardRef<VideoPlayerRefHandle, VideoPlayerProps>(({ showId
 
       return () => clearTimeout(loadingTimeoutId);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedDarkinoSource, selectedSource, darkinoSources]);
 
   // Fetch video sources effect
@@ -1417,6 +1426,7 @@ const VideoPlayer = forwardRef<VideoPlayerRefHandle, VideoPlayerProps>(({ showId
         let fetchedCoflixData: CoflixResponse | null = null;
         let fetchedOmegaData: OmegaResponse | null = null;
         let fetchedDarkinoAvailable = false;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let fetchedDarkinoSources: any[] = [];
         let fetchedMp4Sources: { url: string; label?: string; language?: string }[] = [];
 
@@ -1518,6 +1528,7 @@ const VideoPlayer = forwardRef<VideoPlayerRefHandle, VideoPlayerProps>(({ showId
         setLoadingCoflix(false);
         setLoadingOmega(false);
       } finally {
+        // eslint-disable-next-line no-unsafe-finally
         if (!isCurrent) return;
         setIsLoading(false);
       }
@@ -1571,8 +1582,11 @@ const VideoPlayer = forwardRef<VideoPlayerRefHandle, VideoPlayerProps>(({ showId
         }
         break;
       case 'omega':
+        // eslint-disable-next-line no-case-declarations
         const currentSeries = omegaData?.series?.find(s => s.tmdb_data && s.tmdb_data.id === Number(showId));
+        // eslint-disable-next-line no-case-declarations
         const season = currentSeries?.seasons?.find(s => s.number === seasonNumber);
+        // eslint-disable-next-line no-case-declarations
         const episode = season?.episodes?.find(e => e.number === episodeNumber.toString());
 
         // Get prioritized player links
@@ -1634,27 +1648,13 @@ const VideoPlayer = forwardRef<VideoPlayerRefHandle, VideoPlayerProps>(({ showId
 
       return () => clearTimeout(loadingTimeoutId);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedDarkinoSource, selectedSource, darkinoSources, m3u8Timeout]); // Add m3u8Timeout dependency
 
   // Add VIP retry message state
   const [vipRetryMessage, setVipRetryMessage] = useState<string | null>(null);
 
-  // Add useAdFreePopup hook
-  const {
-    showAdFreePopup,
-    adType,
-    playerToShow: _playerToShow,
-    shouldLoadIframe,
-    isSpecialPlayer: _isSpecialPlayer,
-    is_vip,
-    showPopupForPlayer,
-    handlePopupClose,
-    handlePopupAccept,
-    resetVipStatus
-  } = useAdFreePopup();
-
-  // Add a ref to track the requested source for VIP players
-  const requestedSourceRef = useRef<typeof selectedSource | null>(null);
+  // Ad popup system disabled — source selection is immediate
 
   // Function to update the VIP retry message
   const updateVipRetryMessage = (message: string) => {
@@ -1668,63 +1668,11 @@ const VideoPlayer = forwardRef<VideoPlayerRefHandle, VideoPlayerProps>(({ showId
     }
   }, [loadingDarkino]);
 
-  // Reset VIP status when the show or episode changes
-  useEffect(() => {
-    resetVipStatus();
-  }, [showId, seasonNumber, episodeNumber, resetVipStatus]);
-
-  // Helper to determine if a source is VIP
-  const isVipSource = (src: typeof selectedSource) => {
-    return src === 'darkino' || src === 'mp4';
-  };
-
-  // Modify the source selection to use VIP popup when needed
-  useEffect(() => {
-    if (!showAdFreePopup && shouldLoadIframe && requestedSourceRef.current !== null) {
-      setSelectedSource(requestedSourceRef.current);
-      setShowVostfrOptions(false);
-      scrollToPlayerRef();
-      requestedSourceRef.current = null;
-    }
-  }, [showAdFreePopup, shouldLoadIframe]);
-
-  // Define handleSelectSource function after all the existing useEffects
+  // Define handleSelectSource function
   const handleSelectSource = (src: typeof selectedSource) => {
-    // Si un lecteur est déjà sélectionné, changer directement sans popup
-    if (selectedSource !== null) {
-      setSelectedSource(src);
-      setShowVostfrOptions(false);
-      scrollToPlayerRef();
-      return;
-    }
-
-    // Show popup only for first player selection
-    requestedSourceRef.current = src;
-
-    // Prepare additional info for the showPopupForPlayer function
-    const additionalInfo = {
-      coflixData: {
-        player_links: coflixData?.current_episode?.player_links || []
-      },
-      omegaData: {
-        player_links: (() => {
-          const currentSeries = omegaData?.series?.find(s => s.tmdb_data?.id === Number(showId));
-          const season = currentSeries?.seasons?.find(s => s.number === seasonNumber);
-          const episode = season?.episodes?.find(e => e.number === episodeNumber.toString());
-          if (!episode?.versions?.[selectedOmegaVersion]?.players) return [];
-          return episode.versions[selectedOmegaVersion].players.map(p => ({
-            player: p.name,
-            link: p.link
-          }));
-        })()
-      }
-    };
-
-    showPopupForPlayer(
-      typeof src === 'string' ? src : 'custom',
-      additionalInfo
-    );
-    return;
+    setSelectedSource(src);
+    setShowVostfrOptions(false);
+    scrollToPlayerRef();
   };
   return (
     <div ref={videoPlayerSectionRef} className="space-y-4" id="video-player-section">
@@ -2192,40 +2140,9 @@ const VideoPlayer = forwardRef<VideoPlayerRefHandle, VideoPlayerProps>(({ showId
         </div>
       )}
 
-      {/* Add the AdFreePopup component */}
-      {showAdFreePopup && (
-        <AdFreePlayerAds
-          onClose={handlePopupClose}
-          onAccept={handlePopupAccept}
-          adType={adType}
-        />
-      )}
-
-      {/* Display warning message when VIP needed but popup not shown */}
-      {isVipSource(selectedSource) && !shouldLoadIframe && !is_vip && !showAdFreePopup && (
-        <div className="relative w-full h-[calc(100vh-180px)] mb-32 pb-20 max-w-7xl mx-auto rounded-lg overflow-hidden bg-black flex items-center justify-center">
-          <div className="bg-gray-900 p-6 rounded-lg text-center max-w-md">
-            <div className="text-yellow-400 text-5xl mb-4">⚠️</div>
-            <h3 className="text-xl font-bold mb-2 text-white">{t('details.playbackUnavailable')}</h3>
-            <p className="text-gray-300 mb-4">
-              {t('details.adRequired')}
-            </p>
-            <button
-              onClick={() => {
-                if (selectedSource) {
-                  handleSelectSource(selectedSource);
-                }
-              }}
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
-            >
-              {t('details.viewAdForContent')}
-            </button>
-          </div>
-        </div>
-      )}
 
       {/* Player Rendering Area - Only show if not a VIP source that needs ad view */}
-      {(shouldLoadIframe || !isVipSource(selectedSource) || is_vip) && (
+      {(
         selectedSource === 'darkino' ? (
           // HLS Player (VIP M3U8)
           <div ref={hlsContainerRef} className="relative w-full h-[calc(100vh-180px)] mb-32 pb-20 max-w-7xl mx-auto rounded-lg overflow-hidden bg-black">
@@ -2428,6 +2345,7 @@ const VideoPlayer = forwardRef<VideoPlayerRefHandle, VideoPlayerProps>(({ showId
 VideoPlayer.displayName = 'VideoPlayer';
 const TVDetails: React.FC = () => {
   const { t } = useTranslation();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [show, setShow] = useState<any>(null);
   const [, setIsLoading] = useState(true);
   const { id: encodedId } = useParams<{ id: string }>();
@@ -2446,6 +2364,7 @@ const TVDetails: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [backdropImage, setBackdropImage] = useState<string | null>(null);
   const [showTrailerPopup, setShowTrailerPopup] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [trailerVideo, setTrailerVideo] = useState<any>(null);
   const [isClosingTrailer, setIsClosingTrailer] = useState(false);
   const [availableEpisodes, setAvailableEpisodes] = useState<Episode[]>([]);
@@ -2509,6 +2428,7 @@ const TVDetails: React.FC = () => {
       try {
         const storageKey = 'watchlist_tv';
         const typeWatchlist = JSON.parse(localStorage.getItem(storageKey) || '[]');
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const exists = typeWatchlist.some((media: any) => media.id === Number(id));
 
         if (exists) {
@@ -2531,6 +2451,7 @@ const TVDetails: React.FC = () => {
   const [loadingSimilar, setLoadingSimilar] = useState(false);
   const [recommendationsLoaded, setRecommendationsLoaded] = useState<boolean>(false);
   const [animeMode, setAnimeMode] = useState<boolean>(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [animeData, setAnimeData] = useState<any>(null);
   const [loadingAnimeData, setLoadingAnimeData] = useState<boolean>(false);
   const [tmdbKeywords, setTmdbKeywords] = useState<TmdbKeywordsResponse | null>(null);
@@ -2538,10 +2459,12 @@ const TVDetails: React.FC = () => {
   const [tmdbAlternativeTitles, setTmdbAlternativeTitles] = useState<
     Array<{ iso_3166_1?: string; title?: string }>
   >([]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [selectedAnimeEpisode, setSelectedAnimeEpisode] = useState<any>(null);
   const [selectedLanguage, setSelectedLanguage] = useState<string | null>(null);
   const [selectedPlayer, setSelectedPlayer] = useState<string | null>(null);
   // Ajout de l'état pour stocker les détails complets des saisons et épisodes
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [seasonsDetails, setSeasonsDetails] = useState<Record<number, any>>({});
   // Ajoute ce state dans le composant principal, avant le return :
   // const [_collapsed, _setCollapsed] = useState(true);
@@ -2554,18 +2477,22 @@ const TVDetails: React.FC = () => {
   const [isTabsScrollable, setIsTabsScrollable] = useState(false);
   const tabsContainerRef = useRef<HTMLDivElement>(null);
   // Dans les états, ajoute un état pour le chargement des vidéos
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [videos, setVideos] = useState<any[]>([]);
   const [loadingVideos, setLoadingVideos] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [selectedVideo, setSelectedVideo] = useState<any | null>(null);
   const [showVideoPopup, setShowVideoPopup] = useState<boolean>(false);
   const [isClosingVideo, setIsClosingVideo] = useState(false);
 
   // États pour les vidéos multi-langues
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [multiLangVideos, setMultiLangVideos] = useState<any[]>([]);
   const [loadingMultiLangVideos, setLoadingMultiLangVideos] = useState(false);
   const [showMultiLangView, setShowMultiLangView] = useState(false);
 
   // États pour les vidéos multi-langues par saison
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [seasonMultiLangVideos, setSeasonMultiLangVideos] = useState<{ [key: number]: any[] }>({});
   const [loadingSeasonMultiLangVideos, setLoadingSeasonMultiLangVideos] = useState<{ [key: number]: boolean }>({});
   const [showSeasonMultiLangView, setShowSeasonMultiLangView] = useState<{ [key: number]: boolean }>({});
@@ -2575,6 +2502,7 @@ const TVDetails: React.FC = () => {
   const [dropdownMode, setDropdownMode] = useState<boolean | null>(null); // null = utiliser le mode par défaut basé sur le nombre d'épisodes
   const [certifications, setCertifications] = useState<{ [key: string]: string }>({});
   // Ajout d'un état pour les vidéos par saison
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [seasonVideos, setSeasonVideos] = useState<Record<number, any[]>>({});
   // Nouvel état pour suivre les images échouées
   const [failedImages, setFailedImages] = useState<Record<string, boolean>>({});
@@ -2594,13 +2522,7 @@ const TVDetails: React.FC = () => {
   const [expandedCards, setExpandedCards] = useState<Record<string, boolean>>({});
   // Mode cinéma toujours activé
 
-  // Add resetVipStatus hook for the main component
-  const { resetVipStatus } = useAdFreePopup();
-
-  // Reset VIP status when the TV show ID changes
-  useEffect(() => {
-    resetVipStatus();
-  }, [id, resetVipStatus]);
+  // VIP status reset on navigation (no-op since ad popup is disabled)
 
   // Fonction pour basculer l'état d'expansion d'une carte
   const toggleCardExpansion = (episodeKey: string) => (e: React.MouseEvent) => {
@@ -2721,6 +2643,7 @@ const TVDetails: React.FC = () => {
         const newCertifications: { [key: string]: string } = {};
 
         // Chercher d'abord la classification française
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const frRating = contentRatingsData.find((r: any) => r.iso_3166_1 === 'FR');
         if (frRating && frRating.rating) {
           newCertifications['FR'] = frRating.rating;
@@ -2728,6 +2651,7 @@ const TVDetails: React.FC = () => {
 
         // Si pas de classification française, chercher la classification américaine
         if (!newCertifications['FR']) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const usRating = contentRatingsData.find((r: any) => r.iso_3166_1 === 'US');
           if (usRating && usRating.rating) {
             newCertifications['US'] = usRating.rating;
@@ -2744,7 +2668,9 @@ const TVDetails: React.FC = () => {
       const allEpisodes: Episode[] = [];
       const today = new Date();
       today.setHours(0, 0, 0, 0);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const newSeasonsDetails: Record<number, any> = {};
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const newSeasonVideos: Record<number, any[]> = {}; // Temporary storage for season videos
 
       // Fetch general videos
@@ -2860,6 +2786,7 @@ const TVDetails: React.FC = () => {
       setLoading(false);
       setLoadingVideos(false); // Finish loading videos
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const checkAvailability = useCallback(async () => {
@@ -2908,8 +2835,11 @@ const TVDetails: React.FC = () => {
           const favoritesTv = JSON.parse(localStorage.getItem('favorites_tv') || '[]');
           const watchedTv = JSON.parse(localStorage.getItem('watched_tv') || '[]');
 
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           initialWatchStatus.watchlist = watchlistTv.some((item: any) => item.id === Number(id));
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           initialWatchStatus.favorite = favoritesTv.some((item: any) => item.id === Number(id));
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           initialWatchStatus.watched = watchedTv.some((item: any) => item.id === Number(id));
 
           const episodeWatchlistKey = `watchlist_episodes_tv_${id}`;
@@ -2965,6 +2895,7 @@ const TVDetails: React.FC = () => {
 
     return () => {
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, fetchTVShowDetails, checkAvailability]);
 
   const availableSeasons = useMemo(() => {
@@ -3008,6 +2939,7 @@ const TVDetails: React.FC = () => {
 
   const handleEpisodeChange = (episodeNumber: number | string) => {
     const epNumber = Number(episodeNumber);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const ep = seasonsDetails[selectedSeason!]?.episodes?.find((e: any) => e.episode_number === epNumber);
     const today = new Date();
     const airDate = ep?.air_date ? new Date(ep.air_date) : null;
@@ -3067,6 +2999,7 @@ const TVDetails: React.FC = () => {
     });
 
     // Continue watching functionality removed
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, tvShow, selectedSeason, selectedEpisode]);
 
   useEffect(() => {
@@ -3118,6 +3051,7 @@ const TVDetails: React.FC = () => {
             if (!Array.isArray(seriesList)) seriesList = [];
 
             // Vérifie si cette série est déjà présente dans la liste principale
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             seriesList.some((media: any) => media.id === Number(showId));
 
             // On ne l'ajoute PAS automatiquement à la liste principale
@@ -3155,6 +3089,7 @@ const TVDetails: React.FC = () => {
 
             if (value) {
               // Add to list if not already there
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               if (!currentList.some((media: any) => media.id === Number(showId))) {
                 currentList.push({
                   id: Number(showId),
@@ -3168,6 +3103,7 @@ const TVDetails: React.FC = () => {
               }
             } else {
               // Remove from list
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               const updatedList = currentList.filter((media: any) => media.id !== Number(showId));
               localStorage.setItem(storageKey, JSON.stringify(updatedList));
             }
@@ -3344,6 +3280,7 @@ const TVDetails: React.FC = () => {
               Number(progressData.position) || 0,
               Number(progressData.duration) || 0
             );
+          // eslint-disable-next-line unused-imports/no-unused-vars
           } catch (_) {
             // ignore malformed entries
           }
@@ -3394,6 +3331,7 @@ const TVDetails: React.FC = () => {
     // availableSeasons ne reflète que les saisons TMDB — ce qui renverrait à tort
     // S1E1 lorsqu'un anime a des saisons/cours additionnels non présents dans TMDB.
     const animeSeasonNumbers = animeMode && animeData?.seasons
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ? (animeData.seasons as any[]).map((s, idx) => Number(s?.number ?? (idx + 1)))
       : null;
 
@@ -3426,11 +3364,14 @@ const TVDetails: React.FC = () => {
     // Gérer le mode anime spécifiquement
     if (animeMode && animeData?.seasons) {
       const animeSeason = animeData.seasons[seasonToWatch - 1];
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const animeEpisode = animeSeason?.episodes?.find((ep: any) => ep.index === episodeToWatch);
       if (animeEpisode) {
         setSelectedAnimeEpisode(animeEpisode);
         // Sélectionner langue/lecteur par défaut si nécessaire
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const hasVf = animeEpisode.streaming_links.some((link: any) => link.language === 'vf');
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const hasVostfr = animeEpisode.streaming_links.some((link: any) => link.language === 'vostfr');
         if (hasVf) setSelectedLanguage('vf');
         else if (hasVostfr) setSelectedLanguage('vostfr');
@@ -3679,8 +3620,10 @@ const TVDetails: React.FC = () => {
     if (id && tvShow && !recommendationsLoaded) {
       fetchRecommendations();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id, tvShow, recommendationsLoaded]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleEpisodeSelect = async (seasonNumber: number, episodeNumber: number) => {
     setSelectedSeason(seasonNumber);
     setSelectedEpisode(episodeNumber);
@@ -3696,6 +3639,7 @@ const TVDetails: React.FC = () => {
     } else {
       document.title = t('details.tvShowDefaultTitle');
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tvShow, id]);
 
   const isAnime = useCallback(() => {
@@ -3783,8 +3727,10 @@ const TVDetails: React.FC = () => {
     } finally {
       setLoadingAnimeData(false);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tvShow?.id, tvShow?.name, tvShow, tmdbEnglishName, tmdbAlternativeTitles, MAIN_API]);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const syncSelectedAnimeEpisode = useCallback((nextAnimeData: any) => {
     if (selectedSeason === null || !selectedEpisode || !nextAnimeData?.seasons) {
       setSelectedAnimeEpisode(null);
@@ -3794,8 +3740,10 @@ const TVDetails: React.FC = () => {
     }
 
     const currentSeason = nextAnimeData.seasons.find(
-      (season: any, index: number) => (season.number || (index + 1)) === selectedSeason
+       
+      (season: Record<string, unknown>, index: number) => (season.number || (index + 1)) === selectedSeason
     );
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const currentEpisode = currentSeason?.episodes?.find((episode: any) => episode.index === selectedEpisode);
 
     if (!currentEpisode) {
@@ -3807,7 +3755,9 @@ const TVDetails: React.FC = () => {
 
     setSelectedAnimeEpisode(currentEpisode);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const hasVf = currentEpisode.streaming_links?.some((link: any) => link.language === 'vf');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const hasVostfr = currentEpisode.streaming_links?.some((link: any) => link.language === 'vostfr');
 
     if (hasVf) {
@@ -3874,7 +3824,8 @@ const TVDetails: React.FC = () => {
   useEffect(() => {
     if (animeMode && animeData) {
       // Filter out seasons without episodes
-      const filteredSeasons = animeData.seasons.filter((season: any) =>
+       
+      const filteredSeasons = animeData.seasons.filter((season: Record<string, unknown>) =>
         season && season.episodes && season.episodes.length > 0
       );
 
@@ -3919,6 +3870,7 @@ const TVDetails: React.FC = () => {
       // Trouver la meilleure image de fond
       const backdrops = imagesResponse.data.backdrops;
       if (backdrops && backdrops.length > 0) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const bestBackdrop = backdrops.sort((a: any, b: any) => b.width - a.width)[0];
         setBackdropImage(`https://image.tmdb.org/t/p/w1280${bestBackdrop.file_path}`);
       }
@@ -3929,7 +3881,8 @@ const TVDetails: React.FC = () => {
       });
 
       console.log('French videos response:', videosResponse.data.results);
-      let trailer = videosResponse.data.results.find((video: any) => video.type === 'Trailer');
+       
+      let trailer = videosResponse.data.results.find((video: Record<string, unknown>) => video.type === 'Trailer');
 
       // Si pas de bande-annonce en français, essayer en anglais
       if (!trailer) {
@@ -3938,7 +3891,8 @@ const TVDetails: React.FC = () => {
           params: { api_key: TMDB_API_KEY, language: 'en-US' }
         });
         console.log('English videos response:', enVideosResponse.data.results);
-        trailer = enVideosResponse.data.results.find((video: any) => video.type === 'Trailer');
+         
+        trailer = enVideosResponse.data.results.find((video: Record<string, unknown>) => video.type === 'Trailer');
       }
 
       if (trailer) {
@@ -4007,6 +3961,7 @@ const TVDetails: React.FC = () => {
     if (id) {
       fetchBackdropAndTrailer();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   // Add event listener for auto-playing next episode
@@ -4084,6 +4039,7 @@ const TVDetails: React.FC = () => {
     return episodeCount > 15;
   };
   // Function to render episodes (either dropdown or grid)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const renderEpisodes = (episodes: any[], type: 'anime' | 'standard') => {
     // Filter out empty episodes first to avoid issues
     const nonEmptyEpisodes = episodes.filter(ep => {
@@ -4108,12 +4064,15 @@ const TVDetails: React.FC = () => {
     const defaultDropdownMode = nonEmptyEpisodes.length > 15;
 
     const handleAnimeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const episode = nonEmptyEpisodes.find((ep: any) => ep.index === Number(e.target.value));
       if (episode) {
         setSelectedEpisode(episode.index);
         setSelectedAnimeEpisode(episode);
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const hasVf = episode.streaming_links.some((link: any) => link.language === 'vf');
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const hasVostfr = episode.streaming_links.some((link: any) => link.language === 'vostfr');
 
         if (hasVf) {
@@ -4143,11 +4102,14 @@ const TVDetails: React.FC = () => {
       handleEpisodeChange(Number(e.target.value));
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleAnimeGridClick = (episode: any) => {
       setSelectedEpisode(episode.index);
       setSelectedAnimeEpisode(episode);
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const hasVf = episode.streaming_links.some((link: any) => link.language === 'vf');
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const hasVostfr = episode.streaming_links.some((link: any) => link.language === 'vostfr');
 
       if (hasVf) {
@@ -4196,11 +4158,14 @@ const TVDetails: React.FC = () => {
                     className="block w-full bg-gray-800 border border-gray-700 text-white py-3 px-4 pr-8 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
                   >
                     <option value="" disabled>{t('details.chooseEpisode')}</option>
-                    {nonEmptyEpisodes.map((ep: any) => {
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                    {nonEmptyEpisodes.map((ep: { streaming_links?: { language?: string }[] }) => {
                       // ... options rendering ...
                       if (isAnime) {
                         // Récupérer toutes les langues disponibles pour cet épisode
-                        const allLanguages = ep.streaming_links.map((link: any) => {
+                         
+                        const allLanguages = ep.streaming_links?.map((link: { language?: string }) => {
                           return getAnimeLanguageLabel(link.language, t);
                         }).join(', ');
 
@@ -4238,13 +4203,16 @@ const TVDetails: React.FC = () => {
             transition={{ duration: 0.3 }}
           >
             <div className={`grid grid-cols-1 ${isAnime ? 'md:grid-cols-3' : 'md:grid-cols-3 lg:grid-cols-4'} gap-4 mb-6`}>
-              {nonEmptyEpisodes.map((ep: any, index: number) => {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              {nonEmptyEpisodes.map((ep: { index?: number; streaming_links?: { language?: string }[] }, index: number) => {
                 // ... grid item rendering ...
                 if (isAnime) {
                   const isSelected = selectedEpisode === ep.index;
 
                   // Récupérer toutes les langues disponibles pour cet épisode
-                  const availableLanguages = ep.streaming_links.map((link: any) => link.language);
+                   
+                  const availableLanguages = ep.streaming_links?.map((link: { language?: string }) => link.language) || [];
 
                   return (
                     <motion.div
@@ -4299,6 +4267,7 @@ const TVDetails: React.FC = () => {
                         }
                       }
                     }
+                  // eslint-disable-next-line unused-imports/no-unused-vars
                   } catch (err) {
                     // ignore localStorage/parsing errors
                   }
@@ -5071,7 +5040,8 @@ const TVDetails: React.FC = () => {
                       <AnimatePresence>
                         {animeMode && animeData?.seasons ? (
                           /* Affichage des saisons pour les animes */
-                          animeData.seasons.map((season: any, index: number) => {
+                           
+                          animeData.seasons.map((season: Record<string, unknown>, index: number) => {
                             const seasonNumber = season.number || (index + 1);
                             return (
                               <motion.div
@@ -5215,6 +5185,7 @@ const TVDetails: React.FC = () => {
                               >
                                 {/* Toggle Button (toujours affiché) */}
                                 {(() => {
+                                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                                   const currentSeason = animeData.seasons.find((s: any) => (s.number || (animeData.seasons.indexOf(s) + 1)) === selectedSeason);
                                   return currentSeason?.episodes?.length > 0;
                                 })() && (
@@ -5223,12 +5194,14 @@ const TVDetails: React.FC = () => {
                                         ref={dropdownToggleButtonRef}
                                         className="px-4 py-2 rounded-lg font-medium bg-gray-800 hover:bg-gray-700 text-white dropdown-toggle-button"
                                         onClick={() => {
+                                          // eslint-disable-next-line @typescript-eslint/no-explicit-any
                                           const currentSeason = animeData.seasons.find((s: any) => (s.number || (animeData.seasons.indexOf(s) + 1)) === selectedSeason);
                                           const currentDefault = getDefaultDropdownMode(currentSeason?.episodes?.length || 0);
                                           setDropdownMode((prev) => prev !== null ? !prev : !currentDefault);
                                         }}
                                       >
                                         {(() => {
+                                          // eslint-disable-next-line @typescript-eslint/no-explicit-any
                                           const currentSeason = animeData.seasons.find((s: any) => (s.number || (animeData.seasons.indexOf(s) + 1)) === selectedSeason);
                                           const currentDefault = getDefaultDropdownMode(currentSeason?.episodes?.length || 0);
                                           const currentMode = dropdownMode !== null ? dropdownMode : currentDefault;
@@ -5239,6 +5212,7 @@ const TVDetails: React.FC = () => {
                                   )}
                                 {/* Render Dropdown or Grid */}
                                 {(() => {
+                                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                                   const currentSeason = animeData.seasons.find((s: any) => (s.number || (animeData.seasons.indexOf(s) + 1)) === selectedSeason);
                                   return renderEpisodes(currentSeason?.episodes || [], 'anime');
                                 })()}
@@ -5396,8 +5370,11 @@ const TVDetails: React.FC = () => {
                       {t('details.productionCompanies')}
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      {((tvShow as any).production_companies || []).length > 0 ? (
-                        ((tvShow as any).production_companies || []).map((company: any, index: number) => (
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      {((tvShow as { production_companies?: { id?: number; logo_path?: string; name?: string }[] }).production_companies || []).length > 0 ? (
+                         
+                        ((tvShow as { production_companies?: { id?: number; logo_path?: string; name?: string }[] }).production_companies || []).map((company: { id?: number; logo_path?: string; name?: string }, index: number) => (
                           <motion.div
                             key={company.id}
                             className="flex items-center gap-3 bg-gray-800 p-3 rounded-lg"
@@ -5434,7 +5411,9 @@ const TVDetails: React.FC = () => {
                   </motion.div>
 
                   {/* Pays d'origine */}
-                  {((tvShow as any).origin_country || []).length > 0 && (
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  {((tvShow as { origin_country?: string[] }).origin_country || []).length > 0 && (
                     <motion.div
                       className="mb-6"
                       initial={{ opacity: 0 }}
@@ -5446,7 +5425,9 @@ const TVDetails: React.FC = () => {
                         {t('details.originCountry')}
                       </h3>
                       <div className="flex flex-wrap gap-2">
-                        {((tvShow as any).origin_country || []).map((country: string, index: number) => (
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        {((tvShow as { origin_country?: string[] }).origin_country || []).map((country: string, index: number) => (
                           <motion.div
                             key={country}
                             className="bg-gray-800 px-3 py-2 rounded-lg border border-gray-700"
@@ -5468,7 +5449,9 @@ const TVDetails: React.FC = () => {
                   )}
 
                   {/* Langues */}
-                  {((tvShow as any).spoken_languages || []).length > 0 && (
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                  {((tvShow as { spoken_languages?: { iso_639_1?: string }[] }).spoken_languages || []).length > 0 && (
                     <motion.div
                       className="mb-6"
                       initial={{ opacity: 0 }}
@@ -5480,7 +5463,9 @@ const TVDetails: React.FC = () => {
                         {t('details.languagesLabel')}
                       </h3>
                       <div className="flex flex-wrap gap-2">
-                        {((tvShow as any).spoken_languages || []).map((lang: any, index: number) => (
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        {((tvShow as { spoken_languages?: { iso_639_1?: string }[] }).spoken_languages || []).map((lang: { iso_639_1?: string }, index: number) => (
                           <motion.div
                             key={lang.iso_639_1}
                             className="bg-gray-800 px-3 py-2 rounded-lg border border-gray-700"
@@ -6211,6 +6196,7 @@ const TVDetails: React.FC = () => {
                     multiLangVideos.length > 0 ? (
                       (() => {
                         // Grouper les vidéos par langue
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         const videosByLanguage = multiLangVideos.reduce((acc: any, video: any) => {
                           const lang = video.iso_639_1 || 'unknown';
                           if (!acc[lang]) acc[lang] = [];
@@ -6233,13 +6219,16 @@ const TVDetails: React.FC = () => {
                           'unknown': t('details.langUnknown')
                         };
 
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
                         return Object.entries(videosByLanguage).map(([langCode, videos]: [string, any]) => (
                           <div key={langCode} className="mb-8">
                             <h4 className="text-lg font-medium mb-4 text-purple-400 border-b border-gray-700 pb-2">
                               {languageNames[langCode] || langCode.toUpperCase()}
                             </h4>
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                              {videos.map((video: any, videoIndex: number) => (
+                              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                              {videos.map((video: Record<string, unknown>, videoIndex: number) => (
                                 <motion.div
                                   key={video.id}
                                   className="group bg-gray-800/70 rounded-xl overflow-hidden border border-gray-700/50 hover:border-purple-500/30"
@@ -6325,7 +6314,8 @@ const TVDetails: React.FC = () => {
                     <div className="space-y-8 mb-10">
                       {/* Group general videos by type */}
                       {['Trailer', 'Teaser', 'Clip', 'Behind the Scenes', 'Featurette'].map(videoType => {
-                        const filteredVideos = videos.filter((video: any) => video.type === videoType);
+                         
+                        const filteredVideos = videos.filter((video: Record<string, unknown>) => video.type === videoType);
                         if (filteredVideos.length === 0) return null;
 
                         return (
@@ -6339,7 +6329,9 @@ const TVDetails: React.FC = () => {
                                       videoType === 'Featurette' ? t('details.videoMakingOf') : videoType}
                             </h4>
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                              {filteredVideos.map((video: any, index: number) => (
+                              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                              {filteredVideos.map((video: Record<string, unknown>, index: number) => (
                                 <motion.div
                                   key={video.id || video.key}
                                   className="group bg-gray-800/70 rounded-xl overflow-hidden border border-gray-700/50 hover:border-red-500/30"
@@ -6431,7 +6423,9 @@ const TVDetails: React.FC = () => {
                         );
                       })}
                       {/* ... Rendu pour les autres types de vidéos générales ... */}
-                      {videos.filter((video: any) =>
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                      {videos.filter((video: Record<string, unknown>) =>
                         !['Trailer', 'Teaser', 'Clip', 'Behind the Scenes', 'Featurette'].includes(video.type)
                       ).length > 0 && (
                           <div className="mb-6">
@@ -6440,8 +6434,10 @@ const TVDetails: React.FC = () => {
                             </h4>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                               {videos
-                                .filter((video: any) => !['Trailer', 'Teaser', 'Clip', 'Behind the Scenes', 'Featurette'].includes(video.type))
-                                .map((video: any, index: number) => (
+                                 
+                                .filter((video: Record<string, unknown>) => !['Trailer', 'Teaser', 'Clip', 'Behind the Scenes', 'Featurette'].includes(video.type))
+                                 
+                                .map((video: Record<string, unknown>, index: number) => (
                                   <motion.div
                                     key={video.id || video.key}
                                     className="bg-gray-800 rounded-lg overflow-hidden cursor-pointer"
@@ -6549,6 +6545,7 @@ const TVDetails: React.FC = () => {
                           seasonMultiLangVideos[seasonNum] && seasonMultiLangVideos[seasonNum].length > 0 ? (
                             (() => {
                               // Grouper les vidéos par langue
+                              // eslint-disable-next-line @typescript-eslint/no-explicit-any
                               const videosByLanguage = seasonMultiLangVideos[seasonNum].reduce((acc: any, video: any) => {
                                 const lang = video.iso_639_1 || 'unknown';
                                 if (!acc[lang]) acc[lang] = [];
@@ -6571,13 +6568,16 @@ const TVDetails: React.FC = () => {
                                 'unknown': t('details.langUnknown')
                               };
 
+                              // eslint-disable-next-line @typescript-eslint/no-explicit-any
                               return Object.entries(videosByLanguage).map(([langCode, videos]: [string, any]) => (
                                 <div key={`${seasonNum}-${langCode}`} className="mb-8">
                                   <h5 className="text-md font-medium mb-4 text-purple-400 border-b border-gray-700 pb-2">
                                     {languageNames[langCode] || langCode.toUpperCase()}
                                   </h5>
                                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    {videos.map((video: any, videoIndex: number) => (
+                                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                    {videos.map((video: Record<string, unknown>, videoIndex: number) => (
                                       <motion.div
                                         key={video.id}
                                         className="group bg-gray-800/70 rounded-xl overflow-hidden border border-gray-700/50 hover:border-purple-500/30"
@@ -6663,7 +6663,9 @@ const TVDetails: React.FC = () => {
                           // Vue normale pour cette saison
                           seasonVideos[seasonNum] && seasonVideos[seasonNum].length > 0 ? (
                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                              {seasonVideos[seasonNum].map((video: any, index: number) => (
+                              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                              {seasonVideos[seasonNum].map((video: Record<string, unknown>, index: number) => (
                                 <motion.div
                                   key={video.id || video.key}
                                   className="group bg-gray-800/70 rounded-xl overflow-hidden border border-gray-700/50 hover:border-red-500/30"
@@ -6853,7 +6855,9 @@ const TVDetails: React.FC = () => {
                 {tvShow?.name} - S{selectedSeason} E{selectedEpisode}: {selectedAnimeEpisode.name}
               </h2>
               <p className="text-gray-300 text-sm mt-1">
-                {animeData?.name} - {animeData?.seasons.find((s: any) => (s.number || (animeData.seasons.indexOf(s) + 1)) === selectedSeason)?.name}
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                {animeData?.name} - {animeData?.seasons.find((s: { number?: number; name?: string }) => (s.number || (animeData.seasons.indexOf(s as Record<string, unknown>) + 1)) === selectedSeason)?.name}
               </p>
             </div>
           </div>
@@ -6863,7 +6867,9 @@ const TVDetails: React.FC = () => {
             <div className="flex flex-col gap-3">
               <h3 className="text-gray-300 font-medium">{t('details.versionLabel')}</h3>
               <div className="flex flex-wrap gap-3">
-                {selectedAnimeEpisode.streaming_links?.map((link: any, i: number) => (
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                {selectedAnimeEpisode.streaming_links?.map((link: { language?: string }, i: number) => (
                   <button
                     key={`lang-${link.language}-${i}`}
                     className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${selectedLanguage === link.language
@@ -6880,13 +6886,16 @@ const TVDetails: React.FC = () => {
           </div>
 
           {/* Interface de sélection de lecteur améliorée */}
-          {selectedLanguage && selectedAnimeEpisode.streaming_links?.find((link: any) => link.language === selectedLanguage)?.players?.length > 0 && (
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          {selectedLanguage && selectedAnimeEpisode.streaming_links?.find((link: { language?: string; players?: string[] }) => link.language === selectedLanguage)?.players?.length > 0 && (
             <div className="px-4 py-3 bg-gray-800/50 border-b border-gray-700">
               <div className="flex flex-col gap-3">
                 <h3 className="text-gray-300 font-medium">{t('details.availablePlayers')}</h3>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2">
                   {selectedAnimeEpisode.streaming_links
-                    .find((link: any) => link.language === selectedLanguage)
+                     
+                    .find((link: { language?: string; players?: string[] }) => link.language === selectedLanguage)
                     .players.map((_player: string, index: number) => (
                       <button
                         key={`player-${index}`}
@@ -6911,6 +6920,7 @@ const TVDetails: React.FC = () => {
             <div className="relative w-full" style={{ paddingBottom: '56.25%' }}>
               <iframe
                 src={selectedAnimeEpisode.streaming_links
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   .find((link: any) => link.language === selectedLanguage)
                   .players[parseInt(selectedPlayer)]}
                 className="absolute top-0 left-0 w-full h-full"

@@ -4,8 +4,7 @@ import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import HLSPlayer from '../../components/HLSPlayer';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useAdFreePopup } from '../../context/AdFreePopupContext';
-import AdFreePlayerAds from '../../components/AdFreePlayerAds';
+
 import { extractM3u8FromEmbed, extractVoeM3u8, extractUqloadFile, extractVidzyM3u8, extractFsvidM3u8, extractOneUploadSources, isOneUploadEmbed, isVoeEmbed, extractDoodStreamFile, extractSeekStreamingM3u8, isDoodStreamEmbed, isSeekStreamingEmbed, isDoodStreamExtractionEnabled, isSeekStreamingExtractionEnabled, type M3u8Result } from '../../utils/extractM3u8';
 import { pickAutoSelectedSource, sortHostersByPriority, type SourceAvailability } from '../../utils/sourceAutoSelect';
 import type { TopLevelSourceId } from '../../types/sourcePriority';
@@ -107,7 +106,7 @@ interface FStreamResponse {
   search: {
     query: string;
     results: number;
-    bestMatch: any;
+    bestMatch: Record<string, unknown>;
   };
   players: {
     VFQ?: Array<{
@@ -237,7 +236,7 @@ const checkMovieAvailability = async (movieId: string) => {
 
         const uniqueUrls = new Set<string>();
 
-        rawLinks.forEach((item: any) => {
+        rawLinks.forEach((item: string | Record<string, unknown>) => {
           if (typeof item === 'string') {
             if (item.toLowerCase().endsWith('.mp4') && !uniqueUrls.has(item)) {
               uniqueUrls.add(item);
@@ -372,7 +371,7 @@ const WatchMovie: React.FC = () => {
   const [omegaData, setOmegaData] = useState<OmegaMovieResponse | null>(null);
   const [, setSelectedOmegaPlayer] = useState<number>(0);
   const [darkinoAvailable, setDarkinoAvailable] = useState(false);
-  const [darkinoSources, setDarkinoSources] = useState<any[]>([]);
+  const [darkinoSources, setDarkinoSources] = useState<{ m3u8?: string; label?: string; quality?: string; type?: string }[]>([]);
   const [, setDarkinoId] = useState<string | null>(null);
   const [selectedDarkinoSource, setSelectedDarkinoSource] = useState<number>(0);
   const [mp4Sources, setMp4Sources] = useState<{ url: string; label?: string; language?: string; isVip?: boolean }[]>([]);
@@ -435,7 +434,7 @@ const WatchMovie: React.FC = () => {
   const [rivestreamCaptions, setRivestreamCaptions] = useState<{ label: string; file: string }[]>([]);
 
   // Bump à chaque changement de prefs de priorité pour re-trier les sortedX.
-  const [prefsVersion, setPrefsVersion] = useState<number>(0);
+  const [_prefsVersion, setPrefsVersion] = useState<number>(0);
   useEffect(() => {
     return subscribeToPriorityChanges(() => setPrefsVersion((v) => v + 1));
   }, []);
@@ -453,7 +452,6 @@ const WatchMovie: React.FC = () => {
       }) ?? 'unknown',
     }));
     return sortHostersByPriority(annotated, { category: 'moviesTv', topLevel: 'fstream' });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     // Stabilité UX (M4) : pas de prefsVersion en deps — pin update les prefs +
     // l'indicateur #1, mais l'ordre affiché reste stable jusqu'au prochain refresh.
   }, [fstreamSources]);
@@ -468,7 +466,6 @@ const WatchMovie: React.FC = () => {
       }) ?? 'unknown',
     }));
     return sortHostersByPriority(annotated, { category: 'moviesTv', topLevel: 'wiflix' });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [wiflixSources]);
 
   const sortedJ1f = useMemo(() => {
@@ -481,7 +478,6 @@ const WatchMovie: React.FC = () => {
       }) ?? 'unknown',
     }));
     return sortHostersByPriority(annotated, { category: 'moviesTv', topLevel: 'j1f' });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [j1fSources]);
 
   // Omega / Coflix : les listes viennent de champs dérivés (`omegaData` / `coflixData`).
@@ -501,7 +497,6 @@ const WatchMovie: React.FC = () => {
       }) ?? 'unknown',
     }));
     return sortHostersByPriority(annotated, { category: 'moviesTv', topLevel: 'omega' });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [omegaData]);
 
   const sortedCoflix = useMemo<Array<CoflixPlayer & { type: string }>>(() => {
@@ -516,7 +511,6 @@ const WatchMovie: React.FC = () => {
       }) ?? 'unknown',
     }));
     return sortHostersByPriority(annotated, { category: 'moviesTv', topLevel: 'coflix' });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [coflixData]);
 
   // Viper : items `{ url, label, quality, language }`. Le champ `language`
@@ -531,7 +525,6 @@ const WatchMovie: React.FC = () => {
       }) ?? 'unknown',
     }));
     return sortHostersByPriority(annotated, { category: 'moviesTv', topLevel: 'viper' });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [viperSources]);
 
   const currentSourceRef = useRef<string>('darkino');
@@ -561,19 +554,7 @@ const WatchMovie: React.FC = () => {
     currentActiveUrlRef.current = videoSource || embedUrl || '';
   }, [videoSource, embedUrl]);
 
-  const {
-    showAdFreePopup,
-    adType,
-    shouldLoadIframe,
-    showPopupForPlayer,
-    handlePopupClose,
-    handlePopupAccept
-  } = useAdFreePopup();
-  const [adPopupTriggered, setAdPopupTriggered] = useState(false);
-  const [adPopupBypass, setAdPopupBypass] = useState(false);
-
-  // Ajout de l'état pour savoir si l'utilisateur a cliqué sur la pub
-  const [hasClickedAd, setHasClickedAd] = useState(false);
+  // Ad popup system disabled — players load directly
 
   // CouscousFlix Wrapped 2026 - Track movie viewing time
   useWrappedTracker({
@@ -595,7 +576,7 @@ const WatchMovie: React.FC = () => {
           await fetchVideoSources();
           // Fetch next movie after sources to avoid dependency issues
           await fetchNextMovie();
-        } catch (error) {
+        } catch {
           setIsLoading(false);
         }
       };
@@ -604,6 +585,7 @@ const WatchMovie: React.FC = () => {
     } else {
       setIsLoading(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Empty dependency array to run once
 
   // Function to update VIP retry message
@@ -664,15 +646,15 @@ const WatchMovie: React.FC = () => {
           });
           const results = certResponse.data.results;
           let cert = '';
-          const frRelease = results.find((r: any) => r.iso_3166_1 === 'FR');
+          const frRelease = results.find((r: { iso_3166_1: string; release_dates?: Record<string, unknown>[] }) => r.iso_3166_1 === 'FR');
           if (frRelease?.release_dates) {
-            const theatrical = frRelease.release_dates.find((rd: any) => rd.type === 3 || rd.type === 2);
+            const theatrical = frRelease.release_dates.find((rd: { type: number; certification?: string }) => rd.type === 3 || rd.type === 2);
             if (theatrical?.certification) cert = theatrical.certification;
           }
           if (!cert) {
-            const usRelease = results.find((r: any) => r.iso_3166_1 === 'US');
+            const usRelease = results.find((r: { iso_3166_1: string; release_dates?: Record<string, unknown>[] }) => r.iso_3166_1 === 'US');
             if (usRelease?.release_dates) {
-              const found = usRelease.release_dates.find((rd: any) => rd.certification !== '');
+              const found = usRelease.release_dates.find((rd: { certification: string }) => rd.certification !== '');
               if (found?.certification) cert = found.certification;
             }
           }
@@ -682,7 +664,7 @@ const WatchMovie: React.FC = () => {
             setIsLoading(false);
             return;
           }
-        } catch (e) {
+        } catch {
           console.log('Could not fetch certifications for age check');
         }
       }
@@ -698,7 +680,7 @@ const WatchMovie: React.FC = () => {
         const movieIdInt = parseInt(id);
 
         // Check if movie already exists (handle both old and new format)
-        const existingIndex = continueWatching.movies.findIndex((item: any) => {
+        const existingIndex = continueWatching.movies.findIndex((item: number | { id: number }) => {
           const itemId = typeof item === 'number' ? item : item.id;
           return itemId === movieIdInt;
         });
@@ -862,7 +844,7 @@ const WatchMovie: React.FC = () => {
         // joue le bon hoster ET que le fallback `+1` traverse l'ordre trié.
         const prefsDk0 = getSourcePriorityPrefs();
         const sortedDarkinoSources = sortHostersByPriority(
-          (darkinoResult.sources as any[]).map((s: any) => ({
+          (darkinoResult.sources as { m3u8?: string; label?: string; quality?: string }[]).map((s) => ({
             ...s,
             type: (detectHoster(s.m3u8 || '', {
               patternOverrides: prefsDk0.patternOverrides,
@@ -915,7 +897,7 @@ const WatchMovie: React.FC = () => {
           );
         }
 
-        const dropload = omegaResult.player_links?.find((p: any) => p.player && p.player.toLowerCase().includes('dropload'));
+        const dropload = omegaResult.player_links?.find((p: { player: string; link: string }) => p.player && p.player.toLowerCase().includes('dropload'));
         if (dropload) {
           omegaExtractionPromises.push(
             extractM3u8FromEmbed(dropload, MAIN_API).then(result => ({
@@ -994,7 +976,7 @@ const WatchMovie: React.FC = () => {
           console.log('❌ No supervideo player found in Omega result');
         }
 
-        const dropload = omegaResult.player_links?.find((p: any) => p.player && p.player.toLowerCase().includes('dropload'));
+        const dropload = omegaResult.player_links?.find((p: { player: string; link: string }) => p.player && p.player.toLowerCase().includes('dropload'));
         if (dropload) {
           console.log('🎬 Found dropload player:', dropload);
           omegaExtractionPromises.push(
@@ -1007,7 +989,7 @@ const WatchMovie: React.FC = () => {
         }
 
         // Add Doodstream extraction for Omega
-        const doodstream = omegaResult.player_links?.find((p: any) => p.player && p.player.toLowerCase().includes('doodstream'));
+        const doodstream = omegaResult.player_links?.find((p: { player: string; link: string }) => p.player && p.player.toLowerCase().includes('doodstream'));
         if (doodstream && isDoodStreamExtractionEnabled()) {
           console.log('🎬 Found doodstream player:', doodstream);
           omegaExtractionPromises.push(
@@ -1103,7 +1085,7 @@ const WatchMovie: React.FC = () => {
             finalHlsSources = [...finalHlsSources, ...validVoeResults];
             console.log(`[VOE/UQLOAD][MOVIE] Added ${validVoeResults.length} VOE HLS sources from Firebase`);
           }
-        } catch { }
+        } catch { /* noop */ }
 
         // UQLOAD (File MP4) - Paralléliser
         try {
@@ -1129,7 +1111,7 @@ const WatchMovie: React.FC = () => {
             finalFileSources = [...finalFileSources, ...validUqResults];
             console.log(`[VOE/UQLOAD][MOVIE] Added ${validUqResults.length} UQLOAD file sources from Firebase`);
           }
-        } catch { }
+        } catch { /* noop */ }
 
         // DOODSTREAM from Firebase custom links
         try {
@@ -1152,7 +1134,7 @@ const WatchMovie: React.FC = () => {
             finalFileSources = [...finalFileSources, ...validDoodResults];
             console.log(`✅ Added ${validDoodResults.length} DoodStream sources from Firebase`);
           }
-        } catch { }
+        } catch { /* noop */ }
 
         // SEEKSTREAMING from Firebase custom links
         try {
@@ -1175,13 +1157,14 @@ const WatchMovie: React.FC = () => {
             finalHlsSources = [...finalHlsSources, ...validSeekResults];
             console.log(`✅ Added ${validSeekResults.length} SeekStreaming HLS sources from Firebase`);
           }
-        } catch { }
+        } catch { /* noop */ }
       }
 
       // Process Coflix MULTI links for VOE.SX and UQLOAD extraction (ignore Omega)
       if (coflixResult && Array.isArray(coflixResult.player_links) && coflixResult.player_links.length > 0) {
         const decodedLinks = coflixResult.player_links
-          .map((p: any) => getCoflixPreferredUrl(p))
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          .map((p: { decoded_url?: string; clone_url?: string; url?: string }) => getCoflixPreferredUrl(p as any))
           .filter((u: string) => !!u);
 
         // VOE.SX from MULTI - Paralléliser
@@ -1306,7 +1289,7 @@ const WatchMovie: React.FC = () => {
 
         categories.forEach(category => {
           const categoryPlayers = fstreamResult.players[category] || [];
-          categoryPlayers.forEach((player: any) => {
+          categoryPlayers.forEach((player: { url?: string; player?: string; quality?: string }) => {
             const source = {
               url: player.url,
               label: `${category} - ${player.player} ${player.quality}`,
@@ -1461,7 +1444,7 @@ const WatchMovie: React.FC = () => {
 
         categories.forEach(category => {
           const categoryPlayers = wiflixResult.players[category as keyof typeof wiflixResult.players] || [];
-          categoryPlayers.forEach((player: any) => {
+          categoryPlayers.forEach((player: { url?: string; name?: string }) => {
             const source = {
               url: player.url,
               label: `Lynx ${category.toUpperCase()} - ${player.name}`,
@@ -1731,7 +1714,7 @@ const WatchMovie: React.FC = () => {
 
         categories.forEach(category => {
           const categoryPlayers = j1fResult.players[category as keyof typeof j1fResult.players] || [];
-          categoryPlayers.forEach((player: any) => {
+          categoryPlayers.forEach((player: { url?: string; name?: string }) => {
             const source = {
               url: player.url,
               label: `1J1F ${category.toUpperCase()} - ${player.name}`,
@@ -1929,12 +1912,12 @@ const WatchMovie: React.FC = () => {
         // --- SeekStreaming extraction from Viper ---
         if (isSeekStreamingExtractionEnabled()) {
           const allViperSourcesSeek = [...(viperResult?.links?.vf || []), ...(viperResult?.links?.vostfr || [])];
-          const seekViperSources = allViperSourcesSeek.filter((source: any) =>
+          const seekViperSources = allViperSourcesSeek.filter((source: { url: string; label?: string }) =>
             source.label?.toLowerCase().includes('seekstream') || source.label?.toLowerCase().includes('embed4me') || isSeekStreamingEmbed(source.url)
           );
           if (seekViperSources.length > 0) {
             console.log(`🎬 Found ${seekViperSources.length} SeekStreaming sources in Viper, extracting...`);
-            const seekPromises = seekViperSources.map(async (source: any) => {
+            const seekPromises = seekViperSources.map(async (source: { url: string; label?: string }) => {
               try {
                 const result = await extractSeekStreamingM3u8(source.url);
                 if (result && result.success && result.hlsUrl) {
@@ -1967,7 +1950,7 @@ const WatchMovie: React.FC = () => {
       // l'onError fallback (+1) traverse aussi l'ordre trié.
       const prefsFinalHls = getSourcePriorityPrefs();
       const sortedFinalHls = sortHostersByPriority(
-        finalHlsSources.map((s: any) => ({
+        finalHlsSources.map((s: { url?: string; label?: string }) => ({
           ...s,
           type: (detectHoster(s.url || '', {
             patternOverrides: prefsFinalHls.patternOverrides,
@@ -1980,7 +1963,7 @@ const WatchMovie: React.FC = () => {
         { category: 'moviesTv', topLevel: 'nexus_hls' },
       );
       const sortedFinalFile = sortHostersByPriority(
-        finalFileSources.map((s: any) => ({
+        finalFileSources.map((s: { url?: string; label?: string }) => ({
           ...s,
           type: (detectHoster(s.url || '', {
             patternOverrides: prefsFinalHls.patternOverrides,
@@ -2024,13 +2007,13 @@ const WatchMovie: React.FC = () => {
       // Close sur toutes les variables locales de fetchVideoSources (sources, résultats),
       // ce qui garde le coût faible et évite de faire ressortir tous ces états en props.
       // Retourne true si l'id a été géré avec succès, false sinon.
-      const applyEmbedConfig = async (sourceId: TopLevelSourceId): Promise<boolean> => {
+      const applyEmbedConfig = async (sourceId: TopLevelSourceId | 'nexus_file' | 'rivestream_hls'): Promise<boolean> => {
         switch (sourceId) {
           case 'nexus_hls': {
             // Tri par priorité hoster (M4) — applique le pin user (ex. uqload first).
             const prefsNh = getSourcePriorityPrefs();
             const sortedHls = sortHostersByPriority(
-              finalHlsSources.map((s: any) => ({
+              finalHlsSources.map((s: { url?: string; label?: string }) => ({
                 ...s,
                 type: (detectHoster(s.url || '', {
                   patternOverrides: prefsNh.patternOverrides,
@@ -2050,7 +2033,7 @@ const WatchMovie: React.FC = () => {
             }
             console.log('🎯 Selected HLS URL:', firstSource.url);
             console.log('🏷️ Selected HLS Label:', firstSource.label);
-            const idxNh = finalHlsSources.findIndex((s: any) => s.url === firstSource.url);
+            const idxNh = finalHlsSources.findIndex((s: { url?: string }) => s.url === firstSource.url);
             setSelectedSource('nexus_hls');
             setSelectedNexusHlsSource(idxNh >= 0 ? idxNh : 0);
             setVideoSource(firstSource.url);
@@ -2062,7 +2045,7 @@ const WatchMovie: React.FC = () => {
             console.log('✅ Selecting NEXUS FILE as primary source');
             const prefsNf = getSourcePriorityPrefs();
             const sortedFile = sortHostersByPriority(
-              finalFileSources.map((s: any) => ({
+              finalFileSources.map((s: { url?: string; label?: string }) => ({
                 ...s,
                 type: (detectHoster(s.url || '', {
                   patternOverrides: prefsNf.patternOverrides,
@@ -2075,7 +2058,7 @@ const WatchMovie: React.FC = () => {
               { category: 'moviesTv', topLevel: 'nexus_hls' },
             );
             const topFile = sortedFile[0];
-            const idxNf = finalFileSources.findIndex((s: any) => s.url === topFile.url);
+            const idxNf = finalFileSources.findIndex((s: { url?: string }) => s.url === topFile.url);
             setSelectedSource('nexus_file');
             setSelectedNexusFileSource(idxNf >= 0 ? idxNf : 0);
             setVideoSource(topFile.url);
@@ -2087,7 +2070,7 @@ const WatchMovie: React.FC = () => {
             // Tri par priorité hoster (M4) ; conserve fallback "dernier élément" si tous unknown.
             const prefsBv = getSourcePriorityPrefs();
             const sortedBravo = sortHostersByPriority(
-              localBravoSources.map((s: any) => ({
+              localBravoSources.map((s: { url?: string; label?: string }) => ({
                 ...s,
                 type: (detectHoster(s.url || '', {
                   patternOverrides: prefsBv.patternOverrides,
@@ -2099,7 +2082,7 @@ const WatchMovie: React.FC = () => {
               })),
               { category: 'moviesTv', topLevel: 'bravo' },
             );
-            const allUnknownBv = sortedBravo.every((s: any) => s.type === 'unknown');
+            const allUnknownBv = sortedBravo.every((s: { type?: string }) => s.type === 'unknown');
             const bestBravo = allUnknownBv
               ? localBravoSources[localBravoSources.length - 1]
               : sortedBravo[0];
@@ -2126,7 +2109,7 @@ const WatchMovie: React.FC = () => {
             // Tri par priorité hoster (M4) — applique le pin user.
             const prefsDk = getSourcePriorityPrefs();
             const sortedDk = sortHostersByPriority(
-              darkinoResult.sources.map((s: any) => ({
+              darkinoResult.sources.map((s: { m3u8?: string; label?: string; quality?: string }) => ({
                 ...s,
                 type: (detectHoster(s.m3u8 || '', {
                   patternOverrides: prefsDk.patternOverrides,
@@ -2139,7 +2122,7 @@ const WatchMovie: React.FC = () => {
               { category: 'moviesTv', topLevel: 'darkino' },
             );
             const topDk = sortedDk[0];
-            const idxDk = darkinoResult.sources.findIndex((s: any) => s.m3u8 === topDk.m3u8);
+            const idxDk = darkinoResult.sources.findIndex((s: { m3u8?: string }) => s.m3u8 === topDk.m3u8);
             setSelectedSource('darkino');
             setSelectedDarkinoSource(idxDk >= 0 ? idxDk : 0);
             setVideoSource(topDk.m3u8);
@@ -2271,6 +2254,7 @@ const WatchMovie: React.FC = () => {
               })),
               { category: 'moviesTv', topLevel: 'viper' },
             );
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             setSelectedSource('viper' as any);
             setSelectedViperSource(0);
             setEmbedUrl(sortedViperLocal[0].url);
@@ -2372,7 +2356,7 @@ const WatchMovie: React.FC = () => {
         for (let i = 0; i < availList.length; i++) {
           const pick = pickAutoSelectedSource(availList);
           if (!pick) break;
-          // eslint-disable-next-line no-await-in-loop
+
           if (await applyEmbedConfig(pick)) {
             applied = true;
             break;
@@ -2448,7 +2432,7 @@ const WatchMovie: React.FC = () => {
           runtime: 0 // Default value
         });
       }
-    } catch (error) {
+    } catch { // noop
     } finally {
       setLoadingNextMovie(false);
     }
@@ -2508,8 +2492,8 @@ const WatchMovie: React.FC = () => {
                   const urlObj = new URL(url);
                   urlObj.host = RIVESTREAM_PROXIES[0];
                   url = urlObj.toString();
-                } catch (e) {
-                  url = url.replace(/^(https?:\/\/)[^\/]+/, `$1${RIVESTREAM_PROXIES[0]}`);
+                } catch {
+                  url = url.replace(/^(https?:\/\/)[^/]+/, `$1${RIVESTREAM_PROXIES[0]}`);
                 }
               }
 
@@ -2841,7 +2825,7 @@ const WatchMovie: React.FC = () => {
     };
   }, [
     // State values used in logic
-    darkinoSources, mp4Sources, darkinoAvailable, nexusHlsSources, nexusFileSources, fstreamSources, wiflixSources, j1fSources, sortedFstream, sortedWiflix, sortedJ1f, viperSources, rivestreamSources, rivestreamLoaded, loadingRivestream,
+    darkinoSources, mp4Sources, darkinoAvailable, nexusHlsSources, nexusFileSources, fstreamSources, wiflixSources, j1fSources, sortedFstream, sortedWiflix, sortedJ1f, viperSources, rivestreamSources, rivestreamLoaded, loadingRivestream, canUseBravo, purstreamSources,
     // State setters
     setOnlyVostfrAvailable, setShowEmbedQuality, setEmbedUrl, setEmbedType,
     setSelectedSource, setSelectedDarkinoSource, setSelectedMp4Source, setSelectedNexusHlsSource, setSelectedNexusFileSource, setSelectedFstreamSource, setSelectedWiflixSource, setSelectedViperSource, setSelectedRivestreamSource, setVideoSource,
@@ -2851,137 +2835,7 @@ const WatchMovie: React.FC = () => {
     currentSourceRef, isLoadingRivestreamRef
   ]);
 
-  useEffect(() => {
-    // On ne fait rien si VIP activé
-    if (import.meta.env.is_vip === 'true' || import.meta.env.is_vip === true || localStorage.getItem('is_vip') === 'true') {
-      console.log('🚫 VIP activé - popup ads désactivé');
-      return;
-    }
-    // On ne fait rien si déjà passé le popup ou si popup déjà affiché
-    if (adPopupTriggered || adPopupBypass) {
-      console.log('🚫 Popup déjà déclenché ou bypassé:', { adPopupTriggered, adPopupBypass });
-      return;
-    }
 
-    console.log('🔍 États de chargement:', {
-      loadingDarkino,
-      loadingCoflix,
-      loadingOmega,
-      loadingFrembed,
-      loadingFstream,
-      loadingExtractions
-    });
-
-    // Quand tous les chargements sont terminés (y compris les extractions)
-    if (!loadingDarkino && !loadingCoflix && !loadingOmega && !loadingFrembed && !loadingFstream && !loadingExtractions) {
-      console.log('✅ Tous les chargements terminés - vérification des sources pour popup ads');
-      console.log('📊 Sources disponibles:', {
-        selectedSource,
-        nexusHlsSources: nexusHlsSources.length,
-        nexusFileSources: nexusFileSources.length,
-        darkinoSources: darkinoSources.length,
-        mp4Sources: mp4Sources.length,
-        omegaData: omegaData?.player_links?.length || 0,
-        coflixData: coflixData?.player_links?.length || 0,
-        fstreamSources: fstreamSources.length,
-        wiflixSources: wiflixSources.length,
-        embedUrl
-      });
-
-      // NOUVEAU: Déclencher le popup pour TOUS les lecteurs dès qu'une source est sélectionnée
-      if (selectedSource && !adPopupTriggered) {
-        console.log('🎭 Déclenchement popup pour source:', selectedSource);
-
-        // Vérifier s'il n'y a que des sources VO/VOSTFR disponibles
-        const hasVfSources = darkinoSources.length > 0 || mp4Sources.length > 0 ||
-          (omegaData?.player_links && omegaData.player_links.length > 0) ||
-          (coflixData?.player_links && coflixData.player_links.length > 0) ||
-          (fstreamSources.length > 0 && fstreamSources.some(source =>
-            source.category === 'VF' || source.category === 'VFQ'
-          )) ||
-          (wiflixSources.length > 0 && wiflixSources.some(source =>
-            source.category === 'VF' || source.category === 'VFQ'
-          )) ||
-          (j1fSources.length > 0 && j1fSources.some(source =>
-            source.category === 'VF' || source.category === 'VFQ'
-          )) ||
-          (viperSources.length > 0 && viperSources.some(source =>
-            source.language === 'VF'
-          ));
-
-        const isVoVostfrOnly = !hasVfSources;
-
-        // Déclencher le popup avec le type de lecteur approprié
-        let playerType = selectedSource;
-        let additionalInfo: any = { isVoVostfrOnly };
-
-        // Mapper les types de sources aux types de lecteurs pour le popup
-        switch (selectedSource) {
-          case 'nexus_hls':
-          case 'nexus_file':
-            playerType = 'nexus_' + selectedSource.split('_')[1];
-            break;
-          case 'darkino':
-          case 'mp4':
-            playerType = 'darkino';
-            break;
-          case 'omega':
-            playerType = 'omega';
-            additionalInfo = { omegaData, isVoVostfrOnly };
-            break;
-          case 'coflix':
-            playerType = 'multi';
-            additionalInfo = { coflixData, isVoVostfrOnly };
-            break;
-          case 'fstream':
-            playerType = 'fstream';
-            break;
-          case 'wiflix':
-            playerType = 'wiflix';
-            break;
-          case 'j1f':
-            playerType = 'j1f';
-            break;
-          case 'viper':
-            playerType = 'viper';
-            break;
-          case 'frembed':
-            playerType = 'frembed';
-            break;
-          default:
-            // Pour les autres types (custom, embed URLs, etc.)
-            if (embedUrl) {
-              if (embedUrl.toLowerCase().includes('vidmoly')) {
-                playerType = 'vidmoly';
-              } else if (embedUrl.toLowerCase().includes('dropload')) {
-                playerType = 'dropload';
-              } else {
-                playerType = 'adfree'; // Type générique pour les embeds
-              }
-            } else {
-              playerType = 'adfree'; // Type par défaut
-            }
-            break;
-        }
-
-        console.log(`🎭 Popup déclenché pour ${playerType} (source: ${selectedSource})`);
-        showPopupForPlayer(String(playerType), additionalInfo);
-        setAdPopupTriggered(true);
-        return;
-      }
-
-      console.log('⚠️ Aucune source sélectionnée ou popup déjà déclenché');
-    } else {
-      console.log('⏳ Chargements en cours - popup ads en attente');
-    }
-  }, [loadingDarkino, loadingCoflix, loadingOmega, loadingFrembed, loadingFstream, loadingWiflix, loadingExtractions, selectedSource, darkinoSources, mp4Sources, omegaData, coflixData, fstreamSources, wiflixSources, j1fSources, embedUrl, adPopupTriggered, adPopupBypass, showPopupForPlayer]);
-
-  // Si on ferme le popup (croix) ET qu'on n'a PAS cliqué sur la pub, on bloque l'accès au lecteur
-  useEffect(() => {
-    if (!showAdFreePopup && adPopupTriggered && !shouldLoadIframe && !hasClickedAd) {
-      setAdPopupBypass(true); // On bloque l'accès au lecteur
-    }
-  }, [showAdFreePopup, adPopupTriggered, shouldLoadIframe, hasClickedAd]);
 
   useEffect(() => {
     const setVh = () => {
@@ -3175,16 +3029,6 @@ const WatchMovie: React.FC = () => {
           </div>
           <div className="text-white text-xl font-medium mt-6">{loadingText}</div>
         </div>
-      ) : adPopupBypass ? (
-        <div className="flex flex-col items-center justify-center h-full bg-black">
-          <div className="text-white text-2xl font-bold mb-4">{t('watch.mustWatchAd')}</div>
-          <div className="text-gray-400 text-lg">{t('watch.reloadToRetry')}</div>
-        </div>
-      ) : adPopupTriggered && !shouldLoadIframe && !hasClickedAd ? (
-        <div className="flex flex-col items-center justify-center h-full bg-black">
-          <div className="text-white text-2xl font-bold mb-4">{t('watch.loading')}</div>
-          <div className="text-gray-400 text-lg">{t('watch.pleaseWait')}</div>
-        </div>
       ) : onlyVostfrAvailable ? (
         <div className="h-full bg-black text-white flex flex-col items-center justify-center p-4">
           <div className="max-w-2xl w-full bg-gray-900/95 rounded-xl p-8 text-center shadow-2xl border border-gray-800 relative">
@@ -3273,7 +3117,7 @@ const WatchMovie: React.FC = () => {
             )}
           </AnimatePresence>
         </div>
-      ) : selectedSource === 'fstream' && fstreamSources.length > 0 && (!adPopupTriggered || shouldLoadIframe || hasClickedAd) ? (
+      ) : selectedSource === 'fstream' && fstreamSources.length > 0 ? (
         <div className="w-full h-full flex items-center justify-center">
           {/* Back to Info Button */}
           <button
@@ -3378,7 +3222,7 @@ const WatchMovie: React.FC = () => {
             )}
           </AnimatePresence>
         </div>
-      ) : selectedSource === 'darkino' && darkinoSources.length > 0 && (!adPopupTriggered || shouldLoadIframe || hasClickedAd) ? (
+      ) : selectedSource === 'darkino' && darkinoSources.length > 0 ? (
         <div className="w-full h-full flex items-center justify-center">
           <HLSPlayer
             priorityCategory="moviesTv"
@@ -3413,6 +3257,7 @@ const WatchMovie: React.FC = () => {
                     setEmbedType('wiflix');
                     setEmbedType('wiflix');
                   } else if (viperSources.length > 0) {
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     setSelectedSource('viper' as any);
                     setSelectedViperSource(0);
                     setEmbedUrl(viperSources[0].url);
@@ -3526,7 +3371,7 @@ const WatchMovie: React.FC = () => {
             )}
           </AnimatePresence>
         </div>
-      ) : selectedSource === 'mp4' && (!adPopupTriggered || shouldLoadIframe || hasClickedAd) ? (
+      ) : selectedSource === 'mp4' ? (
         <div className="w-full h-full flex items-center justify-center">
           <HLSPlayer
             priorityCategory="moviesTv"
@@ -3627,7 +3472,7 @@ const WatchMovie: React.FC = () => {
             )}
           </AnimatePresence>
         </div>
-      ) : ((selectedSource === 'nexus_hls' && nexusHlsSources.length > 0) || (selectedSource === 'bravo' && purstreamSources.length > 0 && canUseBravo)) && (!adPopupTriggered || shouldLoadIframe || hasClickedAd) ? (
+      ) : ((selectedSource === 'nexus_hls' && nexusHlsSources.length > 0) || (selectedSource === 'bravo' && purstreamSources.length > 0 && canUseBravo)) ? (
         <div className="w-full h-full flex items-center justify-center">
           <HLSPlayer
             priorityCategory="moviesTv"
@@ -3734,7 +3579,7 @@ const WatchMovie: React.FC = () => {
             )}
           </AnimatePresence>
         </div>
-      ) : selectedSource === 'nexus_file' && nexusFileSources.length > 0 && (!adPopupTriggered || shouldLoadIframe || hasClickedAd) ? (
+      ) : selectedSource === 'nexus_file' && nexusFileSources.length > 0 ? (
         <div className="w-full h-full flex items-center justify-center">
           <HLSPlayer
             priorityCategory="moviesTv"
@@ -3841,7 +3686,7 @@ const WatchMovie: React.FC = () => {
             )}
           </AnimatePresence>
         </div>
-      ) : selectedSource === 'rivestream_hls' && (!adPopupTriggered || shouldLoadIframe || hasClickedAd) ? (
+      ) : selectedSource === 'rivestream_hls' ? (
         <div className="w-full h-full flex items-center justify-center">
           {loadingRivestream ? (
             <div className="flex flex-col items-center justify-center h-full bg-black">
@@ -3989,7 +3834,7 @@ const WatchMovie: React.FC = () => {
             </div>
           )}
         </div>
-      ) : selectedSource === 'darkino' && darkinoSources.length > 0 && (!adPopupTriggered || shouldLoadIframe || hasClickedAd) ? (
+      ) : selectedSource === 'darkino' && darkinoSources.length > 0 ? (
         <div className="w-full h-full flex items-center justify-center">
           <HLSPlayer
             priorityCategory="moviesTv"
@@ -4321,13 +4166,7 @@ const WatchMovie: React.FC = () => {
         </div>
       )}
 
-      {/* Ad popup rendered as an overlay (not in the player/loading branch) so
-          click-anywhere mode keeps the preloaded player visible behind the
-          transparent catcher. Normal mode's dialog still covers the gated
-          (black) loading state below it. */}
-      {showAdFreePopup && adPopupTriggered && !adPopupBypass && (
-        <AdFreePlayerAds onClose={handlePopupClose} onAccept={handlePopupAccept} adType={adType} onAdClick={() => setHasClickedAd(true)} />
-      )}
+
     </div>
   );
 };

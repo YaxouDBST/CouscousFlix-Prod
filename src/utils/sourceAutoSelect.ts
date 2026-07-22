@@ -2,11 +2,11 @@
 import { getSourcePriorityPrefs } from './sourcePriorityPrefs';
 import { getRememberLastPlayer, getLastPlayer } from './lastPlayerPref';
 import type {
-  TopLevelSourceId, HosterId, LanguageId, PriorityCategory,
+  TopLevelSourceId, HosterId, LanguageId, PriorityCategory, DEPRECATED_SOURCE_IDS
 } from '../types/sourcePriority';
 
 export interface SourceAvailability {
-  id: TopLevelSourceId;
+  id: TopLevelSourceId | typeof DEPRECATED_SOURCE_IDS[number];
   hasData: boolean;
 }
 
