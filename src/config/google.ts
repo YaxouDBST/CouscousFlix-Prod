@@ -6,7 +6,7 @@ const getRedirectUri = () => {
 };
 
 export const GOOGLE_CONFIG = {
-  CLIENT_ID: '720624991465-e20dthtgo0hg8lt4ts15b7jucjhdl0rs.apps.googleusercontent.com',
+  CLIENT_ID: import.meta.env.VITE_GOOGLE_CLIENT_ID || '720624991465-e20dthtgo0hg8lt4ts15b7jucjhdl0rs.apps.googleusercontent.com',
   
   get REDIRECT_URI() {
     return getRedirectUri();
