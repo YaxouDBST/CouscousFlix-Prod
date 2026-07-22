@@ -422,7 +422,7 @@ function formatRating(value) {
     : numberValue.toFixed(1);
 }
 
-function buildImageUrl(origin, payload, fallbackPath = "/couscousflix.png") {
+function buildImageUrl(origin, payload, fallbackPath = "/cat.png") {
   const imagePath =
     payload.backdrop_path || payload.poster_path || payload.profile_path;
   if (!imagePath) return new URL(fallbackPath, origin).toString();
@@ -430,7 +430,7 @@ function buildImageUrl(origin, payload, fallbackPath = "/couscousflix.png") {
   return `${TMDB_IMAGE_BASE}/${size}${imagePath}`;
 }
 
-function resolveExternalImageUrl(origin, value, fallbackPath = "/couscousflix.png") {
+function resolveExternalImageUrl(origin, value, fallbackPath = "/cat.png") {
   const normalized = String(value || "").trim();
 
   if (!normalized) {
@@ -537,7 +537,7 @@ function buildBaseMetadata(requestUrl, previewLanguage, payload) {
     ),
     canonicalUrl: requestUrl.toString(),
     imageUrl:
-      payload.imageUrl || new URL("/couscousflix.png", requestUrl.origin).toString(),
+      payload.imageUrl || new URL("/cat.png", requestUrl.origin).toString(),
     imageAlt: payload.imageAlt || SITE_NAME,
     ogType: payload.ogType || "website",
     ogLocale: copy.ogLocale,

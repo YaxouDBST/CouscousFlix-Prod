@@ -10,7 +10,7 @@ const CONFIG_TIMEOUT_MS = 3000;
 // radio cellulaire qui se réveille). Si même ce ping fail, l'origine est
 // vraiment injoignable.
 const REACHABILITY_TIMEOUT_MS = 4000;
-const REACHABILITY_PROBE_PATH = '/couscousflix.png';
+const REACHABILITY_PROBE_PATH = '/cat.png';
 const HOSTNAME_RE = /^[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)+$/i;
 
 // ============================================================================
@@ -286,8 +286,8 @@ self.addEventListener('push', (event) => {
   event.waitUntil(
     self.registration.showNotification(data.title || 'CouscousFlix', {
       body: data.body || '',
-      icon: data.icon ? new URL(data.icon, baseUrl).href : `${baseUrl}/couscousflix.png`,
-      badge: `${baseUrl}/couscousflix.png`,
+      icon: data.icon ? new URL(data.icon, baseUrl).href : `${baseUrl}/cat.png`,
+      badge: `${baseUrl}/cat.png`,
       image: data.image || undefined,
       data: data.data || {},
     })
