@@ -1845,28 +1845,23 @@ const VideoPlayer = ({ movieId, backdropPath }: { movieId: string; backdropPath?
         <div className="relative w-full h-[300px] sm:h-[400px] md:h-[500px] lg:h-[600px] xl:h-[700px] rounded-lg overflow-hidden bg-black">
           <iframe
             id="video-player-iframe"
-            sandbox={
-              // Only apply sandbox to "PAS DE PUBLICITE" players
-              ((selectedSource === 'multi' &&
-                coflixData?.player_links[selectedPlayerLink]?.quality?.includes("PAS DE PUBLICITE") &&
-                // Exclude specific players even if they have "PAS DE PUBLICITE"
-                !coflixData?.player_links[selectedPlayerLink]?.decoded_url?.includes("lulustream") &&
-                !coflixData?.player_links[selectedPlayerLink]?.decoded_url?.includes("filemoon") &&
-                !coflixData?.player_links[selectedPlayerLink]?.decoded_url?.includes("supervideo") &&
-                !coflixData?.player_links[selectedPlayerLink]?.decoded_url?.includes("dropload") &&
-                !coflixData?.player_links[selectedPlayerLink]?.decoded_url?.includes("voe.sx") &&
-                !coflixData?.player_links[selectedPlayerLink]?.decoded_url?.includes("vidmoly") &&
-                !coflixData?.player_links[selectedPlayerLink]?.decoded_url?.includes("vidguard") &&
-                !coflixData?.player_links[selectedPlayerLink]?.decoded_url?.includes("do7go") &&
-                !coflixData?.player_links[selectedPlayerLink]?.decoded_url?.includes("uqload") &&
-                !coflixData?.player_links[selectedPlayerLink]?.decoded_url?.includes("veed") &&
-                !coflixData?.player_links[selectedPlayerLink]?.decoded_url?.includes("wish") &&
-                !coflixData?.player_links[selectedPlayerLink]?.decoded_url?.includes("lecteur6.com")
-              ) ||
-                (selectedSource === 'adfree' && adFreeSource))
-                ? "allow-scripts allow-same-origin allow-presentation"
-                : undefined // No sandbox for other players
-            }
+            sandbox={(() => {
+              const url = selectedSource === 'primary' ? `https://frembed.click/api/film.php?id=${movieId}` :
+                selectedSource === 'peachify' ? `https://peachify.top/embed/movie/${movieId}?sub=French&accent=dc2626` :
+                selectedSource === 'vostfr' ? `https://vidsrc.wtf/api/3/movie/?id=${movieId}` :
+                  selectedSource === 'videasy' ? `https://vidlink.pro/movie/${movieId}?primaryColor=0278fd&secondaryColor=a2a2a2&iconColor=eefdec&icons=default&player=default&title=true&poster=true&autoplay=true&nextbutton=false` :
+                    selectedSource === 'vidsrccc' ? `https://vidsrc.io/embed/movie?tmdb=${movieId}` :
+                      selectedSource === 'vidsrcsu' ? `https://vidsrc.su/embed/movie/${movieId}` :
+                        selectedSource === 'vidsrcwtf1' ? `https://vidsrc.wtf/api/1/movie/?id=${movieId}` :
+                          selectedSource === 'vidsrcwtf5' ? `https://vidsrc.wtf/api/5/movie/?id=${movieId}` :
+                            selectedSource === 'adfree' ? adFreeSource || "" :
+                              selectedSource === 'multi' ? coflixData?.player_links?.[selectedPlayerLink]?.decoded_url || "" : "";
+              const urlLower = url.toLowerCase();
+              if (urlLower.includes("mixdrop") || urlLower.includes("dood") || urlLower.includes("emmmmbed") || urlLower.includes("lecteur6") || urlLower.includes("supervideo") || urlLower.includes("dropload") || urlLower.includes("uqload") || urlLower.includes("luluvdoo") || urlLower.includes("sibnet") || urlLower.includes("filemoon") || urlLower.includes("voe.sx") || urlLower.includes("vidmoly") || urlLower.includes("vidguard") || urlLower.includes("do7go") || urlLower.includes("veed") || urlLower.includes("wish") || urlLower.includes("lulustream")) {
+                return undefined;
+              }
+              return "allow-scripts allow-same-origin allow-presentation";
+            })()}
             src={
               selectedSource === 'primary' ? `https://frembed.click/api/film.php?id=${movieId}` :
                 selectedSource === 'peachify' ? `https://peachify.top/embed/movie/${movieId}?sub=French&accent=dc2626` :

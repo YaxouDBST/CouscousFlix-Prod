@@ -1975,6 +1975,13 @@ const LiveTVPlayer: React.FC<LiveTVPlayerProps> = ({
                             className="absolute inset-0 h-full w-full border-0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                             allowFullScreen
+                            sandbox={(() => {
+                                const urlLower = activeEmbedUrl ? activeEmbedUrl.toLowerCase() : '';
+                                if (urlLower.includes("mixdrop") || urlLower.includes("dood") || urlLower.includes("emmmmbed") || urlLower.includes("lecteur6") || urlLower.includes("supervideo") || urlLower.includes("dropload") || urlLower.includes("uqload") || urlLower.includes("luluvdoo") || urlLower.includes("sibnet") || urlLower.includes("filemoon") || urlLower.includes("voe.sx") || urlLower.includes("vidmoly") || urlLower.includes("vidguard") || urlLower.includes("do7go") || urlLower.includes("veed") || urlLower.includes("wish") || urlLower.includes("lulustream")) {
+                                    return undefined;
+                                }
+                                return "allow-scripts allow-same-origin allow-presentation";
+                            })()}
                         />
                     </div>
                 </div>

@@ -2308,27 +2308,13 @@ const VideoPlayer = forwardRef<VideoPlayerRefHandle, VideoPlayerProps>(({ showId
             <iframe
               ref={videoPlayerIframeRef}
               id="video-player-iframe"
-              sandbox={
-                // Only apply sandbox to "PAS DE PUBLICITE" players
-                ((selectedSource === 'multi' &&
-                  coflixData?.current_episode?.player_links[selectedPlayerLink]?.quality?.includes("PAS DE PUBLICITE") &&
-                  // Exclude specific players even if they have "PAS DE PUBLICITE"
-                  !coflixData?.current_episode?.player_links[selectedPlayerLink]?.decoded_url?.includes("lulustream") &&
-                  !coflixData?.current_episode?.player_links[selectedPlayerLink]?.decoded_url?.includes("filemoon") &&
-                  !coflixData?.current_episode?.player_links[selectedPlayerLink]?.decoded_url?.includes("supervideo") &&
-                  !coflixData?.current_episode?.player_links[selectedPlayerLink]?.decoded_url?.includes("dropload") &&
-                  !coflixData?.current_episode?.player_links[selectedPlayerLink]?.decoded_url?.includes("voe.sx") &&
-                  !coflixData?.current_episode?.player_links[selectedPlayerLink]?.decoded_url?.includes("vidmoly") &&
-                  !coflixData?.current_episode?.player_links[selectedPlayerLink]?.decoded_url?.includes("vidguard") &&
-                  !coflixData?.current_episode?.player_links[selectedPlayerLink]?.decoded_url?.includes("do7go") &&
-                  !coflixData?.current_episode?.player_links[selectedPlayerLink]?.decoded_url?.includes("uqload") &&
-                  !coflixData?.current_episode?.player_links[selectedPlayerLink]?.decoded_url?.includes("veed") &&
-                  !coflixData?.current_episode?.player_links[selectedPlayerLink]?.decoded_url?.includes("wish") &&
-                  !coflixData?.current_episode?.player_links[selectedPlayerLink]?.decoded_url?.includes("lecteur6.com")
-                ))
-                  ? "allow-scripts allow-same-origin allow-presentation"
-                  : undefined // No sandbox for other players
-              }
+              sandbox={(() => {
+                const urlLower = videoSource ? videoSource.toLowerCase() : '';
+                if (urlLower.includes("mixdrop") || urlLower.includes("dood") || urlLower.includes("emmmmbed") || urlLower.includes("lecteur6") || urlLower.includes("supervideo") || urlLower.includes("dropload") || urlLower.includes("uqload") || urlLower.includes("luluvdoo") || urlLower.includes("sibnet") || urlLower.includes("filemoon") || urlLower.includes("voe.sx") || urlLower.includes("vidmoly") || urlLower.includes("vidguard") || urlLower.includes("do7go") || urlLower.includes("veed") || urlLower.includes("wish") || urlLower.includes("lulustream")) {
+                  return undefined;
+                }
+                return "allow-scripts allow-same-origin allow-presentation";
+              })()}
               src={
                 // Utiliser directement videoSource, qui est mis à jour par le useEffect
                 videoSource || ""

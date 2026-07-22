@@ -3161,7 +3161,7 @@ const WatchMovie: React.FC = () => {
             allowFullScreen
             referrerPolicy="strict-origin-when-cross-origin"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            sandbox={undefined}
+            sandbox="allow-scripts allow-same-origin allow-presentation"
           ></iframe>
 
           {/* Sources Menu Overlay */}
@@ -3986,7 +3986,6 @@ const WatchMovie: React.FC = () => {
             sandbox={(() => {
               const urlLower = embedUrl ? embedUrl.toLowerCase() : '';
 
-
               // Jamais de sandbox pour Mixdrop, Doodstream, ou les lecteurs multi (emmmmbed.com, lecteur6.com)
               if (urlLower.includes("mixdrop") || urlLower.includes("dood") || urlLower.includes("emmmmbed") || urlLower.includes("lecteur6")) {
                 return undefined;
@@ -4105,6 +4104,7 @@ const WatchMovie: React.FC = () => {
             allowFullScreen
             referrerPolicy="strict-origin-when-cross-origin"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            sandbox="allow-scripts allow-same-origin allow-presentation"
           ></iframe>
 
           <AnimatePresence>

@@ -4498,7 +4498,7 @@ const WatchTv: React.FC = () => {
               if (embedType === 'coflix') {
                 return undefined;
               }
-              return undefined;
+              return "allow-scripts allow-same-origin allow-presentation";
             })()}
           ></iframe>
 
