@@ -106,7 +106,7 @@ const WhatIsCouscousFlixPage: React.FC = () => {
               className="flex justify-center mb-8"
             >
               <img
-                src="/cat.png"
+                src="/couscous.png"
                 alt="CouscousFlix Logo"
                 className="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 drop-shadow-[0_0_40px_rgba(220,38,38,0.35)]"
                 style={{ transform: 'rotate(-8deg)' }}
@@ -343,7 +343,7 @@ const WhatIsCouscousFlixPage: React.FC = () => {
             className="p-8 backdrop-blur-sm"
           >
             <img
-              src="/cat.png"
+              src="/couscous.png"
               alt="CouscousFlix Logo"
               className="w-12 h-12 mx-auto mb-4 drop-shadow-lg"
             />

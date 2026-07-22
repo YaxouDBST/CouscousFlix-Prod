@@ -421,7 +421,7 @@ export const platformAvatars: AllPlatformAvatars = {
     'Disney Classics': [
       '/avatars/disney+/disney_classics/ariel.png',
       '/avatars/disney+/disney_classics/belle.png',
-      '/avatars/disney+/disney_classics/cheshire_cat.png',
+      '/avatars/disney+/disney_classics/cheshire_couscous.png',
       '/avatars/disney+/disney_classics/cinderella.png',
       '/avatars/disney+/disney_classics/eeyore.png',
       '/avatars/disney+/disney_classics/genie.png',

@@ -679,7 +679,7 @@ async function createNotification(
     sendPushToUser(toUserId, toUserType, {
       title: "CouscousFlix",
       body: pushMessages[notificationType] || "Nouvelle notification",
-      icon: "/cat.png",
+      icon: "/couscous.png",
       data: { contentType, contentId, notificationType },
     });
   } catch (error) {

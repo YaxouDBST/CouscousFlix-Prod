@@ -12,7 +12,7 @@ import { useProfile } from '../context/ProfileContext';
 
 const API_URL = import.meta.env.VITE_MAIN_API;
 const DEFAULT_AVATAR = 'https://as2.ftcdn.net/v2/jpg/05/89/93/27/1000_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N.webp';
-const COUSCOUSFLIX_LOGO_SRC = '/cat.png';
+const COUSCOUSFLIX_LOGO_SRC = '/couscous.png';
 
 interface OAuthPreviewResponse {
   success: boolean;
