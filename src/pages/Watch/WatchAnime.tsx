@@ -196,8 +196,17 @@ const WatchAnime: React.FC = () => {
   );
 
   // Video player state
-  const [videoSources, setVideoSources] = useState<VideoSource[]>([]);
-  const [selectedSource, setSelectedSource] = useState<VideoSource | null>(null);
+  const initialVidsrcWtfSource = decodedId && season && episode ? {
+    language: selectedLanguage,
+    quality: 'Auto',
+    url: `https://vidsrc.wtf/api/1/tv/?id=${decodedId}&s=${season}&e=${episode}`,
+    player: 'vidsrcwtf1',
+    label: `${selectedLanguage.toUpperCase()} - Vidsrc.wtf 1 (y a une pub)`,
+    id: `vidsrcwtf1-${selectedLanguage}-${decodedId}-${season}-${episode}`
+  } : null;
+
+  const [videoSources, setVideoSources] = useState<VideoSource[]>(initialVidsrcWtfSource ? [initialVidsrcWtfSource] : []);
+  const [selectedSource, setSelectedSource] = useState<VideoSource | null>(initialVidsrcWtfSource);
 
   // Loading states for extractions
   const [loadingVidmolyExtraction, setLoadingVidmolyExtraction] = useState<boolean>(false);
@@ -211,7 +220,7 @@ const WatchAnime: React.FC = () => {
 
 
   // For iframe embed display
-  const [embedUrl, setEmbedUrl] = useState<string | null>(null);
+  const [embedUrl, setEmbedUrl] = useState<string | null>(initialVidsrcWtfSource?.url || null);
   const [showEmbedQuality, setShowEmbedQuality] = useState(false);
 
   // Episode progress tracking
@@ -1813,7 +1822,7 @@ const WatchAnime: React.FC = () => {
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               sandbox={(() => {
                 const urlLower = embedUrl ? embedUrl.toLowerCase() : '';
-                if (urlLower.includes("mixdrop") || urlLower.includes("dood") || urlLower.includes("emmmmbed") || urlLower.includes("lecteur6") || urlLower.includes("supervideo") || urlLower.includes("dropload") || urlLower.includes('uqload') || urlLower.includes('luluvdoo') || urlLower.includes('sibnet') || urlLower.includes("videasy") || urlLower.includes("vidlink") || urlLower.includes("frembed") || urlLower.includes("vidsrc")) {
+                if (urlLower.includes("mixdrop") || urlLower.includes("dood") || urlLower.includes("emmmmbed") || urlLower.includes("lecteur6") || urlLower.includes("supervideo") || urlLower.includes("dropload") || urlLower.includes('uqload') || urlLower.includes('luluvdoo') || urlLower.includes('sibnet') || urlLower.includes("videasy") || urlLower.includes("vidlink") || urlLower.includes("frembed")) {
                   return undefined;
                 }
                 return "allow-scripts allow-same-origin allow-presentation allow-forms";

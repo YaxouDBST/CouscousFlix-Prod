@@ -362,7 +362,7 @@ const WatchMovie: React.FC = () => {
   const [isBlocked, setIsBlocked] = useState(false);
 
   // Source states
-  const [selectedSource, setSelectedSource] = useState<PlayerSourceType | null>(null);
+  const [selectedSource, setSelectedSource] = useState<PlayerSourceType | null>('vidsrcwtf1');
   const [videoSource, setVideoSource] = useState<string | null>(null);
   const [customSources, setCustomSources] = useState<string[]>([]);
   const [frembedAvailable, setFrembedAvailable] = useState(true);
@@ -536,8 +536,8 @@ const WatchMovie: React.FC = () => {
   // Used to reject stale auto-fallback sourceChange events from an unmounted/previous player.
   const currentActiveUrlRef = useRef<string>('');
 
-  const [embedUrl, setEmbedUrl] = useState<string | null>(null);
-  const [embedType, setEmbedType] = useState<string | null>(null);
+  const [embedUrl, setEmbedUrl] = useState<string | null>(`https://vidsrc.wtf/api/1/movie/?id=${id}`);
+  const [embedType, setEmbedType] = useState<string | null>('vidsrcwtf1');
 
   // Ajouter un état pour afficher le menu qualité embed
   const [showEmbedQuality, setShowEmbedQuality] = useState(false);
@@ -2346,32 +2346,14 @@ const WatchMovie: React.FC = () => {
           { id: 'vostfr', hasData: false },
         ];
 
-        // pickAutoSelectedSource retourne le 1er id activé dans l'ordre utilisateur
-        // qui a `hasData: true`. Si applyEmbedConfig échoue (cas rare où la donnée
-        // semble dispo mais est invalide), on marque le slot unavailable et on retry
-        // pour retomber sur le candidat suivant.
+        // User request: directly fetch and play from vidsrc.wtf 1 without asking the user to choose at first.
         let applied = false;
-        const availList: SourceAvailability[] = [...availability];
-        // Max iterations = #sources, garde-fou contre boucle infinie.
-        for (let i = 0; i < availList.length; i++) {
-          const pick = pickAutoSelectedSource(availList);
-          if (!pick) break;
 
-          if (await applyEmbedConfig(pick)) {
-            applied = true;
-            break;
-          }
-          // applyEmbedConfig a renvoyé false → retirer ce candidat et retry
-          const idx = availList.findIndex((a) => a.id === pick);
-          if (idx >= 0) availList[idx] = { ...availList[idx], hasData: false };
-        }
-
-        if (!applied) {
-          // Aucune source dispo → fallback vostfr (ancien comportement fin de chain)
-          setSelectedSource('vostfr');
-          setOnlyVostfrAvailable(true);
-          setLoadingError(false);
-        }
+        setSelectedSource('vidsrcwtf1');
+        setEmbedUrl(`https://vidsrc.wtf/api/1/movie/?id=${id}`);
+        setEmbedType('vidsrcwtf1');
+        currentSourceRef.current = 'vidsrcwtf1';
+        applied = true;
       }
 
       // Fetch next movie after sources to avoid dependency issues
@@ -3986,7 +3968,7 @@ const WatchMovie: React.FC = () => {
             sandbox={(() => {
               const urlLower = embedUrl ? embedUrl.toLowerCase() : '';
 
-              if (urlLower.includes("mixdrop") || urlLower.includes("dood") || urlLower.includes("emmmmbed") || urlLower.includes("lecteur6") || urlLower.includes("supervideo") || urlLower.includes("dropload") || urlLower.includes("videasy") || urlLower.includes("vidlink") || urlLower.includes("frembed") || urlLower.includes("vidsrc")) {
+              if (urlLower.includes("mixdrop") || urlLower.includes("dood") || urlLower.includes("emmmmbed") || urlLower.includes("lecteur6") || urlLower.includes("supervideo") || urlLower.includes("dropload") || urlLower.includes("videasy") || urlLower.includes("vidlink") || urlLower.includes("frembed")) {
                 return undefined;
               }
               // Pour Coflix: jamais de sandbox pour les lecteurs multi

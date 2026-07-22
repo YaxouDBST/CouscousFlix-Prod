@@ -475,7 +475,7 @@ const WatchTv: React.FC = () => {
   const { shouldHide, getMaskedContent } = useAntiSpoilerSettings();
 
   // Source states
-  const [selectedSource, setSelectedSource] = useState<PlayerSourceType | null>(null);
+  const [selectedSource, setSelectedSource] = useState<PlayerSourceType | null>('vidsrcwtf1');
   const [customSources, setCustomSources] = useState<string[]>([]);
   const [frembedAvailable, setFrembedAvailable] = useState(true);
   const [adFreeM3u8Url] = useState<string | null>(null); // Keep for potential future use
@@ -688,8 +688,8 @@ const WatchTv: React.FC = () => {
   const currentActiveUrlRef = useRef<string>('');
 
   // State for Embed player
-  const [embedUrl, setEmbedUrl] = useState<string | null>(null);
-  const [embedType, setEmbedType] = useState<string | null>(null);
+  const [embedUrl, setEmbedUrl] = useState<string | null>(`https://vidsrc.wtf/api/1/tv/?id=${id}&s=${seasonNumber}&e=${episodeNumber}`);
+  const [embedType, setEmbedType] = useState<string | null>('vidsrcwtf1');
 
   const [showEmbedQuality, setShowEmbedQuality] = useState(false); // For the embed source menu
 
@@ -3082,27 +3082,14 @@ const WatchTv: React.FC = () => {
             { id: 'vostfr', hasData: false },
           ];
 
+          // User request: directly fetch and play from vidsrc.wtf 1 without asking the user to choose at first.
           let applied = false;
-          const availList: SourceAvailability[] = [...availability];
-          for (let i = 0; i < availList.length; i++) {
-            const pick = pickAutoSelectedSource(availList);
-            if (!pick) break;
-            if (applyEmbedConfig(pick)) {
-              applied = true;
-              break;
-            }
-            // applyEmbedConfig false → retirer ce candidat et retry
-            const idx = availList.findIndex((a) => a.id === pick);
-            if (idx >= 0) availList[idx] = { ...availList[idx], hasData: false };
-          }
-
-          if (!applied) {
-            // Fallback final : vidsrcwtf1
-            setSelectedSource('vidsrcwtf1');
-            setEmbedUrl(`https://vidsrc.wtf/api/1/tv/?id=${id}&s=${seasonNumber}&e=${episodeNumber}`);
-            setEmbedType('vidsrcwtf1');
-            currentSourceRef.current = 'vidsrcwtf1';
-          }
+          
+          setSelectedSource('vidsrcwtf1');
+          setEmbedUrl(`https://vidsrc.wtf/api/1/tv/?id=${id}&s=${seasonNumber}&e=${episodeNumber}`);
+          setEmbedType('vidsrcwtf1');
+          currentSourceRef.current = 'vidsrcwtf1';
+          applied = true;
         }
 
         // Get next episode info
@@ -4484,7 +4471,7 @@ const WatchTv: React.FC = () => {
               }
 
               // Jamais de sandbox pour les liens Firebase Upload
-              if (urlLower.includes('uqload') || urlLower.includes('luluvdoo') || urlLower.includes("videasy") || urlLower.includes("vidlink") || urlLower.includes("frembed") || urlLower.includes("vidsrc")) {
+              if (urlLower.includes('uqload') || urlLower.includes('luluvdoo') || urlLower.includes("videasy") || urlLower.includes("vidlink") || urlLower.includes("frembed")) {
                 return undefined;
               }
 
