@@ -586,7 +586,6 @@ const Header: React.FC = () => {
         {isExploreOpen && (
           <motion.div
             className="lg:hidden fixed inset-0 z-[10999]"
-            style={{ touchAction: 'pan-y' }}
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 40 }}

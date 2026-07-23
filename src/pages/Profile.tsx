@@ -63,7 +63,6 @@ const TMDB_API_KEY = import.meta.env.VITE_TMDB_API_KEY || '';
 const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY;
 const TMDB_POSTER_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 const LIVE_TV_FAVORITES_STORAGE_KEY = 'live_tv_favorite_channels';
-const LIVE_TV_IPTV_CATEGORY_FAVORITES_STORAGE_KEY = 'live_tv_favorite_iptv_categories';
 
 // Track shows for which we've already fetched metadata
 const metadataCache = new Map();
@@ -92,7 +91,7 @@ interface WatchItem {
   itemCount?: number;
   isVip?: boolean;
   source?: string;
-  liveTvKind?: 'channel' | 'iptv';
+  liveTvKind?: 'channel';
   liveTvTargetId?: string;
   liveTvCatalogId?: string;
   liveTvCategoryId?: string;
@@ -150,7 +149,7 @@ interface LiveTVFavorite {
   name: string;
   poster?: string | null;
   addedAt: string;
-  kind: 'channel' | 'iptv';
+  kind: 'channel';
   catalogId?: string;
   categoryId?: string;
 }
@@ -209,7 +208,7 @@ const isLiveTVFavorite = (value: unknown): value is LiveTVFavorite => {
     typeof candidate.id === 'string' &&
     typeof candidate.name === 'string' &&
     typeof candidate.addedAt === 'string' &&
-    (candidate.kind === 'channel' || candidate.kind === 'iptv')
+    (candidate.kind === 'channel')
   );
 };
 
@@ -2851,7 +2850,7 @@ const Profile: React.FC = () => {
     }
 
     if (item.type === 'live-tv') {
-      return item.source === 'iptv' ? t('liveTV.iptvWebSource') : t('nav.liveTV');
+      return t('nav.liveTV');
     }
 
     return '';
