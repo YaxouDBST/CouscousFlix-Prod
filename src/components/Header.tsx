@@ -604,7 +604,7 @@ const Header: React.FC = () => {
               {/* Contenu scrollable */}
               <div
                 className="relative h-full overflow-y-auto"
-                style={{ WebkitOverflowScrolling: 'touch', overscrollBehavior: 'contain' }}
+                style={{ WebkitOverflowScrolling: 'touch', overscrollBehavior: 'none', touchAction: 'pan-y' }}
               >
                 {/* Spacer pour le header */}
                 <div className="h-20" />
