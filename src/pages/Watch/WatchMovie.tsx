@@ -2741,7 +2741,7 @@ const WatchMovie: React.FC = () => {
         }
       }
       // Handle Embed source selections
-      else if (['frembed', 'custom', 'vostfr', 'omega', 'coflix', 'fstream', 'wiflix', 'j1f', 'viper'].includes(type)) {
+      else if (['frembed', 'custom', 'vostfr', 'omega', 'coflix', 'fstream', 'wiflix', 'j1f', 'viper', 'vidsrcwtf1', 'vidsrcwtf5', 'vidsrccc', 'vidsrcsu'].includes(type)) {
         let finalEmbedUrl = url;
         if (type === 'fstream') {
           finalEmbedUrl = getProxyUrl(url);
