@@ -18,5 +18,8 @@ export const buildSiteUrl = (path: string): string => {
 
 export const buildProxyUrl = (url: string): string => {
   if (!PROXY_BASE_URL) return url;
+  if (PROXY_BASE_URL.includes('workers.dev')) {
+    return `${PROXY_BASE_URL}/proxy?url=${encodeURIComponent(url)}`;
+  }
   return `${PROXY_BASE_URL}/proxy/${url}`;
 };
