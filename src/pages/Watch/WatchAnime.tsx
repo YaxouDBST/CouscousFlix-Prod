@@ -316,12 +316,13 @@ const WatchAnime: React.FC = () => {
             });
             const ratings = certResponse.data.results;
             let cert = '';
+            type CertRating = { iso_3166_1: string; rating: string };
 
-            const fr = ratings.find((r: any) => r.iso_3166_1 === 'FR');
+            const fr = ratings.find((r: CertRating) => r.iso_3166_1 === 'FR');
             if (fr?.rating) cert = fr.rating;
             if (!cert) {
 
-              const us = ratings.find((r: any) => r.iso_3166_1 === 'US');
+              const us = ratings.find((r: CertRating) => r.iso_3166_1 === 'US');
               if (us?.rating) cert = us.rating;
             }
             if (cert && !isContentAllowed(cert, profileAge)) {
@@ -374,7 +375,7 @@ const WatchAnime: React.FC = () => {
           name: string;
           url: string;
 
-          seasons: Array<any>;
+          seasons: Array<{ id: number; season_number: number; episode_count: number; name: string }>;
           alternative_names?: string[];
         };
 

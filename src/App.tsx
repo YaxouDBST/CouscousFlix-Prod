@@ -30,7 +30,7 @@ import SmoothScroll from './components/SmoothScroll';
 import AprilFoolsAdminPage from './pages/AprilFoolsAdminPage';
 import ProfileSelection from './pages/ProfileSelection';
 import { ROUTES, type RouteEntry } from './routing/registry';
-import { DelayedSuspense } from './components/DelayedSuspense';
+// import { DelayedSuspense } from './components/DelayedSuspense';
 import { RouteProgressBar } from './components/RouteProgressBar';
 import ScreenSaver from './components/ScreenSaver';
 import { useIdleTimer } from './hooks/useIdleTimer';
@@ -495,9 +495,9 @@ const RouteLazyContent: React.FC<{
 }> = ({ Lazy, fallback }) => {
   const location = useLocation();
   return (
-    <DelayedSuspense fallback={fallback}>
-      <Lazy key={location.pathname} />
-    </DelayedSuspense>
+    <React.Suspense key={location.pathname} fallback={fallback}>
+      <Lazy />
+    </React.Suspense>
   );
 };
 

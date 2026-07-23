@@ -6,7 +6,7 @@ import HLSPlayer from '../../components/HLSPlayer';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { extractM3u8FromEmbed, extractVoeM3u8, extractUqloadFile, extractVidzyM3u8, extractFsvidM3u8, extractOneUploadSources, isOneUploadEmbed, isVoeEmbed, extractDoodStreamFile, extractSeekStreamingM3u8, isDoodStreamEmbed, isSeekStreamingEmbed, isDoodStreamExtractionEnabled, isSeekStreamingExtractionEnabled, type M3u8Result } from '../../utils/extractM3u8';
-import { pickAutoSelectedSource, sortHostersByPriority, type SourceAvailability } from '../../utils/sourceAutoSelect';
+import { sortHostersByPriority } from '../../utils/sourceAutoSelect';
 import type { TopLevelSourceId } from '../../types/sourcePriority';
 import { getSourcePriorityPrefs, subscribeToPriorityChanges } from '../../utils/sourcePriorityPrefs';
 import { detectHoster } from '../../utils/hosterRegistry';
@@ -1164,7 +1164,7 @@ const WatchMovie: React.FC = () => {
       if (coflixResult && Array.isArray(coflixResult.player_links) && coflixResult.player_links.length > 0) {
         const decodedLinks = coflixResult.player_links
 
-          .map((p: { decoded_url?: string; clone_url?: string; url?: string }) => getCoflixPreferredUrl(p as any))
+          .map((p: { decoded_url?: string; clone_url?: string; url?: string }) => getCoflixPreferredUrl(p))
           .filter((u: string) => !!u);
 
         // VOE.SX from MULTI - Paralléliser
@@ -2007,7 +2007,7 @@ const WatchMovie: React.FC = () => {
       // Close sur toutes les variables locales de fetchVideoSources (sources, résultats),
       // ce qui garde le coût faible et évite de faire ressortir tous ces états en props.
       // Retourne true si l'id a été géré avec succès, false sinon.
-      const applyEmbedConfig = async (sourceId: TopLevelSourceId | 'nexus_file' | 'rivestream_hls'): Promise<boolean> => {
+      const _applyEmbedConfig = async (sourceId: TopLevelSourceId | 'nexus_file' | 'rivestream_hls'): Promise<boolean> => {
         switch (sourceId) {
           case 'nexus_hls': {
             // Tri par priorité hoster (M4) — applique le pin user (ex. uqload first).
@@ -2255,7 +2255,7 @@ const WatchMovie: React.FC = () => {
               { category: 'moviesTv', topLevel: 'viper' },
             );
 
-            setSelectedSource('viper' as any);
+            setSelectedSource('viper');
             setSelectedViperSource(0);
             setEmbedUrl(sortedViperLocal[0].url);
             setEmbedType('viper');
@@ -2320,40 +2320,11 @@ const WatchMovie: React.FC = () => {
         }
       }
       else {
-        // Priority-driven auto-select. Construit la liste d'availability à partir
-        // des sources disponibles après toutes les extractions.
-        // Note : 'vox' n'existe pas pour les films (WatchTv uniquement).
-        // 'vostfr' et 'rivestream_hls' restent marqués hasData:false car ils
-        // n'ont pas de fetch dédié côté film (vostfr = fallback final géré plus bas ;
-        // rivestream_hls est déprécié et retiré de TOP_LEVEL_SOURCE_IDS).
-        const availability: SourceAvailability[] = [
-          { id: 'nexus_hls', hasData: finalHlsSources.length > 0 },
-          { id: 'nexus_file', hasData: finalFileSources.length > 0 },
-          { id: 'bravo', hasData: localBravoSources.length > 0 && canUseBravo },
-          { id: 'mp4', hasData: fetchedMp4Sources.length > 0 },
-          { id: 'darkino', hasData: !!(darkinoResult && typeof darkinoResult === 'object' && 'available' in darkinoResult && darkinoResult.available && darkinoResult.sources.length > 0) },
-          { id: 'fstream', hasData: fstreamProcessedSources.length > 0 },
-          { id: 'omega', hasData: !!(omegaResult && getSupervideoFromOmega(omegaResult)) },
-          { id: 'wiflix', hasData: wiflixProcessedSources.length > 0 },
-          { id: 'j1f', hasData: j1fProcessedSources.length > 0 },
-          { id: 'coflix', hasData: !!(coflixResult && getMultiFromCoflix(coflixResult)) },
-          { id: 'viper', hasData: viperProcessedSources.length > 0 },
-          { id: 'custom', hasData: customLinks.length > 0 },
-          { id: 'frembed', hasData: isFrembedAvailable },
-          // Sources sans fetch dédié côté film — placées après, désactivées via hasData: false
-          { id: 'rivestream_hls', hasData: false },
-          { id: 'vox', hasData: false },
-          { id: 'vostfr', hasData: false },
-        ];
-
         // User request: directly fetch and play from vidsrc.wtf 1 without asking the user to choose at first.
-        let applied = false;
-
         setSelectedSource('vidsrcwtf1');
         setEmbedUrl(`https://vidsrc.wtf/api/1/movie/?id=${id}&server=Ethan`);
         setEmbedType('vidsrcwtf1');
         currentSourceRef.current = 'vidsrcwtf1';
-        applied = true;
       }
 
       // Fetch next movie after sources to avoid dependency issues
@@ -3243,7 +3214,7 @@ const WatchMovie: React.FC = () => {
                     setEmbedType('wiflix');
                   } else if (viperSources.length > 0) {
 
-                    setSelectedSource('viper' as any);
+                    setSelectedSource('viper');
                     setSelectedViperSource(0);
                     setEmbedUrl(viperSources[0].url);
                     setEmbedType('viper');
