@@ -208,16 +208,10 @@ const Header: React.FC = () => {
     if (isExploreOpen && isMobile) {
       document.documentElement.style.overflow = 'hidden';
       document.body.style.overflow = 'hidden';
-      document.body.style.position = 'fixed';
-      document.body.style.inset = '0';
-      document.body.style.width = '100%';
       if (lenis) lenis.destroy();
     } else {
       document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.inset = '';
-      document.body.style.width = '';
       // Réinitialiser Lenis si nécessaire
       if (!lenis && isMobile) {
         window.dispatchEvent(new CustomEvent('settings_smooth_scroll_changed'));
@@ -226,9 +220,6 @@ const Header: React.FC = () => {
     return () => {
       document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
-      document.body.style.position = '';
-      document.body.style.inset = '';
-      document.body.style.width = '';
       if (!(window as any).lenis) {
         window.dispatchEvent(new CustomEvent('settings_smooth_scroll_changed'));
       }
