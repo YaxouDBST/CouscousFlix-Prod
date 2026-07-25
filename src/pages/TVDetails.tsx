@@ -1121,7 +1121,7 @@ const checkDarkinoAvailability = async (
 
     
     const matchingShow = searchResponse.data.results.find((result: any) => {
-      if (result.have_streaming !== 1 || !result.is_series) return false
+      if (!result.is_series) return false
       const resultYear = new Date(result.release_date).getFullYear()
       const titleMatches =
         result.original_title?.toLowerCase() === showTitle.toLowerCase() ||

@@ -1174,8 +1174,7 @@ const DownloadPage: React.FC = () => {
       if (type === 'movie') {
         // Pour les films, chercher par tmdb_id exact
         let matchingMovie = searchResponse.data.results.find((result: any) => {
-          return (result.have_streaming === 1 || result.have_streaming === 0) &&
-                 result.type !== 'series' &&
+          return result.type !== 'series' &&
                  result.tmdb_id &&
                  String(result.tmdb_id) === String(id);
         });

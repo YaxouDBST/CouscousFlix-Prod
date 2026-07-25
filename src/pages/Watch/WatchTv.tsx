@@ -2154,7 +2154,11 @@ const WatchTv: React.FC = () => {
           console.log('? No Wiflix/Lynx TV sources available');
         }
 
-        setWiflixSources(wiflixProcessedSources);
+        const filteredWiflix = wiflixProcessedSources.filter(source => {
+          const url = source.url.toLowerCase();
+          return !url.includes('uqload') && !isDoodStreamEmbed(source.url) && !isSeekStreamingEmbed(source.url);
+        });
+        setWiflixSources(filteredWiflix);
         console.log('?? [WatchTv] Wiflix/Lynx TV sources set:', wiflixProcessedSources.length, wiflixProcessedSources);
 
         // =========== TRAITEMENT DES RÉSULTATS J1F (1JOUR1FILM) ===========
@@ -2465,7 +2469,6 @@ const WatchTv: React.FC = () => {
             });
           });
 
-          setViperSources(viperProcessedSources);
           console.log(`? Viper TV sources processed: ${viperProcessedSources.length}`);
 
           // =========== EXTRACTION VOE DEPUIS VIPER ===========
@@ -2492,25 +2495,15 @@ const WatchTv: React.FC = () => {
 
               const voeExtractionResults = await Promise.all(voeExtractionPromises);
 
-              const validVoeResults: { url: string; label: string }[] = [];
               voeExtractionResults.forEach(({ result, originalSource }) => {
                 if (result?.success && result.hlsUrl) {
-                  validVoeResults.push({
-                    url: result.hlsUrl,
-                    label: `Voe HLS ${originalSource.language}`
-                  });
-                  console.log(`? Added Viper VOE HLS source: ${result.hlsUrl}`);
+                  originalSource.url = result.hlsUrl;
+                  originalSource.label = `Voe HLS ${originalSource.language}`;
+                  console.log(`? Extracted Viper VOE HLS source: ${result.hlsUrl}`);
                 } else {
                   console.log(`? Failed to extract Viper VOE source: ${originalSource.url}`);
                 }
               });
-
-              if (validVoeResults.length > 0) {
-                const vf = validVoeResults.filter(s => s.label.includes('VF'));
-                const vostfr = validVoeResults.filter(s => s.label.includes('VOSTFR'));
-                finalHlsSources = [...vf, ...vostfr, ...finalHlsSources];
-                console.log(`? Viper VOE extraction completed. Added ${validVoeResults.length} sources.`);
-              }
             }
           }
 
@@ -2538,26 +2531,16 @@ const WatchTv: React.FC = () => {
 
               const uqloadExtractionResults = await Promise.all(uqloadExtractionPromises);
 
-              const validUqloadResults: { url: string; label: string }[] = [];
               uqloadExtractionResults.forEach(({ result, originalSource }) => {
                 if (result?.success && (result.hlsUrl || result.m3u8Url)) {
                   const extractedUrl = result.hlsUrl || result.m3u8Url || '';
-                  validUqloadResults.push({
-                    url: extractedUrl,
-                    label: `Uqload ${originalSource.language}`
-                  });
-                  console.log(`? Added Viper UQLOAD source: ${extractedUrl}`);
+                  originalSource.url = extractedUrl;
+                  originalSource.label = `Uqload ${originalSource.language}`;
+                  console.log(`? Extracted Viper UQLOAD source: ${extractedUrl}`);
                 } else {
                   console.log(`? Failed to extract Viper UQLOAD source: ${originalSource.url}`);
                 }
               });
-
-              if (validUqloadResults.length > 0) {
-                const vf = validUqloadResults.filter(s => s.label.includes('VF'));
-                const vostfr = validUqloadResults.filter(s => s.label.includes('VOSTFR'));
-                finalHlsSources = [...finalHlsSources, ...vf, ...vostfr];
-                console.log(`? Viper UQLOAD extraction completed. Added ${validUqloadResults.length} sources.`);
-              }
             }
           }
 
@@ -2573,30 +2556,18 @@ const WatchTv: React.FC = () => {
               const doodExtractionPromises = doodViperSources.map(async (doodSource) => {
                 try {
                   const doodResult = await extractDoodStreamFile(doodSource.url);
-                  return { result: doodResult, originalSource: doodSource };
+                  if (doodResult && doodResult.success && doodResult.m3u8Url) {
+                    doodSource.url = doodResult.m3u8Url;
+                    doodSource.label = 'DoodStream' + (doodSource.language === 'VOSTFR' ? ' VOSTFR' : ' VF');
+                    console.log(`? Extracted DoodStream file source from Viper`);
+                  }
+                  return null;
                 } catch (error) {
                   console.error('Error extracting DoodStream source from Viper:', error);
-                  return { result: null, originalSource: doodSource };
+                  return null;
                 }
               });
-
-              const doodExtractionResults = await Promise.all(doodExtractionPromises);
-              const validDoodResults: { url: string; label: string }[] = [];
-              doodExtractionResults.forEach(({ result, originalSource }) => {
-                if (result?.success && result.m3u8Url) {
-                  validDoodResults.push({
-                    url: result.m3u8Url,
-                    label: `DoodStream ${originalSource.language}`
-                  });
-                }
-              });
-
-              if (validDoodResults.length > 0) {
-                const vf = validDoodResults.filter(s => s.label.includes('VF'));
-                const vostfr = validDoodResults.filter(s => s.label.includes('VOSTFR'));
-                finalFileSources = [...vf, ...vostfr, ...finalFileSources];
-                console.log(`? Viper DoodStream extraction (2nd) completed. Added ${validDoodResults.length} sources.`);
-              }
+              await Promise.all(doodExtractionPromises);
             }
           }
 
@@ -2612,32 +2583,22 @@ const WatchTv: React.FC = () => {
               const seekExtractionPromises = seekViperSources.map(async (seekSource) => {
                 try {
                   const seekResult = await extractSeekStreamingM3u8(seekSource.url);
-                  return { result: seekResult, originalSource: seekSource };
+                  if (seekResult && seekResult.success && seekResult.hlsUrl) {
+                    seekSource.url = seekResult.hlsUrl;
+                    seekSource.label = 'SeekStreaming' + (seekSource.language === 'VOSTFR' ? ' VOSTFR' : ' VF');
+                    console.log(`? Extracted SeekStreaming HLS source from Viper`);
+                  }
+                  return null;
                 } catch (error) {
                   console.error('Error extracting SeekStreaming source from Viper:', error);
-                  return { result: null, originalSource: seekSource };
+                  return null;
                 }
               });
-
-              const seekExtractionResults = await Promise.all(seekExtractionPromises);
-              const validSeekResults: { url: string; label: string }[] = [];
-              seekExtractionResults.forEach(({ result, originalSource }) => {
-                if (result?.success && result.hlsUrl) {
-                  validSeekResults.push({
-                    url: result.hlsUrl,
-                    label: `SeekStreaming HLS ${originalSource.language}`
-                  });
-                }
-              });
-
-              if (validSeekResults.length > 0) {
-                const vf = validSeekResults.filter(s => s.label.includes('VF'));
-                const vostfr = validSeekResults.filter(s => s.label.includes('VOSTFR'));
-                finalHlsSources = [...vf, ...vostfr, ...finalHlsSources];
-                console.log(`? Viper SeekStreaming extraction (2nd) completed. Added ${validSeekResults.length} sources.`);
-              }
+              await Promise.all(seekExtractionPromises);
             }
           }
+
+          setViperSources(viperProcessedSources);
         } else {
           setViperData(null);
           setViperSources([]);
@@ -4521,8 +4482,48 @@ const WatchTv: React.FC = () => {
             )}
           </AnimatePresence>
 
-          {/* The Embed Iframe */}
-          <iframe
+          {/* Iframe ou Player HLS natif pour les sources embed */}
+          {embedUrl && (embedUrl.includes('.m3u8') || embedUrl.includes('.mp4') || (window as any).isMP4Source?.(embedUrl)) ? (
+            <div className="w-full h-full flex flex-col items-center justify-center relative bg-black">
+              {/* Back to Info Button */}
+              <button
+                onClick={() => navigate(`/tv/${id}`)}
+                className="fixed top-6 left-8 z-[9999] flex items-center gap-2 px-3 py-2 rounded-lg bg-black/70 hover:bg-black/90 text-white shadow-lg transition-all duration-200"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                </svg>
+                {t('watch.back')}
+              </button>
+              
+              <HLSPlayer
+                priorityCategory="moviesTv"
+                src={embedUrl}
+                tvShowId={id || undefined}
+                seasonNumber={seasonNumber}
+                episodeNumber={episodeNumber}
+                isAnime={isAnime}
+                controls={true}
+                darkinoSources={darkinoSources}
+                mp4Sources={mp4Sources}
+                frembedAvailable={frembedAvailable}
+                customSources={customSources}
+                omegaSources={sortedOmega}
+                coflixSources={sortedCoflix}
+                fstreamSources={sortedFstream}
+                wiflixSources={sortedWiflix}
+                j1fSources={sortedJ1f}
+                viperSources={sortedViper}
+                autoPlay={true}
+                onlyQualityMenu={true}
+                embedType={embedType || undefined}
+                embedUrl={embedUrl || undefined}
+                title={showTitle}
+                initialTime={watchProgress}
+              />
+            </div>
+          ) : (
+            <iframe
             key={`iframe-${embedType || ''}-${embedUrl || ''}`}
             {...(
               // Pour Viper/Wiflix/J1f: utiliser srcdoc avec wrapper anti-pub
@@ -4572,6 +4573,7 @@ const WatchTv: React.FC = () => {
               return undefined;
             })()}
           ></iframe>
+          )}
 
           {/* Source Selection Menu */}
           <AnimatePresence>

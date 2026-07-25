@@ -1759,7 +1759,11 @@ const WatchMovie: React.FC = () => {
         console.log('❌ No Wiflix/Lynx sources available');
       }
 
-      setWiflixSources(wiflixProcessedSources);
+      const filteredWiflix = wiflixProcessedSources.filter(source => {
+        const url = source.url.toLowerCase();
+        return !url.includes('uqload') && !isDoodStreamEmbed(source.url) && !isSeekStreamingEmbed(source.url);
+      });
+      setWiflixSources(filteredWiflix);
       console.log('🎯 [WatchMovie] Wiflix/Lynx sources set:', wiflixProcessedSources.length, wiflixProcessedSources);
 
       // =========== TRAITEMENT DES RÉSULTATS J1F (1JOUR1FILM) ===========
@@ -1830,8 +1834,6 @@ const WatchMovie: React.FC = () => {
         setViperData(null);
         console.log('❌ No Viper sources available');
       }
-      setViperSources(viperProcessedSources);
-
       // =========== EXTRACTION VOE DEPUIS VIPER ===========
       if (viperProcessedSources.length > 0) {
         console.log('🔍 Extracting VOE sources from Viper...');
@@ -1858,28 +1860,16 @@ const WatchMovie: React.FC = () => {
 
           const voeExtractionResults = await Promise.all(voeExtractionPromises);
 
-          // Traiter les résultats VOE et les ajouter aux sources HLS
-          const validVoeResults: { url: string; label: string }[] = [];
+          // Traiter les résultats VOE et les mettre à jour dans viperProcessedSources
           voeExtractionResults.forEach(({ result, originalSource }) => {
             if (result?.success && result.hlsUrl) {
-              validVoeResults.push({
-                url: result.hlsUrl,
-                label: `Voe HLS ${originalSource.language}`
-              });
-              console.log(`✅ Added Viper VOE HLS source: ${result.hlsUrl}`);
+              originalSource.url = result.hlsUrl;
+              originalSource.label = `Voe HLS ${originalSource.language}`;
+              console.log(`✅ Extracted Viper VOE HLS source: ${result.hlsUrl}`);
             } else {
               console.log(`❌ Failed to extract Viper VOE source: ${originalSource.url}`);
             }
           });
-
-          if (validVoeResults.length > 0) {
-            // Prioriser VF
-            const vf = validVoeResults.filter(s => s.label.includes('VF'));
-            const vostfr = validVoeResults.filter(s => s.label.includes('VOSTFR'));
-
-            finalHlsSources = [...vf, ...vostfr, ...finalHlsSources];
-            console.log(`✅ Viper VOE extraction completed. Added ${validVoeResults.length} sources.`);
-          }
         }
       }
 
@@ -1909,29 +1899,17 @@ const WatchMovie: React.FC = () => {
 
           const uqloadExtractionResults = await Promise.all(uqloadExtractionPromises);
 
-          // Traiter les résultats UQLOAD et les ajouter aux sources
-          const validUqloadResults: { url: string; label: string }[] = [];
+          // Traiter les résultats UQLOAD et les mettre à jour
           uqloadExtractionResults.forEach(({ result, originalSource }) => {
             if (result?.success && (result.hlsUrl || result.m3u8Url)) {
               const extractedUrl = result.hlsUrl || result.m3u8Url || '';
-              validUqloadResults.push({
-                url: extractedUrl,
-                label: `Uqload ${originalSource.language}`
-              });
-              console.log(`✅ Added Viper UQLOAD source: ${extractedUrl}`);
+              originalSource.url = extractedUrl;
+              originalSource.label = `Uqload ${originalSource.language}`;
+              console.log(`✅ Extracted Viper UQLOAD source: ${extractedUrl}`);
             } else {
               console.log(`❌ Failed to extract Viper UQLOAD source: ${originalSource.url}`);
             }
           });
-
-          if (validUqloadResults.length > 0) {
-            // Prioriser VF
-            const vf = validUqloadResults.filter(s => s.label.includes('VF'));
-            const vostfr = validUqloadResults.filter(s => s.label.includes('VOSTFR'));
-
-            finalHlsSources = [...finalHlsSources, ...vf, ...vostfr];
-            console.log(`✅ Viper UQLOAD extraction completed. Added ${validUqloadResults.length} sources.`);
-          }
         }
 
         // --- DoodStream extraction from Viper ---
@@ -1946,14 +1924,9 @@ const WatchMovie: React.FC = () => {
               try {
                 const result = await extractDoodStreamFile(source.url);
                 if (result && result.success && result.m3u8Url) {
-                  const isVostfr = source.label?.toLowerCase().includes('vostfr') || source.language === 'VOSTFR';
-                  return {
-                    url: result.m3u8Url,
-                    label: 'DoodStream' + (isVostfr ? ' VOSTFR' : ' VF'),
-                    source: 'doodstream-viper' as const,
-                    isDirect: true,
-                    isVostfr
-                  };
+                  source.url = result.m3u8Url;
+                  source.label = 'DoodStream' + (source.language === 'VOSTFR' ? ' VOSTFR' : ' VF');
+                  console.log(`✅ Extracted DoodStream file source from Viper`);
                 }
                 return null;
               } catch (e) {
@@ -1961,12 +1934,7 @@ const WatchMovie: React.FC = () => {
                 return null;
               }
             });
-            const doodResults = await Promise.all(doodPromises);
-            const validDood = doodResults.filter(r => r !== null);
-            const vfDood = validDood.filter(r => !r.isVostfr);
-            const vostfrDood = validDood.filter(r => r.isVostfr);
-            finalFileSources = [...vfDood, ...finalFileSources, ...vostfrDood];
-            console.log(`✅ Added ${validDood.length} DoodStream file sources from Viper`);
+            await Promise.all(doodPromises);
           }
         }
 
@@ -1978,17 +1946,13 @@ const WatchMovie: React.FC = () => {
           );
           if (seekViperSources.length > 0) {
             console.log(`🎬 Found ${seekViperSources.length} SeekStreaming sources in Viper, extracting...`);
-            const seekPromises = seekViperSources.map(async (source: { url: string; label?: string }) => {
+            const seekPromises = seekViperSources.map(async (source: { url: string; label?: string, language?: string }) => {
               try {
                 const result = await extractSeekStreamingM3u8(source.url);
                 if (result && result.success && result.hlsUrl) {
-                  const isVostfr = source.label?.toLowerCase().includes('vostfr') || (viperResult?.links?.vostfr || []).includes(source);
-                  return {
-                    url: result.hlsUrl,
-                    label: 'SeekStreaming' + (isVostfr ? ' VOSTFR' : ' VF'),
-                    source: 'seekstreaming-viper' as const,
-                    isVostfr
-                  };
+                  source.url = result.hlsUrl;
+                  source.label = 'SeekStreaming' + (source.language === 'VOSTFR' ? ' VOSTFR' : ' VF');
+                  console.log(`✅ Extracted SeekStreaming HLS source from Viper`);
                 }
                 return null;
               } catch (e) {
@@ -1996,15 +1960,12 @@ const WatchMovie: React.FC = () => {
                 return null;
               }
             });
-            const seekResults = await Promise.all(seekPromises);
-            const validSeek = seekResults.filter(r => r !== null);
-            const vfSeek = validSeek.filter(r => !r.isVostfr);
-            const vostfrSeek = validSeek.filter(r => r.isVostfr);
-            finalHlsSources = [...vfSeek, ...finalHlsSources, ...vostfrSeek];
-            console.log(`✅ Added ${validSeek.length} SeekStreaming HLS sources from Viper`);
+            await Promise.all(seekPromises);
           }
         }
       }
+
+      setViperSources(viperProcessedSources);
 
       // Pré-tri par priorité hoster (M4) — le state stocke la liste ordonnée
       // selon le pin user. selectedNexusHls/FileSource = 0 joue le top, et
@@ -3955,6 +3916,42 @@ const WatchMovie: React.FC = () => {
               </motion.div>
             )}
           </AnimatePresence>
+        </div>
+      ) : embedUrl && (embedUrl.includes('.m3u8') || embedUrl.includes('.mp4') || (window as any).isMP4Source?.(embedUrl)) ? (
+        <div className="w-full h-full flex flex-col items-center justify-center relative bg-black">
+          {/* Back to Info Button */}
+          <button
+            onClick={() => navigate(`/movie/${id}`)}
+            className="fixed top-6 left-8 z-[9999] flex items-center gap-2 px-3 py-2 rounded-lg bg-black/70 hover:bg-black/90 text-white shadow-lg transition-all duration-200"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            {t('watch.back')}
+          </button>
+          
+          <HLSPlayer
+            priorityCategory="moviesTv"
+            src={embedUrl}
+            movieId={id || undefined}
+            controls={true}
+            darkinoSources={darkinoSources}
+            mp4Sources={mp4Sources}
+            frembedAvailable={frembedAvailable}
+            customSources={customSources}
+            omegaSources={sortedOmega}
+            coflixSources={sortedCoflix}
+            fstreamSources={sortedFstream}
+            wiflixSources={sortedWiflix}
+            j1fSources={sortedJ1f}
+            viperSources={sortedViper}
+            autoPlay={true}
+            onlyQualityMenu={true}
+            embedType={embedType || undefined}
+            embedUrl={embedUrl || undefined}
+            title={movieTitle}
+            initialTime={watchProgress}
+          />
         </div>
       ) : embedUrl ? (
         <div className="w-full h-full flex flex-col items-center justify-center relative">
