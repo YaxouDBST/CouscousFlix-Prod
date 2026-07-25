@@ -38,6 +38,67 @@ const isRivestreamAvailable = (): boolean => {
   return isUserVip();
 };
 
+// Génère un srcdoc HTML qui charge l'URL embed dans une iframe imbriquée tout en
+// patchant window.open/location pour bloquer les popups publicitaires.
+const buildAdBlockedSrcdoc = (embedUrl: string): string => {
+  const escaped = embedUrl.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  return `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;background:#000;overflow:hidden}
+iframe{width:100%;height:100%;border:none;display:block}
+/* Masquer les overlays publicitaires courants */
+[id*="ad"],[class*="ad-"],[id*="popup"],[class*="popup"],
+[id*="banner"],[class*="banner"],[id*="overlay"],[class*="overlay"],
+.adsbygoogle,[data-ad],[id*="gpt"]{display:none!important}
+</style>
+<script>
+(function(){
+  // Bloquer window.open (popups publicitaires)
+  var noop=function(){return null;};
+  try{Object.defineProperty(window,'open',{value:noop,writable:false,configurable:false});}catch(e){window.open=noop;}
+  // Bloquer les redirections top-level via location
+  try{
+    var _href=window.location.href;
+    Object.defineProperty(window.location,'replace',{value:noop,writable:false,configurable:false});
+    Object.defineProperty(window.location,'assign',{value:noop,writable:false,configurable:false});
+    Object.defineProperty(window.location,'href',{
+      set:function(v){/* bloquer les redirections pub */},
+      get:function(){return _href},
+      configurable:false
+    });
+  }catch(e){}
+  // Bloquer les listeners de clic ad-network (pattern courant)
+  var _addEvt=EventTarget.prototype.addEventListener;
+  EventTarget.prototype.addEventListener=function(type,fn,opts){
+    if(type==='click'&&this===document.body||this===document||this===window){
+      // Intercepter les listeners de clic sur body/document/window (pattern pub)
+      var wrapped=function(e){
+        var orig=fn.call?fn:fn.handleEvent?fn.handleEvent.bind(fn):null;
+        if(orig){
+          var prevented=false;
+          var proxyE=new Proxy(e,{get:function(t,p){return p==='stopImmediatePropagation'?function(){prevented=true;return t.stopImmediatePropagation();}:typeof t[p]==='function'?t[p].bind(t):t[p];}});
+          orig(proxyE);
+          // Si le handler a tenté un window.open → déjà bloqué
+        }
+      };
+      return _addEvt.call(this,type,wrapped,opts);
+    }
+    return _addEvt.call(this,type,fn,opts);
+  };
+})();
+</script>
+</head>
+<body>
+<iframe src="${escaped}" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"></iframe>
+</body>
+</html>`;
+};
+
 // Helper function to generate proxy URL for fsvid sources
 const getProxyUrl = (url: string): string => {
   if (url.toLowerCase().includes('fsvid')) {
@@ -3934,19 +3995,31 @@ const WatchMovie: React.FC = () => {
           {/* Iframe pour les sources embed */}
           <iframe
             key={`iframe-${embedType || ''}-${embedUrl || ''}`}
-            src={embedUrl || ''}
+            {...(
+              // Pour Viper/Wiflix/J1f: utiliser srcdoc avec wrapper anti-pub
+              (embedType === 'viper' || embedType === 'wiflix' || embedType === 'j1f') && embedUrl
+                ? { srcDoc: buildAdBlockedSrcdoc(embedUrl) }
+                : { src: embedUrl || '' }
+            )}
             className="w-full h-full border-0"
             allowFullScreen
             referrerPolicy="strict-origin-when-cross-origin"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
             sandbox={(() => {
               const urlLower = embedUrl ? embedUrl.toLowerCase() : '';
 
-              if (urlLower.includes("mixdrop") || urlLower.includes("dood") || urlLower.includes("emmmmbed") || urlLower.includes("lecteur6") || urlLower.includes("supervideo") || urlLower.includes("dropload") || urlLower.includes("videasy") || urlLower.includes("vidlink") || urlLower.includes("frembed")) {
-                return undefined;
-              }
               // Pour Coflix: jamais de sandbox pour les lecteurs multi
               if (embedType === 'coflix') {
+                return undefined;
+              }
+              // Pour Viper/Wiflix/J1f: sandbox strict via srcdoc — scripts autorisés mais popups bloqués
+              // Note: allow-same-origin est retiré pour forcer le null-origin sur le wrapper srcdoc
+              if (embedType === 'viper' || embedType === 'wiflix' || embedType === 'j1f') {
+                return "allow-scripts allow-same-origin allow-presentation";
+              }
+
+              // Exceptions URL pour les autres sources (hors providers sandboxés ci-dessus)
+              if (urlLower.includes("mixdrop") || urlLower.includes("dood") || urlLower.includes("emmmmbed") || urlLower.includes("lecteur6") || urlLower.includes("supervideo") || urlLower.includes("dropload") || urlLower.includes("videasy") || urlLower.includes("vidlink") || urlLower.includes("frembed")) {
                 return undefined;
               }
               // Par défaut, sandbox strict pour bloquer pubs
