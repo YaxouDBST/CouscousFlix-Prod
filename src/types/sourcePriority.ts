@@ -17,7 +17,7 @@ export const DEPRECATED_HOSTER_IDS = [] as const;
 
 /** Hosters built-in connus. Les custom hosters utilisent des ids prefixés `custom_`. */
 export const BUILTIN_HOSTER_IDS = [
-  'voe', 'vidmoly', 'vidzy', 'uqload', 'sibnet', 'doodstream',
+  'uqload', 'voe', 'vidmoly', 'vidzy', 'sibnet', 'doodstream',
   'seekstreaming', 'smoothpre', 'minochinos', 'darkibox',
   'supervideo', 'dropload', 'oneupload', 'fsvid',
 ] as const;

@@ -1806,11 +1806,14 @@ const WatchMovie: React.FC = () => {
         console.log('🎬 Processing Viper/Cpasmal result:', viperResult);
         setViperData(viperResult);
 
-        const vfSources = viperResult.links.vf || [];
-        const vostfrSources = viperResult.links.vostfr || [];
+        const vfSources: any[] = viperResult.links.vf || [];
+        const vostfrSources: any[] = viperResult.links.vostfr || [];
+
+        const uniqueVfSources = vfSources.filter((s, i, self) => self.findIndex(t => t.url === s.url) === i);
+        const uniqueVostfrSources = vostfrSources.filter((s, i, self) => self.findIndex(t => t.url === s.url) === i);
 
         // Process VF
-        vfSources.forEach((source, index) => {
+        uniqueVfSources.forEach((source, index) => {
           viperProcessedSources.push({
             url: source.url,
             label: `Viper VF - ${source.server} ${index + 1}`,
@@ -1820,7 +1823,7 @@ const WatchMovie: React.FC = () => {
         });
 
         // Process VOSTFR
-        vostfrSources.forEach((source, index) => {
+        uniqueVostfrSources.forEach((source, index) => {
           viperProcessedSources.push({
             url: source.url,
             label: `Viper VOSTFR - ${source.server} ${index + 1}`,

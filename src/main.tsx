@@ -37,7 +37,7 @@ const COUSCOUSFLIX_CONSOLE_SAFETY_WARNING_LINES: CouscousFlixConsoleWarningLine[
     ].join('; '),
   },
   {
-    text: "Si quelqu'un t'a dit de copier/coller quelque chose ici, il y a de fortes chances que ce soit une arnaque.",
+    text: "Tu fait quoi là ??",
     style: [
       'font-size: 22px',
       'font-weight: 900',
@@ -51,7 +51,7 @@ const COUSCOUSFLIX_CONSOLE_SAFETY_WARNING_LINES: CouscousFlixConsoleWarningLine[
     ].join('; '),
   },
   {
-    text: 'Coller quelque chose ici peut donner à un attaquant accès à ton compte CouscousFlix.',
+    text: 'Ya rien à voir ici, retourne sur le site.',
     style: [
       'font-size: 22px',
       'font-weight: 900',
@@ -62,32 +62,6 @@ const COUSCOUSFLIX_CONSOLE_SAFETY_WARNING_LINES: CouscousFlixConsoleWarningLine[
       'border-radius: 12px',
       'text-shadow: 0 1px 0 rgba(255,255,255,0.6)',
       'box-shadow: 0 0 0 3px #ffffff inset'
-    ].join('; '),
-  },
-  {
-    text: 'Ne colle rien que tu ne comprends pas.',
-    style: [
-      'font-size: 22px',
-      'font-weight: 900',
-      'line-height: 1.5',
-      'color: #ffffff',
-      'background: #7c3aed',
-      'padding: 10px 16px',
-      'border-radius: 12px',
-      'text-shadow: 0 2px 12px rgba(0,0,0,0.35)',
-      'box-shadow: 0 0 0 3px #22c55e inset'
-    ].join('; '),
-  },
-  {
-    text: "Fuck les sites qui bloquent le devtool et qui mettent des screamers quand on l'ouvre — et merci à LibreWolf pour bypass les détections.",
-    style: [
-      'font-size: 10px',
-      'font-weight: 600',
-      'line-height: 1.4',
-      'color: #94a3b8',
-      'background: transparent',
-      'padding: 2px 4px',
-      'text-shadow: none'
     ].join('; '),
   },
 ];

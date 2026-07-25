@@ -64,7 +64,7 @@ function hasEmptyLinks(data) {
 }
 
 function sortCpasmalLinks(links) {
-  const priority = ['voe', 'uqload'];
+  const priority = ['uqload', 'voe'];
   return links.sort((a, b) => {
     const indexA = priority.indexOf(a.server);
     const indexB = priority.indexOf(b.server);

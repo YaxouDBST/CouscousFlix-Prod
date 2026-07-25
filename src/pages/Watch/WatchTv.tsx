@@ -2448,22 +2448,25 @@ const WatchTv: React.FC = () => {
           console.log('?? Processing Viper TV result:', viperResult);
           setViperData(viperResult);
 
-          const vfLinks = viperResult.links.vf || [];
-          const vostfrLinks = viperResult.links.vostfr || [];
+          const vfLinks: any[] = viperResult.links.vf || [];
+          const vostfrLinks: any[] = viperResult.links.vostfr || [];
 
-          vfLinks.forEach((link: { server: string; url: string }) => {
+          const uniqueVfLinks = vfLinks.filter((s, i, self) => self.findIndex(t => t.url === s.url) === i);
+          const uniqueVostfrLinks = vostfrLinks.filter((s, i, self) => self.findIndex(t => t.url === s.url) === i);
+
+          uniqueVfLinks.forEach((link: { server: string; url: string }, index: number) => {
             viperProcessedSources.push({
               url: link.url,
-              label: link.server,
+              label: `Viper VF - ${link.server} ${index + 1}`,
               quality: 'HD',
               language: 'VF'
             });
           });
 
-          vostfrLinks.forEach((link: { server: string; url: string }) => {
+          uniqueVostfrLinks.forEach((link: { server: string; url: string }, index: number) => {
             viperProcessedSources.push({
               url: link.url,
-              label: link.server,
+              label: `Viper VOSTFR - ${link.server} ${index + 1}`,
               quality: 'HD',
               language: 'VOSTFR'
             });
