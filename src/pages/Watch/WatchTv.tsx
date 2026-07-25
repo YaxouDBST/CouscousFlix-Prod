@@ -4596,7 +4596,7 @@ const WatchTv: React.FC = () => {
                       onClick={() => setShowEmbedQuality(false)}
                       className="text-gray-400 hover:text-red-500 transition-colors text-2xl font-bold focus:outline-none"
                     >
-                      
+                      ×
                     </button>
                   </div>
                   <div className="p-4">
