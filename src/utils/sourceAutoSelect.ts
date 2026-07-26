@@ -1,6 +1,6 @@
 // src/utils/sourceAutoSelect.ts
 import { getSourcePriorityPrefs } from './sourcePriorityPrefs';
-import { getRememberLastPlayer, getLastPlayer } from './lastPlayerPref';
+import { getRememberLastPlayer, getLastPlayer, getLastHoster, getLastLanguage } from './lastPlayerPref';
 import type {
   TopLevelSourceId, HosterId, LanguageId, PriorityCategory, DEPRECATED_SOURCE_IDS
 } from '../types/sourcePriority';
@@ -82,10 +82,15 @@ export function sortHostersByPriority<
   const cat = prefs.categories[context.category];
   const tl = context.topLevel;
 
+  const rememberLast = getRememberLastPlayer();
+  const lastHoster = rememberLast ? getLastHoster() : null;
+  const lastLanguage = rememberLast ? getLastLanguage() : null;
+
   // Hoster rank
   const overrideOrder = tl ? (cat.overrides as Record<string, HosterId[]>)[tl] : undefined;
   const hosterList = overrideOrder ?? cat.hosterOrder;
   const hosterRank = (type: HosterId) => {
+    if (rememberLast && lastHoster === type) return -1;
     const idx = hosterList.indexOf(type);
     return idx === -1 ? Number.MAX_SAFE_INTEGER : idx;
   };
@@ -107,6 +112,9 @@ export function sortHostersByPriority<
     const raw = item.language ?? item.category;
     if (!raw) return Number.MAX_SAFE_INTEGER - 1; // sans langue explicite = juste après toutes les activées
     const normalized = normalizeLang(String(raw));
+    
+    if (rememberLast && lastLanguage && normalized === lastLanguage) return -1;
+    
     const idx = langOrderEnabled.indexOf(normalized);
     return idx === -1 ? Number.MAX_SAFE_INTEGER : idx;
   };

@@ -2609,8 +2609,34 @@ const WatchMovie: React.FC = () => {
       // M11 — track last manually-picked player for "remember last player".
       // Filtre les events auto-fallback (sélection involontaire) ; setLastPlayer
       // valide en interne contre TOP_LEVEL_SOURCE_IDS et ignore les ids hors-liste.
-      if (origin !== 'auto-fallback' && typeof type === 'string') {
-        setLastPlayer(type);
+            if (origin !== 'auto-fallback' && typeof type === 'string') {
+        let hoster = undefined;
+        let lang = undefined;
+        
+        try {
+          const idxStr = String(id).includes('_') ? String(id).split('_')[1] : String(id);
+          const index = parseInt(idxStr, 10);
+          
+          if (!isNaN(index)) {
+            if (type === 'wiflix' && wiflixSources && wiflixSources[index]) {
+              hoster = wiflixSources[index].type;
+              lang = wiflixSources[index].language || wiflixSources[index].category;
+            } else if (type === 'j1f' && j1fSources && j1fSources[index]) {
+              hoster = j1fSources[index].type;
+              lang = j1fSources[index].language || j1fSources[index].category;
+            } else if (type === 'viper' && viperSources && viperSources[index]) {
+              hoster = viperSources[index].type;
+              lang = viperSources[index].language || viperSources[index].category;
+            } else if (type === 'fstream' && fstreamSources && fstreamSources[index]) {
+              hoster = fstreamSources[index].type;
+              lang = fstreamSources[index].language || fstreamSources[index].category;
+            }
+          }
+        } catch (e) {
+          // ignore
+        }
+        
+        setLastPlayer(type, hoster, lang);
       }
 
       // When any source is picked from the menu, hide the "no content" message and the menu itself.

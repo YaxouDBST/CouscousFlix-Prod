@@ -14,6 +14,8 @@ import { TOP_LEVEL_SOURCE_IDS, type TopLevelSourceId } from '../types/sourcePrio
 // / `couscousflix_last_player` étaient silencieusement filtrés par le client.
 const TOGGLE_KEY = 'playerRememberLast';
 const VALUE_KEY = 'playerLastId';
+const VALUE_HOSTER_KEY = 'playerLastHoster';
+const VALUE_LANG_KEY = 'playerLastLang';
 const CHANGE_EVENT = 'couscousflix-last-player-changed';
 
 const VALID_IDS = new Set<string>(TOP_LEVEL_SOURCE_IDS);
@@ -41,6 +43,22 @@ export function setRememberLastPlayer(enabled: boolean): void {
  * sauvé OU si la valeur n'est plus un id valide (ex: id retiré dans une
  * version future). Robuste à la désérialisation.
  */
+export function getLastHoster(): string | null {
+  try {
+    return localStorage.getItem(VALUE_HOSTER_KEY);
+  } catch {
+    return null;
+  }
+}
+
+export function getLastLanguage(): string | null {
+  try {
+    return localStorage.getItem(VALUE_LANG_KEY);
+  } catch {
+    return null;
+  }
+}
+
 export function getLastPlayer(): TopLevelSourceId | null {
   try {
     const v = localStorage.getItem(VALUE_KEY);
@@ -55,10 +73,12 @@ export function getLastPlayer(): TopLevelSourceId | null {
  * Enregistre l'id si c'est un `TopLevelSourceId` valide. No-op sinon (laisse
  * le caller relayer n'importe quel string sans craindre de polluer le storage).
  */
-export function setLastPlayer(id: string): void {
+export function setLastPlayer(id: string, hoster?: string, language?: string): void {
   if (!id || !VALID_IDS.has(id)) return;
   try {
     localStorage.setItem(VALUE_KEY, id);
+    if (hoster) localStorage.setItem(VALUE_HOSTER_KEY, hoster);
+    if (language) localStorage.setItem(VALUE_LANG_KEY, language);
     window.dispatchEvent(new CustomEvent(CHANGE_EVENT));
   } catch {
     /* noop */
@@ -69,7 +89,7 @@ export function setLastPlayer(id: string): void {
 export function subscribeToLastPlayerChanges(cb: () => void): () => void {
   const handler = () => cb();
   const storageHandler = (e: StorageEvent) => {
-    if (e.key === TOGGLE_KEY || e.key === VALUE_KEY) cb();
+    if (e.key === TOGGLE_KEY || e.key === VALUE_KEY || e.key === VALUE_HOSTER_KEY || e.key === VALUE_LANG_KEY) cb();
   };
   window.addEventListener(CHANGE_EVENT, handler);
   window.addEventListener('storage', storageHandler);
