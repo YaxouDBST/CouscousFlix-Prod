@@ -1417,7 +1417,7 @@ const WatchMovie: React.FC = () => {
 
         // Extraire M3U8 des sources uqload
         const uqloadSources = fstreamProcessedSources.filter(source =>
-          source.url.toLowerCase().includes('uqload')
+          source.url.toLowerCase().includes('uqload') || source.url.toLowerCase().includes('luluvdoo')
         );
 
         if (uqloadSources.length > 0) {
@@ -1637,7 +1637,7 @@ const WatchMovie: React.FC = () => {
 
         // Identifier les sources UQLOAD dans Wiflix
         const uqloadSources = wiflixProcessedSources.filter(source =>
-          source.url.toLowerCase().includes('uqload')
+          source.url.toLowerCase().includes('uqload') || source.url.toLowerCase().includes('luluvdoo')
         );
 
         if (uqloadSources.length > 0) {
@@ -1761,7 +1761,7 @@ const WatchMovie: React.FC = () => {
 
       const filteredWiflix = wiflixProcessedSources.filter(source => {
         const url = source.url.toLowerCase();
-        return !url.includes('uqload') && !isDoodStreamEmbed(source.url) && !isSeekStreamingEmbed(source.url);
+        return !url.includes('uqload') && !url.includes('luluvdoo') && !isDoodStreamEmbed(source.url) && !isSeekStreamingEmbed(source.url);
       });
       setWiflixSources(filteredWiflix);
       console.log('🎯 [WatchMovie] Wiflix/Lynx sources set:', wiflixProcessedSources.length, wiflixProcessedSources);
@@ -1882,7 +1882,7 @@ const WatchMovie: React.FC = () => {
 
         // Identifier les sources UQLOAD dans Viper
         const uqloadViperSources = viperProcessedSources.filter(source =>
-          source.label.toLowerCase().includes('uqload') || source.url.toLowerCase().includes('uqload')
+          source.label.toLowerCase().includes('uqload') || source.url.toLowerCase().includes('uqload') || source.url.toLowerCase().includes('luluvdoo')
         );
 
         if (uqloadViperSources.length > 0) {
@@ -2206,9 +2206,14 @@ const WatchMovie: React.FC = () => {
               })),
               { category: 'moviesTv', topLevel: 'wiflix' },
             );
+            const workingLinkIndex = sortedWiflixLocal.findIndex(s => {
+              const isUnextractedUqload = (s.url.toLowerCase().includes('uqload') || s.url.toLowerCase().includes('luluvdoo')) && !s.url.toLowerCase().includes('uqload-proxy') && !s.url.endsWith('.m3u8') && !s.url.endsWith('.mp4');
+              return !isUnextractedUqload;
+            });
+            if (workingLinkIndex === -1) return false;
             setSelectedSource('wiflix');
-            setSelectedWiflixSource(0);
-            setEmbedUrl(sortedWiflixLocal[0].url);
+            setSelectedWiflixSource(workingLinkIndex);
+            setEmbedUrl(sortedWiflixLocal[workingLinkIndex].url);
             setEmbedType('wiflix');
             currentSourceRef.current = 'wiflix';
             setOnlyVostfrAvailable(false);
@@ -2227,9 +2232,14 @@ const WatchMovie: React.FC = () => {
               })),
               { category: 'moviesTv', topLevel: 'j1f' },
             );
+            const workingLinkIndex = sortedJ1fLocal.findIndex(s => {
+              const isUnextractedUqload = (s.url.toLowerCase().includes('uqload') || s.url.toLowerCase().includes('luluvdoo')) && !s.url.toLowerCase().includes('uqload-proxy') && !s.url.endsWith('.m3u8') && !s.url.endsWith('.mp4');
+              return !isUnextractedUqload;
+            });
+            if (workingLinkIndex === -1) return false;
             setSelectedSource('j1f');
-            setSelectedJ1fSource(0);
-            setEmbedUrl(sortedJ1fLocal[0].url);
+            setSelectedJ1fSource(workingLinkIndex);
+            setEmbedUrl(sortedJ1fLocal[workingLinkIndex].url);
             setEmbedType('j1f');
             currentSourceRef.current = 'j1f';
             setOnlyVostfrAvailable(false);
@@ -2280,9 +2290,14 @@ const WatchMovie: React.FC = () => {
               { category: 'moviesTv', topLevel: 'viper' },
             );
 
+            const workingLinkIndex = sortedViperLocal.findIndex(s => {
+              const isUnextractedUqload = (s.url.toLowerCase().includes('uqload') || s.url.toLowerCase().includes('luluvdoo')) && !s.url.toLowerCase().includes('uqload-proxy') && !s.url.endsWith('.m3u8') && !s.url.endsWith('.mp4');
+              return !isUnextractedUqload;
+            });
+            if (workingLinkIndex === -1) return false;
             setSelectedSource('viper');
-            setSelectedViperSource(0);
-            setEmbedUrl(sortedViperLocal[0].url);
+            setSelectedViperSource(workingLinkIndex);
+            setEmbedUrl(sortedViperLocal[workingLinkIndex].url);
             setEmbedType('viper');
             currentSourceRef.current = 'viper';
             setOnlyVostfrAvailable(false);

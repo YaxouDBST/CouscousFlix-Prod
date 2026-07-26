@@ -438,44 +438,53 @@ async function extractUqloadFileServer(uqloadUrl: string): Promise<M3u8Result | 
     };
   }
 
-  try {
-    // Normaliser le domaine UQLOAD vers uqload.is (tous TLDs)
-    const normalizedUrl = uqloadUrl.replace(/uqload\.[a-z0-9-]+/gi, 'uqload.is');
-    console.log(`[UQLOAD] Normalized URL: ${normalizedUrl}`);
+  let retryCount = 0;
+  const maxRetries = 2;
 
-    // Utiliser le serveur Python pour l'extraction UQLOAD
-    const response = await fetch(`${PROXIES_EMBED_API}/api/extract-uqload?url=${encodeURIComponent(normalizedUrl)}`, { headers: getVipHeaders() });
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+  while (retryCount <= maxRetries) {
+    try {
+      // Normaliser le domaine UQLOAD vers uqload.is (tous TLDs)
+      const normalizedUrl = uqloadUrl.replace(/uqload\.[a-z0-9-]+/gi, 'uqload.is');
+      console.log(`[UQLOAD] Normalized URL: ${normalizedUrl} (Attempt ${retryCount + 1})`);
+
+      // Utiliser le serveur Python pour l'extraction UQLOAD
+      const response = await fetch(`${PROXIES_EMBED_API}/api/extract-uqload?url=${encodeURIComponent(normalizedUrl)}`, { headers: getVipHeaders() });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      // Handle both possible response formats
+      const fileUrl = data.data?.url || data.url;
+      if (fileUrl) {
+        return {
+          m3u8Url: fileUrl,
+          success: true
+        };
+      }
+
+      throw new Error('Aucun fichier trouvé dans la réponse UQLOAD');
+
+    } catch (error) {
+      if (retryCount >= maxRetries) {
+        console.error('Erreur lors de l\'extraction UQLOAD:', error);
+        // Ajouter au cache des échecs seulement après avoir épuisé les retries
+        failedUrlsCache.add(uqloadUrl);
+        return {
+          success: false,
+          error: error instanceof Error ? error.message : 'Erreur inconnue UQLOAD'
+        };
+      }
+      
+      retryCount++;
+      console.warn(`[UQLOAD] Extraction failed, retrying in 1.5s (Attempt ${retryCount + 1}/${maxRetries + 1})...`, error);
+      // Attendre 1.5 secondes avant de réessayer (pour éviter le rate-limiting)
+      await new Promise(resolve => setTimeout(resolve, 1500));
     }
-
-    const data = await response.json();
-
-    // Handle both possible response formats
-    const fileUrl = data.data?.url || data.url;
-    if (fileUrl) {
-      return {
-        m3u8Url: fileUrl,
-        success: true
-      };
-    }
-
-    // Ajouter au cache des échecs
-    failedUrlsCache.add(uqloadUrl);
-    return {
-      success: false,
-      error: 'Aucun fichier trouvé dans la réponse UQLOAD'
-    };
-
-  } catch (error) {
-    console.error('Erreur lors de l\'extraction UQLOAD:', error);
-    // Ajouter au cache des échecs
-    failedUrlsCache.add(uqloadUrl);
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : 'Erreur inconnue UQLOAD'
-    };
   }
+
+  return null;
 }
 
 /**

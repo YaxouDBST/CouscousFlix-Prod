@@ -3336,7 +3336,7 @@ class ProxyServer:
             video_id = 'embed-' + video_id
         
         full_url = f'{base}/{video_id}'
-        if 'uqload' not in full_url:
+        if 'uqload' not in full_url and 'luluvdoo' not in full_url:
             raise ValueError('Invalid UQLOAD URL')
         
         return full_url
@@ -3381,7 +3381,7 @@ class ProxyServer:
             return self._vip_denied_response()
         try:
             url = request.query.get('url')
-            if not url or 'uqload' not in url.lower():
+            if not url or 'uqload' not in url.lower() and 'luluvdoo' not in url.lower():
                 return web.json_response({'error': 'Invalid URL'}, status=400)
             
             cache_key = hashlib.md5(url.encode()).hexdigest()

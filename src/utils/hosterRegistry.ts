@@ -38,7 +38,7 @@ export const BUILTIN_HOSTER_PATTERNS: Record<BuiltinHosterId, string[]> = {
     'timmaybealready',
   ],
   vidmoly: ['vidmoly'],
-  uqload: ['uqload'],
+  uqload: ['uqload', 'luluvdoo'],
   sibnet: ['sibnet'],
   doodstream: [
     'doodstream', 'd0000d', 'd000d',
