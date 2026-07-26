@@ -208,21 +208,16 @@ const Header: React.FC = () => {
     if (isExploreOpen && isMobile) {
       document.documentElement.style.overflow = 'hidden';
       document.body.style.overflow = 'hidden';
-      if (lenis) lenis.destroy();
+      if (lenis) lenis.stop();
     } else {
       document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
-      // Réinitialiser Lenis si nécessaire
-      if (!lenis && isMobile) {
-        window.dispatchEvent(new CustomEvent('settings_smooth_scroll_changed'));
-      }
+      if (lenis) lenis.start();
     }
     return () => {
       document.documentElement.style.overflow = '';
       document.body.style.overflow = '';
-      if (!(window as any).lenis) {
-        window.dispatchEvent(new CustomEvent('settings_smooth_scroll_changed'));
-      }
+      if ((window as any).lenis) (window as any).lenis.start();
     };
   }, [isExploreOpen]);
 
@@ -603,8 +598,8 @@ const Header: React.FC = () => {
 
               {/* Contenu scrollable */}
               <div
-                className="relative h-full overflow-y-auto"
-                style={{ WebkitOverflowScrolling: 'touch' }}
+                className="relative h-full overflow-y-auto overscroll-contain"
+                style={{ WebkitOverflowScrolling: 'touch', touchAction: 'pan-y' }}
                 data-lenis-prevent
               >
                 {/* Spacer pour le header */}
