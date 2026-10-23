@@ -5,7 +5,7 @@
 <h1 align="center">CouscousFlix</h1>
 
 <p align="center">
-  <strong>Le 1er site de streaming open source made in France et 100% vibecodé.</strong>
+  <strong>Le 2eme site de streaming open source (movix les goats) made in France et 100% vibecodé.</strong>
 </p>
 
 <p align="center">
